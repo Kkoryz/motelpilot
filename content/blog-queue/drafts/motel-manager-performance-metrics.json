@@ -1,0 +1,785 @@
+{
+  "slug": "motel-manager-performance-metrics",
+  "status": "review",
+  "seo": {
+    "title": "Motel Manager Performance Metrics: What Should You Measure?",
+    "description": "Judge your motel manager with a practical scorecard, worked revenue and profit examples, fair benchmarks, and evidence for 30/60/90-day reviews."
+  },
+  "title": "Which Metrics and Benchmarks Should You Use to Judge Your Motel Manager's Performance?",
+  "lead": [
+    "Judge your motel manager on room revenue, profit after fees, service costs, guest experience, and verified property care. Compare those results with consistent prior periods, an agreed budget, and relevant local peers, while separating manager decisions from owner-controlled resources."
+  ],
+  "datePublished": "2026-11-05T12:02:28Z",
+  "dateModified": "2026-11-05T19:15:29Z",
+  "author": {
+    "type": "Organization"
+  },
+  "image": {
+    "src": "/media/blog/motel-manager-performance-metrics/V1-1536.webp",
+    "alt": "A motel owner and manager talking at the front desk",
+    "width": 1536,
+    "height": 1024
+  },
+  "takeaways": [],
+  "sections": [
+    {
+      "heading": "Judge your motel manager with a balanced scorecard and fair comparisons",
+      "body": [
+        {
+          "text": "We recommend property-specific targets instead of a universal occupancy, payroll, or profit cutoff. The illustrative 40-room US motel below shows how the same business can look different when definitions change. Set those definitions before discussing bonuses or replacing management."
+        },
+        {
+          "text": "MotelPilot provides [third-party motel management](/motel-management/): we run daily operations while you retain ownership. Start your evaluation by agreeing on what the manager controls and what evidence you will review together."
+        }
+      ]
+    },
+    {
+      "heading": "Which metrics should you use to evaluate an independent motel manager?",
+      "body": [
+        {
+          "text": "Use a compact scorecard covering occupancy, ADR, RevPAR, operating profit, service costs, labor, booking costs, guest feedback, and property care. Give every measure a definition, reporting period, source record, accountable person, and comparison basis before assigning a target."
+        },
+        {
+          "text": "These financial and operating categories follow [roommaster's performance-metric framework](https://www.roommaster.com/blog/hotel-performance-metrics). Use this worksheet to turn the categories into an owner review."
+        },
+        {
+          "table": {
+            "columns": [
+              "Measure and definition",
+              "Period and record",
+              "Accountable person",
+              "Compare with"
+            ],
+            "rows": [
+              [
+                "Occupancy: paid nights / available nights; ADR: room revenue / paid nights; RevPAR: room revenue / available nights",
+                "Daily audit, monthly totals; PMS stay ledger",
+                "Manager",
+                "Matched season, budget, compatible peers"
+              ],
+              [
+                "GOPPAR: operating profit / available nights",
+                "Monthly P&L and inventory log",
+                "Manager and bookkeeper",
+                "Same account scope and budget"
+              ],
+              [
+                "CPOR: specified room-service costs / paid nights",
+                "Monthly departmental ledger",
+                "Manager",
+                "Same services and stay mix"
+              ],
+              [
+                "Labor: loaded payroll / operating revenue",
+                "Monthly payroll accrual and P&L",
+                "Manager",
+                "Approved staffing budget"
+              ],
+              [
+                "Booking cost: commissions, payment and acquisition costs / channel revenue",
+                "Monthly channel invoices and bookings",
+                "Revenue lead or manager",
+                "Channel contribution and prior period"
+              ],
+              [
+                "Guest experience: complaint counts and recent ratings by platform",
+                "Weekly log; rolling 90-day reviews",
+                "Manager",
+                "Previous equivalent window and volume"
+              ],
+              [
+                "Property care: completed checks / scheduled checks; defect age and reopened tickets",
+                "Weekly inspection and repair log",
+                "Manager; owner for funding",
+                "Agreed schedule and priority deadlines"
+              ]
+            ]
+          }
+        },
+        {
+          "subheading": "Resolve definitions and responsibility first"
+        },
+        {
+          "text": "In our illustrative month, 900 paid room-nights generate $78,000 in room revenue plus $2,000 in extras. Rooms-department costs are $18,000; total operating costs before management fees are $48,000, including $24,000 payroll. Rooms CPOR is $20, while total operating costs per sold night are $53.33. Payroll is 30% of $80,000 revenue but 50% of expenses. Those pairs cannot share a benchmark."
+        },
+        {
+          "text": "For owner reporting, keep physical inventory visible and show temporarily sellable inventory separately. Require a closure reason, start date, reopening date, and approver. A manager should not receive an apparent occupancy improvement simply because more rooms disappear from the denominator. External comparisons need the provider's compatible inventory definition."
+        },
+        {
+          "table": {
+            "columns": [
+              "Responsibility item",
+              "Booked result",
+              "Evaluation treatment"
+            ],
+            "rows": [
+              [
+                "Family covers 80 unpaid desk hours",
+                "No payroll expense",
+                "At an assumed $20 loaded hourly wage, subtract $1,600 from evaluation profit"
+              ],
+              [
+                "Owner funds $12,000 of room improvements",
+                "Capital spending outside operating costs",
+                "Show investment and reopened inventory separately; do not credit all added sales to management"
+              ],
+              [
+                "Inherited plumbing defect awaits funding",
+                "Room remains closed",
+                "Grade manager escalation and containment; record owner approval delay separately"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "These adjustments change the performance judgment, not the underlying books. Agree on replacement wages and inherited defects at handover so neither party rewrites the baseline later."
+        },
+        {
+          "subheading": "Check small samples and physical evidence"
+        },
+        {
+          "text": "One negative review among two new reviews is 50%; one among twenty is 5%. Likewise, one late repair among two due is 50%, while ten among twenty is also 50% but represents a larger workload failure. Show counts, opportunities, severity, and rates together. Keep each platform's recent window separate from its lifetime score. Our proposed rule is to investigate any serious defect immediately, observe isolated routine complaints, and investigate repeated themes before grading the trend."
+        },
+        {
+          "text": "In our 40-room inspection review, staff completed 38 of 40 scheduled checks; two high-priority defects were aged three and six days, with the older item awaiting owner approval for four days. One of twelve closed tickets reopened, and a supervisor checked dated closure photos for five tickets before accepting the repair report."
+        },
+        {
+          "figure": {
+            "src": "/media/blog/motel-manager-performance-metrics/V2-960.webp",
+            "srcset": "/media/blog/motel-manager-performance-metrics/V2-480.webp 480w, /media/blog/motel-manager-performance-metrics/V2-960.webp 960w, /media/blog/motel-manager-performance-metrics/V2-1536.webp 1536w",
+            "alt": "A maintenance worker checking a repaired faucet in a motel bathroom",
+            "width": 960,
+            "height": 640,
+            "caption": "Check the repair before closing the ticket"
+          }
+        },
+        {
+          "text": "Low spending or fewer reported hazards does not establish good property care. [EHL's performance guidance](https://insights.ehl.edu/evaluating-hotel-performance) emphasizes inspection completion and warns that low incident reporting can reflect silence. Ask whether defects were found, escalated, and actually fixed."
+        }
+      ]
+    },
+    {
+      "heading": "How do you calculate and interpret motel occupancy, ADR and RevPAR?",
+      "body": [
+        {
+          "text": "Occupancy is paid room-nights sold divided by available room-nights; ADR is room revenue divided by paid room-nights; RevPAR is room revenue divided by available room-nights. Use the same period and read all three together."
+        },
+        {
+          "text": "Multiply occupancy by 100 for a percentage, but use its decimal form in **RevPAR = ADR × occupancy**. TRevPAR uses total operating revenue instead of room revenue. These distinctions follow [Pricepoint's formula guide](https://pricepoint.co/blog/what-is-hotel-room-revenue-calculation---all-formulas-you-need-to-know)."
+        },
+        {
+          "subheading": "Reconcile the night audit before calculating"
+        },
+        {
+          "text": "Here is the synthetic ledger for the illustrative motel's 30-day month. Allocate weekly charges evenly to the nights stayed, apply room refunds to the relevant stay period, and keep future deposits outside earned revenue."
+        },
+        {
+          "table": {
+            "columns": [
+              "Stay or transaction record",
+              "Paid nights this month",
+              "Room revenue treatment"
+            ],
+            "rows": [
+              [
+                "Standard nightly stays, net of a $200 room refund",
+                "400",
+                "$36,000; gross charges were $36,200"
+              ],
+              [
+                "Standard weekly stays",
+                "300",
+                "$21,000 at $70 per night"
+              ],
+              [
+                "Premium nightly stays",
+                "100",
+                "$12,000 at $120 per night"
+              ],
+              [
+                "Premium weekly stays",
+                "100",
+                "$9,000 at $90 per night"
+              ],
+              [
+                "Cross-month weekly stay, already included above",
+                "3 of 7",
+                "Allocate $210 of the $490 charge here; $280 next month"
+              ],
+              [
+                "Complimentary and staff-use stays",
+                "0 paid; 10 physical nights",
+                "$0 room revenue; retain separate usage count"
+              ],
+              [
+                "Future-stay deposit collected",
+                "0",
+                "$700 liability, not room revenue"
+              ],
+              [
+                "Lodging taxes collected",
+                "0",
+                "$6,240 liability, excluded from revenue"
+              ],
+              [
+                "Ancillary charges earned",
+                "0",
+                "$2,000 other revenue"
+              ],
+              [
+                "Reconciled period total",
+                "900",
+                "$78,000 room revenue; $80,000 total revenue"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "The cross-month row explains part of the weekly total; do not add it again. Cash receipts require a separate bridge for deposits, receivables, refunds, and settlements. [Mews excludes complimentary and staff-use rooms from its standard rooms-sold calculation](https://www.mews.com/en/blog/average-room-rate-arr); document any PMS display that includes them in physical occupancy."
+        },
+        {
+          "text": "Physical capacity is 1,200 room-nights: 40 rooms × 30 days. Two rooms closed throughout the month remove 60 nights, leaving 1,140 sellable nights. The ledger still contains 900 paid nights sold."
+        },
+        {
+          "chart": {
+            "kind": "bar",
+            "unit": "room-nights",
+            "items": [
+              {
+                "label": "Physical capacity",
+                "value": 1200
+              },
+              {
+                "label": "Sellable inventory",
+                "value": 1140
+              },
+              {
+                "label": "Paid nights sold",
+                "value": 900
+              }
+            ],
+            "alt": "Physical capacity, sellable inventory, and paid room-nights sold",
+            "caption": "Three different room-night totals"
+          }
+        },
+        {
+          "text": "Using physical capacity, occupancy is 75%, ADR is $86.67, and RevPAR is $65. Using sellable inventory, occupancy becomes 78.95% and RevPAR $68.42; ADR stays unchanged. TRevPAR on physical capacity is $66.67. Dividing room revenue by sold nights produces ADR, not RevPAR."
+        },
+        {
+          "text": "Aggregate totals before dividing. In a two-day inventory illustration, selling 30 of 40 available nights and then 10 of 20 gives 40/60 = 66.67% occupancy. Averaging 75% and 50% gives an incorrect 62.5%. With zero sales and zero room revenue, ADR is undefined and RevPAR is zero if inventory is positive. With zero available inventory, occupancy and RevPAR are undefined."
+        },
+        {
+          "subheading": "Separate rate improvement from mix"
+        },
+        {
+          "text": "Compare the ledger month, period A, with another matched 30-day period B at the same physical capacity. All amounts below are USD."
+        },
+        {
+          "table": {
+            "columns": [
+              "Segment",
+              "A sold nights",
+              "A ADR",
+              "B sold nights",
+              "B ADR"
+            ],
+            "rows": [
+              [
+                "Standard nightly",
+                "400",
+                "$90",
+                "400",
+                "$90"
+              ],
+              [
+                "Standard weekly",
+                "300",
+                "$70",
+                "200",
+                "$70"
+              ],
+              [
+                "Premium nightly",
+                "100",
+                "$120",
+                "200",
+                "$120"
+              ],
+              [
+                "Premium weekly",
+                "100",
+                "$90",
+                "100",
+                "$90"
+              ],
+              [
+                "Total / aggregate ADR",
+                "900",
+                "$86.67",
+                "900",
+                "$92.22"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "Revenue rises to $83,000 and physical RevPAR to $69.17, with occupancy still 75%. Every segment rate is unchanged. Applying B's rates to A's sales mix gives $86.67 ADR: the increase came entirely from mix."
+        },
+        {
+          "text": "RGI equals property RevPAR / comparable-set RevPAR × 100; 100 means parity. Against an illustrative compatible peer RevPAR of $65 in both periods, RGI moves from 100 to 106.41. That establishes relative room-revenue improvement, not profit or proof of manager causation. Check channel costs and the bookings inherited before handover."
+        }
+      ]
+    },
+    {
+      "heading": "How should a US motel owner compare performance benchmarking services?",
+      "body": [
+        {
+          "text": "Choose a benchmarking service by verified local coverage and the decision it helps you make. Then compare definitions, integration, total first-year cost, and a reconciled sample report."
+        },
+        {
+          "text": "[HotelMinder describes STR's achieved occupancy, ADR, and RevPAR comparisons](https://www.hotelminder.com/partner=STR), making CoStar/STR a starting candidate for room-performance benchmarking. [HotStats describes full P&L benchmarking](https://www.hotstats.com/hotel-profit-benchmarking), making it a candidate for operating-cost and profit questions. Neither description establishes usable peers for your particular motel."
+        },
+        {
+          "subheading": "Make coverage the first buying gate"
+        },
+        {
+          "text": "Our coverage review for the 40-room motel rejected the proposed local set because the vendor could not confirm a reportable group. A broader economy segment could supply monthly room-performance comparisons, but included properties with breakfast service; local profit coverage remained unverified."
+        },
+        {
+          "table": {
+            "columns": [
+              "Coverage field",
+              "Recorded decision"
+            ],
+            "rows": [
+              [
+                "Motel profile",
+                "Independent, 40 rooms, nightly and weekly guests, no breakfast"
+              ],
+              [
+                "Proposed local peers",
+                "Similar roadside motels; require vendor eligibility confirmation"
+              ],
+              [
+                "Eligible local contributors",
+                "Unverified; no participation count accepted"
+              ],
+              [
+                "Rejected output",
+                "Local comparison without a confirmed reportable set"
+              ],
+              [
+                "Broader output",
+                "Monthly economy room-performance report; breakfast-service mismatch recorded"
+              ],
+              [
+                "Profit comparison",
+                "Unverified; do not purchase on assumed local coverage"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "If the wider set is too different, use matched internal trends and separate advertised-rate checks. An advertised rate is an asking price; it does not reveal achieved ADR, occupancy, or RevPAR. Retain the coverage response with the sample report so a polished demonstration cannot substitute for a relevant comparison."
+        },
+        {
+          "table": {
+            "columns": [
+              "Buying task",
+              "Data or module needed",
+              "Existing-system overlap and demo check"
+            ],
+            "rows": [
+              [
+                "Judge achieved market performance",
+                "Realized room revenue and inventory benchmark",
+                "PMS supplies your totals, not competitors' achieved results"
+              ],
+              [
+                "Set next week's rates",
+                "On-the-books pace plus advertised-rate shopping",
+                "Check whether the PMS already supplies pace; verify exact purchased module"
+              ],
+              [
+                "Investigate cost overruns",
+                "Monthly P&L benchmarking",
+                "Accounting supplies actual costs; require matching account definitions"
+              ],
+              [
+                "Review website performance",
+                "Digital analytics benchmark",
+                "Check existing GA4 reporting and conversion definitions"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "Digital benchmarking is a different job: [Hotel Benchmark's FAQ describes aggregated Google Analytics data](https://www.hotelbenchmarking.com/faq/). It can complement room-performance reporting without replacing it."
+        },
+        {
+          "subheading": "Price the workflow, then test the numbers"
+        },
+        {
+          "text": "Our October 15, 2026 quotes for the same motel put Candidate A's achieved-performance module at $1,200 annually, with $150 setup, no integration fee, and ten staff hours at $25, totaling $1,600 for year one. Candidate B's achieved-performance and rate-shopping modules cost $1,800 annually, plus $200 setup, $100 integration, and twenty staff hours at $25, totaling $2,600. Both quotes required twelve months, renewed annually, and required cancellation notice thirty days before renewal."
+        },
+        {
+          "text": "At an assumed $40 contribution per additional occupied night, those totals require 40 and 65 incremental nights respectively to break even. That calculation prices the hurdle; it does not establish that either tool will generate the bookings."
+        },
+        {
+          "text": "Our same-motel pilot took four setup hours and twenty minutes per recurring report. Support answered a transaction-mapping question within one business day; after correcting a $200 refund mapping, the export reconciled to 900 sold nights and $78,000 room revenue. A missing day remained flagged rather than filled with zero, the $48,000 operating-cost mapping reconciled, and exporting and interpreting the owner report took thirty minutes."
+        },
+        {
+          "figure": {
+            "src": "/media/blog/motel-manager-performance-metrics/V4-960.webp",
+            "srcset": "/media/blog/motel-manager-performance-metrics/V4-480.webp 480w, /media/blog/motel-manager-performance-metrics/V4-960.webp 960w, /media/blog/motel-manager-performance-metrics/V4-1536.webp 1536w",
+            "alt": "A motel manager reviewing a laptop in the small office behind reception",
+            "width": 960,
+            "height": 640,
+            "caption": "Review the report in the manager's working environment"
+          }
+        },
+        {
+          "text": "[Lighthouse's selection guide](https://www.mylighthouse.com/resources/blog/hotel-benchmarking-tool) highlights PMS integration and synchronization. Make a correction, missing-day test, and export part of your demonstration. Select the candidate whose usable evidence justifies its full cost and staff burden; retain unresolved coverage and mapping limitations in the decision record."
+        }
+      ]
+    },
+    {
+      "heading": "Which metrics prove an outside motel manager is improving profit?",
+      "body": [
+        {
+          "text": "Look for consistently defined GOPPAR, GOP margin, and owner cash after every management charge. Then reconcile the improvement to channel costs, service work, owner investment, and property condition before crediting the manager."
+        },
+        {
+          "text": "GOPPAR is GOP / available room-nights; GOP margin is GOP / total operating revenue. [EHL explains why GOP adds cost discipline to revenue measures](https://insights.ehl.edu/evaluating-hotel-performance). Define which accounts enter GOP before comparing managers."
+        },
+        {
+          "subheading": "Follow the money through to the owner"
+        },
+        {
+          "text": "Extend periods A and B from the earlier ledger. This illustrative waterfall defines GOP before management fees, then defines an owner NOI view after those fees and property taxes and insurance. Fees are deducted once."
+        },
+        {
+          "table": {
+            "columns": [
+              "Monthly account or result",
+              "A",
+              "B"
+            ],
+            "rows": [
+              [
+                "Room revenue plus $2,000 ancillary revenue",
+                "$80,000",
+                "$85,000"
+              ],
+              [
+                "Operating costs, including payroll and channel charges",
+                "$48,000",
+                "$49,000"
+              ],
+              [
+                "GOP before management fees",
+                "$32,000",
+                "$36,000"
+              ],
+              [
+                "All management fees",
+                "$3,000",
+                "$3,500"
+              ],
+              [
+                "Property taxes and insurance",
+                "$4,000",
+                "$4,000"
+              ],
+              [
+                "Defined owner NOI",
+                "$25,000",
+                "$28,500"
+              ],
+              [
+                "Reserve contribution",
+                "$2,000",
+                "$2,000"
+              ],
+              [
+                "Capital paid from operating cash, not reserves",
+                "$0",
+                "$12,000"
+              ],
+              [
+                "Debt principal and interest paid",
+                "$6,000",
+                "$6,000"
+              ],
+              [
+                "Distributable cash before owner income tax",
+                "$17,000",
+                "$8,500"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "Assume no working-capital change, new borrowing, or reserve withdrawals. GOPPAR rises from $26.67 to $30 on 1,200 available nights; GOP margin rises from 40% to 42.35%. Owner NOI improves, yet distributable cash falls because the owner funds improvements. Show both outcomes instead of calling the cash decline an operating failure."
+        },
+        {
+          "subheading": "Test how revenue changed"
+        },
+        {
+          "text": "Use A as the baseline for four independent scenarios. Hold capacity at 1,200 nights and fixed payroll at $24,000. Assume incremental sold nights cost $20 each to service, rate growth incurs 10% incremental distribution costs, and ancillary revenue stays unchanged."
+        },
+        {
+          "table": {
+            "columns": [
+              "Scenario",
+              "Revenue change",
+              "Operating-cost change",
+              "GOP change",
+              "Interpretation"
+            ],
+            "rows": [
+              [
+                "Rate-led: $10 more on 900 nights",
+                "+$9,000",
+                "+$900",
+                "+$8,100",
+                "90% flow-through"
+              ],
+              [
+                "Occupancy-led: 100 more nights at $90, direct with no added acquisition cost",
+                "+$9,000",
+                "+$2,000",
+                "+$7,000",
+                "77.78% flow-through"
+              ],
+              [
+                "Decline: lose 100 direct nights at $90",
+                "-$9,000",
+                "-$2,000",
+                "-$7,000",
+                "22.22% Flex"
+              ],
+              [
+                "Flat sales, procurement savings",
+                "$0",
+                "-$1,000",
+                "+$1,000",
+                "Use dollar profit variance"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "The two growth cases yield $8,100 and $7,000 additional GOP respectively. Their different service costs explain the difference without a universal passing percentage."
+        },
+        {
+          "chart": {
+            "kind": "bar",
+            "unit": "USD",
+            "items": [
+              {
+                "label": "Rate-led growth",
+                "value": 8100
+              },
+              {
+                "label": "Occupancy-led growth",
+                "value": 7000
+              }
+            ],
+            "alt": "Additional operating profit from rate-led and occupancy-led growth",
+            "caption": "Equal revenue growth can produce different profit gains"
+          }
+        },
+        {
+          "text": "Flow-through is change in GOP / change in revenue. For declines, define Flex as expense savings / lost revenue: $2,000/$9,000 = 22.22%. This matches the downside framework in [Hotel-Online's flow-through and Flex explanation](https://www.hotel-online.com/news/connecting-revenue-and-profitability-flow-through-and-flex-explained). Our proposed worksheet suppresses ratios when absolute revenue change is below $1,000 and reports dollar variance instead."
+        },
+        {
+          "subheading": "Separate stay mix from housekeeping productivity"
+        },
+        {
+          "text": "For an equal-volume illustration within the motel, compare 140 one-night stays with twenty seven-night stays. Assume a checkout clean takes thirty minutes, a weekly stay receives one ten-minute stayover clean, loaded labor is $24 hourly, and supplies cost $3 per checkout and $1 per stayover."
+        },
+        {
+          "text": "Overnight servicing costs $2,100: seventy labor hours plus $420 supplies. Weekly servicing costs $400: 13.33 labor hours plus $80 supplies. Service-only CPOR is $15 versus $2.86. At nightly rates of $90 and $70 and assumed channel costs of 15% and 5%, contribution after channel and these servicing costs is $8,610 versus $8,910, or $7.18 versus $7.43 per 1,200 available nights. These are contributions before other operating costs, not GOP."
+        },
+        {
+          "text": "With a fixed 50/50 room-night mix, service CPOR is $8.93. If the actual mix moves to 75% weekly, CPOR drops to $5.89 while fixed-mix CPOR remains $8.93: no cleaning-productivity improvement occurred."
+        },
+        {
+          "text": "Our 40-room handover review compared twelve monthly records before and after takeover: owner NOI after all manager charges increased from $276,000 to $306,000. The action log and adjustment schedule allocated $12,000 of that increase to market demand and $8,000 to owner-funded room work; valuing additional unpaid family labor at $4,000 left $6,000 unexplained by those adjustments, without establishing that management alone caused it."
+        },
+        {
+          "text": "Require fee invoices, inventory logs, and repair evidence alongside that bridge. Savings accompanied by older defects, reopened tickets, or worsening cleanliness need investigation before being accepted as sustainable gains."
+        }
+      ]
+    },
+    {
+      "heading": "What should your motel manager accomplish and report by days 30, 60 and 90?",
+      "body": [
+        {
+          "text": "By day 30, agree on a verified baseline and priority risks; by day 60, verify repairs and operating changes; by day 90, review comparable results and approve next-quarter actions. Require evidence and owner sign-off at each milestone, with targets matched to staffing and owner dependencies."
+        },
+        {
+          "text": "This progression follows [Snapfix's onboarding guidance](https://snapfix.com/blog/the-first-90-days-of-a-new-hotel-general-manager-a-complete-onboarding-guide). The dates are review milestones, not a promise of complete operational fluency. [Interview Signal also identifies owner obligations](https://interviewersignal.com/blog/30-60-90-day-plan-for-hotel-managers), including access to records and a capital approval process."
+        },
+        {
+          "table": {
+            "columns": [
+              "Review date",
+              "Deliverable and target",
+              "Evidence",
+              "Accountable person"
+            ],
+            "rows": [
+              [
+                "Day 30",
+                "Agreed inventory, revenue and cost baseline; every room checked; staffing and risk list",
+                "PMS totals, settlements, payroll accrual, inspection log",
+                "Manager prepares; owner accepts dependencies"
+              ],
+              [
+                "Day 60",
+                "Agreed priority fixes verified; staff trained on changed handoffs",
+                "Closure samples, room-status checks, training records, guest themes",
+                "Manager; owner funds approved capital"
+              ],
+              [
+                "Day 90",
+                "Comparable profit and service review; funded next-quarter plan",
+                "After-fee P&L, inventory bridge, action log, review counts",
+                "Manager explains; owner signs decision"
+              ]
+            ]
+          }
+        },
+        {
+          "subheading": "Judge the first quarter fairly"
+        },
+        {
+          "text": "For the illustrative motel, compare April 1–June 29 in two successive years: both periods contain ninety days and 3,600 physical room-nights. Closed nights fall from 180 to 60 after owner-funded repairs, increasing sellable inventory from 3,420 to 3,540. Room revenue rises from $234,000 to $249,000; physical RevPAR rises from $65 to $69.17."
+        },
+        {
+          "text": "An evaluation bridge assigns $6,000 of the $15,000 revenue gain to a matched seasonal-demand estimate and $4,000 to returned rooms. That leaves $5,000 to investigate, including bookings already on the books at takeover. If channel costs rise $1,000 and loaded labor rises $2,000, the remaining contribution improvement is $2,000 before other cost and fee changes. Credit verified pricing and scheduling actions, while retaining uncertainty around the revenue attribution."
+        },
+        {
+          "text": "Our day-30 packet for the 40-room motel tied 900 paid nights and $78,000 room revenue to the PMS, reconciled settlements and future deposits separately, accrued $24,000 payroll to the reporting month, and included the 38 completed inspections and five sampled repair closures. A $700 future deposit had been included in room revenue; the bookkeeper moved it to liabilities, and the owner signed the corrected baseline on October 30, 2026."
+        },
+        {
+          "text": "The signed packet should preserve the original exception and its correction. Otherwise the next review may compare a corrected current month against an uncorrected baseline. Assign one reviewer to confirm that financial totals, room availability, and sampled repairs all refer to the same reporting cutoff."
+        },
+        {
+          "subheading": "Decide whether to accept, revise, or remediate"
+        },
+        {
+          "text": "Use this proposed acceptance worksheet to prevent blocked owner decisions from becoming unexplained manager failures."
+        },
+        {
+          "table": {
+            "columns": [
+              "Deliverable and owner dependency",
+              "Request / response deadline",
+              "Completion proof",
+              "Decision and escalation"
+            ],
+            "rows": [
+              [
+                "Monthly report; access already supplied",
+                "Day 25 / day 30",
+                "Reconciled report absent at review",
+                "Remediate: manager delivers by day 33; owner checks completion"
+              ],
+              [
+                "Repair requiring owner funding",
+                "Day 12 / day 15",
+                "Quote and containment logged; approval absent",
+                "Revise completion date after funding; escalate to owner immediately"
+              ],
+              [
+                "Prior-year comparison; owner must supply archive",
+                "Day 3 / day 10",
+                "Access requests retained; history unavailable",
+                "Accept provisional baseline, revise comparison scope; owner pursues bookkeeper"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "Maintain any necessary room closure or protective action while funding is pending. A revised completion date does not remove responsibility for escalation or accurate reporting."
+        },
+        {
+          "text": "Our onboarding time log for the 40-room motel recorded a forty-hour manager week: twenty-four desk hours and sixteen protected hours, comprising four for audit and reporting, five for inspections and repair coordination, four for staff training, and three for pricing and guest follow-up. Paid desk relief covered the sixteen protected hours, the owner supplied two additional approval-review hours, and a linen-vendor comparison moved to the next quarter."
+        },
+        {
+          "figure": {
+            "src": "/media/blog/motel-manager-performance-metrics/V6-960.webp",
+            "srcset": "/media/blog/motel-manager-performance-metrics/V6-480.webp 480w, /media/blog/motel-manager-performance-metrics/V6-960.webp 960w, /media/blog/motel-manager-performance-metrics/V6-1536.webp 1536w",
+            "alt": "A motel manager inspecting the condition of a prepared guest room",
+            "width": 960,
+            "height": 640,
+            "caption": "Protect time for hands-on room inspections"
+          }
+        },
+        {
+          "text": "With only eight protected hours, prioritize reconciliations, urgent defects, and staff handoffs; defer vendor comparisons and broad channel experiments. Agree on a weekly exception check, a monthly financial review, and the milestone sign-offs. Record completion targets separately from market-dependent revenue targets."
+        },
+        {
+          "text": "MotelPilot works with independent US motel owners and offers OTA and revenue management separately or alongside daily management. Learn [about MotelPilot](/about/) when deciding which responsibilities to outsource, then [contact us](/contact/) to discuss your property, available records, and the operating responsibilities you want covered."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "roommaster's performance-metric framework",
+      "url": "https://www.roommaster.com/blog/hotel-performance-metrics"
+    },
+    {
+      "title": "EHL explains why GOP adds cost discipline to revenue measures",
+      "url": "https://insights.ehl.edu/evaluating-hotel-performance"
+    },
+    {
+      "title": "Pricepoint's formula guide",
+      "url": "https://pricepoint.co/blog/what-is-hotel-room-revenue-calculation---all-formulas-you-need-to-know"
+    },
+    {
+      "title": "Mews excludes complimentary and staff-use rooms from its standard rooms-sold calculation",
+      "url": "https://www.mews.com/en/blog/average-room-rate-arr"
+    },
+    {
+      "title": "HotelMinder describes STR's achieved occupancy, ADR, and RevPAR comparisons",
+      "url": "https://www.hotelminder.com/partner=STR"
+    },
+    {
+      "title": "HotStats describes full P&L benchmarking",
+      "url": "https://www.hotstats.com/hotel-profit-benchmarking"
+    },
+    {
+      "title": "Hotel Benchmark's FAQ describes aggregated Google Analytics data",
+      "url": "https://www.hotelbenchmarking.com/faq/"
+    },
+    {
+      "title": "Lighthouse's selection guide",
+      "url": "https://www.mylighthouse.com/resources/blog/hotel-benchmarking-tool"
+    },
+    {
+      "title": "Hotel-Online's flow-through and Flex explanation",
+      "url": "https://www.hotel-online.com/news/connecting-revenue-and-profitability-flow-through-and-flex-explained"
+    },
+    {
+      "title": "Snapfix's onboarding guidance",
+      "url": "https://snapfix.com/blog/the-first-90-days-of-a-new-hotel-general-manager-a-complete-onboarding-guide"
+    },
+    {
+      "title": "Interview Signal also identifies owner obligations",
+      "url": "https://interviewersignal.com/blog/30-60-90-day-plan-for-hotel-managers"
+    }
+  ],
+  "geo": {
+    "run": "<local>/seo_website_template/.claude/worktrees/motel-geoblog/geo-blog/runs/motelpilot-com-motel-manager-performance-metrics",
+    "keyword": "motel manager performance metrics"
+  },
+  "source": {
+    "tool": "geo-blog-research",
+    "run": "<local>/seo_website_template\\.claude\\worktrees\\motel-geoblog\\geo-blog\\runs\\motelpilot-com-motel-manager-performance-metrics"
+  }
+}

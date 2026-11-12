@@ -1,0 +1,2984 @@
+{
+  "schemaVersion": "seo-site-template-variants-v1",
+  "sourceUrl": "https://example.com/",
+  "axes": {},
+  "components": {
+    "header": {
+      "ctaRoute": "/contact/",
+      "layout": "inline",
+      "topBar": false,
+      "dropdown": "list",
+      "carets": false
+    },
+    "hero": "media-overlay",
+    "featureGrid": "plain",
+    "splitMedia": "media-end",
+    "proof": "band",
+    "faq": "accordion",
+    "cta": "form",
+    "media": {
+      "origin": "library",
+      "hero": {
+        "src": "/media/photos/general-hero-1-960.webp",
+        "srcset": "/media/photos/general-hero-1-480.webp 480w, /media/photos/general-hero-1-960.webp 960w, /media/photos/general-hero-1-1536.webp 1536w",
+        "width": 960,
+        "height": 640,
+        "alt": "A roadside motel with an office and exterior room doors in warm late-afternoon light.",
+        "sources": [
+          {
+            "media": "(max-width: 767px)",
+            "src": "/media/photos/general-hero-1-phone-960.webp",
+            "srcset": "/media/photos/general-hero-1-phone-480.webp 480w, /media/photos/general-hero-1-phone-960.webp 960w",
+            "width": 960,
+            "height": 1440
+          }
+        ]
+      },
+      "heroByRoute": {
+        "/": {
+          "src": "/media/photos/general-hero-1-960.webp",
+          "srcset": "/media/photos/general-hero-1-480.webp 480w, /media/photos/general-hero-1-960.webp 960w, /media/photos/general-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A roadside motel with an office and exterior room doors in warm late-afternoon light.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-1-phone-960.webp",
+              "srcset": "/media/photos/general-hero-1-phone-480.webp 480w, /media/photos/general-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/services/": {
+          "src": "/media/photos/general-hero-2-960.webp",
+          "srcset": "/media/photos/general-hero-2-480.webp 480w, /media/photos/general-hero-2-960.webp 960w, /media/photos/general-hero-2-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel clerk helps a guest with luggage at a wooden reception counter beside an open lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-2-phone-960.webp",
+              "srcset": "/media/photos/general-hero-2-phone-480.webp 480w, /media/photos/general-hero-2-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/business-development/": {
+          "src": "/media/photos/general-hero-3-960.webp",
+          "srcset": "/media/photos/general-hero-3-480.webp 480w, /media/photos/general-hero-3-960.webp 960w, /media/photos/general-hero-3-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A man and a woman look at a tablet beside a reception counter in a warmly lit motel lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-3-phone-960.webp",
+              "srcset": "/media/photos/general-hero-3-phone-480.webp 480w, /media/photos/general-hero-3-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/digital-marketing/": {
+          "src": "/media/photos/digital-marketing-hero-1-960.webp",
+          "srcset": "/media/photos/digital-marketing-hero-1-480.webp 480w, /media/photos/digital-marketing-hero-1-960.webp 960w, /media/photos/digital-marketing-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A housekeeper adjusts pillows on a neatly made bed in a sunlit motel room with beige walls and navy bedding.",
+          "category": "digital marketing",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/digital-marketing-hero-1-phone-960.webp",
+              "srcset": "/media/photos/digital-marketing-hero-1-phone-480.webp 480w, /media/photos/digital-marketing-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/human-resources/": {
+          "src": "/media/photos/human-resources-hero-1-960.webp",
+          "srcset": "/media/photos/human-resources-hero-1-480.webp 480w, /media/photos/human-resources-hero-1-960.webp 960w, /media/photos/human-resources-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A roadside motel exterior with an office and room doors in warm late-afternoon light.",
+          "category": "human resources",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/human-resources-hero-1-phone-960.webp",
+              "srcset": "/media/photos/human-resources-hero-1-phone-480.webp 480w, /media/photos/human-resources-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/operations-management/": {
+          "src": "/media/photos/general-hero-4-960.webp",
+          "srcset": "/media/photos/general-hero-4-480.webp 480w, /media/photos/general-hero-4-960.webp 960w, /media/photos/general-hero-4-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A housekeeper smooths white bedding in a sunlit motel room with blue accents and an open beige wall.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-4-phone-960.webp",
+              "srcset": "/media/photos/general-hero-4-phone-480.webp 480w, /media/photos/general-hero-4-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/revenue-management/": {
+          "src": "/media/photos/revenue-management-hero-1-960.webp",
+          "srcset": "/media/photos/revenue-management-hero-1-480.webp 480w, /media/photos/revenue-management-hero-1-960.webp 960w, /media/photos/revenue-management-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel front-desk clerk helps an arriving guest across the reception counter.",
+          "category": "revenue management",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/revenue-management-hero-1-phone-960.webp",
+              "srcset": "/media/photos/revenue-management-hero-1-phone-480.webp 480w, /media/photos/revenue-management-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/information-technology/": {
+          "src": "/media/photos/information-technology-hero-1-960.webp",
+          "srcset": "/media/photos/information-technology-hero-1-480.webp 480w, /media/photos/information-technology-hero-1-960.webp 960w, /media/photos/information-technology-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel owner and manager discuss a tablet in a small lobby.",
+          "category": "information technology",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/information-technology-hero-1-phone-960.webp",
+              "srcset": "/media/photos/information-technology-hero-1-phone-480.webp 480w, /media/photos/information-technology-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/commercial-strategy/": {
+          "src": "/media/photos/general-hero-1-960.webp",
+          "srcset": "/media/photos/general-hero-1-480.webp 480w, /media/photos/general-hero-1-960.webp 960w, /media/photos/general-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A roadside motel with an office and exterior room doors in warm late-afternoon light.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-1-phone-960.webp",
+              "srcset": "/media/photos/general-hero-1-phone-480.webp 480w, /media/photos/general-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/project-management/": {
+          "src": "/media/photos/project-management-hero-1-960.webp",
+          "srcset": "/media/photos/project-management-hero-1-480.webp 480w, /media/photos/project-management-hero-1-960.webp 960w, /media/photos/project-management-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A neatly made bed in a motel guest room lit by morning daylight.",
+          "category": "project management",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/project-management-hero-1-phone-960.webp",
+              "srcset": "/media/photos/project-management-hero-1-phone-480.webp 480w, /media/photos/project-management-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/development/": {
+          "src": "/media/photos/general-hero-2-960.webp",
+          "srcset": "/media/photos/general-hero-2-480.webp 480w, /media/photos/general-hero-2-960.webp 960w, /media/photos/general-hero-2-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel clerk helps a guest with luggage at a wooden reception counter beside an open lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-2-phone-960.webp",
+              "srcset": "/media/photos/general-hero-2-phone-480.webp 480w, /media/photos/general-hero-2-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/receivership/": {
+          "src": "/media/photos/general-hero-3-960.webp",
+          "srcset": "/media/photos/general-hero-3-480.webp 480w, /media/photos/general-hero-3-960.webp 960w, /media/photos/general-hero-3-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A man and a woman look at a tablet beside a reception counter in a warmly lit motel lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-3-phone-960.webp",
+              "srcset": "/media/photos/general-hero-3-phone-480.webp 480w, /media/photos/general-hero-3-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/asset-management/": {
+          "src": "/media/photos/general-hero-4-960.webp",
+          "srcset": "/media/photos/general-hero-4-480.webp 480w, /media/photos/general-hero-4-960.webp 960w, /media/photos/general-hero-4-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A housekeeper smooths white bedding in a sunlit motel room with blue accents and an open beige wall.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-4-phone-960.webp",
+              "srcset": "/media/photos/general-hero-4-phone-480.webp 480w, /media/photos/general-hero-4-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/accounting/": {
+          "src": "/media/photos/accounting-hero-1-960.webp",
+          "srcset": "/media/photos/accounting-hero-1-480.webp 480w, /media/photos/accounting-hero-1-960.webp 960w, /media/photos/accounting-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel clerk points to paperwork while a guest with luggage stands at the front desk.",
+          "category": "accounting",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/accounting-hero-1-phone-960.webp",
+              "srcset": "/media/photos/accounting-hero-1-phone-480.webp 480w, /media/photos/accounting-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/ota-optimization/": {
+          "src": "/media/photos/ota-optimization-hero-1-960.webp",
+          "srcset": "/media/photos/ota-optimization-hero-1-480.webp 480w, /media/photos/ota-optimization-hero-1-960.webp 960w, /media/photos/ota-optimization-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel owner and manager discuss a tablet in a small lobby.",
+          "category": "ota optimization",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/ota-optimization-hero-1-phone-960.webp",
+              "srcset": "/media/photos/ota-optimization-hero-1-phone-480.webp 480w, /media/photos/ota-optimization-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/about-us/": {
+          "src": "/media/photos/general-hero-1-960.webp",
+          "srcset": "/media/photos/general-hero-1-480.webp 480w, /media/photos/general-hero-1-960.webp 960w, /media/photos/general-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A roadside motel with an office and exterior room doors in warm late-afternoon light.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-1-phone-960.webp",
+              "srcset": "/media/photos/general-hero-1-phone-480.webp 480w, /media/photos/general-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/contact-us/": {
+          "src": "/media/photos/general-hero-2-960.webp",
+          "srcset": "/media/photos/general-hero-2-480.webp 480w, /media/photos/general-hero-2-960.webp 960w, /media/photos/general-hero-2-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel clerk helps a guest with luggage at a wooden reception counter beside an open lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-2-phone-960.webp",
+              "srcset": "/media/photos/general-hero-2-phone-480.webp 480w, /media/photos/general-hero-2-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/case-studies/": {
+          "src": "/media/photos/general-hero-3-960.webp",
+          "srcset": "/media/photos/general-hero-3-480.webp 480w, /media/photos/general-hero-3-960.webp 960w, /media/photos/general-hero-3-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A man and a woman look at a tablet beside a reception counter in a warmly lit motel lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-3-phone-960.webp",
+              "srcset": "/media/photos/general-hero-3-phone-480.webp 480w, /media/photos/general-hero-3-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/capabilities/": {
+          "src": "/media/photos/general-hero-4-960.webp",
+          "srcset": "/media/photos/general-hero-4-480.webp 480w, /media/photos/general-hero-4-960.webp 960w, /media/photos/general-hero-4-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A housekeeper smooths white bedding in a sunlit motel room with blue accents and an open beige wall.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-4-phone-960.webp",
+              "srcset": "/media/photos/general-hero-4-phone-480.webp 480w, /media/photos/general-hero-4-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/our-process/": {
+          "src": "/media/photos/general-hero-1-960.webp",
+          "srcset": "/media/photos/general-hero-1-480.webp 480w, /media/photos/general-hero-1-960.webp 960w, /media/photos/general-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A roadside motel with an office and exterior room doors in warm late-afternoon light.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-1-phone-960.webp",
+              "srcset": "/media/photos/general-hero-1-phone-480.webp 480w, /media/photos/general-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/our-history/": {
+          "src": "/media/photos/general-hero-2-960.webp",
+          "srcset": "/media/photos/general-hero-2-480.webp 480w, /media/photos/general-hero-2-960.webp 960w, /media/photos/general-hero-2-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel clerk helps a guest with luggage at a wooden reception counter beside an open lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-2-phone-960.webp",
+              "srcset": "/media/photos/general-hero-2-phone-480.webp 480w, /media/photos/general-hero-2-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/resources/": {
+          "src": "/media/photos/general-hero-3-960.webp",
+          "srcset": "/media/photos/general-hero-3-480.webp 480w, /media/photos/general-hero-3-960.webp 960w, /media/photos/general-hero-3-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A man and a woman look at a tablet beside a reception counter in a warmly lit motel lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-3-phone-960.webp",
+              "srcset": "/media/photos/general-hero-3-phone-480.webp 480w, /media/photos/general-hero-3-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/careers/": {
+          "src": "/media/photos/general-hero-4-960.webp",
+          "srcset": "/media/photos/general-hero-4-480.webp 480w, /media/photos/general-hero-4-960.webp 960w, /media/photos/general-hero-4-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A housekeeper smooths white bedding in a sunlit motel room with blue accents and an open beige wall.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-4-phone-960.webp",
+              "srcset": "/media/photos/general-hero-4-phone-480.webp 480w, /media/photos/general-hero-4-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/privacy-policy/": {
+          "src": "/media/photos/general-hero-1-960.webp",
+          "srcset": "/media/photos/general-hero-1-480.webp 480w, /media/photos/general-hero-1-960.webp 960w, /media/photos/general-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A roadside motel with an office and exterior room doors in warm late-afternoon light.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-1-phone-960.webp",
+              "srcset": "/media/photos/general-hero-1-phone-480.webp 480w, /media/photos/general-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/terms-and-conditions/": {
+          "src": "/media/photos/general-hero-2-960.webp",
+          "srcset": "/media/photos/general-hero-2-480.webp 480w, /media/photos/general-hero-2-960.webp 960w, /media/photos/general-hero-2-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel clerk helps a guest with luggage at a wooden reception counter beside an open lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-2-phone-960.webp",
+              "srcset": "/media/photos/general-hero-2-phone-480.webp 480w, /media/photos/general-hero-2-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/request-a-quote/": {
+          "src": "/media/photos/general-hero-3-960.webp",
+          "srcset": "/media/photos/general-hero-3-480.webp 480w, /media/photos/general-hero-3-960.webp 960w, /media/photos/general-hero-3-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A man and a woman look at a tablet beside a reception counter in a warmly lit motel lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-3-phone-960.webp",
+              "srcset": "/media/photos/general-hero-3-phone-480.webp 480w, /media/photos/general-hero-3-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/blog/": {
+          "src": "/media/photos/general-hero-4-960.webp",
+          "srcset": "/media/photos/general-hero-4-480.webp 480w, /media/photos/general-hero-4-960.webp 960w, /media/photos/general-hero-4-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A housekeeper smooths white bedding in a sunlit motel room with blue accents and an open beige wall.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-4-phone-960.webp",
+              "srcset": "/media/photos/general-hero-4-phone-480.webp 480w, /media/photos/general-hero-4-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/blog/motel-management-models-compared/": {
+          "src": "/media/photos/general-hero-1-960.webp",
+          "srcset": "/media/photos/general-hero-1-480.webp 480w, /media/photos/general-hero-1-960.webp 960w, /media/photos/general-hero-1-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A roadside motel with an office and exterior room doors in warm late-afternoon light.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-1-phone-960.webp",
+              "srcset": "/media/photos/general-hero-1-phone-480.webp 480w, /media/photos/general-hero-1-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/blog/motel-management-fees-reasonable-structure/": {
+          "src": "/media/photos/general-hero-2-960.webp",
+          "srcset": "/media/photos/general-hero-2-480.webp 480w, /media/photos/general-hero-2-960.webp 960w, /media/photos/general-hero-2-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A motel clerk helps a guest with luggage at a wooden reception counter beside an open lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-2-phone-960.webp",
+              "srcset": "/media/photos/general-hero-2-phone-480.webp 480w, /media/photos/general-hero-2-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        },
+        "/blog/motel-manager-performance-metrics/": {
+          "src": "/media/photos/general-hero-3-960.webp",
+          "srcset": "/media/photos/general-hero-3-480.webp 480w, /media/photos/general-hero-3-960.webp 960w, /media/photos/general-hero-3-1536.webp 1536w",
+          "width": 960,
+          "height": 640,
+          "alt": "A man and a woman look at a tablet beside a reception counter in a warmly lit motel lobby.",
+          "category": "general",
+          "sources": [
+            {
+              "media": "(max-width: 767px)",
+              "src": "/media/photos/general-hero-3-phone-960.webp",
+              "srcset": "/media/photos/general-hero-3-phone-480.webp 480w, /media/photos/general-hero-3-phone-960.webp 960w",
+              "width": 960,
+              "height": 1440
+            }
+          ]
+        }
+      },
+      "pools": {
+        "product": [
+          {
+            "src": "/media/photos/general-product-1-960.webp",
+            "srcset": "/media/photos/general-product-1-480.webp 480w, /media/photos/general-product-1-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A freshly made bed and desk in a motel guest room.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-2-960.webp",
+            "srcset": "/media/photos/general-product-2-480.webp 480w, /media/photos/general-product-2-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A motel clerk assists a guest at the front desk.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-3-960.webp",
+            "srcset": "/media/photos/general-product-3-480.webp 480w, /media/photos/general-product-3-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A clean outdoor motel walkway runs past room doors under warm lights.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-4-960.webp",
+            "srcset": "/media/photos/general-product-4-480.webp 480w, /media/photos/general-product-4-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A housekeeper pushes a cart along a motel's outdoor walkway.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-5-960.webp",
+            "srcset": "/media/photos/general-product-5-480.webp 480w, /media/photos/general-product-5-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A freshly made bed and desk in a motel guest room.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-6-960.webp",
+            "srcset": "/media/photos/general-product-6-480.webp 480w, /media/photos/general-product-6-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A motel clerk checks in a guest at the front desk.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-7-960.webp",
+            "srcset": "/media/photos/general-product-7-480.webp 480w, /media/photos/general-product-7-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A clean outdoor motel walkway runs alongside room doors in warm evening light.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-8-960.webp",
+            "srcset": "/media/photos/general-product-8-480.webp 480w, /media/photos/general-product-8-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A housekeeper pushes a cart with towels and cleaning supplies along a motel's outdoor walkway.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-9-960.webp",
+            "srcset": "/media/photos/general-product-9-480.webp 480w, /media/photos/general-product-9-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A housekeeper smooths bedding in a motel room with a wooden desk, warm lamps and a large window.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-10-960.webp",
+            "srcset": "/media/photos/general-product-10-480.webp 480w, /media/photos/general-product-10-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A motel clerk checks in a guest at the front desk.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-11-960.webp",
+            "srcset": "/media/photos/general-product-11-480.webp 480w, /media/photos/general-product-11-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A covered motel walkway with teal room doors, warm wall lights and flower planters at sunset.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-12-960.webp",
+            "srcset": "/media/photos/general-product-12-480.webp 480w, /media/photos/general-product-12-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A housekeeper pushes a cart along a motel's outdoor walkway.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-13-960.webp",
+            "srcset": "/media/photos/general-product-13-480.webp 480w, /media/photos/general-product-13-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A motel room with a neatly made bed and a woman working at a desk beside a window at sunset.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-14-960.webp",
+            "srcset": "/media/photos/general-product-14-480.webp 480w, /media/photos/general-product-14-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A motel clerk checks in a guest with luggage at the front desk.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-product-full-remote-management-960.webp",
+            "srcset": "/media/photos/general-product-full-remote-management-480.webp 480w, /media/photos/general-product-full-remote-management-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A laptop on a wooden desk displays motel views beside a window overlooking motel rooms at sunset.",
+            "category": "general",
+            "topic": "Full remote management"
+          },
+          {
+            "src": "/media/photos/general-product-revenue-and-dynamic-pricing-960.webp",
+            "srcset": "/media/photos/general-product-revenue-and-dynamic-pricing-480.webp 480w, /media/photos/general-product-revenue-and-dynamic-pricing-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A laptop displaying charts sits on a wooden motel reception desk beside a mug and lamp at sunset.",
+            "category": "general",
+            "topic": "Revenue and Dynamic Pricing"
+          },
+          {
+            "src": "/media/photos/general-product-booking-com-and-expedia-960.webp",
+            "srcset": "/media/photos/general-product-booking-com-and-expedia-480.webp 480w, /media/photos/general-product-booking-com-and-expedia-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A laptop displaying room listings sits on a motel reception counter beside a lamp and flowers.",
+            "category": "general",
+            "topic": "Booking.com and Expedia"
+          },
+          {
+            "src": "/media/photos/general-product-online-visibility-and-direct-bookings-960.webp",
+            "srcset": "/media/photos/general-product-online-visibility-and-direct-bookings-480.webp 480w, /media/photos/general-product-online-visibility-and-direct-bookings-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A laptop displaying motel rooms sits on a wooden desk beside a window overlooking a motel at dusk.",
+            "category": "general",
+            "topic": "Online visibility and direct bookings"
+          },
+          {
+            "src": "/media/photos/general-product-more-ways-we-can-help-960.webp",
+            "srcset": "/media/photos/general-product-more-ways-we-can-help-480.webp 480w, /media/photos/general-product-more-ways-we-can-help-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A motel room with a made bed, armchair, and open door overlooking the courtyard at sunset.",
+            "category": "general",
+            "topic": "More ways we can help"
+          },
+          {
+            "src": "/media/photos/general-product-business-development-for-a-family-owned-business-960.webp",
+            "srcset": "/media/photos/general-product-business-development-for-a-family-owned-business-480.webp 480w, /media/photos/general-product-business-development-for-a-family-owned-business-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A laptop, notebook and mug sit on a desk in a warmly lit motel lobby overlooking guest rooms at sunset.",
+            "category": "general",
+            "topic": "Business development for a family-owned business"
+          },
+          {
+            "src": "/media/photos/general-product-commercial-strategy-for-a-family-owned-business-960.webp",
+            "srcset": "/media/photos/general-product-commercial-strategy-for-a-family-owned-business-480.webp 480w, /media/photos/general-product-commercial-strategy-for-a-family-owned-business-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A laptop, notebook and mug sit on a wooden desk overlooking motel rooms at sunset.",
+            "category": "general",
+            "topic": "Commercial strategy for a family-owned business"
+          },
+          {
+            "src": "/media/photos/general-product-development-for-a-first-time-owner-960.webp",
+            "srcset": "/media/photos/general-product-development-for-a-first-time-owner-480.webp 480w, /media/photos/general-product-development-for-a-first-time-owner-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A woman writes in a notebook beside a laptop in a motel lobby at dusk.",
+            "category": "general",
+            "topic": "Development for a first-time owner"
+          },
+          {
+            "src": "/media/photos/general-product-operations-management-for-a-family-owned-business-960.webp",
+            "srcset": "/media/photos/general-product-operations-management-for-a-family-owned-business-480.webp 480w, /media/photos/general-product-operations-management-for-a-family-owned-business-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A motel reception desk holds a laptop, telephone, notebook, keys and folded towels beside a window.",
+            "category": "general",
+            "topic": "Operations management for a family-owned business"
+          },
+          {
+            "src": "/media/photos/general-product-asset-management-for-an-owner-with-two-sites-960.webp",
+            "srcset": "/media/photos/general-product-asset-management-for-an-owner-with-two-sites-480.webp 480w, /media/photos/general-product-asset-management-for-an-owner-with-two-sites-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A woman at a desk views motel buildings on a monitor beside large windows at sunset.",
+            "category": "general",
+            "topic": "Asset management for an owner with two sites"
+          },
+          {
+            "src": "/media/photos/business-development-brief-splitmedia-2-1-960.webp",
+            "srcset": "/media/photos/business-development-brief-splitmedia-2-1-480.webp 480w, /media/photos/business-development-brief-splitmedia-2-1-960.webp 960w",
+            "width": 960,
+            "height": 960,
+            "alt": "A woman holds a phone to her ear while using a calculator at a small breakfast table.",
+            "category": "general",
+            "intent": "/business-development/#brief-splitMedia-2-1"
+          }
+        ],
+        "process": [
+          {
+            "src": "/media/photos/general-process-1-960.webp",
+            "srcset": "/media/photos/general-process-1-480.webp 480w, /media/photos/general-process-1-960.webp 960w, /media/photos/general-process-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A manager works at a laptop on a desk in a small motel office.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-process-2-960.webp",
+            "srcset": "/media/photos/general-process-2-480.webp 480w, /media/photos/general-process-2-960.webp 960w, /media/photos/general-process-2-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A housekeeper smooths a white sheet across a bed in a motel guest room.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-process-3-960.webp",
+            "srcset": "/media/photos/general-process-3-480.webp 480w, /media/photos/general-process-3-960.webp 960w, /media/photos/general-process-3-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A maintenance technician services an air-conditioning unit outside a motel room.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-process-4-960.webp",
+            "srcset": "/media/photos/general-process-4-480.webp 480w, /media/photos/general-process-4-960.webp 960w, /media/photos/general-process-4-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A manager works at a laptop in a small motel back office.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-process-5-960.webp",
+            "srcset": "/media/photos/general-process-5-480.webp 480w, /media/photos/general-process-5-960.webp 960w, /media/photos/general-process-5-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A housekeeper straightens a white sheet on a bed in a motel guest room.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-process-6-960.webp",
+            "srcset": "/media/photos/general-process-6-480.webp 480w, /media/photos/general-process-6-960.webp 960w, /media/photos/general-process-6-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A maintenance technician services an air-conditioning unit outside a motel room.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/services-brief-m3-1-960.webp",
+            "srcset": "/media/photos/services-brief-m3-1-480.webp 480w, /media/photos/services-brief-m3-1-960.webp 960w, /media/photos/services-brief-m3-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man tests a key card at a motel guestroom door while a woman watches from the exterior corridor.",
+            "category": "general",
+            "intent": "/services/#brief-m3-1"
+          },
+          {
+            "src": "/media/photos/services-brief-m4-1-960.webp",
+            "srcset": "/media/photos/services-brief-m4-1-480.webp 480w, /media/photos/services-brief-m4-1-960.webp 960w, /media/photos/services-brief-m4-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "Adults review an existing reception counter in a motel lobby.",
+            "category": "general",
+            "intent": "/services/#brief-m4-1"
+          },
+          {
+            "src": "/media/photos/services-brief-m6-1-960.webp",
+            "srcset": "/media/photos/services-brief-m6-1-480.webp 480w, /media/photos/services-brief-m6-1-960.webp 960w, /media/photos/services-brief-m6-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A photographer adjusts a tripod-mounted camera in a bright motel guestroom.",
+            "category": "general",
+            "intent": "/services/#brief-m6-1"
+          },
+          {
+            "src": "/media/photos/services-brief-m8-1-960.webp",
+            "srcset": "/media/photos/services-brief-m8-1-480.webp 480w, /media/photos/services-brief-m8-1-960.webp 960w, /media/photos/services-brief-m8-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A project manager watches a contractor measure a bathroom doorway in a motel room under renovation.",
+            "category": "general",
+            "intent": "/services/#brief-m8-1"
+          },
+          {
+            "src": "/media/photos/business-development-brief-m4-1-960.webp",
+            "srcset": "/media/photos/business-development-brief-m4-1-480.webp 480w, /media/photos/business-development-brief-m4-1-960.webp 960w, /media/photos/business-development-brief-m4-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A manager leans over a motel floor plan on an office table, tracing a route with a pencil.",
+            "category": "general",
+            "intent": "/business-development/#brief-m4-1"
+          },
+          {
+            "src": "/media/photos/business-development-brief-splitmedia-1-1-960.webp",
+            "srcset": "/media/photos/business-development-brief-splitmedia-1-1-480.webp 480w, /media/photos/business-development-brief-splitmedia-1-1-960.webp 960w, /media/photos/business-development-brief-splitmedia-1-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman in a safety vest holds a phone horizontally toward an unfinished bathroom doorway.",
+            "category": "general",
+            "intent": "/business-development/#brief-splitMedia-1-1"
+          },
+          {
+            "src": "/media/photos/operations-management-brief-m3-1-960.webp",
+            "srcset": "/media/photos/operations-management-brief-m3-1-480.webp 480w, /media/photos/operations-management-brief-m3-1-960.webp 960w, /media/photos/operations-management-brief-m3-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man lifts an unlabelled bottle from an open carton beside shelves stocked with towels and supplies.",
+            "category": "general",
+            "intent": "/operations-management/#brief-m3-1"
+          },
+          {
+            "src": "/media/photos/operations-management-brief-splitmedia-1-1-960.webp",
+            "srcset": "/media/photos/operations-management-brief-splitmedia-1-1-480.webp 480w, /media/photos/operations-management-brief-splitmedia-1-1-960.webp 960w, /media/photos/operations-management-brief-splitmedia-1-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman tests a motel room door handle while a man watches from the corridor, with made beds visible inside.",
+            "category": "general",
+            "intent": "/operations-management/#brief-splitMedia-1-1"
+          },
+          {
+            "src": "/media/photos/commercial-strategy-brief-splitmedia-1-1-960.webp",
+            "srcset": "/media/photos/commercial-strategy-brief-splitmedia-1-1-480.webp 480w, /media/photos/commercial-strategy-brief-splitmedia-1-1-960.webp 960w, /media/photos/commercial-strategy-brief-splitmedia-1-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A photographer adjusts a tripod-mounted camera at the foot of a freshly made motel bed.",
+            "category": "general",
+            "intent": "/commercial-strategy/#brief-splitMedia-1-1"
+          },
+          {
+            "src": "/media/photos/commercial-strategy-brief-splitmedia-2-1-960.webp",
+            "srcset": "/media/photos/commercial-strategy-brief-splitmedia-2-1-480.webp 480w, /media/photos/commercial-strategy-brief-splitmedia-2-1-960.webp 960w, /media/photos/commercial-strategy-brief-splitmedia-2-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A motel owner hands a plain folder to an onboarding specialist across a breakfast-room table.",
+            "category": "general",
+            "intent": "/commercial-strategy/#brief-splitMedia-2-1"
+          },
+          {
+            "src": "/media/photos/commercial-strategy-brief-m4-1-960.webp",
+            "srcset": "/media/photos/commercial-strategy-brief-m4-1-480.webp 480w, /media/photos/commercial-strategy-brief-m4-1-960.webp 960w, /media/photos/commercial-strategy-brief-m4-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man gestures toward empty parking bays beside motel guest rooms while a woman watches.",
+            "category": "general",
+            "intent": "/commercial-strategy/#brief-m4-1"
+          },
+          {
+            "src": "/media/photos/development-brief-splitmedia-1-1-960.webp",
+            "srcset": "/media/photos/development-brief-splitmedia-1-1-480.webp 480w, /media/photos/development-brief-splitmedia-1-1-960.webp 960w, /media/photos/development-brief-splitmedia-1-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman marks a guestroom floor plan beside a laptop on a desk near a window.",
+            "category": "general",
+            "intent": "/development/#brief-splitMedia-1-1"
+          },
+          {
+            "src": "/media/photos/development-brief-splitmedia-2-1-960.webp",
+            "srcset": "/media/photos/development-brief-splitmedia-2-1-480.webp 480w, /media/photos/development-brief-splitmedia-2-1-960.webp 960w, /media/photos/development-brief-splitmedia-2-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man holds a tablet during a video call in an unfinished motel lobby.",
+            "category": "general",
+            "intent": "/development/#brief-splitMedia-2-1"
+          },
+          {
+            "src": "/media/photos/development-brief-splitmedia-4-1-960.webp",
+            "srcset": "/media/photos/development-brief-splitmedia-4-1-480.webp 480w, /media/photos/development-brief-splitmedia-4-1-960.webp 960w, /media/photos/development-brief-splitmedia-4-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman wearing a headset turns a binder page beside a laptop at a reception desk.",
+            "category": "general",
+            "intent": "/development/#brief-splitMedia-4-1"
+          },
+          {
+            "src": "/media/photos/receivership-brief-m6-1-960.webp",
+            "srcset": "/media/photos/receivership-brief-m6-1-480.webp 480w, /media/photos/receivership-brief-m6-1-960.webp 960w, /media/photos/receivership-brief-m6-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man holds a phone and points at a handrail mounting on an exterior motel staircase.",
+            "category": "general",
+            "intent": "/receivership/#brief-m6-1"
+          },
+          {
+            "src": "/media/photos/asset-management-brief-splitmedia-1-1-960.webp",
+            "srcset": "/media/photos/asset-management-brief-splitmedia-1-1-480.webp 480w, /media/photos/asset-management-brief-splitmedia-1-1-960.webp 960w, /media/photos/asset-management-brief-splitmedia-1-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "Adults review paperwork together across a small office desk as one points to a document.",
+            "category": "general",
+            "intent": "/asset-management/#brief-splitMedia-1-1"
+          }
+        ],
+        "lifestyle": [
+          {
+            "src": "/media/photos/general-lifestyle-1-960.webp",
+            "srcset": "/media/photos/general-lifestyle-1-480.webp 480w, /media/photos/general-lifestyle-1-960.webp 960w, /media/photos/general-lifestyle-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "Guests carrying bags arrive at a motel at dusk.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-lifestyle-2-960.webp",
+            "srcset": "/media/photos/general-lifestyle-2-480.webp 480w, /media/photos/general-lifestyle-2-960.webp 960w, /media/photos/general-lifestyle-2-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man and a woman walk beside motel rooms while the woman writes on a clipboard.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-lifestyle-3-960.webp",
+            "srcset": "/media/photos/general-lifestyle-3-480.webp 480w, /media/photos/general-lifestyle-3-960.webp 960w, /media/photos/general-lifestyle-3-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "Guests arrive with their bags at a motel at dusk.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-lifestyle-4-960.webp",
+            "srcset": "/media/photos/general-lifestyle-4-480.webp 480w, /media/photos/general-lifestyle-4-960.webp 960w, /media/photos/general-lifestyle-4-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man and a woman walk beside motel rooms, carrying a tablet and a clipboard.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-lifestyle-5-960.webp",
+            "srcset": "/media/photos/general-lifestyle-5-480.webp 480w, /media/photos/general-lifestyle-5-960.webp 960w, /media/photos/general-lifestyle-5-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "Guests carry bags and roll suitcases toward a warmly lit motel room at dusk.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/general-lifestyle-6-960.webp",
+            "srcset": "/media/photos/general-lifestyle-6-480.webp 480w, /media/photos/general-lifestyle-6-960.webp 960w, /media/photos/general-lifestyle-6-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A motel owner and manager walk together outside the motel.",
+            "category": "general"
+          },
+          {
+            "src": "/media/photos/home-brief-cta-1-960.webp",
+            "srcset": "/media/photos/home-brief-cta-1-480.webp 480w, /media/photos/home-brief-cta-1-960.webp 960w, /media/photos/home-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man speaks on a smartphone at a desk beside a window overlooking motel room entrances.",
+            "category": "general",
+            "intent": "/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/services-brief-cta-1-960.webp",
+            "srcset": "/media/photos/services-brief-cta-1-480.webp 480w, /media/photos/services-brief-cta-1-960.webp 960w, /media/photos/services-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man gestures toward motel guestrooms while a woman listens across an outdoor courtyard table.",
+            "category": "general",
+            "intent": "/services/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/business-development-brief-cta-1-960.webp",
+            "srcset": "/media/photos/business-development-brief-cta-1-480.webp 480w, /media/photos/business-development-brief-cta-1-960.webp 960w, /media/photos/business-development-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "Adults stand in a motel courtyard, with one gesturing toward the exterior guest-room corridor.",
+            "category": "general",
+            "intent": "/business-development/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/operations-management-brief-cta-1-960.webp",
+            "srcset": "/media/photos/operations-management-brief-cta-1-480.webp 480w, /media/photos/operations-management-brief-cta-1-960.webp 960w, /media/photos/operations-management-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman wearing a headset speaks and gestures behind an open laptop at an office desk.",
+            "category": "general",
+            "intent": "/operations-management/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/commercial-strategy-brief-cta-1-960.webp",
+            "srcset": "/media/photos/commercial-strategy-brief-cta-1-480.webp 480w, /media/photos/commercial-strategy-brief-cta-1-960.webp 960w, /media/photos/commercial-strategy-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman sits at a kitchen table holding a phone to her ear beside a mug and a potted plant.",
+            "category": "general",
+            "intent": "/commercial-strategy/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/development-brief-cta-1-960.webp",
+            "srcset": "/media/photos/development-brief-cta-1-480.webp 480w, /media/photos/development-brief-cta-1-960.webp 960w, /media/photos/development-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A person speaks on a mobile phone in a motel courtyard with exterior corridors and guestroom doors behind them.",
+            "category": "general",
+            "intent": "/development/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/receivership-brief-cta-1-960.webp",
+            "srcset": "/media/photos/receivership-brief-cta-1-480.webp 480w, /media/photos/receivership-brief-cta-1-960.webp 960w, /media/photos/receivership-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man sits at a desk on the phone, looking through an open doorway toward a motel parking area.",
+            "category": "general",
+            "intent": "/receivership/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/asset-management-brief-cta-1-960.webp",
+            "srcset": "/media/photos/asset-management-brief-cta-1-480.webp 480w, /media/photos/asset-management-brief-cta-1-960.webp 960w, /media/photos/asset-management-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "Men talk at a small table beside a motel lobby window overlooking an exterior guest-room walkway.",
+            "category": "general",
+            "intent": "/asset-management/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/about-us-brief-cta-1-960.webp",
+            "srcset": "/media/photos/about-us-brief-cta-1-480.webp 480w, /media/photos/about-us-brief-cta-1-960.webp 960w, /media/photos/about-us-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A man wearing a headset sits beside a laptop at a motel reception counter and looks out toward guest rooms.",
+            "category": "general",
+            "intent": "/about-us/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/case-studies-brief-cta-1-960.webp",
+            "srcset": "/media/photos/case-studies-brief-cta-1-480.webp 480w, /media/photos/case-studies-brief-cta-1-960.webp 960w, /media/photos/case-studies-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A seated motel owner points through the reception window while a management specialist listens.",
+            "category": "general",
+            "intent": "/case-studies/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/capabilities-brief-cta-1-960.webp",
+            "srcset": "/media/photos/capabilities-brief-cta-1-480.webp 480w, /media/photos/capabilities-brief-cta-1-960.webp 960w, /media/photos/capabilities-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A motel owner speaks on a phone behind the reception counter and gestures toward a laptop.",
+            "category": "general",
+            "intent": "/capabilities/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/our-process-brief-cta-1-960.webp",
+            "srcset": "/media/photos/our-process-brief-cta-1-480.webp 480w, /media/photos/our-process-brief-cta-1-960.webp 960w, /media/photos/our-process-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman holds a phone behind a motel reception counter beside an open door overlooking the guest-room corridor.",
+            "category": "general",
+            "intent": "/our-process/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/our-history-brief-cta-1-960.webp",
+            "srcset": "/media/photos/our-history-brief-cta-1-480.webp 480w, /media/photos/our-history-brief-cta-1-960.webp 960w, /media/photos/our-history-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman at a motel reception desk holds a phone and looks toward the courtyard beside a key rack.",
+            "category": "general",
+            "intent": "/our-history/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/resources-brief-cta-1-960.webp",
+            "srcset": "/media/photos/resources-brief-cta-1-480.webp 480w, /media/photos/resources-brief-cta-1-960.webp 960w, /media/photos/resources-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman holds a phone and pen at a desk beside a closed laptop, with motel doors visible through the window.",
+            "category": "general",
+            "intent": "/resources/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/careers-brief-cta-1-960.webp",
+            "srcset": "/media/photos/careers-brief-cta-1-480.webp 480w, /media/photos/careers-brief-cta-1-960.webp 960w, /media/photos/careers-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman wearing a headset leans toward an open laptop at a wooden desk in a home office.",
+            "category": "general",
+            "intent": "/careers/#brief-cta-1"
+          },
+          {
+            "src": "/media/photos/request-a-quote-brief-cta-1-960.webp",
+            "srcset": "/media/photos/request-a-quote-brief-cta-1-480.webp 480w, /media/photos/request-a-quote-brief-cta-1-960.webp 960w, /media/photos/request-a-quote-brief-cta-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A motel owner speaks on the phone behind the front desk beside an open laptop, with a corridor visible through the window.",
+            "category": "general",
+            "intent": "/request-a-quote/#brief-cta-1"
+          }
+        ],
+        "material": [
+          {
+            "src": "/media/photos/development-brief-splitmedia-3-1-960.webp",
+            "srcset": "/media/photos/development-brief-splitmedia-3-1-480.webp 480w, /media/photos/development-brief-splitmedia-3-1-960.webp 960w, /media/photos/development-brief-splitmedia-3-1-1536.webp 1536w",
+            "width": 960,
+            "height": 640,
+            "alt": "A woman examines wall-light samples beside a finish board and blurred papers on a wooden table.",
+            "category": "general",
+            "intent": "/development/#brief-splitMedia-3-1"
+          }
+        ]
+      },
+      "routePools": {
+        "/digital-marketing/": {
+          "product": [
+            {
+              "src": "/media/photos/digital-marketing-product-1-960.webp",
+              "srcset": "/media/photos/digital-marketing-product-1-480.webp 480w, /media/photos/digital-marketing-product-1-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper pushes a cart along a motel's outdoor walkway.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-product-2-960.webp",
+              "srcset": "/media/photos/digital-marketing-product-2-480.webp 480w, /media/photos/digital-marketing-product-2-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A freshly made bed and wooden desk in a motel guest room lit by daylight and warm lamps.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-product-3-960.webp",
+              "srcset": "/media/photos/digital-marketing-product-3-480.webp 480w, /media/photos/digital-marketing-product-3-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A motel clerk checks in a guest at the front desk.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-product-4-960.webp",
+              "srcset": "/media/photos/digital-marketing-product-4-480.webp 480w, /media/photos/digital-marketing-product-4-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A freshly made bed and a desk in a motel guest room lit by daylight and warm lamps.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-product-5-960.webp",
+              "srcset": "/media/photos/digital-marketing-product-5-480.webp 480w, /media/photos/digital-marketing-product-5-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A clerk checks in a guest at the front desk of a small motel.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-product-6-960.webp",
+              "srcset": "/media/photos/digital-marketing-product-6-480.webp 480w, /media/photos/digital-marketing-product-6-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper pushes a cart along a motel's outdoor walkway.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-product-digital-marketing-for-an-owner-with-two-sites-960.webp",
+              "srcset": "/media/photos/digital-marketing-product-digital-marketing-for-an-owner-with-two-sites-480.webp 480w, /media/photos/digital-marketing-product-digital-marketing-for-an-owner-with-two-sites-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "Colleagues review websites on laptops at a wooden desk beside large windows at sunset.",
+              "category": "digital marketing",
+              "topic": "Digital marketing for an owner with two sites"
+            }
+          ],
+          "lifestyle": [
+            {
+              "src": "/media/photos/digital-marketing-lifestyle-1-960.webp",
+              "srcset": "/media/photos/digital-marketing-lifestyle-1-480.webp 480w, /media/photos/digital-marketing-lifestyle-1-960.webp 960w, /media/photos/digital-marketing-lifestyle-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner and manager walk together along the property.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-lifestyle-2-960.webp",
+              "srcset": "/media/photos/digital-marketing-lifestyle-2-480.webp 480w, /media/photos/digital-marketing-lifestyle-2-960.webp 960w, /media/photos/digital-marketing-lifestyle-2-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner and manager walk together along the property.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-lifestyle-3-960.webp",
+              "srcset": "/media/photos/digital-marketing-lifestyle-3-480.webp 480w, /media/photos/digital-marketing-lifestyle-3-960.webp 960w, /media/photos/digital-marketing-lifestyle-3-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Guests carry bags and pull a suitcase outside a warmly lit motel at dusk.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-lifestyle-4-960.webp",
+              "srcset": "/media/photos/digital-marketing-lifestyle-4-480.webp 480w, /media/photos/digital-marketing-lifestyle-4-960.webp 960w, /media/photos/digital-marketing-lifestyle-4-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner and manager walk together along an outdoor walkway beside guest rooms.",
+              "category": "digital marketing"
+            },
+            {
+              "src": "/media/photos/digital-marketing-brief-cta-1-960.webp",
+              "srcset": "/media/photos/digital-marketing-brief-cta-1-480.webp 480w, /media/photos/digital-marketing-brief-cta-1-960.webp 960w, /media/photos/digital-marketing-brief-cta-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner speaks on the phone behind a reception counter beside a laptop, with a courtyard visible through the window.",
+              "category": "digital marketing",
+              "intent": "/digital-marketing/#brief-cta-1"
+            }
+          ],
+          "process": [
+            {
+              "src": "/media/photos/digital-marketing-brief-m9-1-960.webp",
+              "srcset": "/media/photos/digital-marketing-brief-m9-1-480.webp 480w, /media/photos/digital-marketing-brief-m9-1-960.webp 960w, /media/photos/digital-marketing-brief-m9-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Colleagues review guest-room and courtyard photographs around a meeting table with laptops.",
+              "category": "digital marketing",
+              "intent": "/digital-marketing/#brief-m9-1"
+            }
+          ]
+        },
+        "/human-resources/": {
+          "product": [
+            {
+              "src": "/media/photos/human-resources-product-1-960.webp",
+              "srcset": "/media/photos/human-resources-product-1-480.webp 480w, /media/photos/human-resources-product-1-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A staff member adjusts pillows on a made bed in a motel room with a wooden desk and warm lamps.",
+              "category": "human resources"
+            },
+            {
+              "src": "/media/photos/human-resources-product-2-960.webp",
+              "srcset": "/media/photos/human-resources-product-2-480.webp 480w, /media/photos/human-resources-product-2-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A motel clerk assists a guest signing paperwork at the front desk.",
+              "category": "human resources"
+            },
+            {
+              "src": "/media/photos/human-resources-product-3-960.webp",
+              "srcset": "/media/photos/human-resources-product-3-480.webp 480w, /media/photos/human-resources-product-3-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A clean outdoor motel walkway with blue doors, warm wall lights, and potted flowers at sunset.",
+              "category": "human resources"
+            },
+            {
+              "src": "/media/photos/human-resources-product-4-960.webp",
+              "srcset": "/media/photos/human-resources-product-4-480.webp 480w, /media/photos/human-resources-product-4-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper pushes a cart along a motel's outdoor walkway.",
+              "category": "human resources"
+            },
+            {
+              "src": "/media/photos/human-resources-product-human-resources-for-a-first-time-owner-960.webp",
+              "srcset": "/media/photos/human-resources-product-human-resources-for-a-first-time-owner-480.webp 480w, /media/photos/human-resources-product-human-resources-for-a-first-time-owner-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A woman and a man review a laptop together at a wooden desk in a sunlit office.",
+              "category": "human resources",
+              "topic": "Human resources for a first-time owner"
+            }
+          ],
+          "lifestyle": [
+            {
+              "src": "/media/photos/human-resources-lifestyle-1-960.webp",
+              "srcset": "/media/photos/human-resources-lifestyle-1-480.webp 480w, /media/photos/human-resources-lifestyle-1-960.webp 960w, /media/photos/human-resources-lifestyle-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man gestures beside a woman holding a clipboard as they walk outside motel rooms.",
+              "category": "human resources"
+            },
+            {
+              "src": "/media/photos/human-resources-lifestyle-2-960.webp",
+              "srcset": "/media/photos/human-resources-lifestyle-2-480.webp 480w, /media/photos/human-resources-lifestyle-2-960.webp 960w, /media/photos/human-resources-lifestyle-2-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Guests arrive with their bags at a motel at dusk.",
+              "category": "human resources"
+            },
+            {
+              "src": "/media/photos/human-resources-lifestyle-3-960.webp",
+              "srcset": "/media/photos/human-resources-lifestyle-3-480.webp 480w, /media/photos/human-resources-lifestyle-3-960.webp 960w, /media/photos/human-resources-lifestyle-3-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man gestures toward a motel room while walking beside a woman holding a folder at dusk.",
+              "category": "human resources"
+            },
+            {
+              "src": "/media/photos/human-resources-brief-cta-1-960.webp",
+              "srcset": "/media/photos/human-resources-brief-cta-1-480.webp 480w, /media/photos/human-resources-brief-cta-1-960.webp 960w, /media/photos/human-resources-brief-cta-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A woman wearing a headset sits at a desk with her hand beside a closed notebook.",
+              "category": "human resources",
+              "intent": "/human-resources/#brief-cta-1"
+            }
+          ],
+          "process": [
+            {
+              "src": "/media/photos/human-resources-brief-splitmedia-1-1-960.webp",
+              "srcset": "/media/photos/human-resources-brief-splitmedia-1-1-480.webp 480w, /media/photos/human-resources-brief-splitmedia-1-1-960.webp 960w, /media/photos/human-resources-brief-splitmedia-1-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man hands a closed binder to a seated woman beside an open laptop in a small office.",
+              "category": "human resources",
+              "intent": "/human-resources/#brief-splitMedia-1-1"
+            },
+            {
+              "src": "/media/photos/human-resources-brief-splitmedia-2-1-960.webp",
+              "srcset": "/media/photos/human-resources-brief-splitmedia-2-1-480.webp 480w, /media/photos/human-resources-brief-splitmedia-2-1-960.webp 960w, /media/photos/human-resources-brief-splitmedia-2-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel manager hands a folded uniform and keys to a housekeeping employee beside a cart on a covered walkway.",
+              "category": "human resources",
+              "intent": "/human-resources/#brief-splitMedia-2-1"
+            }
+          ]
+        },
+        "/revenue-management/": {
+          "product": [
+            {
+              "src": "/media/photos/revenue-management-product-1-960.webp",
+              "srcset": "/media/photos/revenue-management-product-1-480.webp 480w, /media/photos/revenue-management-product-1-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A motel clerk checks in a guest at a front desk beside large windows and warm pendant lights.",
+              "category": "revenue management"
+            },
+            {
+              "src": "/media/photos/revenue-management-product-2-960.webp",
+              "srcset": "/media/photos/revenue-management-product-2-480.webp 480w, /media/photos/revenue-management-product-2-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A motel clerk checks in a guest at the front desk.",
+              "category": "revenue management"
+            },
+            {
+              "src": "/media/photos/revenue-management-product-3-960.webp",
+              "srcset": "/media/photos/revenue-management-product-3-480.webp 480w, /media/photos/revenue-management-product-3-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper pushes a cart with towels and cleaning supplies along a motel's outdoor walkway.",
+              "category": "revenue management"
+            }
+          ],
+          "lifestyle": [
+            {
+              "src": "/media/photos/revenue-management-lifestyle-1-960.webp",
+              "srcset": "/media/photos/revenue-management-lifestyle-1-480.webp 480w, /media/photos/revenue-management-lifestyle-1-960.webp 960w, /media/photos/revenue-management-lifestyle-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man and a woman holding a tablet walk along a motel walkway.",
+              "category": "revenue management"
+            },
+            {
+              "src": "/media/photos/revenue-management-lifestyle-2-960.webp",
+              "srcset": "/media/photos/revenue-management-lifestyle-2-480.webp 480w, /media/photos/revenue-management-lifestyle-2-960.webp 960w, /media/photos/revenue-management-lifestyle-2-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man and a woman walk beside motel rooms while looking at a tablet.",
+              "category": "revenue management"
+            },
+            {
+              "src": "/media/photos/revenue-management-lifestyle-3-960.webp",
+              "srcset": "/media/photos/revenue-management-lifestyle-3-480.webp 480w, /media/photos/revenue-management-lifestyle-3-960.webp 960w, /media/photos/revenue-management-lifestyle-3-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Guests arriving with luggage at a motel at dusk.",
+              "category": "revenue management"
+            },
+            {
+              "src": "/media/photos/revenue-management-brief-cta-1-960.webp",
+              "srcset": "/media/photos/revenue-management-brief-cta-1-480.webp 480w, /media/photos/revenue-management-brief-cta-1-960.webp 960w, /media/photos/revenue-management-brief-cta-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A woman talks on a phone beside outdoor chairs in a motel courtyard with guestroom doors behind her.",
+              "category": "revenue management",
+              "intent": "/revenue-management/#brief-cta-1"
+            }
+          ],
+          "process": [
+            {
+              "src": "/media/photos/revenue-management-brief-m10-1-960.webp",
+              "srcset": "/media/photos/revenue-management-brief-m10-1-480.webp 480w, /media/photos/revenue-management-brief-m10-1-960.webp 960w, /media/photos/revenue-management-brief-m10-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A woman works on a laptop beside a man and a desktop monitor at a motel reception counter.",
+              "category": "revenue management",
+              "intent": "/revenue-management/#brief-m10-1"
+            },
+            {
+              "src": "/media/photos/revenue-management-brief-m4-1-960.webp",
+              "srcset": "/media/photos/revenue-management-brief-m4-1-480.webp 480w, /media/photos/revenue-management-brief-m4-1-960.webp 960w, /media/photos/revenue-management-brief-m4-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A revenue manager leans over a desk with a calculator and points to printed forecast charts.",
+              "category": "revenue management",
+              "intent": "/revenue-management/#brief-m4-1"
+            },
+            {
+              "src": "/media/photos/revenue-management-brief-m7-1-960.webp",
+              "srcset": "/media/photos/revenue-management-brief-m7-1-480.webp 480w, /media/photos/revenue-management-brief-m7-1-960.webp 960w, /media/photos/revenue-management-brief-m7-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Adults discuss paperwork across a small breakfast room table with a calculator.",
+              "category": "revenue management",
+              "intent": "/revenue-management/#brief-m7-1"
+            },
+            {
+              "src": "/media/photos/revenue-management-brief-m2-1-960.webp",
+              "srcset": "/media/photos/revenue-management-brief-m2-1-480.webp 480w, /media/photos/revenue-management-brief-m2-1-960.webp 960w, /media/photos/revenue-management-brief-m2-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man gestures toward a motel room kitchenette while a woman holds a notebook beside him.",
+              "category": "revenue management",
+              "intent": "/revenue-management/#brief-m2-1"
+            }
+          ]
+        },
+        "/information-technology/": {
+          "product": [
+            {
+              "src": "/media/photos/information-technology-product-1-960.webp",
+              "srcset": "/media/photos/information-technology-product-1-480.webp 480w, /media/photos/information-technology-product-1-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A freshly made bed and a desk in a motel guest room.",
+              "category": "information technology"
+            },
+            {
+              "src": "/media/photos/information-technology-product-2-960.webp",
+              "srcset": "/media/photos/information-technology-product-2-480.webp 480w, /media/photos/information-technology-product-2-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper pushes a cart along a motel's outdoor walkway.",
+              "category": "information technology"
+            },
+            {
+              "src": "/media/photos/information-technology-product-3-960.webp",
+              "srcset": "/media/photos/information-technology-product-3-480.webp 480w, /media/photos/information-technology-product-3-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A made-up motel bed stands beside a desk where a man uses a laptop in warm evening light.",
+              "category": "information technology"
+            },
+            {
+              "src": "/media/photos/information-technology-product-information-technology-for-a-first-time-owner-960.webp",
+              "srcset": "/media/photos/information-technology-product-information-technology-for-a-first-time-owner-480.webp 480w, /media/photos/information-technology-product-information-technology-for-a-first-time-owner-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "Colleagues discuss a laptop at a wooden desk in an office lit by evening sunlight.",
+              "category": "information technology",
+              "topic": "Information technology for a first-time owner"
+            }
+          ],
+          "lifestyle": [
+            {
+              "src": "/media/photos/information-technology-lifestyle-1-960.webp",
+              "srcset": "/media/photos/information-technology-lifestyle-1-480.webp 480w, /media/photos/information-technology-lifestyle-1-960.webp 960w, /media/photos/information-technology-lifestyle-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner and manager walk together along the property.",
+              "category": "information technology"
+            },
+            {
+              "src": "/media/photos/information-technology-lifestyle-2-960.webp",
+              "srcset": "/media/photos/information-technology-lifestyle-2-480.webp 480w, /media/photos/information-technology-lifestyle-2-960.webp 960w, /media/photos/information-technology-lifestyle-2-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Guests arriving with their bags at a motel at dusk.",
+              "category": "information technology"
+            },
+            {
+              "src": "/media/photos/information-technology-brief-cta-1-960.webp",
+              "srcset": "/media/photos/information-technology-brief-cta-1-480.webp 480w, /media/photos/information-technology-brief-cta-1-960.webp 960w, /media/photos/information-technology-brief-cta-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A woman speaks on a mobile phone beside an empty picnic table in a motel courtyard.",
+              "category": "information technology",
+              "intent": "/information-technology/#brief-cta-1"
+            }
+          ],
+          "process": [
+            {
+              "src": "/media/photos/information-technology-brief-m2-1-960.webp",
+              "srcset": "/media/photos/information-technology-brief-m2-1-480.webp 480w, /media/photos/information-technology-brief-m2-1-960.webp 960w, /media/photos/information-technology-brief-m2-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man plugs a network cable into a router on a metal shelf beside an open laptop.",
+              "category": "information technology",
+              "intent": "/information-technology/#brief-m2-1"
+            }
+          ]
+        },
+        "/project-management/": {
+          "product": [
+            {
+              "src": "/media/photos/project-management-product-1-960.webp",
+              "srcset": "/media/photos/project-management-product-1-480.webp 480w, /media/photos/project-management-product-1-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper pushes a cart with towels and cleaning supplies along a motel's outdoor walkway.",
+              "category": "project management"
+            },
+            {
+              "src": "/media/photos/project-management-product-2-960.webp",
+              "srcset": "/media/photos/project-management-product-2-480.webp 480w, /media/photos/project-management-product-2-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A motel guest room with a neatly made bed and a staff member wiping the wooden desk beside a curtained window.",
+              "category": "project management"
+            },
+            {
+              "src": "/media/photos/project-management-product-3-960.webp",
+              "srcset": "/media/photos/project-management-product-3-480.webp 480w, /media/photos/project-management-product-3-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A motel clerk works at a computer while a guest with luggage stands at the front desk.",
+              "category": "project management"
+            },
+            {
+              "src": "/media/photos/project-management-product-project-management-for-an-owner-with-two-sites-960.webp",
+              "srcset": "/media/photos/project-management-product-project-management-for-an-owner-with-two-sites-480.webp 480w, /media/photos/project-management-product-project-management-for-an-owner-with-two-sites-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A woman works on a laptop beside architectural plans and monitors displaying buildings in a sunlit office.",
+              "category": "project management",
+              "topic": "Project management for an owner with two sites"
+            }
+          ],
+          "lifestyle": [
+            {
+              "src": "/media/photos/project-management-lifestyle-1-960.webp",
+              "srcset": "/media/photos/project-management-lifestyle-1-480.webp 480w, /media/photos/project-management-lifestyle-1-960.webp 960w, /media/photos/project-management-lifestyle-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man and a woman holding a tablet walk and talk along a motel walkway beside shrubs and parking spaces.",
+              "category": "project management"
+            },
+            {
+              "src": "/media/photos/project-management-lifestyle-2-960.webp",
+              "srcset": "/media/photos/project-management-lifestyle-2-480.webp 480w, /media/photos/project-management-lifestyle-2-960.webp 960w, /media/photos/project-management-lifestyle-2-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner and manager walk together along the property.",
+              "category": "project management"
+            },
+            {
+              "src": "/media/photos/project-management-brief-cta-1-960.webp",
+              "srcset": "/media/photos/project-management-brief-cta-1-480.webp 480w, /media/photos/project-management-brief-cta-1-960.webp 960w, /media/photos/project-management-brief-cta-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner sits at a reception desk speaking on the phone beside a doorway to an empty guest room.",
+              "category": "project management",
+              "intent": "/project-management/#brief-cta-1"
+            }
+          ],
+          "process": [
+            {
+              "src": "/media/photos/project-management-brief-splitmedia-1-1-960.webp",
+              "srcset": "/media/photos/project-management-brief-splitmedia-1-1-480.webp 480w, /media/photos/project-management-brief-splitmedia-1-1-960.webp 960w, /media/photos/project-management-brief-splitmedia-1-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A project manager wearing a headset compares wall-light samples beside an open laptop in an office.",
+              "category": "project management",
+              "intent": "/project-management/#brief-splitMedia-1-1"
+            }
+          ],
+          "material": [
+            {
+              "src": "/media/photos/project-management-brief-m3-1-960.webp",
+              "srcset": "/media/photos/project-management-brief-m3-1-480.webp 480w, /media/photos/project-management-brief-m3-1-960.webp 960w, /media/photos/project-management-brief-m3-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "An installer positions a wooden nightstand beside a bed, with cardboard packaging nearby.",
+              "category": "project management",
+              "intent": "/project-management/#brief-m3-1"
+            }
+          ]
+        },
+        "/accounting/": {
+          "product": [
+            {
+              "src": "/media/photos/accounting-product-1-960.webp",
+              "srcset": "/media/photos/accounting-product-1-480.webp 480w, /media/photos/accounting-product-1-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A motel clerk assists a guest at the front desk.",
+              "category": "accounting"
+            },
+            {
+              "src": "/media/photos/accounting-product-2-960.webp",
+              "srcset": "/media/photos/accounting-product-2-480.webp 480w, /media/photos/accounting-product-2-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper pushes a cart along a motel's outdoor walkway.",
+              "category": "accounting"
+            },
+            {
+              "src": "/media/photos/accounting-product-3-960.webp",
+              "srcset": "/media/photos/accounting-product-3-480.webp 480w, /media/photos/accounting-product-3-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper pushes a cart along a motel's outdoor walkway.",
+              "category": "accounting"
+            },
+            {
+              "src": "/media/photos/accounting-product-accounting-and-reporting-960.webp",
+              "srcset": "/media/photos/accounting-product-accounting-and-reporting-480.webp 480w, /media/photos/accounting-product-accounting-and-reporting-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A laptop displaying charts sits beside a calculator and printed reports on a wooden desk by a window.",
+              "category": "accounting",
+              "topic": "Accounting and reporting"
+            },
+            {
+              "src": "/media/photos/accounting-product-accounting-for-a-first-time-owner-960.webp",
+              "srcset": "/media/photos/accounting-product-accounting-for-a-first-time-owner-480.webp 480w, /media/photos/accounting-product-accounting-for-a-first-time-owner-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A woman and a man review a laptop at a wooden desk with a calculator and open notebook.",
+              "category": "accounting",
+              "topic": "Accounting for a first-time owner"
+            }
+          ],
+          "lifestyle": [
+            {
+              "src": "/media/photos/accounting-lifestyle-1-960.webp",
+              "srcset": "/media/photos/accounting-lifestyle-1-480.webp 480w, /media/photos/accounting-lifestyle-1-960.webp 960w, /media/photos/accounting-lifestyle-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner and manager walk together along the property.",
+              "category": "accounting"
+            },
+            {
+              "src": "/media/photos/accounting-lifestyle-2-960.webp",
+              "srcset": "/media/photos/accounting-lifestyle-2-480.webp 480w, /media/photos/accounting-lifestyle-2-960.webp 960w, /media/photos/accounting-lifestyle-2-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Guests with rolling suitcases approach a warmly lit motel reception window at dusk.",
+              "category": "accounting"
+            },
+            {
+              "src": "/media/photos/accounting-brief-cta-1-960.webp",
+              "srcset": "/media/photos/accounting-brief-cta-1-480.webp 480w, /media/photos/accounting-brief-cta-1-960.webp 960w, /media/photos/accounting-brief-cta-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Women talk across a table in a motel breakfast room, with guestroom doors visible through the window.",
+              "category": "accounting",
+              "intent": "/accounting/#brief-cta-1"
+            }
+          ],
+          "process": [
+            {
+              "src": "/media/photos/accounting-brief-splitmedia-1-1-960.webp",
+              "srcset": "/media/photos/accounting-brief-splitmedia-1-1-480.webp 480w, /media/photos/accounting-brief-splitmedia-1-1-960.webp 960w, /media/photos/accounting-brief-splitmedia-1-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "An accountant works at an angled monitor with a hand on a calculator beside receipts.",
+              "category": "accounting",
+              "intent": "/accounting/#brief-splitMedia-1-1"
+            },
+            {
+              "src": "/media/photos/accounting-brief-splitmedia-2-1-960.webp",
+              "srcset": "/media/photos/accounting-brief-splitmedia-2-1-480.webp 480w, /media/photos/accounting-brief-splitmedia-2-1-960.webp 960w, /media/photos/accounting-brief-splitmedia-2-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A staff member places a closed folder into a filing cabinet beside a cleared desk.",
+              "category": "accounting",
+              "intent": "/accounting/#brief-splitMedia-2-1"
+            },
+            {
+              "src": "/media/photos/accounting-brief-splitmedia-3-1-960.webp",
+              "srcset": "/media/photos/accounting-brief-splitmedia-3-1-480.webp 480w, /media/photos/accounting-brief-splitmedia-3-1-960.webp 960w, /media/photos/accounting-brief-splitmedia-3-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man passes a cardboard box of unmarked folders across an office desk to a woman.",
+              "category": "accounting",
+              "intent": "/accounting/#brief-splitMedia-3-1"
+            }
+          ]
+        },
+        "/ota-optimization/": {
+          "product": [
+            {
+              "src": "/media/photos/ota-optimization-product-1-960.webp",
+              "srcset": "/media/photos/ota-optimization-product-1-480.webp 480w, /media/photos/ota-optimization-product-1-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper pushes a cart along a motel's outdoor walkway.",
+              "category": "ota optimization"
+            },
+            {
+              "src": "/media/photos/ota-optimization-product-2-960.webp",
+              "srcset": "/media/photos/ota-optimization-product-2-480.webp 480w, /media/photos/ota-optimization-product-2-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A housekeeper smooths bedding in a motel guest room with a wooden desk and warm lamps.",
+              "category": "ota optimization"
+            },
+            {
+              "src": "/media/photos/ota-optimization-product-3-960.webp",
+              "srcset": "/media/photos/ota-optimization-product-3-480.webp 480w, /media/photos/ota-optimization-product-3-960.webp 960w",
+              "width": 960,
+              "height": 960,
+              "alt": "A freshly made bed and desk in a motel guest room lit by soft daylight.",
+              "category": "ota optimization"
+            }
+          ],
+          "lifestyle": [
+            {
+              "src": "/media/photos/ota-optimization-lifestyle-1-960.webp",
+              "srcset": "/media/photos/ota-optimization-lifestyle-1-480.webp 480w, /media/photos/ota-optimization-lifestyle-1-960.webp 960w, /media/photos/ota-optimization-lifestyle-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A man and a woman walk along a motel walkway while looking at a tablet.",
+              "category": "ota optimization"
+            },
+            {
+              "src": "/media/photos/ota-optimization-lifestyle-2-960.webp",
+              "srcset": "/media/photos/ota-optimization-lifestyle-2-480.webp 480w, /media/photos/ota-optimization-lifestyle-2-960.webp 960w, /media/photos/ota-optimization-lifestyle-2-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Guests arrive with their bags at a warmly lit motel at dusk.",
+              "category": "ota optimization"
+            },
+            {
+              "src": "/media/photos/ota-optimization-lifestyle-3-960.webp",
+              "srcset": "/media/photos/ota-optimization-lifestyle-3-480.webp 480w, /media/photos/ota-optimization-lifestyle-3-960.webp 960w, /media/photos/ota-optimization-lifestyle-3-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner and manager walk together along the property.",
+              "category": "ota optimization"
+            },
+            {
+              "src": "/media/photos/ota-optimization-lifestyle-4-960.webp",
+              "srcset": "/media/photos/ota-optimization-lifestyle-4-480.webp 480w, /media/photos/ota-optimization-lifestyle-4-960.webp 960w, /media/photos/ota-optimization-lifestyle-4-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "Guests arrive with their bags at a motel at dusk.",
+              "category": "ota optimization"
+            },
+            {
+              "src": "/media/photos/ota-optimization-brief-cta-1-960.webp",
+              "srcset": "/media/photos/ota-optimization-brief-cta-1-480.webp 480w, /media/photos/ota-optimization-brief-cta-1-960.webp 960w, /media/photos/ota-optimization-brief-cta-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A woman wearing a black headset sits beside a window with potted plants.",
+              "category": "ota optimization",
+              "intent": "/ota-optimization/#brief-cta-1"
+            }
+          ],
+          "process": [
+            {
+              "src": "/media/photos/ota-optimization-brief-m13-1-960.webp",
+              "srcset": "/media/photos/ota-optimization-brief-m13-1-480.webp 480w, /media/photos/ota-optimization-brief-m13-1-960.webp 960w, /media/photos/ota-optimization-brief-m13-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A photographer adjusts a tripod-mounted camera beside a made bed and kitchenette in a motel room.",
+              "category": "ota optimization",
+              "intent": "/ota-optimization/#brief-m13-1"
+            },
+            {
+              "src": "/media/photos/ota-optimization-brief-m3-1-960.webp",
+              "srcset": "/media/photos/ota-optimization-brief-m3-1-480.webp 480w, /media/photos/ota-optimization-brief-m3-1-960.webp 960w, /media/photos/ota-optimization-brief-m3-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A person kneels beside a motel room kitchenette and photographs its amenities with a phone.",
+              "category": "ota optimization",
+              "intent": "/ota-optimization/#brief-m3-1"
+            },
+            {
+              "src": "/media/photos/ota-optimization-brief-m4-1-960.webp",
+              "srcset": "/media/photos/ota-optimization-brief-m4-1-480.webp 480w, /media/photos/ota-optimization-brief-m4-1-960.webp 960w, /media/photos/ota-optimization-brief-m4-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A woman sits behind an unmarked laptop at a desk beside a window overlooking a motel at dusk.",
+              "category": "ota optimization",
+              "intent": "/ota-optimization/#brief-m4-1"
+            },
+            {
+              "src": "/media/photos/ota-optimization-brief-m8-1-960.webp",
+              "srcset": "/media/photos/ota-optimization-brief-m8-1-480.webp 480w, /media/photos/ota-optimization-brief-m8-1-960.webp 960w, /media/photos/ota-optimization-brief-m8-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A woman arranges property photographs on a table in a motel breakfast room.",
+              "category": "ota optimization",
+              "intent": "/ota-optimization/#brief-m8-1"
+            },
+            {
+              "src": "/media/photos/ota-optimization-brief-splitmedia-1-1-960.webp",
+              "srcset": "/media/photos/ota-optimization-brief-splitmedia-1-1-480.webp 480w, /media/photos/ota-optimization-brief-splitmedia-1-1-960.webp 960w, /media/photos/ota-optimization-brief-splitmedia-1-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "An editor reads from a laptop while a colleague wears headphones in a meeting room.",
+              "category": "ota optimization",
+              "intent": "/ota-optimization/#brief-splitMedia-1-1"
+            },
+            {
+              "src": "/media/photos/ota-optimization-brief-splitmedia-3-1-960.webp",
+              "srcset": "/media/photos/ota-optimization-brief-splitmedia-3-1-480.webp 480w, /media/photos/ota-optimization-brief-splitmedia-3-1-960.webp 960w, /media/photos/ota-optimization-brief-splitmedia-3-1-1536.webp 1536w",
+              "width": 960,
+              "height": 640,
+              "alt": "A motel owner points to a street map beside a colleague in an office overlooking a courtyard.",
+              "category": "ota optimization",
+              "intent": "/ota-optimization/#brief-splitMedia-3-1"
+            }
+          ]
+        }
+      },
+      "routeCategories": {
+        "/": "general",
+        "/services/": "general",
+        "/business-development/": "general",
+        "/digital-marketing/": "digital marketing",
+        "/human-resources/": "human resources",
+        "/operations-management/": "general",
+        "/revenue-management/": "revenue management",
+        "/information-technology/": "information technology",
+        "/commercial-strategy/": "general",
+        "/project-management/": "project management",
+        "/development/": "general",
+        "/receivership/": "general",
+        "/asset-management/": "general",
+        "/accounting/": "accounting",
+        "/ota-optimization/": "ota optimization",
+        "/about-us/": "general",
+        "/contact-us/": "general",
+        "/case-studies/": "general",
+        "/capabilities/": "general",
+        "/our-process/": "general",
+        "/our-history/": "general",
+        "/resources/": "general",
+        "/careers/": "general",
+        "/privacy-policy/": "general",
+        "/terms-and-conditions/": "general",
+        "/request-a-quote/": "general",
+        "/blog/": "general",
+        "/blog/motel-management-models-compared/": "general",
+        "/blog/motel-management-fees-reasonable-structure/": "general",
+        "/blog/motel-manager-performance-metrics/": "general"
+      },
+      "placeholders": []
+    },
+    "heroByPageType": {
+      "home": "media-overlay",
+      "solution": "media-overlay",
+      "about": "media-overlay",
+      "contact": "media-overlay"
+    },
+    "pageTypes": {
+      "home": {
+        "intro": "text",
+        "band": "left",
+        "cta": "form",
+        "testimonials": "carousel",
+        "logos": "grid",
+        "blocks": {
+          "story-1": {
+            "variant": "single",
+            "side": "media-end"
+          },
+          "quality-1": {
+            "variant": "single",
+            "side": "media-start"
+          }
+        },
+        "splitSequence": [
+          "wide",
+          "column",
+          "tinted",
+          "wide",
+          "wide",
+          "wide"
+        ],
+        "mediaModules": [
+          {
+            "at": 0,
+            "type": "band"
+          },
+          {
+            "at": 0.57,
+            "type": "band"
+          }
+        ],
+        "featureGrid": "media"
+      },
+      "about": {
+        "intro": "text",
+        "cta": "form",
+        "blocks": {
+          "story-2": {
+            "side": "media-start"
+          }
+        },
+        "splitSequence": [
+          "single"
+        ],
+        "featureGrid": "media"
+      },
+      "solution": {
+        "intro": "text",
+        "iconList": "checks",
+        "cta": "form",
+        "table": "cards",
+        "blocks": {
+          "options": {
+            "variant": "cards"
+          },
+          "scope-1": {
+            "variant": "single"
+          },
+          "scope-2": {
+            "variant": "single",
+            "side": "media-start"
+          },
+          "comparison": {
+            "variant": "cards"
+          },
+          "m4": {
+            "variant": "single"
+          },
+          "splitMedia-1": {
+            "variant": "single"
+          },
+          "splitMedia-2": {
+            "variant": "single"
+          }
+        },
+        "splitSequence": [
+          "single",
+          "single",
+          "single",
+          "wide",
+          "single",
+          "single",
+          "single"
+        ],
+        "mediaModules": [
+          {
+            "at": 0.38,
+            "type": "band"
+          }
+        ],
+        "featureGrid": "bullets",
+        "process": "list"
+      },
+      "contact": {
+        "form": "plain",
+        "contactChannels": "list",
+        "cta": "inline",
+        "featureGrid": "bullets",
+        "process": "list"
+      }
+    },
+    "footer": {
+      "layout": "minimal",
+      "phoneGroups": "open"
+    },
+    "intro": "text",
+    "featureGridMedia": false,
+    "ctaForm": "beside",
+    "testimonials": "carousel",
+    "logos": "grid",
+    "contactChannels": "list",
+    "form": "plain",
+    "textRunWords": 386,
+    "breadcrumbs": "after-hero",
+    "densityBands": {
+      "wordsPer1000px": {
+        "max": 163
+      },
+      "visualAreaPct": {
+        "min": 19,
+        "max": 43
+      },
+      "longestTextOnlyPx": {
+        "max": 2467
+      },
+      "pageTypes": {
+        "home": {
+          "wordsPer1000px": {
+            "max": 74
+          },
+          "visualAreaPct": {
+            "min": 34,
+            "max": 61
+          },
+          "longestTextOnlyPx": {
+            "max": 1916
+          }
+        }
+      }
+    },
+    "blockModel": {
+      "*": {
+        "base": 200,
+        "perWord": 4,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "caseStudies:*": {
+        "base": 1278,
+        "perWord": 0,
+        "visual": 0.52,
+        "before": 0.1,
+        "after": 0.24
+      },
+      "caseStudies:": {
+        "base": 1278,
+        "perWord": 0,
+        "visual": 0.52,
+        "before": 0.1,
+        "after": 0.24
+      },
+      "charts:*": {
+        "base": 321,
+        "perWord": 0,
+        "visual": 0.74,
+        "before": 0,
+        "after": 0.17
+      },
+      "charts:": {
+        "base": 321,
+        "perWord": 0,
+        "visual": 0.74,
+        "before": 0,
+        "after": 0.17
+      },
+      "cta:*": {
+        "base": 634,
+        "perWord": 3.29,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:form+photo": {
+        "base": 618,
+        "perWord": 5.74,
+        "visual": 0.24,
+        "before": 0.66,
+        "after": 0.68
+      },
+      "cta:form": {
+        "base": 634,
+        "perWord": 3.83,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:image-band+photo": {
+        "base": 600,
+        "perWord": 0,
+        "visual": 0.57,
+        "before": 0.1,
+        "after": 0.2
+      },
+      "cta:image-band": {
+        "base": 554,
+        "perWord": 0,
+        "visual": 0.56,
+        "before": 0.11,
+        "after": 0.22
+      },
+      "featureGrid:*": {
+        "base": 190,
+        "perWord": 4.12,
+        "visual": 0.09,
+        "before": 0.87,
+        "after": 0.85
+      },
+      "featureGrid:bullets": {
+        "base": 199,
+        "perWord": 4.11,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:cards": {
+        "base": 231,
+        "perWord": 3.79,
+        "visual": 0.43,
+        "before": 0.4,
+        "after": 0.31
+      },
+      "featureGrid:icons": {
+        "base": 260,
+        "perWord": 2.8,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:media": {
+        "base": 447,
+        "perWord": 3.17,
+        "visual": 0.3,
+        "before": 0.18,
+        "after": 0.45
+      },
+      "gallery:*": {
+        "base": 1135,
+        "perWord": 38.34,
+        "visual": 0.91,
+        "before": 0.05,
+        "after": 0.05
+      },
+      "gallery:band": {
+        "base": 1135,
+        "perWord": 0,
+        "visual": 0.91,
+        "before": 0.05,
+        "after": 0.05
+      },
+      "gallery:grid": {
+        "base": 1212,
+        "perWord": 0,
+        "visual": 0.56,
+        "before": 0.05,
+        "after": 0.13
+      },
+      "hero:*": {
+        "base": 607,
+        "perWord": 0.39,
+        "visual": 1,
+        "before": 0,
+        "after": 0
+      },
+      "hero:media-overlay": {
+        "base": 607,
+        "perWord": 0.39,
+        "visual": 1,
+        "before": 0,
+        "after": 0
+      },
+      "iconList:*": {
+        "base": 190,
+        "perWord": 5.08,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "iconList:checks": {
+        "base": 195,
+        "perWord": 5.05,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "intro:*": {
+        "base": 169,
+        "perWord": 4.11,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "intro:text": {
+        "base": 169,
+        "perWord": 4.11,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "logos:*": {
+        "base": 380,
+        "perWord": 0,
+        "visual": 0.38,
+        "before": 0.16,
+        "after": 0.16
+      },
+      "logos:": {
+        "base": 380,
+        "perWord": 0,
+        "visual": 0.38,
+        "before": 0.16,
+        "after": 0.16
+      },
+      "process:*": {
+        "base": 254,
+        "perWord": 3.67,
+        "visual": 0.09,
+        "before": 0.9,
+        "after": 0.88
+      },
+      "process:circles": {
+        "base": 676,
+        "perWord": 0,
+        "visual": 0.52,
+        "before": 0.24,
+        "after": 0.11
+      },
+      "process:list": {
+        "base": 240,
+        "perWord": 3.79,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "process:photo-cards": {
+        "base": 549,
+        "perWord": 0,
+        "visual": 1,
+        "before": 0,
+        "after": 0
+      },
+      "process:ring": {
+        "base": 210,
+        "perWord": 3.62,
+        "visual": 0.7,
+        "before": 0.25,
+        "after": 0.05
+      },
+      "process:timeline": {
+        "base": 210,
+        "perWord": 3.62,
+        "visual": 0.7,
+        "before": 0.25,
+        "after": 0.05
+      },
+      "proof:*": {
+        "base": 131,
+        "perWord": 3.99,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "proof:band": {
+        "base": 131,
+        "perWord": 3.99,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "relatedPages:*": {
+        "base": 226,
+        "perWord": 57.12,
+        "visual": 0.18,
+        "before": 0.61,
+        "after": 0.71
+      },
+      "relatedPages:": {
+        "base": 476,
+        "perWord": 0,
+        "visual": 0.33,
+        "before": 0.24,
+        "after": 0.37
+      },
+      "relatedPages:tiles": {
+        "base": 740,
+        "perWord": 0,
+        "visual": 0.4,
+        "before": 0.15,
+        "after": 0.36
+      },
+      "splitMedia:*": {
+        "base": 256,
+        "perWord": 4.07,
+        "visual": 0.02,
+        "before": 0.93,
+        "after": 0.94
+      },
+      "splitMedia:panel": {
+        "base": 248,
+        "perWord": 4.38,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "splitMedia:single": {
+        "base": 249,
+        "perWord": 4.08,
+        "visual": 0.03,
+        "before": 0.89,
+        "after": 0.9
+      },
+      "stats:*": {
+        "base": 269,
+        "perWord": 0,
+        "visual": 0.29,
+        "before": 0.5,
+        "after": 0.22
+      },
+      "stats:row": {
+        "base": 269,
+        "perWord": 0,
+        "visual": 0.29,
+        "before": 0.5,
+        "after": 0.22
+      },
+      "table:*": {
+        "base": 979,
+        "perWord": 3.26,
+        "visual": 0.52,
+        "before": 0.23,
+        "after": 0.07
+      },
+      "table:cards": {
+        "base": 1159,
+        "perWord": 0,
+        "visual": 0.55,
+        "before": 0.25,
+        "after": 0.07
+      },
+      "table:grid": {
+        "base": 805,
+        "perWord": 0,
+        "visual": 0.45,
+        "before": 0.17,
+        "after": 0.07
+      },
+      "trustBar:*": {
+        "base": 82,
+        "perWord": 0.39,
+        "visual": 0.2,
+        "before": 0.79,
+        "after": 0.79
+      },
+      "trustBar:": {
+        "base": 82,
+        "perWord": 0.39,
+        "visual": 0.2,
+        "before": 0.79,
+        "after": 0.79
+      },
+      "orderCase:": {
+        "base": 154,
+        "perWord": 6.33,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "orderCase:*": {
+        "base": 154,
+        "perWord": 6.33,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "testimonials:": {
+        "base": 486,
+        "perWord": 1,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "testimonials:*": {
+        "base": 486,
+        "perWord": 1,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "faq:accordion": {
+        "base": 659,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "faq:*": {
+        "base": 659,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "relatedPages:links": {
+        "base": 340,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "hero:media-overlay@home": {
+        "base": 1000,
+        "perWord": 0,
+        "visual": 1,
+        "before": 0,
+        "after": 0
+      },
+      "trustBar:@home": {
+        "base": 85,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "intro:text@home": {
+        "base": 270,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:media@home": {
+        "base": 633,
+        "perWord": 0,
+        "visual": 0.31,
+        "before": 0.17,
+        "after": 0.45
+      },
+      "process:circles@home": {
+        "base": 404,
+        "perWord": 0,
+        "visual": 0.42,
+        "before": 0.34,
+        "after": 0.15
+      },
+      "gallery:band@home": {
+        "base": 1181,
+        "perWord": 0,
+        "visual": 0.92,
+        "before": 0.05,
+        "after": 0.05
+      },
+      "stats:row@home": {
+        "base": 269,
+        "perWord": 0,
+        "visual": 0.29,
+        "before": 0.5,
+        "after": 0.22
+      },
+      "logos:@home": {
+        "base": 380,
+        "perWord": 0,
+        "visual": 0.38,
+        "before": 0.16,
+        "after": 0.16
+      },
+      "orderCase:@home": {
+        "base": 840,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "testimonials:@home": {
+        "base": 568,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "relatedPages:tiles@home": {
+        "base": 712,
+        "perWord": 0,
+        "visual": 0.41,
+        "before": 0.15,
+        "after": 0.34
+      },
+      "faq:accordion@home": {
+        "base": 683,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:image-band+photo@home": {
+        "base": 600,
+        "perWord": 0,
+        "visual": 0.57,
+        "before": 0.1,
+        "after": 0.2
+      },
+      "hero:media-overlay@solutions_hub": {
+        "base": 600,
+        "perWord": 0,
+        "visual": 1,
+        "before": 0,
+        "after": 0
+      },
+      "trustBar:@solutions_hub": {
+        "base": 102,
+        "perWord": 0,
+        "visual": 0.98,
+        "before": 0.01,
+        "after": 0.01
+      },
+      "intro:text@solutions_hub": {
+        "base": 372,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "process:photo-cards@solutions_hub": {
+        "base": 549,
+        "perWord": 0,
+        "visual": 1,
+        "before": 0,
+        "after": 0
+      },
+      "gallery:grid@solutions_hub": {
+        "base": 1212,
+        "perWord": 0,
+        "visual": 0.56,
+        "before": 0.05,
+        "after": 0.13
+      },
+      "iconList:checks@solutions_hub": {
+        "base": 585,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:cards@solutions_hub": {
+        "base": 98,
+        "perWord": 5.52,
+        "visual": 0.46,
+        "before": 0.37,
+        "after": 0.27
+      },
+      "splitMedia:single@solutions_hub": {
+        "base": 246,
+        "perWord": 4.23,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "table:grid@solutions_hub": {
+        "base": 805,
+        "perWord": 0,
+        "visual": 0.45,
+        "before": 0.17,
+        "after": 0.07
+      },
+      "gallery:band@solutions_hub": {
+        "base": 1080,
+        "perWord": 0,
+        "visual": 0.91,
+        "before": 0.06,
+        "after": 0.06
+      },
+      "proof:band@solutions_hub": {
+        "base": 477,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "charts:@solutions_hub": {
+        "base": 439,
+        "perWord": 0,
+        "visual": 0.76,
+        "before": 0,
+        "after": 0.11
+      },
+      "relatedPages:links@solutions_hub": {
+        "base": 260,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:form+photo@solutions_hub": {
+        "base": 958,
+        "perWord": 0,
+        "visual": 0.65,
+        "before": 0.06,
+        "after": 0.13
+      },
+      "hero:media-overlay@solution": {
+        "base": 600,
+        "perWord": 0,
+        "visual": 1,
+        "before": 0,
+        "after": 0
+      },
+      "trustBar:@solution": {
+        "base": 67,
+        "perWord": 1.04,
+        "visual": 0.22,
+        "before": 0.77,
+        "after": 0.77
+      },
+      "intro:text@solution": {
+        "base": 149,
+        "perWord": 4.64,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:bullets@solution": {
+        "base": 199,
+        "perWord": 4.11,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "gallery:band@solution": {
+        "base": 1135,
+        "perWord": 0,
+        "visual": 0.91,
+        "before": 0.05,
+        "after": 0.05
+      },
+      "iconList:checks@solution": {
+        "base": 230,
+        "perWord": 4.87,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "splitMedia:panel@solution": {
+        "base": 248,
+        "perWord": 4.38,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "proof:band@solution": {
+        "base": 121,
+        "perWord": 4.06,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "charts:@solution": {
+        "base": 304,
+        "perWord": 0,
+        "visual": 0.74,
+        "before": 0,
+        "after": 0.18
+      },
+      "caseStudies:@solution": {
+        "base": 1278,
+        "perWord": 0,
+        "visual": 0.52,
+        "before": 0.1,
+        "after": 0.24
+      },
+      "relatedPages:tiles@solution": {
+        "base": 743,
+        "perWord": 0,
+        "visual": 0.4,
+        "before": 0.15,
+        "after": 0.37
+      },
+      "cta:form+photo@solution": {
+        "base": 665,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "process:list@solution": {
+        "base": 240,
+        "perWord": 3.79,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "orderCase:@solution": {
+        "base": 313,
+        "perWord": 2.05,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "testimonials:@solution": {
+        "base": 534,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "table:cards@solution": {
+        "base": 1159,
+        "perWord": 0,
+        "visual": 0.55,
+        "before": 0.25,
+        "after": 0.07
+      },
+      "splitMedia:single@solution": {
+        "base": 256,
+        "perWord": 3.95,
+        "visual": 0.04,
+        "before": 0.87,
+        "after": 0.88
+      },
+      "hero:media-overlay@about": {
+        "base": 600,
+        "perWord": 0,
+        "visual": 1,
+        "before": 0,
+        "after": 0
+      },
+      "trustBar:@about": {
+        "base": 85,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "intro:text@about": {
+        "base": 536,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:media@about": {
+        "base": 710,
+        "perWord": 0,
+        "visual": 0.3,
+        "before": 0.19,
+        "after": 0.44
+      },
+      "stats:row@about": {
+        "base": 269,
+        "perWord": 0,
+        "visual": 0.29,
+        "before": 0.5,
+        "after": 0.22
+      },
+      "logos:@about": {
+        "base": 380,
+        "perWord": 0,
+        "visual": 0.38,
+        "before": 0.16,
+        "after": 0.16
+      },
+      "testimonials:@about": {
+        "base": 510,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:form+photo@about": {
+        "base": 765,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "hero:media-overlay@general": {
+        "base": 600,
+        "perWord": 0,
+        "visual": 1,
+        "before": 0,
+        "after": 0
+      },
+      "intro:text@general": {
+        "base": 213,
+        "perWord": 3.24,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:cards@general": {
+        "base": 227,
+        "perWord": 3.64,
+        "visual": 0.42,
+        "before": 0.41,
+        "after": 0.33
+      },
+      "gallery:band@general": {
+        "base": 1281,
+        "perWord": 0,
+        "visual": 0.92,
+        "before": 0.05,
+        "after": 0.05
+      },
+      "orderCase:@general": {
+        "base": 840,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "relatedPages:tiles@general": {
+        "base": 645,
+        "perWord": 0,
+        "visual": 0.46,
+        "before": 0.17,
+        "after": 0.27
+      },
+      "cta:form+photo@general": {
+        "base": 958,
+        "perWord": 0,
+        "visual": 0.65,
+        "before": 0.06,
+        "after": 0.13
+      },
+      "trustBar:@general": {
+        "base": 85,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "process:circles@general": {
+        "base": 948,
+        "perWord": 0,
+        "visual": 0.62,
+        "before": 0.15,
+        "after": 0.06
+      },
+      "faq:accordion@general": {
+        "base": 634,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "relatedPages:links@general": {
+        "base": 330,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:single": {
+        "base": 409,
+        "perWord": 1.33,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:single@solution": {
+        "base": 409,
+        "perWord": 1.33,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "iconList:single": {
+        "base": 868,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "iconList:single@solution": {
+        "base": 868,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:icons@home": {
+        "base": 40,
+        "perWord": 6.8,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:band": {
+        "base": 424,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:band@home": {
+        "base": 424,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:form@solutions_hub": {
+        "base": 858,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:form@solution": {
+        "base": 665,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "featureGrid:icons@about": {
+        "base": 484,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:form@about": {
+        "base": 765,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "cta:form@general": {
+        "base": 858,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "relatedPages:links@solution": {
+        "base": 378,
+        "perWord": 0,
+        "visual": 0,
+        "before": 1,
+        "after": 1
+      },
+      "gallery:band@about": {
+        "base": 1080,
+        "perWord": 0,
+        "visual": 0.91,
+        "before": 0.06,
+        "after": 0.06
+      }
+    },
+    "headingAlign": "start",
+    "tradePhotos": "scenes",
+    "heroText": {
+      "family": "\"Josefin Sans\", Helvetica, Arial, _sans-serif",
+      "textTransform": "uppercase",
+      "chars": 22,
+      "charEm": 0.722,
+      "leadWords": 0
+    }
+  }
+}

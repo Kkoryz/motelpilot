@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "seo-site-trust-v1",
+  "items": [
+    {
+      "value": "since 2016",
+      "label": "Operating since 2016",
+      "factId": "brief:SG18",
+      "unconfirmed": true
+    },
+    {
+      "value": "60 hotels and motels",
+      "label": "Properties we work for",
+      "factId": "brief:SG18",
+      "unconfirmed": true
+    }
+  ]
+}

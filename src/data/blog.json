@@ -1,0 +1,94 @@
+{
+  "title": "Blog: Pricing and Booking Channel Guides | MotelPilot",
+  "description": "Practical answers on pricing, booking channels and daily operations fill the MotelPilot Blog, with guides written by our working team.",
+  "heading": "The MotelPilot Blog",
+  "intro": "Our guides help you make practical decisions about pricing, booking channels and daily operations, with advice from the people doing the work.",
+  "blocks": [
+    {
+      "id": "overview",
+      "type": "intro",
+      "sourceSectionIds": [
+        "overview"
+      ],
+      "heading": "Practical guides for independent property owners",
+      "paragraphs": [
+        "If you run an independent hotel or motel and want straighter answers on pricing, booking channels and the daily running of the place, this blog is for you. Each guide covers what to check, which trade-offs actually matter and how to put a change into practice.",
+        "The people writing it work in revenue, OTAs and operations. Because all three views sit side by side, you can see how a pricing or distribution decision ripples into the work of running your property."
+      ],
+      "wordCount": 81
+    },
+    {
+      "id": "featureGrid-1",
+      "type": "featureGrid",
+      "sourceSectionIds": [
+        "overview_2"
+      ],
+      "heading": "Five questions we help you answer",
+      "items": [
+        {
+          "heading": "OTA commissions and net revenue",
+          "paragraphs": [
+            "How to compare what you actually keep from each booking once commissions and other booking costs come out."
+          ]
+        },
+        {
+          "heading": "Should a small property outsource pricing?",
+          "paragraphs": [
+            "When handing off revenue management makes sense, which tasks to delegate and what oversight to hold on to."
+          ]
+        },
+        {
+          "heading": "What moves a Booking.com ranking?",
+          "paragraphs": [
+            "Availability, pricing, listing quality and guest reviews all play a part, though no one can promise you a fixed formula for visibility."
+          ]
+        }
+      ],
+      "mediaKind": "product"
+    },
+    {
+      "id": "featureGrid-2",
+      "type": "featureGrid",
+      "sourceSectionIds": [
+        "overview_2"
+      ],
+      "continues": "featureGrid-1",
+      "items": [
+        {
+          "heading": "Dynamic pricing for motels",
+          "paragraphs": [
+            "Ways to adjust rates for demand, booking pace and local events without chasing every shift in the market."
+          ]
+        },
+        {
+          "heading": "A healthy channel mix",
+          "paragraphs": [
+            "Balancing direct bookings against OTAs, with acquisition costs, reach and dependence on any single channel all in the picture."
+          ]
+        }
+      ],
+      "mediaKind": "product"
+    },
+    {
+      "id": "cta",
+      "type": "cta",
+      "sourceSectionIds": [
+        "cta"
+      ],
+      "heading": "Get new guides in your inbox",
+      "paragraphs": [
+        "Once a month, you'll get an email with the newest guides on pricing, OTA performance and remote operations, along with a short checklist to use at your property.",
+        "Want it? [Ask our team to add you to the blog email list](/contact-us/)."
+      ],
+      "cta": {
+        "label": "Talk to our team",
+        "href": "/contact-us/"
+      },
+      "links": []
+    }
+  ],
+  "source": {
+    "package": "sf/authoring/v1",
+    "pageId": "site:blog"
+  }
+}

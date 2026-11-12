@@ -1,0 +1,67 @@
+---
+import { withMediaModules } from '../../../scripts/lib/media-slots.mjs';
+import { headingFitVars, heroLeadShown, wrapEmFor } from '../../../scripts/lib/heading-fit.mjs';
+import { blockVariant, isBuilt, pageHero, pageMedia, variants, type AuthoringPage } from '../../lib/authoring';
+import Breadcrumbs from '../site/Breadcrumbs.astro';
+import TrustBar from '../site/TrustBar.astro';
+import InlineText from '../blog/InlineText.astro';
+import PageHero from './PageHero.astro';
+import SectionChart from './SectionChart.astro';
+import { dataVisuals } from '../../lib/authoring';
+import { BLOCKS, type BlockEntry } from './registry';
+
+interface Props { page: AuthoringPage }
+const { page } = Astro.props;
+
+// The reference's photo walls join the authored blocks (media-slots.mjs withMediaModules; the image plan counts them too).
+const blocks = withMediaModules(page, variants, { isBuilt }) as AuthoringPage['blocks'];
+// Each block's pattern variant: split rows follow the reference page's split sequence (splitIndex: their place in it).
+let splits = 0;
+const resolved = blocks.map((block) => {
+  const splitIndex = block.type === 'splitMedia' ? splits++ : 0;
+  return { block, splitIndex, variant: blockVariant(block, page.pageType, splitIndex) };
+});
+
+// Media slots are a template decision: content media wins, template media (with its origin label) fills the rest,
+// chosen for the whole site by section topic and product category (null: this position shows no photo).
+const plan = pageMedia(page.route);
+// Without a hero photo, the page's first image may sit in the first viewport: it loads eagerly.
+if (!pageHero(page).showsImage) {
+  const first = plan.flat().find((media) => media && !media.slot);
+  if (first) plan.forEach((list) => list.forEach((media, index) => { if (media === first) list[index] = { ...media, priority: true }; }));
+}
+// A closing button that points at this page leads to the page's own enquiry form instead.
+const formId = blocks.find((block) => block.type === 'form')?.id ?? null;
+// The title's phone line width in ems (heading-fit), for the section headings' cap on a phone (template.css).
+const titleFit = headingFitVars(page.hero.heading, { charEm: wrapEmFor(variants.heroText) });
+// A photo hero's lead much longer than the competitor's opens the page under the hero, word for word (heading-fit.mjs).
+const heroVariant = pageHero(page).variant;
+const leadBelow = ['media-overlay', 'media-form'].includes(heroVariant) && Boolean(page.hero.lead?.length) && !heroLeadShown(page.hero.lead, variants.heroText);
+const mainStyle = titleFit ? `--title-ems-phone: ${titleFit['--fit-ems-phone']}; --title-min-phone: ${titleFit['--fit-min-phone']}` : undefined;
+---
+
+<main id="main" data-authoring-page={page.id} data-page-type={page.pageType} data-page-status={page.status} style={mainStyle}>
+  {variants.breadcrumbs !== 'after-hero' && <Breadcrumbs page={page} />}
+  <PageHero page={page} />
+  {variants.breadcrumbs === 'after-hero' && <Breadcrumbs page={page} />}
+  <TrustBar page={page} />
+  {leadBelow && (
+    <section class="block block--page-lead" data-authoring-block="page-lead" data-block-id="page-lead">
+      <div class="container">{page.hero.lead!.map((paragraph) => <p class="page-lead"><InlineText text={paragraph} /></p>)}</div>
+    </section>
+  )}
+  {resolved.map(({ block, variant, splitIndex }, index) => {
+    // Each block type's component from the registry (registry.ts), with the props it takes from this page.
+    const { component: Component, props }: BlockEntry = BLOCKS[block.type as keyof typeof BLOCKS];
+    // A section's data drawn after its text (a split row draws it in its photo's place; the closing band's before it).
+    const charts = block.type === 'splitMedia' ? [] : dataVisuals(block);
+    const drawn = charts.length > 0 && <div class="block block--charts" data-authoring-block="charts" data-block-id={`${block.id}-charts`}><div class="container section-charts">{charts.map((visual) => <SectionChart visual={visual} />)}</div></div>;
+    return (
+      <>
+        {block.type === 'cta' && drawn}
+        <Component {...props({ block, variant, page, formId, media: plan[index] ?? [], splitIndex })} />
+        {block.type !== 'cta' && drawn}
+      </>
+    );
+  })}
+</main>

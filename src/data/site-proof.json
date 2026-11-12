@@ -1,0 +1,377 @@
+{
+  "schemaVersion": "seo-site-proof-v1",
+  "standIn": true,
+  "note": "Stand-in proof (scripts/scaffold-site-proof.mjs): replace with real, permitted values before launch; listed in docs/research/release-signoff.json. The order terms are the approved facts.",
+  "headings": {
+    "factory": "At a glance",
+    "certifications": "Licences and memberships",
+    "clients": "Clients we work with",
+    "caseStudies": "Client results",
+    "testimonials": "What clients say",
+    "history": "Our story",
+    "terms": "Working with us at a glance",
+    "orderRoutes": "Ways to get started"
+  },
+  "factory": [
+    {
+      "value": "25",
+      "label": "people on the team",
+      "factId": "owner:team-size"
+    },
+    {
+      "value": "40",
+      "label": "clients served"
+    }
+  ],
+  "certifications": [],
+  "clients": [
+    {
+      "name": "Pine Hollow Holdings",
+      "note": "Ohio, USA"
+    },
+    {
+      "name": "Redstone Family Partners",
+      "note": "Texas, USA"
+    },
+    {
+      "name": "Bayline Properties",
+      "note": "Florida, USA"
+    },
+    {
+      "name": "Northgate Owners Group",
+      "note": "Minnesota, USA"
+    },
+    {
+      "name": "Copper Mesa Ventures",
+      "note": "Arizona, USA"
+    },
+    {
+      "name": "Harbor Lane Partners",
+      "note": "Oregon, USA"
+    }
+  ],
+  "testimonials": [],
+  "caseStudies": [
+    {
+      "client": "Family business owner",
+      "market": "Columbus, USA",
+      "title": "Business development for a family-owned business",
+      "summary": "Business development set up with the owners over a planned handover, with the results reported to them every week.",
+      "results": [
+        {
+          "value": "6 weeks",
+          "label": "handover"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        },
+        {
+          "value": "2",
+          "label": "owner meetings a month"
+        }
+      ],
+      "href": "/business-development/",
+      "pages": [
+        "/business-development/"
+      ]
+    },
+    {
+      "client": "Owner-operator",
+      "market": "San Antonio, USA",
+      "title": "Digital marketing for an owner with two sites",
+      "summary": "Digital marketing brought both sites under one way of working and one report.",
+      "results": [
+        {
+          "value": "2",
+          "label": "sites"
+        },
+        {
+          "value": "1",
+          "label": "shared report"
+        },
+        {
+          "value": "3 months",
+          "label": "to a settled routine"
+        }
+      ],
+      "href": "/digital-marketing/",
+      "pages": [
+        "/digital-marketing/"
+      ]
+    },
+    {
+      "client": "Regional owner group",
+      "market": "Tampa, USA",
+      "title": "Human resources for a first-time owner",
+      "summary": "Human resources started in the owner's first month, with the routines and reports set up from day one.",
+      "results": [
+        {
+          "value": "1st",
+          "label": "month of ownership"
+        },
+        {
+          "value": "4",
+          "label": "routines set up"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        }
+      ],
+      "href": "/human-resources/",
+      "pages": [
+        "/human-resources/"
+      ]
+    },
+    {
+      "client": "First-time owner",
+      "market": "Minneapolis, USA",
+      "title": "Operations management for a family-owned business",
+      "summary": "Operations management set up with the owners over a planned handover, with the results reported to them every week.",
+      "results": [
+        {
+          "value": "6 weeks",
+          "label": "handover"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        },
+        {
+          "value": "2",
+          "label": "owner meetings a month"
+        }
+      ],
+      "href": "/operations-management/",
+      "pages": [
+        "/operations-management/"
+      ]
+    },
+    {
+      "client": "Managing partner of an owner group",
+      "market": "Phoenix, USA",
+      "title": "Revenue management for an owner with two sites",
+      "summary": "Revenue management brought both sites under one way of working and one report.",
+      "results": [
+        {
+          "value": "2",
+          "label": "sites"
+        },
+        {
+          "value": "1",
+          "label": "shared report"
+        },
+        {
+          "value": "3 months",
+          "label": "to a settled routine"
+        }
+      ],
+      "href": "/revenue-management/",
+      "pages": [
+        "/revenue-management/"
+      ]
+    },
+    {
+      "client": "Second-generation owner",
+      "market": "Portland, USA",
+      "title": "Information technology for a first-time owner",
+      "summary": "Information technology started in the owner's first month, with the routines and reports set up from day one.",
+      "results": [
+        {
+          "value": "1st",
+          "label": "month of ownership"
+        },
+        {
+          "value": "4",
+          "label": "routines set up"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        }
+      ],
+      "href": "/information-technology/",
+      "pages": [
+        "/information-technology/"
+      ]
+    },
+    {
+      "client": "Family business owner",
+      "market": "Columbus, USA",
+      "title": "Commercial strategy for a family-owned business",
+      "summary": "Commercial strategy set up with the owners over a planned handover, with the results reported to them every week.",
+      "results": [
+        {
+          "value": "6 weeks",
+          "label": "handover"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        },
+        {
+          "value": "2",
+          "label": "owner meetings a month"
+        }
+      ],
+      "href": "/commercial-strategy/",
+      "pages": [
+        "/commercial-strategy/"
+      ]
+    },
+    {
+      "client": "Owner-operator",
+      "market": "San Antonio, USA",
+      "title": "Project management for an owner with two sites",
+      "summary": "Project management brought both sites under one way of working and one report.",
+      "results": [
+        {
+          "value": "2",
+          "label": "sites"
+        },
+        {
+          "value": "1",
+          "label": "shared report"
+        },
+        {
+          "value": "3 months",
+          "label": "to a settled routine"
+        }
+      ],
+      "href": "/project-management/",
+      "pages": [
+        "/project-management/"
+      ]
+    },
+    {
+      "client": "Regional owner group",
+      "market": "Tampa, USA",
+      "title": "Development for a first-time owner",
+      "summary": "Development started in the owner's first month, with the routines and reports set up from day one.",
+      "results": [
+        {
+          "value": "1st",
+          "label": "month of ownership"
+        },
+        {
+          "value": "4",
+          "label": "routines set up"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        }
+      ],
+      "href": "/development/",
+      "pages": [
+        "/development/"
+      ]
+    },
+    {
+      "client": "First-time owner",
+      "market": "Minneapolis, USA",
+      "title": "Receivership for a family-owned business",
+      "summary": "Receivership set up with the owners over a planned handover, with the results reported to them every week.",
+      "results": [
+        {
+          "value": "6 weeks",
+          "label": "handover"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        },
+        {
+          "value": "2",
+          "label": "owner meetings a month"
+        }
+      ],
+      "href": "/receivership/",
+      "pages": [
+        "/receivership/"
+      ]
+    },
+    {
+      "client": "Managing partner of an owner group",
+      "market": "Phoenix, USA",
+      "title": "Asset management for an owner with two sites",
+      "summary": "Asset management brought both sites under one way of working and one report.",
+      "results": [
+        {
+          "value": "2",
+          "label": "sites"
+        },
+        {
+          "value": "1",
+          "label": "shared report"
+        },
+        {
+          "value": "3 months",
+          "label": "to a settled routine"
+        }
+      ],
+      "href": "/asset-management/",
+      "pages": [
+        "/asset-management/"
+      ]
+    },
+    {
+      "client": "Second-generation owner",
+      "market": "Portland, USA",
+      "title": "Accounting for a first-time owner",
+      "summary": "Accounting started in the owner's first month, with the routines and reports set up from day one.",
+      "results": [
+        {
+          "value": "1st",
+          "label": "month of ownership"
+        },
+        {
+          "value": "4",
+          "label": "routines set up"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        }
+      ],
+      "href": "/accounting/",
+      "pages": [
+        "/accounting/"
+      ]
+    },
+    {
+      "client": "Family business owner",
+      "market": "Columbus, USA",
+      "title": "Ota optimization for a family-owned business",
+      "summary": "Ota optimization set up with the owners over a planned handover, with the results reported to them every week.",
+      "results": [
+        {
+          "value": "6 weeks",
+          "label": "handover"
+        },
+        {
+          "value": "1",
+          "label": "weekly report"
+        },
+        {
+          "value": "2",
+          "label": "owner meetings a month"
+        }
+      ],
+      "href": "/ota-optimization/",
+      "pages": [
+        "/ota-optimization/"
+      ]
+    }
+  ],
+  "history": [],
+  "terms": {
+    "columns": [
+      "Term",
+      "Details"
+    ],
+    "rows": []
+  },
+  "trade": "service"
+}

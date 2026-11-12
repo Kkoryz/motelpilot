@@ -1,0 +1,17 @@
+{
+  "frames": {
+    "hero": {
+      "byPageType": {
+        "home": 1
+      }
+    },
+    "cta": {
+      "byPageType": {
+        "home": 0.51
+      }
+    }
+  },
+  "crops": {},
+  "soft": [],
+  "unfocused": []
+}

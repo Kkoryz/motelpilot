@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "seo-site-template-v1",
+  "sourceUrl": "https://www.concordhotels.com/",
+  "route": "/",
+  "components": [
+    "Hero"
+  ],
+  "islands": [],
+  "mode": "authoring",
+  "routes": [
+    "/",
+    "/about-us/",
+    "/accounting/",
+    "/asset-management/",
+    "/business-development/",
+    "/capabilities/",
+    "/careers/",
+    "/case-studies/",
+    "/commercial-strategy/",
+    "/contact-us/",
+    "/development/",
+    "/digital-marketing/",
+    "/human-resources/",
+    "/information-technology/",
+    "/operations-management/",
+    "/ota-optimization/",
+    "/our-history/",
+    "/our-process/",
+    "/privacy-policy/",
+    "/project-management/",
+    "/receivership/",
+    "/request-a-quote/",
+    "/resources/",
+    "/revenue-management/",
+    "/services/",
+    "/terms-and-conditions/"
+  ],
+  "representatives": {
+    "solution": "/business-development/",
+    "about": "/about-us/",
+    "contact": "/contact-us/"
+  }
+}

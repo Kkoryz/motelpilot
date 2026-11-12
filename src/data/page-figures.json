@@ -1,0 +1,290 @@
+{
+  "/services/": [
+    {
+      "value": "6 to 8 weeks",
+      "label": "Management handover preparation"
+    },
+    {
+      "value": "3 to 6 months",
+      "label": "Pre-opening preparation"
+    },
+    {
+      "value": "2 hours",
+      "label": "Reservation resync after restoration"
+    },
+    {
+      "value": "24 hours",
+      "label": "Dashboard update interval"
+    }
+  ],
+  "/business-development/": [
+    {
+      "value": "6 months",
+      "label": "Exclusive mandate duration"
+    },
+    {
+      "value": "10 business days",
+      "label": "Underwriting package delivery"
+    },
+    {
+      "value": "5 business days",
+      "label": "Inspection report review"
+    },
+    {
+      "value": "30-minute",
+      "label": "First consultation duration"
+    }
+  ],
+  "/digital-marketing/": [
+    {
+      "value": "up to 4 metasearch channels",
+      "label": "Included metasearch channels"
+    },
+    {
+      "value": "30-day",
+      "label": "Initial performance review"
+    },
+    {
+      "value": "5th business day",
+      "label": "Monthly reporting deadline"
+    },
+    {
+      "value": "1 business day",
+      "label": "Serious complaint escalation"
+    }
+  ],
+  "/human-resources/": [
+    {
+      "value": "14 to 21 days",
+      "label": "Hourly role recruitment"
+    },
+    {
+      "value": "30 to 45 days",
+      "label": "Management role recruitment"
+    },
+    {
+      "value": "2 hours",
+      "label": "Urgent incident response"
+    },
+    {
+      "value": "15 business days",
+      "label": "Compliance findings delivery"
+    }
+  ],
+  "/operations-management/": [
+    {
+      "value": "20 business days",
+      "label": "Business plan delivery"
+    },
+    {
+      "value": "12-month",
+      "label": "Budget horizon"
+    },
+    {
+      "value": "5-year",
+      "label": "Capital plan horizon"
+    },
+    {
+      "value": "2 consecutive quarters",
+      "label": "Missed targets exit trigger"
+    }
+  ],
+  "/revenue-management/": [
+    {
+      "value": "2 hours",
+      "label": "Urgent request response"
+    },
+    {
+      "value": "no more than 12 properties",
+      "label": "Portfolio per manager"
+    },
+    {
+      "value": "up to 10 similar properties",
+      "label": "Competitor comparison coverage"
+    }
+  ],
+  "/information-technology/": [
+    {
+      "value": "6 to 10 weeks",
+      "label": "Planning to handover"
+    },
+    {
+      "value": "4 hours",
+      "label": "Maximum offline time"
+    },
+    {
+      "value": "90 days",
+      "label": "Access review interval"
+    },
+    {
+      "value": "20 test reservations",
+      "label": "Minimum reservation tests"
+    }
+  ],
+  "/commercial-strategy/": [
+    {
+      "value": "24 months",
+      "label": "Forecasting history required"
+    },
+    {
+      "value": "30-minute",
+      "label": "Initial consultation"
+    },
+    {
+      "value": "30 days",
+      "label": "Advertising performance review"
+    }
+  ],
+  "/project-management/": [
+    {
+      "value": "4 to 8 months",
+      "label": "PIP timeline"
+    },
+    {
+      "value": "9 to 15 months",
+      "label": "Full renovation timeline"
+    },
+    {
+      "value": "18 to 30 months",
+      "label": "New-build timeline"
+    },
+    {
+      "value": "3 business days",
+      "label": "Change-order review"
+    }
+  ],
+  "/development/": [
+    {
+      "value": "2 compliant alternatives",
+      "label": "Minimum compliant alternatives"
+    },
+    {
+      "value": "2 to 4 hours a week",
+      "label": "Owner time commitment"
+    },
+    {
+      "value": "3 to 6 months",
+      "label": "Pre-opening programme duration"
+    },
+    {
+      "value": "10 business days",
+      "label": "Approval application preparation"
+    }
+  ],
+  "/receivership/": [
+    {
+      "value": "24 hours",
+      "label": "Local support arrival"
+    },
+    {
+      "value": "72 hours",
+      "label": "Initial checks and report"
+    },
+    {
+      "value": "7 days",
+      "label": "Interim manager recruitment"
+    },
+    {
+      "value": "13-week",
+      "label": "Cash flow forecast"
+    }
+  ],
+  "/asset-management/": [
+    {
+      "value": "4 to 6 weeks",
+      "label": "Initial review turnaround"
+    },
+    {
+      "value": "13-week",
+      "label": "Cash flow forecast"
+    },
+    {
+      "value": "90-day",
+      "label": "Operator transition"
+    },
+    {
+      "value": "10 business days",
+      "label": "Cash model delivery"
+    }
+  ],
+  "/accounting/": [
+    {
+      "value": "8 hotels",
+      "label": "Maximum per accountant"
+    },
+    {
+      "value": "30 business days",
+      "label": "Backlog cleanup target"
+    },
+    {
+      "value": "5%",
+      "label": "Variance explanation threshold"
+    },
+    {
+      "value": "10 business days",
+      "label": "Month-end P&L delivery"
+    }
+  ],
+  "/ota-optimization/": [
+    {
+      "value": "100%",
+      "label": "Booking.com content score"
+    },
+    {
+      "value": "2 to 4 weeks",
+      "label": "Search ranking improvement"
+    },
+    {
+      "value": "6 channels",
+      "label": "Complete plan coverage"
+    },
+    {
+      "value": "2 hours",
+      "label": "Exposed inventory closure"
+    }
+  ],
+  "/contact-us/": [
+    {
+      "value": "2 hours",
+      "label": "Urgent support response"
+    },
+    {
+      "value": "8:00 to 18:00",
+      "label": "Weekday contact hours"
+    }
+  ],
+  "/case-studies/": [],
+  "/capabilities/": [],
+  "/our-process/": [
+    {
+      "value": "2 to 3 business days",
+      "label": "Quick services completion"
+    },
+    {
+      "value": "1–2 business days",
+      "label": "PriceLabs work completion"
+    },
+    {
+      "value": "1–3 business days",
+      "label": "Scope and access setup"
+    },
+    {
+      "value": "30 minutes",
+      "label": "Reporting platform demo"
+    }
+  ],
+  "/our-history/": [
+    {
+      "value": "25-person",
+      "label": "Team in 2024"
+    }
+  ],
+  "/resources/": [],
+  "/careers/": [],
+  "/request-a-quote/": [
+    {
+      "value": "30-minute",
+      "label": "Consultation duration"
+    }
+  ]
+}

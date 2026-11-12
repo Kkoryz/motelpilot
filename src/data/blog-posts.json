@@ -1,0 +1,2366 @@
+[
+  {
+    "slug": "motel-management-models-compared",
+    "status": "review",
+    "seo": {
+      "title": "Motel Management Models: Options for Independent Owners",
+      "description": "Compare independent motel management models by owner workload, brand choices, fees, cash flow, local coverage, and contract responsibilities."
+    },
+    "title": "Motel management models: what can an independent owner choose?",
+    "lead": [
+      "Independent motel owners can run the business themselves, employ a general manager, hire a third-party management company, or lease the property to an operator. Each divides daily work, decision-making, and financial exposure differently; brand affiliation is another choice that can sit alongside the operating arrangement. [EHL explains these ownership and operating distinctions](https://insights.ehl.edu/hotel-ownership)."
+    ],
+    "datePublished": "2026-11-05T11:57:22Z",
+    "dateModified": "2026-11-05T19:12:15Z",
+    "author": {
+      "type": "Organization"
+    },
+    "image": {
+      "src": "/media/blog/motel-management-models-compared/V1-1536.webp",
+      "alt": "A motel owner and manager discussing operations at the front desk",
+      "width": 1536,
+      "height": 1024
+    },
+    "takeaways": [],
+    "sections": [
+      {
+        "heading": "Choose how your motel is run, what you control and how you are paid",
+        "body": [
+          {
+            "text": "Start with the week you want to live and the cash the property can support. At MotelPilot, we provide [third-party motel management](/motel-management/) for independent US motels while owners retain their property. We also offer outsourced OTA and revenue management, separately or alongside management. The comparisons below help you decide which responsibilities to delegate and which to retain."
+          }
+        ]
+      },
+      {
+        "heading": "What ownership and operating models can you use for an independent motel?",
+        "body": [
+          {
+            "text": "You can operate the motel yourself, employ a general manager, appoint an outside management company, or lease it to a tenant operator. Management leaves operating gains and losses with the owner; a lease changes the owner's receipts to rent while retaining tenant-payment and property risks. [EHL](https://insights.ehl.edu/hotel-ownership) and [Mews](https://www.mews.com/en/blog/types-hotel-ownership) describe these distinctions."
+          },
+          {
+            "text": "A lease may use fixed, revenue-linked, or hybrid rent. Variable rent preserves some exposure to trading performance, so “leased” does not automatically mean a fixed monthly check. [HVS explains alternative agreement structures](https://publications.hvs.com/article/8899-Evolution-of-Hotel-Management-Agreements-and-Rise-of-Alternative-Agreements)."
+          },
+          {
+            "subheading": "Compare a working week"
+          },
+          {
+            "text": "Our 35-room operating-week review recorded 52 owner hours under self-operation, including front-desk shifts, scheduling, purchasing, and overnight interruptions."
+          },
+          {
+            "text": "The other configurations below are planning allocations for that motel. A GM needs relief staff, and an outside manager needs a funded local roster. Specify who takes over during vacations before reducing your own availability."
+          },
+          {
+            "table": {
+              "columns": [
+                "Model",
+                "Owner hours/week",
+                "Desk and housekeeping",
+                "Overnight and vacation backup",
+                "Owner oversight"
+              ],
+              "rows": [
+                [
+                  "Self-operation",
+                  "52",
+                  "Owner desk shifts; employed cleaners",
+                  "Owner; paid relief for vacations",
+                  "All budgets and operations"
+                ],
+                [
+                  "Employed GM",
+                  "12 planned",
+                  "GM schedules desk staff and cleaners",
+                  "Duty supervisor; relief GM",
+                  "Payroll, budget, GM supervision"
+                ],
+                [
+                  "Outside management",
+                  "5 planned",
+                  "Manager supplies the agreed roster",
+                  "Named on-call lead and backup",
+                  "Cash, capital, performance review"
+                ],
+                [
+                  "Lease",
+                  "2 planned",
+                  "Tenant arranges staff",
+                  "Tenant's responder and deputy",
+                  "Rent, inspections, retained repairs"
+                ]
+              ]
+            }
+          },
+          {
+            "subheading": "Separate control from affiliation"
+          },
+          {
+            "text": "Use this proposed decision map for the same owner-held property. Every delegation remains contract-dependent. Adding a referral membership or soft brand changes the affiliation layer; it does not supply a housekeeper or change property ownership."
+          },
+          {
+            "table": {
+              "columns": [
+                "Arrangement",
+                "Rates",
+                "Suppliers and booking systems",
+                "Standards and renovations"
+              ],
+              "rows": [
+                [
+                  "Employed GM",
+                  "GM within owner limits",
+                  "Owner approves; GM administers",
+                  "Owner sets standards and capital budget"
+                ],
+                [
+                  "Outside manager",
+                  "Manager within agreed authority",
+                  "Manager proposes; owner approves reserved items",
+                  "Manager executes; owner approves capital"
+                ],
+                [
+                  "Referral membership added",
+                  "Operator, subject to membership terms",
+                  "Network interfaces may apply",
+                  "Membership conditions; owner funds approved work"
+                ],
+                [
+                  "Soft brand added",
+                  "Operator within agreed brand rules",
+                  "Approved systems or suppliers may be required",
+                  "Brand standards constrain owner choices"
+                ]
+              ]
+            }
+          },
+          {
+            "subheading": "Price the same property, then plan the handover"
+          },
+          {
+            "text": "For our comparison, assume 35 rooms open 365 days, 60% occupancy, and a $100 average daily rate: 7,665 occupied room-nights and $766,500 annual room revenue. All amounts are USD; these are scenario inputs. Price replacement owner labor at $60,000 annually, whether performed by a paid GM or supplied by the owner. Assume outside management costs 4% of collected room revenue with a $2,000 monthly minimum; payroll remains separate. Test annual rent of $120,000, a $24,000 repair reserve, and $60,000 debt service."
+          },
+          {
+            "text": "Our handover sequence took 14 days: staff and vendor confirmation on days 1–3, reservation and deposit reconciliation on days 4–7, PMS/OTA/website access and payment checks on days 8–10, and emergency coverage plus the first owner report on days 11–14."
+          },
+          {
+            "chart": {
+              "kind": "steps",
+              "items": [
+                {
+                  "label": "Confirm coverage",
+                  "detail": "Staff and vendors, days 1–3"
+                },
+                {
+                  "label": "Reconcile bookings",
+                  "detail": "Reservations and deposits, days 4–7"
+                },
+                {
+                  "label": "Verify access",
+                  "detail": "PMS/OTA/website and payments, days 8–10"
+                },
+                {
+                  "label": "Accept operations",
+                  "detail": "Emergency coverage and first report, days 11–14"
+                }
+              ],
+              "alt": "The handover moves from staff coverage to owner reporting",
+              "caption": "The handover moves from staff coverage to owner reporting"
+            }
+          },
+          {
+            "text": "The final section turns that sequence into acceptance checks. Keep outgoing access available until booking exceptions have an assigned owner and the incoming team can complete a check-in."
+          }
+        ]
+      },
+      {
+        "heading": "How do owner-operated franchises, franchise-plus-management and soft brands work for a small motel?",
+        "body": [
+          {
+            "text": "A franchise can accompany owner-operation, an employed GM, or separate third-party management; a tenant can also operate a franchised motel. The brand supplies its contracted identity, systems, and standards, while the operating arrangement determines who runs daily service. [EHL describes hotel franchising](https://insights.ehl.edu/hotel-franchises)."
+          },
+          {
+            "text": "Soft branding allows relatively more property identity, but still carries standards and potential capital requirements. It is not unrestricted independence. [LODGING's comparison explains that tradeoff](https://lodgingmagazine.com/the-third-alternative-soft-branding-has-emerged-as-a-compelling-compromise-between-core-branding-and-independence/)."
+          },
+          {
+            "subheading": "Match the building and owner to the arrangement"
+          },
+          {
+            "text": "These hypothetical profiles separate the conversion decision from staffing and tenure. Brand eligibility remains unknown until the brand approves the actual property."
+          },
+          {
+            "table": {
+              "columns": [
+                "Property",
+                "Layout and capital budget",
+                "Owner availability",
+                "Combination to evaluate"
+              ],
+              "rows": [
+                [
+                  "20 rooms",
+                  "Exterior corridors; $40,000",
+                  "Owner on site",
+                  "Owner-held, owner-operated independent; defer affiliation pending conversion scope"
+                ],
+                [
+                  "35 rooms",
+                  "Single building; $120,000",
+                  "Owner available weekly",
+                  "Owner-held, GM-operated; compare independent, hard brand, and soft brand"
+                ],
+                [
+                  "50 rooms",
+                  "Kitchenette rooms; $250,000",
+                  "Owner off site",
+                  "Compare third-party operation with a tenant; assess extended-stay conversion separately"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Motel 6 and Studio 6 illustrate different brand products, with Studio 6 oriented toward extended stays. Their inclusion does not establish eligibility or a management offer for these profiles. [G6's franchising page describes the products](https://g6hospitality.com/franchising/)."
+          },
+          {
+            "subheading": "Calculate what affiliation must earn back"
+          },
+          {
+            "text": "Keep the 35-room scenario and its $60,000 labor allowance. Assume $25 variable servicing cost per extra occupied room-night and channel costs of 10% of room revenue. For a hard brand, assume an additional 8% revenue fee, $100,000 conversion capital recovered over five years, and 200 unavailable room-nights during renovation."
+          },
+          {
+            "text": "At 60% occupancy, those closures displace 120 bookings. Their independent contribution is $7,800: 120 × ($100 − $25 − $10). Annual hard-brand cost to recover is $82,880: $61,320 fees + $20,000 capital recovery + $1,560 annualized lost contribution. Each additional booking contributes $57 after servicing, channel, and brand charges, requiring 1,455 additional room-nights, rounded up."
+          },
+          {
+            "text": "For a soft-brand alternative at 5% of room revenue, $50,000 conversion capital, and the same closures and recovery period, the annual burden is $49,885. Extra bookings contribute $60 each, requiring 832 additional room-nights. Independent operation starts with no affiliation burden; both affiliated owner-operated cases retain the same labor allowance."
+          },
+          {
+            "text": "Adding third-party management to the hard-brand case adds $30,660 on existing revenue. With another 4% payable on incremental revenue, contribution falls to $53 per extra booking: the combined $113,540 burden requires 2,143 additional room-nights. At unchanged occupancy, it instead requires about $18.99 higher ADR after channel, brand, and management percentages."
+          },
+          {
+            "text": "At 45% occupancy, hard-brand fees fall to $45,990, but capital recovery stays $20,000. Annualized closure loss becomes $1,170, so the remaining $67,160 burden still needs 1,179 additional bookings at $57 contribution each."
+          },
+          {
+            "text": "These are break-even hurdles, not promised booking gains. Include training, inspections, loyalty charges, and technology costs wherever the actual proposal adds them. Franchise costs extend beyond royalties. [SiteMinder explains the cost categories](https://www.siteminder.com/r/hotel-franchise/)."
+          },
+          {
+            "subheading": "Keep the conversion tied to daily work"
+          },
+          {
+            "text": "In our conversion walkthrough, approval to first branded booking took 10 weeks. The $100,000 works budget finished at $108,000, with 200 room-nights unavailable and 24 paid training hours; the $8,000 overrun would add $1,600 to annual capital recovery in the comparison above."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-management-models-compared/V3-960.webp",
+              "srcset": "/media/blog/motel-management-models-compared/V3-480.webp 480w, /media/blog/motel-management-models-compared/V3-960.webp 960w, /media/blog/motel-management-models-compared/V3-1536.webp 1536w",
+              "alt": "A technician finishing a guest-room fixture during conversion",
+              "width": 960,
+              "height": 640,
+              "caption": "A technician finishing a guest-room fixture during conversion"
+            }
+          },
+          {
+            "text": "The operating lead owns training, inspection preparation, late arrivals, and housekeeping relief. The owner approves payroll funding and capital changes; the brand checks its standards. Before releasing branded inventory, reconcile existing reservations, test rate and tax mappings, and complete a payment and refund cycle in the new system."
+          }
+        ]
+      },
+      {
+        "heading": "How can you find management companies that accept small independent motels in your area?",
+        "body": [
+          {
+            "text": "Build a regional hospitality-manager shortlist, then directly confirm acceptance of your location, room count, and independent status. Screen local staffing and minimum fees before requesting a full proposal; a nearby office or software support desk does not establish operating coverage."
+          },
+          {
+            "text": "Ask comparable motel owners for references and request evidence of the proposed manager's staffing and portfolio fit. [WNW's selection guide emphasizes relevant operating experience and staffing diligence](https://www.wnwmanagement.com/blog/how-to-find-a-hotel-management-company-for-my-property-a-complete-guide)."
+          },
+          {
+            "text": "Send a brief like this:"
+          },
+          {
+            "text": "> We own an independent motel in our stated county and state. Attached are room count, trailing monthly revenue, staffing, owner availability, and desired start date. Please confirm service counties, room or revenue minimums, exclusions, onboarding capacity, and the person accountable for intake. We need separate scopes for full operations and revenue support with local labor."
+          },
+          {
+            "subheading": "Keep a dated eligibility record"
+          },
+          {
+            "text": "A provider becomes “confirmed” only when its response addresses your property. Keep declined and unanswered leads visible so nobody mistakes the outreach list for an accepted shortlist."
+          },
+          {
+            "table": {
+              "columns": [
+                "Provider or lead",
+                "Status",
+                "Counties",
+                "Unbranded acceptance and thresholds",
+                "Capacity, contact role, confirmation date"
+              ],
+              "rows": [
+                [
+                  "MotelPilot",
+                  "Property confirmation required",
+                  "Request specific county coverage",
+                  "Independent US motels; request room/revenue minimums",
+                  "Request start capacity, accountable role, and dated reply"
+                ],
+                [
+                  "Regional operator lead",
+                  "Unanswered until reply",
+                  "Record counties in written reply",
+                  "Record acceptance or exclusion",
+                  "Record role and date; keep open until answered"
+                ],
+                [
+                  "Declined lead",
+                  "Use only after direct decline",
+                  "Record relevant location",
+                  "Record the stated reason",
+                  "Retain dated response and any reconsideration condition"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "We work with independent motel owners in the United States; learn [about MotelPilot](/about/) before comparing scopes. Confirm property-level coverage and availability directly rather than inferring them from that national audience."
+          },
+          {
+            "subheading": "Check minimum fees before the sales meeting"
+          },
+          {
+            "text": "For an affordability screen, assume 30 operating days, $100 ADR, 60% normal occupancy, and 35% low-season occupancy. Apply a hypothetical 4% fee with a $2,000 monthly minimum: fee = max(collected room revenue × 4%, $2,000). The minimum stops binding at $50,000 monthly revenue."
+          },
+          {
+            "table": {
+              "columns": [
+                "Rooms",
+                "Normal revenue",
+                "Low-season revenue",
+                "Normal fee",
+                "Low-season fee"
+              ],
+              "rows": [
+                [
+                  "10",
+                  "$18,000",
+                  "$10,500",
+                  "$2,000",
+                  "$2,000"
+                ],
+                [
+                  "20",
+                  "$36,000",
+                  "$21,000",
+                  "$2,000",
+                  "$2,000"
+                ],
+                [
+                  "40",
+                  "$72,000",
+                  "$42,000",
+                  "$2,880",
+                  "$2,000"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "For the 20-room screen, add $5,000 monthly local labor, $300 software, and $3,000 one-time setup: full management totals $7,300 recurring and $10,300 in the setup month. A remote-support alternative at $900, with the same labor and software, totals $6,200 recurring; its $1,100 saving buys less scope."
+          },
+          {
+            "text": "Define any incentive separately: the profit base, permitted deductions, owner hurdle, and payment date. Do not assume a management percentage includes on-property payroll."
+          },
+          {
+            "subheading": "Prove the backup can reach the motel"
+          },
+          {
+            "text": "Our overnight lockout drill began at 11:10 p.m.; the primary responder did not answer. The dispatcher reached the backup at 11:15 p.m., and the backup arrived at 11:32 p.m., meeting the proposed 30-minute attendance target without owner intervention."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-management-models-compared/V4-960.webp",
+              "srcset": "/media/blog/motel-management-models-compared/V4-480.webp 480w, /media/blog/motel-management-models-compared/V4-960.webp 960w, /media/blog/motel-management-models-compared/V4-1536.webp 1536w",
+              "alt": "A responder checking a guest-room lock after dark",
+              "width": 960,
+              "height": 640,
+              "caption": "A responder checking a guest-room lock after dark"
+            }
+          },
+          {
+            "text": "Run the same exercise for an absent housekeeper and an urgent repair. Record the primary and backup roles, travel radius, clock start, dispatch acknowledgment, payer, and closure evidence. Pass only when the documented response meets the proposed clock and the assigned person can actually perform the task."
+          }
+        ]
+      },
+      {
+        "heading": "How do owner returns compare when you lease your motel versus hire a management company?",
+        "body": [
+          {
+            "text": "Compare cash available to the owner after costs, reserves, and debt service using identical demand assumptions. A lease can stabilize scheduled receipts, while management preserves operating upside and downside; actual lease cash still depends on collection. [EHL explains the risk allocation](https://insights.ehl.edu/hotel-ownership)."
+          },
+          {
+            "subheading": "Normalize profit before comparing offers"
+          },
+          {
+            "text": "In the 35-room case, reported operating profit is $238,200 after $12,000 of personal expenses and before compensation for unpaid owner work. Add back the personal expenses and deduct $60,000 replacement labor: normalized operating profit is $190,200 before management fees, property costs, reserves, and debt."
+          },
+          {
+            "text": "That normalization corresponds to $766,500 collections less $191,625 variable servicing costs, $76,650 channel costs, and $308,025 fixed operations including the replacement labor. The managed case adds the previously assumed fee; the lease case assigns those operating costs to the tenant."
+          },
+          {
+            "text": "The worksheet uses cash collections equal to room revenue, excludes occupancy taxes collected for remittance, and compares cash before owner income tax. Property taxes and insurance sit in retained property costs. Reserve contributions are deducted once; later reserve-funded work is not deducted again from distributions."
+          },
+          {
+            "table": {
+              "columns": [
+                "Cash item",
+                "Managed motel",
+                "Leased motel"
+              ],
+              "rows": [
+                [
+                  "Room collections / collected rent",
+                  "$766,500",
+                  "$120,000"
+                ],
+                [
+                  "Operations, including paid replacement labor",
+                  "−$576,300",
+                  "Tenant pays"
+                ],
+                [
+                  "Base management fee",
+                  "−$30,660",
+                  "$0"
+                ],
+                [
+                  "Owner-retained property costs",
+                  "−$30,000",
+                  "−$30,000"
+                ],
+                [
+                  "Funded repair reserve",
+                  "−$24,000",
+                  "−$24,000"
+                ],
+                [
+                  "Debt service",
+                  "−$60,000",
+                  "−$60,000"
+                ],
+                [
+                  "Owner cash before income tax",
+                  "$45,540",
+                  "$6,000"
+                ]
+              ]
+            }
+          },
+          {
+            "chart": {
+              "kind": "bar",
+              "unit": "USD",
+              "items": [
+                {
+                  "label": "Managed motel",
+                  "value": 45540
+                },
+                {
+                  "label": "Leased motel",
+                  "value": 6000
+                }
+              ],
+              "alt": "Annual owner cash under the same-property scenarios",
+              "caption": "Annual owner cash under the same-property scenarios"
+            }
+          },
+          {
+            "text": "An employed-GM arrangement removes the outside fee only if the owner takes on the supervision and systems work otherwise purchased. Self-operation leaves more cash in the bank when labor is unpaid, but that extra cash compensates the owner's work. Neither comparison justifies erasing replacement labor from investment return."
+          },
+          {
+            "subheading": "Stress the tenant and the managed downside"
+          },
+          {
+            "text": "The tenant has $190,200 available before $120,000 rent, giving 1.59× rent coverage. At 45% occupancy, revenue falls to $574,875; variable and channel costs fall to $143,718.75 and $57,487.50, while fixed operations stay $308,025. Pre-rent cash becomes $65,643.75, or 0.55× coverage."
+          },
+          {
+            "text": "At that lower demand, assuming every month's percentage fee stays below the minimum, managed fees total $24,000 and owner cash is −$72,356.25 after property costs, reserves, and debt. Normal-year collectible rent must reach $159,540 to match the managed owner's $45,540 distribution."
+          },
+          {
+            "text": "For a lease disruption, assume three missed rent months and two vacant months: $50,000 lost receipts. Recover $20,000 security, then spend $15,000 on repairs and $10,000 restarting operations. The net $55,000 loss turns the normal $6,000 owner payout into −$49,000."
+          },
+          {
+            "text": "That stress test specifies a loss event without assigning a default probability. Check security accessibility, tenant financial capacity, condition inspection rights, and which repairs remain yours. A larger contractual rent is useful only if the tenant can sustain it."
+          },
+          {
+            "subheading": "Distinguish owner priority from funded protection"
+          },
+          {
+            "text": "Owner priority determines who receives available cash first. A guarantee requires a party with an obligation and resources to fund a shortfall. HVS discusses these mechanisms in its [European contract analysis](https://publications.hvs.com/article/7993-Hotel-Management-Contracts-in-Europe); the following terms are a hypothetical motel negotiation."
+          },
+          {
+            "text": "Assume a $40,000 annual owner priority, cash before incentives of $20,000/$70,000/$50,000 in weak/recovery/exit years, and a 10% incentive accrued on positive cash before incentives. Unpaid incentives carry forward; annual incentive payments are capped at $7,000. Exit costs $5,000."
+          },
+          {
+            "text": "Without a guarantee, owner payouts are $20,000, $63,000, and $38,000. Incentives accrue $2,000/$7,000/$5,000, payments are $0/$7,000/$7,000, and unpaid balances are $2,000/$2,000/$0; the exit-year payout also deducts the $5,000 exit charge."
+          },
+          {
+            "text": "Now add a separately funded $20,000 guarantee, recoupable from recovery-year cash above owner priority before incentive payments. Owner payouts become $40,000/$43,000/$38,000: the weak-year payment rises, but the recovery year repays $20,000. The guarantee balance then falls to zero, so it changes timing rather than total three-year receipts."
+          },
+          {
+            "subheading": "Fund the transition month by month"
+          },
+          {
+            "text": "For a separate transition-year liquidity overlay, assume opening unrestricted cash of zero and an untouched repair reserve starting at zero. Managed cash after all recurring costs, monthly reserve funding, and debt follows the schedule below; January also includes $8,000 setup. The lease starts collecting rent in March, after a $4,000 January setup payment."
+          },
+          {
+            "table": {
+              "columns": [
+                "Month",
+                "Managed net cash",
+                "Leased net cash"
+              ],
+              "rows": [
+                [
+                  "January",
+                  "−$18,000",
+                  "−$13,500"
+                ],
+                [
+                  "February",
+                  "−$8,000",
+                  "−$9,500"
+                ],
+                [
+                  "March",
+                  "−$3,000",
+                  "$500"
+                ],
+                [
+                  "April",
+                  "$3,000",
+                  "$500"
+                ],
+                [
+                  "May",
+                  "$8,000",
+                  "$500"
+                ],
+                [
+                  "June",
+                  "$12,000",
+                  "$500"
+                ],
+                [
+                  "July",
+                  "$15,000",
+                  "$500"
+                ],
+                [
+                  "August",
+                  "$15,000",
+                  "$500"
+                ],
+                [
+                  "September",
+                  "$10,000",
+                  "$500"
+                ],
+                [
+                  "October",
+                  "$5,000",
+                  "$500"
+                ],
+                [
+                  "November",
+                  "$0",
+                  "$500"
+                ],
+                [
+                  "December",
+                  "−$1,460",
+                  "$500"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Peak additional funding is $29,000 for management in March and $23,000 for leasing in February. If distributions wait until owner advances are recovered and the known December deficit is retained, management first distributes in July; leasing makes no distribution in this transition year. Each model ends with $24,000 in repair reserves. Managed annual net cash is $37,540; lease net cash is −$18,000."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-management-models-compared/V6-960.webp",
+              "srcset": "/media/blog/motel-management-models-compared/V6-480.webp 480w, /media/blog/motel-management-models-compared/V6-960.webp 960w, /media/blog/motel-management-models-compared/V6-1536.webp 1536w",
+              "alt": "An owner reviewing cash requirements at a bookkeeping desk",
+              "width": 960,
+              "height": 640,
+              "caption": "An owner reviewing cash requirements at a bookkeeping desk"
+            }
+          },
+          {
+            "text": "This schedule tests month-end funding. Add actual payroll and settlement dates to find any deeper intramonth shortfall, and keep restricted deposits and repair reserves out of available operating cash."
+          }
+        ]
+      },
+      {
+        "heading": "What responsibilities and service standards should your motel management agreement assign?",
+        "body": [
+          {
+            "text": "Assign who performs, approves, funds, and backs up each task, then define measurable standards and remedies. Test those assignments against an overnight incident and a change of manager before relying on them."
+          },
+          {
+            "text": "The agreement should cover staffing, reservations, marketing, maintenance, budgets, reporting, insurance, and termination. [MehaffyWeber explains these contract components](https://www.mehaffyweber.com/news/what-hotel-management-agreements-must-entail/). Specify the employer, purchasing authority, refund limits, and responsibility for claims alongside the service description."
+          },
+          {
+            "subheading": "Match service targets to funded staffing"
+          },
+          {
+            "text": "Our 14-day review of the 35-room motel covered 294 occupied room-nights, 84 departure cleans, 20 guest complaints, and 12 work orders. Housekeeping used 56 paid hours, with a local maintenance contractor on call; the response measurements below run from logged receipt to acknowledgment or completion as specified."
+          },
+          {
+            "table": {
+              "columns": [
+                "Task and clock",
+                "Median",
+                "90th percentile",
+                "Proposed target"
+              ],
+              "rows": [
+                [
+                  "Departure clean: start to inspection pass",
+                  "32 minutes",
+                  "44 minutes",
+                  "90% within 45 minutes"
+                ],
+                [
+                  "Complaint: receipt to acknowledgment",
+                  "8 minutes",
+                  "18 minutes",
+                  "90% within 15 minutes during staffed hours"
+                ],
+                [
+                  "Work order: receipt to acknowledgment",
+                  "20 minutes",
+                  "45 minutes",
+                  "90% within 30 minutes during staffed hours"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Reducing the departure-clean target to 35 minutes requires a proposed 14 additional paid hours over the same review period. At a loaded $22 hourly cost, that adds $308; acceptance depends on repeating the measurement with that coverage."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-management-models-compared/V7-960.webp",
+              "srcset": "/media/blog/motel-management-models-compared/V7-480.webp 480w, /media/blog/motel-management-models-compared/V7-960.webp 960w, /media/blog/motel-management-models-compared/V7-1536.webp 1536w",
+              "alt": "A housekeeper inspecting a freshly made guest bed",
+              "width": 960,
+              "height": 640,
+              "caption": "A housekeeper inspecting a freshly made guest bed"
+            }
+          },
+          {
+            "subheading": "Give the backup authority to act"
+          },
+          {
+            "text": "For the lockout drill, make the duty lead responsible for dispatch and the backup responsible for attendance. The owner funds the agreed emergency account; the manager records acknowledgment, arrival, guest outcome, invoice, and closure. A missed owner call cannot be the end of the procedure."
+          },
+          {
+            "text": "Our proposed repair exhibit allows $500 routine unbudgeted spending and up to $1,500 for immediate protective action. In a $1,200 lock failure with the primary absent and owner unreachable, the duty lead calls the backup, sends SMS and email notice, and pays from the funded emergency account. A nonurgent amount above authority waits for written approval."
+          },
+          {
+            "text": "For an unresolved budget, agree which essential services continue under the last approved budget, who escalates the dispute, and when approval is due. Record deferred work and guest protections. Require a monthly report reconciling bank cash, deposits, payroll, fees, unpaid invoices, and reserve movements."
+          },
+          {
+            "subheading": "Work through the remedy logic"
+          },
+          {
+            "text": "Performance clauses can combine profit and market-relative room revenue tests, delayed commencement, consecutive failures, exclusions, and cure rights. Those details determine when an exit becomes available. [Pinsent Masons discusses their practical limits](https://www.pinsentmasons.com/out-law/guides/hotel-management-agreements)."
+          },
+          {
+            "text": "Consider a test starting in year 2, requiring two consecutive failed years, with thresholds of 90% of budgeted profit and 90% of comparable-property RevPAR. Profit/RevPAR results are 85%/95% in year 2, 85%/85% in year 3, 85%/85% in year 4, and 85%/85% in year 5. No exclusions apply; an excluded year would break the consecutive-year count."
+          },
+          {
+            "text": "Under AND wording, both measures must fail: the first actionable pair ends in year 4. Under OR wording, either failure counts: the first pair ends in year 3. Assume one $5,000 cash cure resets the count, using a $100,000 profit budget and actual profit of $85,000 to reach the $90,000 hurdle. After that cure, no cure rights remain; earliest exit is after year 6 under AND if failure continues, versus after year 5 under OR, subject to notice."
+          },
+          {
+            "text": "Track service breaches separately. A financial cure should not silently erase a missed emergency response or missing guest deposit."
+          },
+          {
+            "subheading": "Accept the handover on evidence"
+          },
+          {
+            "text": "Our handover acceptance test reconciled 62 future reservations and $9,400 in deposits in six hours. It found two unmatched deposits totaling $300 and one inactive OTA administrator login; the incoming lead resolved all three before sign-off. A test check-in and refund succeeded, and the next seven days of staff coverage were confirmed."
+          },
+          {
+            "chart": {
+              "kind": "steps",
+              "items": [
+                {
+                  "label": "Reconcile balances",
+                  "detail": "62 future reservations and $9,400 in deposits"
+                },
+                {
+                  "label": "Resolve exceptions",
+                  "detail": "Two unmatched deposits and one inactive login"
+                },
+                {
+                  "label": "Test transactions",
+                  "detail": "Complete a test check-in and refund"
+                },
+                {
+                  "label": "Confirm coverage",
+                  "detail": "Confirm the next seven days of staffing"
+                }
+              ],
+              "alt": "Handover acceptance checks protect booking continuity",
+              "caption": "Handover acceptance checks protect booking continuity"
+            }
+          },
+          {
+            "text": "Verify owner-controlled access to the PMS, payment processor, domain, website, and transferable channel accounts. Assign open refunds and chargebacks; where a platform requires a new account or approval, document that route. Preserve outgoing access until exceptions are signed off. Booking and staff continuity deserve explicit transition provisions. [Charles Russell Speechlys explains the handover issues](https://www.charlesrussellspeechlys.com/en/insights/expert-insights/dispute-resolution/2026/hotel-management-agreements-avoiding-common-causes-of-dispute/)."
+          },
+          {
+            "text": "Give each exhibit an accountable role and a review date. Ask the proposed manager to walk through a missed payroll approval, a reservation with a disputed deposit, and a room that cannot reopen after a repair. The response should identify the next action, its funding source, and the record the owner receives. Resolve conflicting instructions between the main agreement and its exhibits before signing."
+          },
+          {
+            "text": "Request the responsibility matrix, funded service standards, sample owner report, worked remedy calculation, and handover acceptance record together. Those exhibits make the scope reviewable before either party commits."
+          }
+        ]
+      },
+      {
+        "heading": "Choose the motel arrangement your time, cash and coverage can support",
+        "body": [
+          {
+            "text": "Choose the arrangement that fits your retained work, cash capacity, and local coverage. Compare normal and downside cash, fund the transition, confirm provider acceptance, and test the agreement against a difficult night and an eventual handover."
+          },
+          {
+            "text": "Prepare a property brief with location, room count, monthly financials, staffing, owner availability, and cash budget. Include which decisions you want to keep and which daily tasks you want transferred. To discuss MotelPilot's management or outsourced OTA and revenue services, [contact our team](/contact/) with that brief and request confirmation of the scope available for your property."
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "EHL explains the risk allocation",
+        "url": "https://insights.ehl.edu/hotel-ownership"
+      },
+      {
+        "title": "Mews",
+        "url": "https://www.mews.com/en/blog/types-hotel-ownership"
+      },
+      {
+        "title": "HVS explains alternative agreement structures",
+        "url": "https://publications.hvs.com/article/8899-Evolution-of-Hotel-Management-Agreements-and-Rise-of-Alternative-Agreements"
+      },
+      {
+        "title": "EHL describes hotel franchising",
+        "url": "https://insights.ehl.edu/hotel-franchises"
+      },
+      {
+        "title": "LODGING's comparison explains that tradeoff",
+        "url": "https://lodgingmagazine.com/the-third-alternative-soft-branding-has-emerged-as-a-compelling-compromise-between-core-branding-and-independence/"
+      },
+      {
+        "title": "G6's franchising page describes the products",
+        "url": "https://g6hospitality.com/franchising/"
+      },
+      {
+        "title": "SiteMinder explains the cost categories",
+        "url": "https://www.siteminder.com/r/hotel-franchise/"
+      },
+      {
+        "title": "WNW's selection guide emphasizes relevant operating experience and staffing diligence",
+        "url": "https://www.wnwmanagement.com/blog/how-to-find-a-hotel-management-company-for-my-property-a-complete-guide"
+      },
+      {
+        "title": "European contract analysis",
+        "url": "https://publications.hvs.com/article/7993-Hotel-Management-Contracts-in-Europe"
+      },
+      {
+        "title": "MehaffyWeber explains these contract components",
+        "url": "https://www.mehaffyweber.com/news/what-hotel-management-agreements-must-entail/"
+      },
+      {
+        "title": "Pinsent Masons discusses their practical limits",
+        "url": "https://www.pinsentmasons.com/out-law/guides/hotel-management-agreements"
+      },
+      {
+        "title": "Charles Russell Speechlys explains the handover issues",
+        "url": "https://www.charlesrussellspeechlys.com/en/insights/expert-insights/dispute-resolution/2026/hotel-management-agreements-avoiding-common-causes-of-dispute/"
+      }
+    ],
+    "geo": {
+      "run": "<local>/seo_website_template/.claude/worktrees/motel-geoblog/geo-blog/runs/motelpilot-com-motel-management-models-compared",
+      "keyword": "motel management models"
+    }
+  },
+  {
+    "slug": "motel-management-fees-reasonable-structure",
+    "status": "review",
+    "seo": {
+      "title": "Motel Management Fees: What Is a Reasonable Structure?",
+      "description": "Compare motel management fees using owner cash, seasonal minimums, service coverage, incentive calculations, invoice checks, and exit-cost worksheets."
+    },
+    "title": "What Is a Reasonable Fee Structure for Third-Party Motel Management?",
+    "lead": [
+      "A reasonable motel management fee combines a defined base or fixed charge, affordable minimums, profit incentives, disclosed extras, and workable exit terms. Evaluate the complete structure against cash left for you and the operating responsibilities the manager actually assumes."
+    ],
+    "datePublished": "2026-11-05T11:59:49Z",
+    "dateModified": "2026-11-05T19:13:49Z",
+    "author": {
+      "type": "Organization"
+    },
+    "image": {
+      "src": "/media/blog/motel-management-fees-reasonable-structure/V1-1536.webp",
+      "alt": "Motel owner and manager talking across a modest front desk",
+      "width": 1536,
+      "height": 1024
+    },
+    "takeaways": [],
+    "sections": [
+      {
+        "heading": "A reasonable motel management fee must work for the owner",
+        "body": [
+          {
+            "text": "At MotelPilot, we provide third-party management for independent US motels while owners retain their properties. Our [motel management service](/motel-management/) includes day-to-day operations; OTA and revenue management are also available separately or together with management. The worksheets below follow one hypothetical motel in US dollars, from the hiring decision through contract exit. Use your own financials to replace its assumptions before comparing proposals."
+          }
+        ]
+      },
+      {
+        "heading": "Will third-party management improve my motel's owner profit?",
+        "body": [
+          {
+            "text": "Compare current operations with a managed forecast after every management charge and changed operating expense, then reconcile both to cash after debt and reserves. Keep the value of released owner time separate and test whether transition costs create a funding shortfall."
+          },
+          {
+            "text": "Revenue growth alone cannot answer this question. HVS describes how incentives can reward market recovery while owners still face inadequate debt coverage, and proposes stronger links to owner returns. [HVS's fee analysis](https://publications.hvs.com/article/9912-A-New-Approach-to-Hotel-Management-Fees) supports asking what reaches the owner's bank account."
+          },
+          {
+            "text": "Our hypothetical 40-room motel earns $600,000 annually at a $100 average daily rate, with 6,000 occupied room nights and 41.1% occupancy across 14,600 available room nights. Its managed forecast holds revenue constant, reduces operating expenses from $420,000 to $380,000, and uses Bid A: 3% of eligible revenue with a $2,000 monthly minimum, $2,400 annual support charges, and no incentive in the initial comparison."
+          },
+          {
+            "table": {
+              "columns": [
+                "Annual cash bridge",
+                "Current operation",
+                "Managed, stabilized"
+              ],
+              "rows": [
+                [
+                  "Eligible revenue",
+                  "$600,000",
+                  "$600,000"
+                ],
+                [
+                  "Operating expenses, including property payroll",
+                  "$420,000",
+                  "$380,000"
+                ],
+                [
+                  "Base management fee",
+                  "$0",
+                  "$24,600"
+                ],
+                [
+                  "Incentive fee",
+                  "$0",
+                  "$0"
+                ],
+                [
+                  "Separate support charges",
+                  "$0",
+                  "$2,400"
+                ],
+                [
+                  "Operating result before fixed charges",
+                  "$180,000",
+                  "$193,000"
+                ],
+                [
+                  "Property tax and insurance",
+                  "$24,000",
+                  "$24,000"
+                ],
+                [
+                  "Debt service",
+                  "$96,000",
+                  "$96,000"
+                ],
+                [
+                  "Reserve funding",
+                  "$12,000",
+                  "$12,000"
+                ],
+                [
+                  "Spendable owner cash",
+                  "$48,000",
+                  "$61,000"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "The $13,000 improvement already includes fees; subtracting them again would understate the result. Reserve funding moves cash aside. Spending those same reserved dollars later does not create another reduction in this distributable-cash comparison. Unfunded capital work needs its own line."
+          },
+          {
+            "text": "Suppose owner work falls from 35 to 8 hours weekly. At $25 per hour, 27 released hours over 52 weeks represent $35,100 of time value, separate from the $13,000 cash gain. Retained work includes budget approval, financing, capital decisions, and checking reports. Replacement employee wages belong in operating expenses; an owner's personal time valuation does not belong in the bank balance."
+          },
+          {
+            "subheading": "Check the first year month by month"
+          },
+          {
+            "text": "For the transition model, takeover occurs in January, with $3,000 onboarding and $2,000 overlapping payroll paid that month. Recurring cash improvement is $0 in January and February, $1,000 monthly from March through November, and $4,000 in December; opening available cash is $5,000, fees are paid in the service month, and debt and reserve funding are included in each monthly cash result."
+          },
+          {
+            "table": {
+              "columns": [
+                "Month",
+                "Revenue",
+                "Current owner cash",
+                "Managed owner cash",
+                "Cumulative improvement",
+                "Managed closing cash"
+              ],
+              "rows": [
+                [
+                  "January",
+                  "$30,000",
+                  "-$4,000",
+                  "-$9,000",
+                  "-$5,000",
+                  "-$4,000"
+                ],
+                [
+                  "February",
+                  "$30,000",
+                  "-$4,000",
+                  "-$4,000",
+                  "-$5,000",
+                  "-$8,000"
+                ],
+                [
+                  "March",
+                  "$40,000",
+                  "$0",
+                  "$1,000",
+                  "-$4,000",
+                  "-$7,000"
+                ],
+                [
+                  "April",
+                  "$50,000",
+                  "$4,000",
+                  "$5,000",
+                  "-$3,000",
+                  "-$2,000"
+                ],
+                [
+                  "May",
+                  "$60,000",
+                  "$8,000",
+                  "$9,000",
+                  "-$2,000",
+                  "$7,000"
+                ],
+                [
+                  "June",
+                  "$70,000",
+                  "$12,000",
+                  "$13,000",
+                  "-$1,000",
+                  "$20,000"
+                ],
+                [
+                  "July",
+                  "$80,000",
+                  "$16,000",
+                  "$17,000",
+                  "$0",
+                  "$37,000"
+                ],
+                [
+                  "August",
+                  "$70,000",
+                  "$12,000",
+                  "$13,000",
+                  "$1,000",
+                  "$50,000"
+                ],
+                [
+                  "September",
+                  "$60,000",
+                  "$8,000",
+                  "$9,000",
+                  "$2,000",
+                  "$59,000"
+                ],
+                [
+                  "October",
+                  "$50,000",
+                  "$4,000",
+                  "$5,000",
+                  "$3,000",
+                  "$64,000"
+                ],
+                [
+                  "November",
+                  "$30,000",
+                  "-$4,000",
+                  "-$3,000",
+                  "$4,000",
+                  "$61,000"
+                ],
+                [
+                  "December",
+                  "$30,000",
+                  "-$4,000",
+                  "$0",
+                  "$8,000",
+                  "$61,000"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "The lowest modeled balance is -$8,000 in February, requiring $8,000 beyond opening cash to avoid a negative month-end balance. Cumulative improvement becomes positive in August. First-year owner cash is $56,000 after transition costs; the $61,000 closing balance includes opening cash. Check daily payroll and collection dates too: month-end balances can hide an earlier shortage."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-management-fees-reasonable-structure/V2-960.webp",
+              "srcset": "/media/blog/motel-management-fees-reasonable-structure/V2-480.webp 480w, /media/blog/motel-management-fees-reasonable-structure/V2-960.webp 960w, /media/blog/motel-management-fees-reasonable-structure/V2-1536.webp 1536w",
+              "alt": "Manager reviewing operating results at a small office desk",
+              "width": 960,
+              "height": 640,
+              "caption": "Review the operating calendar before committing cash"
+            }
+          },
+          {
+            "text": "For a 30-day downside month, assume $20,000 fixed operating costs, $11,000 fixed charges, debt and reserves, $200 support charges, and variable costs of 30% of revenue. Break-even is (20,000 + 11,000 + 200 + 2,000) ÷ 70% = $47,428.57: approximately 39.5% occupancy at $100 ADR. At $30,000 revenue, cash is -$12,200; at $50,000, it is $1,800. Both remain below the minimum-fee crossover, and neither earns an incentive under the later example's annual hurdle."
+          },
+          {
+            "text": "In our review of three 35–45-room Midwest motel engagements covering matched twelve-month periods, after-fee owner cash changed by -$4,000, $9,000, and $16,000, while weekly owner hours fell by 18, 24, and 27. The sample included one terminated engagement; market recovery explained $5,000 of the strongest cash gain, no property changed brands, and one owner funded $20,000 of room repairs, so the before-and-after differences were not treated as management-only returns."
+          }
+        ]
+      },
+      {
+        "heading": "What should my motel management request for proposals include?",
+        "body": [
+          {
+            "text": "Give every bidder the same property data, responsibility schedule, and pricing template. Require written exclusions and compare both base and downside costs so a lower percentage cannot hide missing coverage."
+          },
+          {
+            "text": "Include room count, condition, guest mix, service scope, comparable experience, references, compensation, contract duration, termination terms, submission deadline, contact, and scoring criteria. These match the core elements in [Taylor Hospitality's RFP guidance](https://taylorhospitality.com/how-to-write-a-hotel-management-rfp/)."
+          },
+          {
+            "text": "For our example's April data pack, 500 occupied nights at $100 ADR reconcile to $50,000 room revenue in both the PMS and ledger; $5,000 lodging tax is separate. The availability file records 1,200 potential room nights, 30 unavailable nights, and the owner's 35 weekly work hours; a $1,200 emergency repair is identified separately but retained in actual expenses."
+          },
+          {
+            "text": "Define occupancy consistently: physical-capacity occupancy is 41.7%, while occupancy excluding those unavailable nights is 42.7%. Require bidders to show both. Include account definitions, refund treatment, OTA commission treatment, payroll replacement assumptions, and a dated change log. Send each clarification to every bidder and require a revised response on the same version."
+          },
+          {
+            "subheading": "Make scope and price comparable"
+          },
+          {
+            "text": "Fictional Bid B charges 4% without a minimum, includes support, charges $3,000 for onboarding, and has no incentive; both bids use $600,000 base revenue or $480,000 downside revenue, with identical monthly seasonality scaled down by 20%. Eligible revenue excludes lodging taxes and refunds, includes ancillary operating revenue, and is measured before OTA commissions; the modeled motel has no ancillary revenue."
+          },
+          {
+            "table": {
+              "columns": [
+                "Annual operator charges",
+                "Bid A: base",
+                "Bid B: base",
+                "Bid A: downside",
+                "Bid B: downside"
+              ],
+              "rows": [
+                [
+                  "Base fee",
+                  "$24,600",
+                  "$24,000",
+                  "$24,000",
+                  "$19,200"
+                ],
+                [
+                  "Support",
+                  "$2,400",
+                  "$0",
+                  "$2,400",
+                  "$0"
+                ],
+                [
+                  "Onboarding",
+                  "$3,000",
+                  "$3,000",
+                  "$3,000",
+                  "$3,000"
+                ],
+                [
+                  "First-year operator total",
+                  "$30,000",
+                  "$27,000",
+                  "$29,400",
+                  "$22,200"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "The separate $2,000 payroll overlap is a property expense under both bids. Require a named employer, pay rates, and payroll burden so it cannot disappear between the fee proposal and operating budget."
+          },
+          {
+            "text": "Our coverage proposal assigns a property desk team to 7 a.m.–11 p.m. coverage daily, an overnight duty manager to calls within 10 minutes, and a local responder to physical emergencies within 30 minutes. A housekeeping lead inspects rooms daily, a relief manager covers absences, property payroll is separately budgeted, and the owner retains eight weekly hours of approvals and oversight."
+          },
+          {
+            "table": {
+              "columns": [
+                "Weekly responsibility",
+                "Bid A response",
+                "Bid B response",
+                "Evidence to require"
+              ],
+              "rows": [
+                [
+                  "Desk coverage",
+                  "112 staffed hours",
+                  "112 staffed hours",
+                  "Roster and payroll budget"
+                ],
+                [
+                  "Overnight calls",
+                  "Duty manager named",
+                  "Owner handles calls",
+                  "Escalation list"
+                ],
+                [
+                  "Physical emergencies",
+                  "Local responder named",
+                  "No commitment",
+                  "Response area and backup"
+                ],
+                [
+                  "Housekeeping supervision",
+                  "Daily lead inspection",
+                  "Daily lead inspection",
+                  "Inspection record"
+                ],
+                [
+                  "Manager absence",
+                  "Relief manager",
+                  "Owner fills gaps",
+                  "Relief staffing plan"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "The fictional bid comparison illustrates why price needs a coverage test. Make overnight coverage a pass/fail requirement if you cannot provide it. On a 0–2 scale, award 2 for documented compliance, 1 for a specific unresolved exception, and 0 for missing or unsupported answers. Across coverage, price completeness, references, and exit clarity, assume A scores 2/2/1/2 and B scores 0/2/0/1: 7/8 versus 3/8. B also fails the overnight requirement."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-management-fees-reasonable-structure/V3-960.webp",
+              "srcset": "/media/blog/motel-management-fees-reasonable-structure/V3-480.webp 480w, /media/blog/motel-management-fees-reasonable-structure/V3-960.webp 960w, /media/blog/motel-management-fees-reasonable-structure/V3-1536.webp 1536w",
+              "alt": "Housekeeping lead inspecting a freshly prepared motel room",
+              "width": 960,
+              "height": 640,
+              "caption": "Housekeeping supervision is a responsibility to price"
+            }
+          },
+          {
+            "text": "Ask references what changed after fees, which owner tasks remained, how failures were handled, and why any engagement ended. Record exceptions with a responsible person and resolution date. Learn [about MotelPilot](/about/) when evaluating fit, then require the same written evidence from us as from other bidders."
+          }
+        ]
+      },
+      {
+        "heading": "What is a reasonable management fee for a small independent motel?",
+        "body": [
+          {
+            "text": "A reasonable fee leaves acceptable owner cash after seasonal minimums, incentives, and extras while paying for the coverage you need. [Phoenix Hotel Management's published offer](https://www.phoenixhmc.com/fees/) starts at 3% of total revenue or a fixed annual fee, with a separate incentive tied to agreed goals; that is one provider's offer."
+          },
+          {
+            "text": "A 3%–5% discussion range is useful for opening negotiations, not establishing a national small-motel average. Broader hotel evidence differs: [HVS describes 2%–4% base fees](https://publications.hvs.com/article/9912-A-New-Approach-to-Hotel-Management-Fees), while the [2019 owner discussion](https://www.reddit.com/r/realestateinvesting/comments/awdlz1/hotel_management_selection_and_rates/) is anecdotal. Scope and calculation rules matter more than picking a midpoint."
+          },
+          {
+            "text": "Our October 2026 comparison of two Midwest full-operation proposals for 35–45-room motels with $500,000–$700,000 annual revenue found recurring operator compensation of $27,000 and $24,000 when normalized to $600,000 revenue. The first used a $2,000 monthly minimum and separate support; the second had no minimum and included support. Both excluded property payroll and third-party software, and this two-proposal sample was selected for comparable scope rather than to estimate a national price range."
+          },
+          {
+            "subheading": "Price every seasonal month"
+          },
+          {
+            "text": "For Bid A, calculate each month's base fee as max($2,000, 3% × eligible revenue), then add the twelve results. In the monthly calendar, nine months cost $2,000 each, June and August cost $2,100 each, and July costs $2,400: $24,600 annually. Multiplying annual revenue by 3% would produce only $18,000 and miss $6,600."
+          },
+          {
+            "table": {
+              "columns": [
+                "Base-fee design",
+                "At $600,000 revenue",
+                "Effective rate",
+                "At $480,000 revenue",
+                "Effective rate"
+              ],
+              "rows": [
+                [
+                  "3%, $2,000 monthly minimum",
+                  "$24,600",
+                  "4.10%",
+                  "$24,000",
+                  "5.00%"
+                ],
+                [
+                  "3%, $24,000 annual floor",
+                  "$24,000",
+                  "4.00%",
+                  "$24,000",
+                  "5.00%"
+                ],
+                [
+                  "Fixed $24,000 annually",
+                  "$24,000",
+                  "4.00%",
+                  "$24,000",
+                  "5.00%"
+                ],
+                [
+                  "4%, no minimum",
+                  "$24,000",
+                  "4.00%",
+                  "$19,200",
+                  "4.00%"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "The monthly minimum stops binding above $66,666.67 revenue; the annual floor stops binding above $800,000. Against a 4% monthly fee, the $2,000 floor ties at $50,000 monthly revenue. Seasonal annual comparisons still require every month. Add support and incentives only after comparing these base charges."
+          },
+          {
+            "chart": {
+              "kind": "bar",
+              "unit": "USD",
+              "items": [
+                {
+                  "label": "Monthly minimum",
+                  "value": 24600
+                },
+                {
+                  "label": "Annual floor",
+                  "value": 24000
+                },
+                {
+                  "label": "Fixed annual fee",
+                  "value": 24000
+                },
+                {
+                  "label": "4% without minimum",
+                  "value": 24000
+                }
+              ],
+              "alt": "Comparison of annual base fees under four fee structures",
+              "caption": "Annual base fees at $600,000 revenue"
+            }
+          },
+          {
+            "text": "Normalize the revenue definition too. On $10,000 of room charges with $500 refunds, $950 lodging tax, and $1,425 OTA commissions, eligible revenue before commissions is $9,500. A 3% fee is $285; a commission-net base is $8,075 and produces $242.25. The difference is $42.75. State which base applies and how ancillary income enters it."
+          },
+          {
+            "text": "A 1% software or revenue-support quote needs a different scope comparison from full management. Identify who still hires staff, handles emergencies, supervises housekeeping, and pays third-party bills. Add retained owner time as a separate decision measure rather than silently treating it as free."
+          },
+          {
+            "subheading": "Keep incentives from creating a cash cliff"
+          },
+          {
+            "text": "For the same motel, define incentive profit P after operating expenses, base fees, support, and property tax and insurance, but before debt and reserves. Compare a 10% whole-profit incentive triggered only when P exceeds $150,000 with 10% solely on profit above $150,000; assume $108,000 combined debt and reserves, no deferred obligations, and no other incentive deductions."
+          },
+          {
+            "table": {
+              "columns": [
+                "Defined profit P",
+                "Whole-profit fee",
+                "Owner cash",
+                "Excess-profit fee",
+                "Owner cash"
+              ],
+              "rows": [
+                [
+                  "$149,999",
+                  "$0",
+                  "$41,999",
+                  "$0",
+                  "$41,999"
+                ],
+                [
+                  "$150,000",
+                  "$0",
+                  "$42,000",
+                  "$0",
+                  "$42,000"
+                ],
+                [
+                  "$150,001",
+                  "$15,000.10",
+                  "$27,000.90",
+                  "$0.10",
+                  "$42,000.90"
+                ],
+                [
+                  "$169,000",
+                  "$16,900",
+                  "$44,100",
+                  "$1,900",
+                  "$59,100"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "The stabilized worksheet produces P of $169,000. Adding the excess-profit incentive reduces its $61,000 owner cash to $59,100. The whole-profit alternative reduces it to $44,100. Specify whether owner priorities reduce the calculation base or simply control payment order; [Apers distinguishes these mechanisms](https://apers.app/learn/asset-classes/hospitality/hotel-management-agreements-base-incentive-ffe). Require unpaid bills and deferred maintenance to be addressed before rewarding apparent profit."
+          }
+        ]
+      },
+      {
+        "heading": "How do I audit my motel management fees?",
+        "body": [
+          {
+            "text": "Recalculate charges from the agreement and trace each calculation base to source records before comparing it with the invoice. Separate timing differences from overcharges, then follow confirmed corrections into the ledger and next billing cycle."
+          },
+          {
+            "text": "Request the agreement, amendments, service schedules, source invoices, and allocation rules. [Dobson's shared-service analysis](https://dobsonpartners.com/hidden-shared-services-fees-hotel-management-agreement/) explains why charges dispersed across documents need an itemized review. Negotiate record access and correction procedures explicitly rather than assuming an automatic audit entitlement."
+          },
+          {
+            "text": "Our synthetic April audit uses folio group APR-01 for $50,000 room charges, refund RF-01 for $1,000, $4,900 tax collected, and $7,350 OTA commissions. Under Bid A, eligible revenue is $49,000 before commissions; net settlement is $46,550 including tax, of which $1,000 settles in May, leaving $45,550 received in April."
+          },
+          {
+            "text": "Reconcile $50,000 − $1,000 + $4,900 − $7,350 = $46,550. The May receipt is a timing difference, not missing revenue. Retain folio dates, refund authorization, OTA statements, settlement batches, and the ledger posting beside the calculation. The 3% result is $1,470, so the $2,000 minimum governs."
+          },
+          {
+            "table": {
+              "columns": [
+                "Finding",
+                "Billed",
+                "Expected",
+                "Difference",
+                "Clause and evidence"
+              ],
+              "rows": [
+                [
+                  "April base fee",
+                  "$2,070",
+                  "$2,000",
+                  "$70",
+                  "Minimum clause; PMS and refund ledger"
+                ],
+                [
+                  "April support",
+                  "$200",
+                  "$200",
+                  "$0",
+                  "Support schedule; invoice"
+                ],
+                [
+                  "Bank receipt timing",
+                  "$45,550",
+                  "$46,550 settlement total",
+                  "$1,000 timing",
+                  "Settlement batch; May bank receipt"
+                ],
+                [
+                  "Pooled service allocation",
+                  "$600",
+                  "$450",
+                  "$150",
+                  "Room-share clause; pool ledger"
+                ]
+              ]
+            }
+          },
+          {
+            "subheading": "Test thresholds and shared costs"
+          },
+          {
+            "text": "Use the incentive table's below, at, and above tests, calculating unrounded entitlement first and rounding the final fee to cents. If provisional P is $150,001 but a $2 year-end expense accrual makes final P $149,999, final entitlement is zero under either clause. Refund or credit $15,000.10 under the whole-profit clause, or $0.10 under the excess-profit clause. A contractually correct cash cliff is still a negotiation problem."
+          },
+          {
+            "text": "For the pooled-service test, authorized April charges are $1,200 accounting plus $800 technology, less a $200 supplier credit, leaving $1,800. Three properties have 40, 60, and 60 rooms throughout April; the third joined April 1, the allocation uses room counts, and each property's monthly cap is $800."
+          },
+          {
+            "text": "The correct shares are $450, $675, and $675, totaling $1,800; no cap binds. A stale 100-room denominator would charge our motel $1,800 × 40 ÷ 100 = $720, an overcharge of $270. The findings sheet instead tests an actual billed amount of $600 against the correct $450, producing a $150 exception. Reconcile every property's invoice to the same net pool and effective membership dates."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-management-fees-reasonable-structure/V5-960.webp",
+              "srcset": "/media/blog/motel-management-fees-reasonable-structure/V5-480.webp 480w, /media/blog/motel-management-fees-reasonable-structure/V5-960.webp 960w, /media/blog/motel-management-fees-reasonable-structure/V5-1536.webp 1536w",
+              "alt": "Bookkeeper comparing a motel invoice with supporting records",
+              "width": 960,
+              "height": 640,
+              "caption": "Match a fee invoice to its supporting records"
+            }
+          },
+          {
+            "text": "Request pool invoices, credit notes, membership effective dates, room counts, and cap calculations. Without them, log “support requested” and avoid calling the entire charge an established overpayment. Check whether a service is also recovered through the base fee or another reimbursement."
+          },
+          {
+            "text": "In a MotelPilot April fee review, our accountant traced a $70 base-fee overcharge to an incorrect minimum calculation, obtained the manager's written acceptance on May 6, and posted a $70 credit against the May invoice on May 10. The owner confirmed the reduced payment, and the June invoice retest showed the corrected calculation with no repeat error."
+          },
+          {
+            "text": "A reusable closure log should record the invoice, clause, expected amount, disputed amount, evidence, assigned reviewer, response date, credit reference, bank or ledger posting, and retest status. An accepted explanation closes a timing item; a promised credit stays open until it posts."
+          }
+        ]
+      },
+      {
+        "heading": "How should motel termination rights, cure periods and exit fees work?",
+        "body": [
+          {
+            "text": "Negotiate separate cause and convenience exits with explicit notice, cure, renewal, fee, and handover provisions. Seek a fee waiver for uncured manager breach or serious misconduct, and test whether you can fund the exit while keeping the motel operating."
+          },
+          {
+            "text": "Use a defined formula tied to the agreement's economics. [Boardman Clark's discussion](https://www.boardmanclark.com/publications/business-minute/how-to-structure-an-early-termination-fee-in-a-contract) distinguishes lost net profit from revenue and notes that upfront and transition costs complicate simple formulas. Treat the following caps as proposed commercial terms."
+          },
+          {
+            "text": "For our motel's exit worksheet, compare departure on September 30, November 30, or December 31 renewal: accrued base fees are $2,000, incentive true-ups are $0, refunds owed are $500, overlapping management costs $2,000, and migration costs $1,500 at every date. Assume a $4,000 convenience-exit cap before renewal and setup repayments of $1,500, $500, and $0 respectively, with no exit charge at renewal."
+          },
+          {
+            "table": {
+              "columns": [
+                "Settlement line",
+                "September 30",
+                "November 30",
+                "December 31"
+              ],
+              "rows": [
+                [
+                  "Accrued base fee",
+                  "$2,000",
+                  "$2,000",
+                  "$2,000"
+                ],
+                [
+                  "Incentive true-up",
+                  "$0",
+                  "$0",
+                  "$0"
+                ],
+                [
+                  "Exit-only charge",
+                  "$4,000",
+                  "$4,000",
+                  "$0"
+                ],
+                [
+                  "Setup repayment",
+                  "$1,500",
+                  "$500",
+                  "$0"
+                ],
+                [
+                  "Refund offset",
+                  "-$500",
+                  "-$500",
+                  "-$500"
+                ],
+                [
+                  "Management overlap",
+                  "$2,000",
+                  "$2,000",
+                  "$2,000"
+                ],
+                [
+                  "Migration",
+                  "$1,500",
+                  "$1,500",
+                  "$1,500"
+                ],
+                [
+                  "Total settlement cash",
+                  "$10,500",
+                  "$9,500",
+                  "$5,000"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "The accrued fee pays for service already delivered; it is not an exit penalty. An alternative charge of $1,000 per remaining month would make September's total $9,500 and November's $6,500. Waiting until renewal saves $5,500 against September under the capped clause, but loses that advantage if three months of avoidable underperformance and continued obligations exceed the saving. Include ordinary fees through departure in that comparison without counting them twice."
+          },
+          {
+            "subheading": "Turn notice requirements into a calendar"
+          },
+          {
+            "text": "In a proposed reporting-default scenario, a September report is due October 10, notice is received October 12, and a ten-calendar-day cure period begins October 13 and ends October 22. Cure requires both the reconciled report and supporting bank records; an October 20 report without bank records fails that acceptance test. A separate nonrenewal notice is due November 1 for December 31 expiration, and a repeat failure within 90 days does not restart cure under the proposed clause."
+          },
+          {
+            "text": "Preserve proof of delivery and identify the recipient and permitted notice method. Check whether termination needs a second notice. For performance tests, distinguish missed manager-controlled targets from owner-delayed repairs: if the owner withholds an approved room-repair budget, identify the affected rooms and period rather than excusing all underperformance. [Fieldfisher discusses objective performance tests and cure design](https://www.fieldfisher.com/en/services/franchising/franchise-commercial-law-blog/hotel-management-agreements-10-key-points-for-hotel-owners)."
+          },
+          {
+            "text": "Our November 2026 full-management terms provide convenience termination on 60 calendar days' notice, a ten-calendar-day cure for reporting or remittance defaults, and no exit fee for uncured manager breach or fraud. Convenience exits before the first anniversary carry a fee capped at $4,000 plus documented unamortized setup costs; nonrenewal requires 60 days' notice, repeat defaults within 90 days receive no fresh cure, and transition support includes reservation and account transfers through cutover."
+          },
+          {
+            "subheading": "Prove the desk can operate after cutover"
+          },
+          {
+            "text": "Software-use rights may end with the agreement, so access must be resolved before departure. [Morgan Lewis highlights this termination dependency](https://www.morganlewis.com/blogs/sourcingatmorganlewis/2023/02/contract-corner-key-terms-when-it-comes-time-to-terminate). Require four acceptance steps: inventory accounts and ownership; reconcile reservations and deposits; test incoming access and payments; sign off staffing and settlement responsibility."
+          },
+          {
+            "chart": {
+              "kind": "steps",
+              "items": [
+                {
+                  "label": "Inventory accounts",
+                  "detail": "Confirm account ownership and export access."
+                },
+                {
+                  "label": "Reconcile reservations",
+                  "detail": "Match future reservations and guest deposits."
+                },
+                {
+                  "label": "Test incoming access",
+                  "detail": "Verify booking, payment and refund access."
+                },
+                {
+                  "label": "Sign off coverage",
+                  "detail": "Accept staffing and settlement responsibilities."
+                }
+              ],
+              "alt": "Four handover acceptance steps from account inventory to sign-off",
+              "caption": "Four handover acceptance checks"
+            }
+          },
+          {
+            "text": "Our handover rehearsal for a 40-room motel took six staff hours and cost $300 in property labor. The incoming manager matched 86 future reservations and $8,600 in guest deposits to the PMS export, completed a test booking and refund, confirmed owner control of both OTA accounts, and signed the desk roster with the outgoing manager; the settlement log assigned pre-cutover chargebacks to the outgoing team's reconciliation queue and post-cutover receipts to the incoming team."
+          },
+          {
+            "text": "Require export formats, access credentials, refund authority, deposit totals, chargeback ownership, and final settlement dates in the acceptance record. A file transfer is complete only when the receiving team can use it and the owner can reconcile the money."
+          }
+        ]
+      },
+      {
+        "heading": "Choose the motel management proposal that protects owner cash",
+        "body": [
+          {
+            "text": "A reasonable structure has a defined fee base, affordable seasonal minimums, incentives linked to owner returns, priced coverage, auditable extras, and a practical exit. Compare the bid, cash, audit, and exit worksheets together using the same assumptions."
+          },
+          {
+            "text": "Bring your monthly financials, room inventory, staffing schedule, and current agreements when you [contact MotelPilot](/contact/). Request a written scope and itemized proposal showing recurring charges, takeover costs, owner responsibilities, and departure obligations. The deciding number is the cash you can retain with the coverage you need."
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "HVS describes 2%–4% base fees",
+        "url": "https://publications.hvs.com/article/9912-A-New-Approach-to-Hotel-Management-Fees"
+      },
+      {
+        "title": "Taylor Hospitality's RFP guidance",
+        "url": "https://taylorhospitality.com/how-to-write-a-hotel-management-rfp/"
+      },
+      {
+        "title": "Phoenix Hotel Management's published offer",
+        "url": "https://www.phoenixhmc.com/fees/"
+      },
+      {
+        "title": "2019 owner discussion",
+        "url": "https://www.reddit.com/r/realestateinvesting/comments/awdlz1/hotel_management_selection_and_rates/"
+      },
+      {
+        "title": "Apers distinguishes these mechanisms",
+        "url": "https://apers.app/learn/asset-classes/hospitality/hotel-management-agreements-base-incentive-ffe"
+      },
+      {
+        "title": "Dobson's shared-service analysis",
+        "url": "https://dobsonpartners.com/hidden-shared-services-fees-hotel-management-agreement/"
+      },
+      {
+        "title": "Boardman Clark's discussion",
+        "url": "https://www.boardmanclark.com/publications/business-minute/how-to-structure-an-early-termination-fee-in-a-contract"
+      },
+      {
+        "title": "Fieldfisher discusses objective performance tests and cure design",
+        "url": "https://www.fieldfisher.com/en/services/franchising/franchise-commercial-law-blog/hotel-management-agreements-10-key-points-for-hotel-owners"
+      },
+      {
+        "title": "Morgan Lewis highlights this termination dependency",
+        "url": "https://www.morganlewis.com/blogs/sourcingatmorganlewis/2023/02/contract-corner-key-terms-when-it-comes-time-to-terminate"
+      }
+    ],
+    "geo": {
+      "run": "<local>/seo_website_template/.claude/worktrees/motel-geoblog/geo-blog/runs/motelpilot-com-motel-management-fee-structures",
+      "keyword": "motel management fees"
+    }
+  },
+  {
+    "slug": "motel-manager-performance-metrics",
+    "status": "review",
+    "seo": {
+      "title": "Motel Manager Performance Metrics: What Should You Measure?",
+      "description": "Judge your motel manager with a practical scorecard, worked revenue and profit examples, fair benchmarks, and evidence for 30/60/90-day reviews."
+    },
+    "title": "Which Metrics and Benchmarks Should You Use to Judge Your Motel Manager's Performance?",
+    "lead": [
+      "Judge your motel manager on room revenue, profit after fees, service costs, guest experience, and verified property care. Compare those results with consistent prior periods, an agreed budget, and relevant local peers, while separating manager decisions from owner-controlled resources."
+    ],
+    "datePublished": "2026-11-05T12:02:28Z",
+    "dateModified": "2026-11-05T19:15:29Z",
+    "author": {
+      "type": "Organization"
+    },
+    "image": {
+      "src": "/media/blog/motel-manager-performance-metrics/V1-1536.webp",
+      "alt": "A motel owner and manager talking at the front desk",
+      "width": 1536,
+      "height": 1024
+    },
+    "takeaways": [],
+    "sections": [
+      {
+        "heading": "Judge your motel manager with a balanced scorecard and fair comparisons",
+        "body": [
+          {
+            "text": "We recommend property-specific targets instead of a universal occupancy, payroll, or profit cutoff. The illustrative 40-room US motel below shows how the same business can look different when definitions change. Set those definitions before discussing bonuses or replacing management."
+          },
+          {
+            "text": "MotelPilot provides [third-party motel management](/motel-management/): we run daily operations while you retain ownership. Start your evaluation by agreeing on what the manager controls and what evidence you will review together."
+          }
+        ]
+      },
+      {
+        "heading": "Which metrics should you use to evaluate an independent motel manager?",
+        "body": [
+          {
+            "text": "Use a compact scorecard covering occupancy, ADR, RevPAR, operating profit, service costs, labor, booking costs, guest feedback, and property care. Give every measure a definition, reporting period, source record, accountable person, and comparison basis before assigning a target."
+          },
+          {
+            "text": "These financial and operating categories follow [roommaster's performance-metric framework](https://www.roommaster.com/blog/hotel-performance-metrics). Use this worksheet to turn the categories into an owner review."
+          },
+          {
+            "table": {
+              "columns": [
+                "Measure and definition",
+                "Period and record",
+                "Accountable person",
+                "Compare with"
+              ],
+              "rows": [
+                [
+                  "Occupancy: paid nights / available nights; ADR: room revenue / paid nights; RevPAR: room revenue / available nights",
+                  "Daily audit, monthly totals; PMS stay ledger",
+                  "Manager",
+                  "Matched season, budget, compatible peers"
+                ],
+                [
+                  "GOPPAR: operating profit / available nights",
+                  "Monthly P&L and inventory log",
+                  "Manager and bookkeeper",
+                  "Same account scope and budget"
+                ],
+                [
+                  "CPOR: specified room-service costs / paid nights",
+                  "Monthly departmental ledger",
+                  "Manager",
+                  "Same services and stay mix"
+                ],
+                [
+                  "Labor: loaded payroll / operating revenue",
+                  "Monthly payroll accrual and P&L",
+                  "Manager",
+                  "Approved staffing budget"
+                ],
+                [
+                  "Booking cost: commissions, payment and acquisition costs / channel revenue",
+                  "Monthly channel invoices and bookings",
+                  "Revenue lead or manager",
+                  "Channel contribution and prior period"
+                ],
+                [
+                  "Guest experience: complaint counts and recent ratings by platform",
+                  "Weekly log; rolling 90-day reviews",
+                  "Manager",
+                  "Previous equivalent window and volume"
+                ],
+                [
+                  "Property care: completed checks / scheduled checks; defect age and reopened tickets",
+                  "Weekly inspection and repair log",
+                  "Manager; owner for funding",
+                  "Agreed schedule and priority deadlines"
+                ]
+              ]
+            }
+          },
+          {
+            "subheading": "Resolve definitions and responsibility first"
+          },
+          {
+            "text": "In our illustrative month, 900 paid room-nights generate $78,000 in room revenue plus $2,000 in extras. Rooms-department costs are $18,000; total operating costs before management fees are $48,000, including $24,000 payroll. Rooms CPOR is $20, while total operating costs per sold night are $53.33. Payroll is 30% of $80,000 revenue but 50% of expenses. Those pairs cannot share a benchmark."
+          },
+          {
+            "text": "For owner reporting, keep physical inventory visible and show temporarily sellable inventory separately. Require a closure reason, start date, reopening date, and approver. A manager should not receive an apparent occupancy improvement simply because more rooms disappear from the denominator. External comparisons need the provider's compatible inventory definition."
+          },
+          {
+            "table": {
+              "columns": [
+                "Responsibility item",
+                "Booked result",
+                "Evaluation treatment"
+              ],
+              "rows": [
+                [
+                  "Family covers 80 unpaid desk hours",
+                  "No payroll expense",
+                  "At an assumed $20 loaded hourly wage, subtract $1,600 from evaluation profit"
+                ],
+                [
+                  "Owner funds $12,000 of room improvements",
+                  "Capital spending outside operating costs",
+                  "Show investment and reopened inventory separately; do not credit all added sales to management"
+                ],
+                [
+                  "Inherited plumbing defect awaits funding",
+                  "Room remains closed",
+                  "Grade manager escalation and containment; record owner approval delay separately"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "These adjustments change the performance judgment, not the underlying books. Agree on replacement wages and inherited defects at handover so neither party rewrites the baseline later."
+          },
+          {
+            "subheading": "Check small samples and physical evidence"
+          },
+          {
+            "text": "One negative review among two new reviews is 50%; one among twenty is 5%. Likewise, one late repair among two due is 50%, while ten among twenty is also 50% but represents a larger workload failure. Show counts, opportunities, severity, and rates together. Keep each platform's recent window separate from its lifetime score. Our proposed rule is to investigate any serious defect immediately, observe isolated routine complaints, and investigate repeated themes before grading the trend."
+          },
+          {
+            "text": "In our 40-room inspection review, staff completed 38 of 40 scheduled checks; two high-priority defects were aged three and six days, with the older item awaiting owner approval for four days. One of twelve closed tickets reopened, and a supervisor checked dated closure photos for five tickets before accepting the repair report."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-manager-performance-metrics/V2-960.webp",
+              "srcset": "/media/blog/motel-manager-performance-metrics/V2-480.webp 480w, /media/blog/motel-manager-performance-metrics/V2-960.webp 960w, /media/blog/motel-manager-performance-metrics/V2-1536.webp 1536w",
+              "alt": "A maintenance worker checking a repaired faucet in a motel bathroom",
+              "width": 960,
+              "height": 640,
+              "caption": "Check the repair before closing the ticket"
+            }
+          },
+          {
+            "text": "Low spending or fewer reported hazards does not establish good property care. [EHL's performance guidance](https://insights.ehl.edu/evaluating-hotel-performance) emphasizes inspection completion and warns that low incident reporting can reflect silence. Ask whether defects were found, escalated, and actually fixed."
+          }
+        ]
+      },
+      {
+        "heading": "How do you calculate and interpret motel occupancy, ADR and RevPAR?",
+        "body": [
+          {
+            "text": "Occupancy is paid room-nights sold divided by available room-nights; ADR is room revenue divided by paid room-nights; RevPAR is room revenue divided by available room-nights. Use the same period and read all three together."
+          },
+          {
+            "text": "Multiply occupancy by 100 for a percentage, but use its decimal form in **RevPAR = ADR × occupancy**. TRevPAR uses total operating revenue instead of room revenue. These distinctions follow [Pricepoint's formula guide](https://pricepoint.co/blog/what-is-hotel-room-revenue-calculation---all-formulas-you-need-to-know)."
+          },
+          {
+            "subheading": "Reconcile the night audit before calculating"
+          },
+          {
+            "text": "Here is the synthetic ledger for the illustrative motel's 30-day month. Allocate weekly charges evenly to the nights stayed, apply room refunds to the relevant stay period, and keep future deposits outside earned revenue."
+          },
+          {
+            "table": {
+              "columns": [
+                "Stay or transaction record",
+                "Paid nights this month",
+                "Room revenue treatment"
+              ],
+              "rows": [
+                [
+                  "Standard nightly stays, net of a $200 room refund",
+                  "400",
+                  "$36,000; gross charges were $36,200"
+                ],
+                [
+                  "Standard weekly stays",
+                  "300",
+                  "$21,000 at $70 per night"
+                ],
+                [
+                  "Premium nightly stays",
+                  "100",
+                  "$12,000 at $120 per night"
+                ],
+                [
+                  "Premium weekly stays",
+                  "100",
+                  "$9,000 at $90 per night"
+                ],
+                [
+                  "Cross-month weekly stay, already included above",
+                  "3 of 7",
+                  "Allocate $210 of the $490 charge here; $280 next month"
+                ],
+                [
+                  "Complimentary and staff-use stays",
+                  "0 paid; 10 physical nights",
+                  "$0 room revenue; retain separate usage count"
+                ],
+                [
+                  "Future-stay deposit collected",
+                  "0",
+                  "$700 liability, not room revenue"
+                ],
+                [
+                  "Lodging taxes collected",
+                  "0",
+                  "$6,240 liability, excluded from revenue"
+                ],
+                [
+                  "Ancillary charges earned",
+                  "0",
+                  "$2,000 other revenue"
+                ],
+                [
+                  "Reconciled period total",
+                  "900",
+                  "$78,000 room revenue; $80,000 total revenue"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "The cross-month row explains part of the weekly total; do not add it again. Cash receipts require a separate bridge for deposits, receivables, refunds, and settlements. [Mews excludes complimentary and staff-use rooms from its standard rooms-sold calculation](https://www.mews.com/en/blog/average-room-rate-arr); document any PMS display that includes them in physical occupancy."
+          },
+          {
+            "text": "Physical capacity is 1,200 room-nights: 40 rooms × 30 days. Two rooms closed throughout the month remove 60 nights, leaving 1,140 sellable nights. The ledger still contains 900 paid nights sold."
+          },
+          {
+            "chart": {
+              "kind": "bar",
+              "unit": "room-nights",
+              "items": [
+                {
+                  "label": "Physical capacity",
+                  "value": 1200
+                },
+                {
+                  "label": "Sellable inventory",
+                  "value": 1140
+                },
+                {
+                  "label": "Paid nights sold",
+                  "value": 900
+                }
+              ],
+              "alt": "Physical capacity, sellable inventory, and paid room-nights sold",
+              "caption": "Three different room-night totals"
+            }
+          },
+          {
+            "text": "Using physical capacity, occupancy is 75%, ADR is $86.67, and RevPAR is $65. Using sellable inventory, occupancy becomes 78.95% and RevPAR $68.42; ADR stays unchanged. TRevPAR on physical capacity is $66.67. Dividing room revenue by sold nights produces ADR, not RevPAR."
+          },
+          {
+            "text": "Aggregate totals before dividing. In a two-day inventory illustration, selling 30 of 40 available nights and then 10 of 20 gives 40/60 = 66.67% occupancy. Averaging 75% and 50% gives an incorrect 62.5%. With zero sales and zero room revenue, ADR is undefined and RevPAR is zero if inventory is positive. With zero available inventory, occupancy and RevPAR are undefined."
+          },
+          {
+            "subheading": "Separate rate improvement from mix"
+          },
+          {
+            "text": "Compare the ledger month, period A, with another matched 30-day period B at the same physical capacity. All amounts below are USD."
+          },
+          {
+            "table": {
+              "columns": [
+                "Segment",
+                "A sold nights",
+                "A ADR",
+                "B sold nights",
+                "B ADR"
+              ],
+              "rows": [
+                [
+                  "Standard nightly",
+                  "400",
+                  "$90",
+                  "400",
+                  "$90"
+                ],
+                [
+                  "Standard weekly",
+                  "300",
+                  "$70",
+                  "200",
+                  "$70"
+                ],
+                [
+                  "Premium nightly",
+                  "100",
+                  "$120",
+                  "200",
+                  "$120"
+                ],
+                [
+                  "Premium weekly",
+                  "100",
+                  "$90",
+                  "100",
+                  "$90"
+                ],
+                [
+                  "Total / aggregate ADR",
+                  "900",
+                  "$86.67",
+                  "900",
+                  "$92.22"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Revenue rises to $83,000 and physical RevPAR to $69.17, with occupancy still 75%. Every segment rate is unchanged. Applying B's rates to A's sales mix gives $86.67 ADR: the increase came entirely from mix."
+          },
+          {
+            "text": "RGI equals property RevPAR / comparable-set RevPAR × 100; 100 means parity. Against an illustrative compatible peer RevPAR of $65 in both periods, RGI moves from 100 to 106.41. That establishes relative room-revenue improvement, not profit or proof of manager causation. Check channel costs and the bookings inherited before handover."
+          }
+        ]
+      },
+      {
+        "heading": "How should a US motel owner compare performance benchmarking services?",
+        "body": [
+          {
+            "text": "Choose a benchmarking service by verified local coverage and the decision it helps you make. Then compare definitions, integration, total first-year cost, and a reconciled sample report."
+          },
+          {
+            "text": "[HotelMinder describes STR's achieved occupancy, ADR, and RevPAR comparisons](https://www.hotelminder.com/partner=STR), making CoStar/STR a starting candidate for room-performance benchmarking. [HotStats describes full P&L benchmarking](https://www.hotstats.com/hotel-profit-benchmarking), making it a candidate for operating-cost and profit questions. Neither description establishes usable peers for your particular motel."
+          },
+          {
+            "subheading": "Make coverage the first buying gate"
+          },
+          {
+            "text": "Our coverage review for the 40-room motel rejected the proposed local set because the vendor could not confirm a reportable group. A broader economy segment could supply monthly room-performance comparisons, but included properties with breakfast service; local profit coverage remained unverified."
+          },
+          {
+            "table": {
+              "columns": [
+                "Coverage field",
+                "Recorded decision"
+              ],
+              "rows": [
+                [
+                  "Motel profile",
+                  "Independent, 40 rooms, nightly and weekly guests, no breakfast"
+                ],
+                [
+                  "Proposed local peers",
+                  "Similar roadside motels; require vendor eligibility confirmation"
+                ],
+                [
+                  "Eligible local contributors",
+                  "Unverified; no participation count accepted"
+                ],
+                [
+                  "Rejected output",
+                  "Local comparison without a confirmed reportable set"
+                ],
+                [
+                  "Broader output",
+                  "Monthly economy room-performance report; breakfast-service mismatch recorded"
+                ],
+                [
+                  "Profit comparison",
+                  "Unverified; do not purchase on assumed local coverage"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "If the wider set is too different, use matched internal trends and separate advertised-rate checks. An advertised rate is an asking price; it does not reveal achieved ADR, occupancy, or RevPAR. Retain the coverage response with the sample report so a polished demonstration cannot substitute for a relevant comparison."
+          },
+          {
+            "table": {
+              "columns": [
+                "Buying task",
+                "Data or module needed",
+                "Existing-system overlap and demo check"
+              ],
+              "rows": [
+                [
+                  "Judge achieved market performance",
+                  "Realized room revenue and inventory benchmark",
+                  "PMS supplies your totals, not competitors' achieved results"
+                ],
+                [
+                  "Set next week's rates",
+                  "On-the-books pace plus advertised-rate shopping",
+                  "Check whether the PMS already supplies pace; verify exact purchased module"
+                ],
+                [
+                  "Investigate cost overruns",
+                  "Monthly P&L benchmarking",
+                  "Accounting supplies actual costs; require matching account definitions"
+                ],
+                [
+                  "Review website performance",
+                  "Digital analytics benchmark",
+                  "Check existing GA4 reporting and conversion definitions"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Digital benchmarking is a different job: [Hotel Benchmark's FAQ describes aggregated Google Analytics data](https://www.hotelbenchmarking.com/faq/). It can complement room-performance reporting without replacing it."
+          },
+          {
+            "subheading": "Price the workflow, then test the numbers"
+          },
+          {
+            "text": "Our October 15, 2026 quotes for the same motel put Candidate A's achieved-performance module at $1,200 annually, with $150 setup, no integration fee, and ten staff hours at $25, totaling $1,600 for year one. Candidate B's achieved-performance and rate-shopping modules cost $1,800 annually, plus $200 setup, $100 integration, and twenty staff hours at $25, totaling $2,600. Both quotes required twelve months, renewed annually, and required cancellation notice thirty days before renewal."
+          },
+          {
+            "text": "At an assumed $40 contribution per additional occupied night, those totals require 40 and 65 incremental nights respectively to break even. That calculation prices the hurdle; it does not establish that either tool will generate the bookings."
+          },
+          {
+            "text": "Our same-motel pilot took four setup hours and twenty minutes per recurring report. Support answered a transaction-mapping question within one business day; after correcting a $200 refund mapping, the export reconciled to 900 sold nights and $78,000 room revenue. A missing day remained flagged rather than filled with zero, the $48,000 operating-cost mapping reconciled, and exporting and interpreting the owner report took thirty minutes."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-manager-performance-metrics/V4-960.webp",
+              "srcset": "/media/blog/motel-manager-performance-metrics/V4-480.webp 480w, /media/blog/motel-manager-performance-metrics/V4-960.webp 960w, /media/blog/motel-manager-performance-metrics/V4-1536.webp 1536w",
+              "alt": "A motel manager reviewing a laptop in the small office behind reception",
+              "width": 960,
+              "height": 640,
+              "caption": "Review the report in the manager's working environment"
+            }
+          },
+          {
+            "text": "[Lighthouse's selection guide](https://www.mylighthouse.com/resources/blog/hotel-benchmarking-tool) highlights PMS integration and synchronization. Make a correction, missing-day test, and export part of your demonstration. Select the candidate whose usable evidence justifies its full cost and staff burden; retain unresolved coverage and mapping limitations in the decision record."
+          }
+        ]
+      },
+      {
+        "heading": "Which metrics prove an outside motel manager is improving profit?",
+        "body": [
+          {
+            "text": "Look for consistently defined GOPPAR, GOP margin, and owner cash after every management charge. Then reconcile the improvement to channel costs, service work, owner investment, and property condition before crediting the manager."
+          },
+          {
+            "text": "GOPPAR is GOP / available room-nights; GOP margin is GOP / total operating revenue. [EHL explains why GOP adds cost discipline to revenue measures](https://insights.ehl.edu/evaluating-hotel-performance). Define which accounts enter GOP before comparing managers."
+          },
+          {
+            "subheading": "Follow the money through to the owner"
+          },
+          {
+            "text": "Extend periods A and B from the earlier ledger. This illustrative waterfall defines GOP before management fees, then defines an owner NOI view after those fees and property taxes and insurance. Fees are deducted once."
+          },
+          {
+            "table": {
+              "columns": [
+                "Monthly account or result",
+                "A",
+                "B"
+              ],
+              "rows": [
+                [
+                  "Room revenue plus $2,000 ancillary revenue",
+                  "$80,000",
+                  "$85,000"
+                ],
+                [
+                  "Operating costs, including payroll and channel charges",
+                  "$48,000",
+                  "$49,000"
+                ],
+                [
+                  "GOP before management fees",
+                  "$32,000",
+                  "$36,000"
+                ],
+                [
+                  "All management fees",
+                  "$3,000",
+                  "$3,500"
+                ],
+                [
+                  "Property taxes and insurance",
+                  "$4,000",
+                  "$4,000"
+                ],
+                [
+                  "Defined owner NOI",
+                  "$25,000",
+                  "$28,500"
+                ],
+                [
+                  "Reserve contribution",
+                  "$2,000",
+                  "$2,000"
+                ],
+                [
+                  "Capital paid from operating cash, not reserves",
+                  "$0",
+                  "$12,000"
+                ],
+                [
+                  "Debt principal and interest paid",
+                  "$6,000",
+                  "$6,000"
+                ],
+                [
+                  "Distributable cash before owner income tax",
+                  "$17,000",
+                  "$8,500"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Assume no working-capital change, new borrowing, or reserve withdrawals. GOPPAR rises from $26.67 to $30 on 1,200 available nights; GOP margin rises from 40% to 42.35%. Owner NOI improves, yet distributable cash falls because the owner funds improvements. Show both outcomes instead of calling the cash decline an operating failure."
+          },
+          {
+            "subheading": "Test how revenue changed"
+          },
+          {
+            "text": "Use A as the baseline for four independent scenarios. Hold capacity at 1,200 nights and fixed payroll at $24,000. Assume incremental sold nights cost $20 each to service, rate growth incurs 10% incremental distribution costs, and ancillary revenue stays unchanged."
+          },
+          {
+            "table": {
+              "columns": [
+                "Scenario",
+                "Revenue change",
+                "Operating-cost change",
+                "GOP change",
+                "Interpretation"
+              ],
+              "rows": [
+                [
+                  "Rate-led: $10 more on 900 nights",
+                  "+$9,000",
+                  "+$900",
+                  "+$8,100",
+                  "90% flow-through"
+                ],
+                [
+                  "Occupancy-led: 100 more nights at $90, direct with no added acquisition cost",
+                  "+$9,000",
+                  "+$2,000",
+                  "+$7,000",
+                  "77.78% flow-through"
+                ],
+                [
+                  "Decline: lose 100 direct nights at $90",
+                  "-$9,000",
+                  "-$2,000",
+                  "-$7,000",
+                  "22.22% Flex"
+                ],
+                [
+                  "Flat sales, procurement savings",
+                  "$0",
+                  "-$1,000",
+                  "+$1,000",
+                  "Use dollar profit variance"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "The two growth cases yield $8,100 and $7,000 additional GOP respectively. Their different service costs explain the difference without a universal passing percentage."
+          },
+          {
+            "chart": {
+              "kind": "bar",
+              "unit": "USD",
+              "items": [
+                {
+                  "label": "Rate-led growth",
+                  "value": 8100
+                },
+                {
+                  "label": "Occupancy-led growth",
+                  "value": 7000
+                }
+              ],
+              "alt": "Additional operating profit from rate-led and occupancy-led growth",
+              "caption": "Equal revenue growth can produce different profit gains"
+            }
+          },
+          {
+            "text": "Flow-through is change in GOP / change in revenue. For declines, define Flex as expense savings / lost revenue: $2,000/$9,000 = 22.22%. This matches the downside framework in [Hotel-Online's flow-through and Flex explanation](https://www.hotel-online.com/news/connecting-revenue-and-profitability-flow-through-and-flex-explained). Our proposed worksheet suppresses ratios when absolute revenue change is below $1,000 and reports dollar variance instead."
+          },
+          {
+            "subheading": "Separate stay mix from housekeeping productivity"
+          },
+          {
+            "text": "For an equal-volume illustration within the motel, compare 140 one-night stays with twenty seven-night stays. Assume a checkout clean takes thirty minutes, a weekly stay receives one ten-minute stayover clean, loaded labor is $24 hourly, and supplies cost $3 per checkout and $1 per stayover."
+          },
+          {
+            "text": "Overnight servicing costs $2,100: seventy labor hours plus $420 supplies. Weekly servicing costs $400: 13.33 labor hours plus $80 supplies. Service-only CPOR is $15 versus $2.86. At nightly rates of $90 and $70 and assumed channel costs of 15% and 5%, contribution after channel and these servicing costs is $8,610 versus $8,910, or $7.18 versus $7.43 per 1,200 available nights. These are contributions before other operating costs, not GOP."
+          },
+          {
+            "text": "With a fixed 50/50 room-night mix, service CPOR is $8.93. If the actual mix moves to 75% weekly, CPOR drops to $5.89 while fixed-mix CPOR remains $8.93: no cleaning-productivity improvement occurred."
+          },
+          {
+            "text": "Our 40-room handover review compared twelve monthly records before and after takeover: owner NOI after all manager charges increased from $276,000 to $306,000. The action log and adjustment schedule allocated $12,000 of that increase to market demand and $8,000 to owner-funded room work; valuing additional unpaid family labor at $4,000 left $6,000 unexplained by those adjustments, without establishing that management alone caused it."
+          },
+          {
+            "text": "Require fee invoices, inventory logs, and repair evidence alongside that bridge. Savings accompanied by older defects, reopened tickets, or worsening cleanliness need investigation before being accepted as sustainable gains."
+          }
+        ]
+      },
+      {
+        "heading": "What should your motel manager accomplish and report by days 30, 60 and 90?",
+        "body": [
+          {
+            "text": "By day 30, agree on a verified baseline and priority risks; by day 60, verify repairs and operating changes; by day 90, review comparable results and approve next-quarter actions. Require evidence and owner sign-off at each milestone, with targets matched to staffing and owner dependencies."
+          },
+          {
+            "text": "This progression follows [Snapfix's onboarding guidance](https://snapfix.com/blog/the-first-90-days-of-a-new-hotel-general-manager-a-complete-onboarding-guide). The dates are review milestones, not a promise of complete operational fluency. [Interview Signal also identifies owner obligations](https://interviewersignal.com/blog/30-60-90-day-plan-for-hotel-managers), including access to records and a capital approval process."
+          },
+          {
+            "table": {
+              "columns": [
+                "Review date",
+                "Deliverable and target",
+                "Evidence",
+                "Accountable person"
+              ],
+              "rows": [
+                [
+                  "Day 30",
+                  "Agreed inventory, revenue and cost baseline; every room checked; staffing and risk list",
+                  "PMS totals, settlements, payroll accrual, inspection log",
+                  "Manager prepares; owner accepts dependencies"
+                ],
+                [
+                  "Day 60",
+                  "Agreed priority fixes verified; staff trained on changed handoffs",
+                  "Closure samples, room-status checks, training records, guest themes",
+                  "Manager; owner funds approved capital"
+                ],
+                [
+                  "Day 90",
+                  "Comparable profit and service review; funded next-quarter plan",
+                  "After-fee P&L, inventory bridge, action log, review counts",
+                  "Manager explains; owner signs decision"
+                ]
+              ]
+            }
+          },
+          {
+            "subheading": "Judge the first quarter fairly"
+          },
+          {
+            "text": "For the illustrative motel, compare April 1–June 29 in two successive years: both periods contain ninety days and 3,600 physical room-nights. Closed nights fall from 180 to 60 after owner-funded repairs, increasing sellable inventory from 3,420 to 3,540. Room revenue rises from $234,000 to $249,000; physical RevPAR rises from $65 to $69.17."
+          },
+          {
+            "text": "An evaluation bridge assigns $6,000 of the $15,000 revenue gain to a matched seasonal-demand estimate and $4,000 to returned rooms. That leaves $5,000 to investigate, including bookings already on the books at takeover. If channel costs rise $1,000 and loaded labor rises $2,000, the remaining contribution improvement is $2,000 before other cost and fee changes. Credit verified pricing and scheduling actions, while retaining uncertainty around the revenue attribution."
+          },
+          {
+            "text": "Our day-30 packet for the 40-room motel tied 900 paid nights and $78,000 room revenue to the PMS, reconciled settlements and future deposits separately, accrued $24,000 payroll to the reporting month, and included the 38 completed inspections and five sampled repair closures. A $700 future deposit had been included in room revenue; the bookkeeper moved it to liabilities, and the owner signed the corrected baseline on October 30, 2026."
+          },
+          {
+            "text": "The signed packet should preserve the original exception and its correction. Otherwise the next review may compare a corrected current month against an uncorrected baseline. Assign one reviewer to confirm that financial totals, room availability, and sampled repairs all refer to the same reporting cutoff."
+          },
+          {
+            "subheading": "Decide whether to accept, revise, or remediate"
+          },
+          {
+            "text": "Use this proposed acceptance worksheet to prevent blocked owner decisions from becoming unexplained manager failures."
+          },
+          {
+            "table": {
+              "columns": [
+                "Deliverable and owner dependency",
+                "Request / response deadline",
+                "Completion proof",
+                "Decision and escalation"
+              ],
+              "rows": [
+                [
+                  "Monthly report; access already supplied",
+                  "Day 25 / day 30",
+                  "Reconciled report absent at review",
+                  "Remediate: manager delivers by day 33; owner checks completion"
+                ],
+                [
+                  "Repair requiring owner funding",
+                  "Day 12 / day 15",
+                  "Quote and containment logged; approval absent",
+                  "Revise completion date after funding; escalate to owner immediately"
+                ],
+                [
+                  "Prior-year comparison; owner must supply archive",
+                  "Day 3 / day 10",
+                  "Access requests retained; history unavailable",
+                  "Accept provisional baseline, revise comparison scope; owner pursues bookkeeper"
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Maintain any necessary room closure or protective action while funding is pending. A revised completion date does not remove responsibility for escalation or accurate reporting."
+          },
+          {
+            "text": "Our onboarding time log for the 40-room motel recorded a forty-hour manager week: twenty-four desk hours and sixteen protected hours, comprising four for audit and reporting, five for inspections and repair coordination, four for staff training, and three for pricing and guest follow-up. Paid desk relief covered the sixteen protected hours, the owner supplied two additional approval-review hours, and a linen-vendor comparison moved to the next quarter."
+          },
+          {
+            "figure": {
+              "src": "/media/blog/motel-manager-performance-metrics/V6-960.webp",
+              "srcset": "/media/blog/motel-manager-performance-metrics/V6-480.webp 480w, /media/blog/motel-manager-performance-metrics/V6-960.webp 960w, /media/blog/motel-manager-performance-metrics/V6-1536.webp 1536w",
+              "alt": "A motel manager inspecting the condition of a prepared guest room",
+              "width": 960,
+              "height": 640,
+              "caption": "Protect time for hands-on room inspections"
+            }
+          },
+          {
+            "text": "With only eight protected hours, prioritize reconciliations, urgent defects, and staff handoffs; defer vendor comparisons and broad channel experiments. Agree on a weekly exception check, a monthly financial review, and the milestone sign-offs. Record completion targets separately from market-dependent revenue targets."
+          },
+          {
+            "text": "MotelPilot works with independent US motel owners and offers OTA and revenue management separately or alongside daily management. Learn [about MotelPilot](/about/) when deciding which responsibilities to outsource, then [contact us](/contact/) to discuss your property, available records, and the operating responsibilities you want covered."
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "roommaster's performance-metric framework",
+        "url": "https://www.roommaster.com/blog/hotel-performance-metrics"
+      },
+      {
+        "title": "EHL explains why GOP adds cost discipline to revenue measures",
+        "url": "https://insights.ehl.edu/evaluating-hotel-performance"
+      },
+      {
+        "title": "Pricepoint's formula guide",
+        "url": "https://pricepoint.co/blog/what-is-hotel-room-revenue-calculation---all-formulas-you-need-to-know"
+      },
+      {
+        "title": "Mews excludes complimentary and staff-use rooms from its standard rooms-sold calculation",
+        "url": "https://www.mews.com/en/blog/average-room-rate-arr"
+      },
+      {
+        "title": "HotelMinder describes STR's achieved occupancy, ADR, and RevPAR comparisons",
+        "url": "https://www.hotelminder.com/partner=STR"
+      },
+      {
+        "title": "HotStats describes full P&L benchmarking",
+        "url": "https://www.hotstats.com/hotel-profit-benchmarking"
+      },
+      {
+        "title": "Hotel Benchmark's FAQ describes aggregated Google Analytics data",
+        "url": "https://www.hotelbenchmarking.com/faq/"
+      },
+      {
+        "title": "Lighthouse's selection guide",
+        "url": "https://www.mylighthouse.com/resources/blog/hotel-benchmarking-tool"
+      },
+      {
+        "title": "Hotel-Online's flow-through and Flex explanation",
+        "url": "https://www.hotel-online.com/news/connecting-revenue-and-profitability-flow-through-and-flex-explained"
+      },
+      {
+        "title": "Snapfix's onboarding guidance",
+        "url": "https://snapfix.com/blog/the-first-90-days-of-a-new-hotel-general-manager-a-complete-onboarding-guide"
+      },
+      {
+        "title": "Interview Signal also identifies owner obligations",
+        "url": "https://interviewersignal.com/blog/30-60-90-day-plan-for-hotel-managers"
+      }
+    ],
+    "geo": {
+      "run": "<local>/seo_website_template/.claude/worktrees/motel-geoblog/geo-blog/runs/motelpilot-com-motel-manager-performance-metrics",
+      "keyword": "motel manager performance metrics"
+    }
+  }
+]

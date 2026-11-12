@@ -1,0 +1,14 @@
+{
+  "email": "hello@example.com",
+  "phone": "+1 555 0100",
+  "address": "Office address to be confirmed",
+  "hours": "Monday to Friday, 8:00 to 18:00",
+  "same_as": [],
+  "placeholder": true,
+  "standIns": [
+    "email",
+    "phone",
+    "address",
+    "hours"
+  ]
+}

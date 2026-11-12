@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "seo-site-nav-v1",
+  "source": "site-factory pages.json",
+  "brand": null,
+  "header": [
+    {
+      "label": "Services",
+      "route": "/services/",
+      "children": [
+        {
+          "label": "Business Development",
+          "route": "/business-development/",
+          "children": []
+        },
+        {
+          "label": "Digital Marketing",
+          "route": "/digital-marketing/",
+          "children": []
+        },
+        {
+          "label": "Human Resources",
+          "route": "/human-resources/",
+          "children": []
+        },
+        {
+          "label": "Operations Management",
+          "route": "/operations-management/",
+          "children": []
+        },
+        {
+          "label": "Revenue Management",
+          "route": "/revenue-management/",
+          "children": []
+        },
+        {
+          "label": "Information Technology",
+          "route": "/information-technology/",
+          "children": []
+        },
+        {
+          "label": "Commercial Strategy",
+          "route": "/commercial-strategy/",
+          "children": []
+        },
+        {
+          "label": "Project Management",
+          "route": "/project-management/",
+          "children": []
+        },
+        {
+          "label": "Development",
+          "route": "/development/",
+          "children": []
+        },
+        {
+          "label": "Receivership",
+          "route": "/receivership/",
+          "children": []
+        },
+        {
+          "label": "Asset Management",
+          "route": "/asset-management/",
+          "children": []
+        },
+        {
+          "label": "Accounting",
+          "route": "/accounting/",
+          "children": []
+        },
+        {
+          "label": "OTA Optimization",
+          "route": "/ota-optimization/",
+          "children": []
+        }
+      ]
+    },
+    {
+      "label": "About Us",
+      "route": "/about-us/",
+      "children": []
+    },
+    {
+      "label": "Case Studies",
+      "route": "/case-studies/",
+      "children": []
+    },
+    {
+      "label": "Blog",
+      "route": "/blog/",
+      "children": []
+    },
+    {
+      "label": "Contact Us",
+      "route": "/contact-us/",
+      "children": []
+    }
+  ],
+  "footer": [
+    {
+      "label": "Capabilities",
+      "route": "/capabilities/",
+      "children": []
+    },
+    {
+      "label": "Our Process",
+      "route": "/our-process/",
+      "children": []
+    },
+    {
+      "label": "Our History",
+      "route": "/our-history/",
+      "children": []
+    },
+    {
+      "label": "Resources",
+      "route": "/resources/",
+      "children": []
+    },
+    {
+      "label": "Careers",
+      "route": "/careers/",
+      "children": []
+    },
+    {
+      "label": "Privacy Policy",
+      "route": "/privacy-policy/",
+      "children": []
+    },
+    {
+      "label": "Terms and Conditions",
+      "route": "/terms-and-conditions/",
+      "children": []
+    },
+    {
+      "label": "Request a Quote",
+      "route": "/request-a-quote/",
+      "children": []
+    }
+  ]
+}
