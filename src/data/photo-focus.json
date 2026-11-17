@@ -1,54 +1,470 @@
 {
-  "/media/reference/hero-2.webp": {
-    "x": 0.738,
+  "/media/photos/general-hero-1-960.webp": {
+    "x": 0.68,
     "y": 0.52
   },
-  "/media/reference/hero-3.webp": {
-    "x": 0.48,
-    "y": 0.46
+  "/media/photos/general-hero-2-960.webp": {
+    "x": 0.42,
+    "y": 0.3
   },
-  "/media/reference/hero-1.webp": {
-    "x": 0.63,
-    "y": 0.61
+  "/media/photos/general-hero-3-960.webp": {
+    "x": 0.68,
+    "y": 0.32
   },
-  "/media/reference/hero-4.webp": {
-    "x": 0.71,
+  "/media/photos/digital-marketing-hero-1-960.webp": {
+    "x": 0.59,
+    "y": 0.38
+  },
+  "/media/photos/human-resources-hero-1-960.webp": {
+    "x": 0.76,
+    "y": 0.6
+  },
+  "/media/photos/general-hero-4-960.webp": {
+    "x": 0.77,
+    "y": 0.32
+  },
+  "/media/photos/revenue-management-hero-1-960.webp": {
+    "x": 0.67,
+    "y": 0.38
+  },
+  "/media/photos/information-technology-hero-1-960.webp": {
+    "x": 0.64,
+    "y": 0.5
+  },
+  "/media/photos/general-hero-5-960.webp": {
+    "x": 0.31,
+    "y": 0.62
+  },
+  "/media/photos/project-management-hero-1-960.webp": {
+    "x": 0.74,
     "y": 0.43
   },
-  "/media/reference/product-01-d229f0dc.webp": {
+  "/media/photos/general-hero-6-960.webp": {
+    "x": 0.45,
+    "y": 0.38
+  },
+  "/media/photos/general-hero-7-960.webp": {
+    "x": 0.56,
+    "y": 0.33
+  },
+  "/media/photos/accounting-hero-1-960.webp": {
+    "x": 0.57,
+    "y": 0.46
+  },
+  "/media/photos/ota-optimization-hero-1-960.webp": {
+    "x": 0.84,
+    "y": 0.42
+  },
+  "/media/photos/general-product-1-960.webp": {
+    "x": 0.82,
+    "y": 0.36
+  },
+  "/media/photos/general-product-2-960.webp": {
+    "x": 0.49,
+    "y": 0.37
+  },
+  "/media/photos/general-product-3-960.webp": {
+    "x": 0.56,
+    "y": 0.64
+  },
+  "/media/photos/general-product-4-960.webp": {
+    "x": 0.5,
+    "y": 0.37
+  },
+  "/media/photos/general-product-5-960.webp": {
+    "x": 0.75,
+    "y": 0.34
+  },
+  "/media/photos/general-product-6-960.webp": {
+    "x": 0.76,
+    "y": 0.39
+  },
+  "/media/photos/general-product-7-960.webp": {
+    "x": 0.5,
+    "y": 0.74
+  },
+  "/media/photos/general-product-8-960.webp": {
+    "x": 0.512,
+    "y": 0.374
+  },
+  "/media/photos/general-product-9-960.webp": {
+    "x": 0.59,
+    "y": 0.39
+  },
+  "/media/photos/general-product-10-960.webp": {
+    "x": 0.44,
+    "y": 0.47
+  },
+  "/media/photos/general-product-11-960.webp": {
+    "x": 0.52,
+    "y": 0.55
+  },
+  "/media/photos/general-product-12-960.webp": {
+    "x": 0.6,
+    "y": 0.34
+  },
+  "/media/photos/general-product-13-960.webp": {
+    "x": 0.22,
+    "y": 0.46
+  },
+  "/media/photos/general-product-14-960.webp": {
+    "x": 0.79,
+    "y": 0.4
+  },
+  "/media/photos/business-development-brief-splitmedia-2-1-960.webp": {
+    "x": 0.58,
+    "y": 0.32
+  },
+  "/media/photos/general-process-1-960.webp": {
+    "x": 0.55,
+    "y": 0.38
+  },
+  "/media/photos/general-process-2-960.webp": {
+    "x": 0.43,
+    "y": 0.3
+  },
+  "/media/photos/general-process-3-960.webp": {
+    "x": 0.653,
+    "y": 0.327
+  },
+  "/media/photos/business-development-brief-m4-1-960.webp": {
+    "x": 0.62,
+    "y": 0.3
+  },
+  "/media/photos/business-development-brief-splitmedia-1-1-960.webp": {
+    "x": 0.36,
+    "y": 0.34
+  },
+  "/media/photos/operations-management-brief-m3-1-960.webp": {
+    "x": 0.32,
+    "y": 0.34
+  },
+  "/media/photos/operations-management-brief-splitmedia-1-1-960.webp": {
+    "x": 0.46,
+    "y": 0.34
+  },
+  "/media/photos/commercial-strategy-brief-splitmedia-1-1-960.webp": {
     "x": 0.29,
-    "y": 0.49
+    "y": 0.31
   },
-  "/media/reference/product-02-5a077450.webp": {
+  "/media/photos/commercial-strategy-brief-splitmedia-2-1-960.webp": {
+    "x": 0.25,
+    "y": 0.35
+  },
+  "/media/photos/commercial-strategy-brief-m4-1-960.webp": {
+    "x": 0.34,
+    "y": 0.36
+  },
+  "/media/photos/development-brief-splitmedia-1-1-960.webp": {
+    "x": 0.3,
+    "y": 0.39
+  },
+  "/media/photos/development-brief-splitmedia-2-1-960.webp": {
+    "x": 0.27,
+    "y": 0.33
+  },
+  "/media/photos/development-brief-splitmedia-4-1-960.webp": {
+    "x": 0.38,
+    "y": 0.33
+  },
+  "/media/photos/asset-management-brief-splitmedia-1-1-960.webp": {
+    "x": 0.29,
+    "y": 0.4
+  },
+  "/media/photos/general-lifestyle-1-960.webp": {
+    "x": 0.505,
+    "y": 0.4
+  },
+  "/media/photos/general-lifestyle-2-960.webp": {
+    "x": 0.684,
+    "y": 0.36
+  },
+  "/media/photos/general-lifestyle-3-960.webp": {
+    "x": 0.34,
+    "y": 0.36
+  },
+  "/media/photos/general-lifestyle-4-960.webp": {
+    "x": 0.392,
+    "y": 0.35
+  },
+  "/media/photos/general-lifestyle-5-960.webp": {
+    "x": 0.375,
+    "y": 0.405
+  },
+  "/media/photos/home-brief-cta-1-960.webp": {
+    "x": 0.47,
+    "y": 0.38
+  },
+  "/media/photos/services-brief-cta-1-960.webp": {
+    "x": 0.27,
+    "y": 0.42
+  },
+  "/media/photos/business-development-brief-cta-1-960.webp": {
+    "x": 0.36,
+    "y": 0.3
+  },
+  "/media/photos/operations-management-brief-cta-1-960.webp": {
+    "x": 0.47,
+    "y": 0.36
+  },
+  "/media/photos/commercial-strategy-brief-cta-1-960.webp": {
+    "x": 0.51,
+    "y": 0.37
+  },
+  "/media/photos/development-brief-cta-1-960.webp": {
+    "x": 0.31,
+    "y": 0.38
+  },
+  "/media/photos/asset-management-brief-cta-1-960.webp": {
+    "x": 0.35,
+    "y": 0.4
+  },
+  "/media/photos/about-us-brief-cta-1-960.webp": {
+    "x": 0.38,
+    "y": 0.32
+  },
+  "/media/photos/case-studies-brief-cta-1-960.webp": {
+    "x": 0.46,
+    "y": 0.33
+  },
+  "/media/photos/capabilities-brief-cta-1-960.webp": {
+    "x": 0.45,
+    "y": 0.33
+  },
+  "/media/photos/our-process-brief-cta-1-960.webp": {
+    "x": 0.36,
+    "y": 0.5
+  },
+  "/media/photos/our-history-brief-cta-1-960.webp": {
+    "x": 0.47,
+    "y": 0.5
+  },
+  "/media/photos/resources-brief-cta-1-960.webp": {
+    "x": 0.44,
+    "y": 0.32
+  },
+  "/media/photos/request-a-quote-brief-cta-1-960.webp": {
+    "x": 0.38,
+    "y": 0.38
+  },
+  "/media/photos/development-brief-splitmedia-3-1-960.webp": {
+    "x": 0.24,
+    "y": 0.35
+  },
+  "/media/photos/digital-marketing-product-1-960.webp": {
+    "x": 0.3,
+    "y": 0.28
+  },
+  "/media/photos/digital-marketing-product-2-960.webp": {
+    "x": 0.2,
+    "y": 0.4
+  },
+  "/media/photos/digital-marketing-product-3-960.webp": {
+    "x": 0.44,
+    "y": 0.7
+  },
+  "/media/photos/digital-marketing-product-4-960.webp": {
+    "x": 0.24,
+    "y": 0.42
+  },
+  "/media/photos/digital-marketing-product-5-960.webp": {
+    "x": 0.31,
+    "y": 0.32
+  },
+  "/media/photos/digital-marketing-product-6-960.webp": {
+    "x": 0.31,
+    "y": 0.26
+  },
+  "/media/photos/digital-marketing-lifestyle-1-960.webp": {
+    "x": 0.58,
+    "y": 0.5
+  },
+  "/media/photos/digital-marketing-lifestyle-2-960.webp": {
+    "x": 0.306,
+    "y": 0.34
+  },
+  "/media/photos/digital-marketing-lifestyle-3-960.webp": {
+    "x": 0.48,
+    "y": 0.62
+  },
+  "/media/photos/digital-marketing-lifestyle-4-960.webp": {
     "x": 0.26,
-    "y": 0.57
+    "y": 0.42
   },
-  "/media/reference/product-03-6cf8bb23.webp": {
-    "x": 0.42,
-    "y": 0.73
+  "/media/photos/digital-marketing-brief-cta-1-960.webp": {
+    "x": 0.45,
+    "y": 0.34
   },
-  "/media/reference/product-04-280e80ac.webp": {
-    "x": 0.73,
-    "y": 0.61
+  "/media/photos/digital-marketing-brief-m9-1-960.webp": {
+    "x": 0.25,
+    "y": 0.3
   },
-  "/media/reference/process-01-b880240c.webp": {
-    "x": 0.9,
-    "y": 0.48
+  "/media/photos/human-resources-lifestyle-1-960.webp": {
+    "x": 0.54,
+    "y": 0.47
   },
-  "/media/reference/process-02-23b715ff.webp": {
-    "x": 0.87,
+  "/media/photos/human-resources-lifestyle-2-960.webp": {
+    "x": 0.35,
+    "y": 0.42
+  },
+  "/media/photos/human-resources-lifestyle-3-960.webp": {
+    "x": 0.53,
+    "y": 0.58
+  },
+  "/media/photos/human-resources-brief-cta-1-960.webp": {
+    "x": 0.44,
+    "y": 0.36
+  },
+  "/media/photos/human-resources-brief-splitmedia-1-1-960.webp": {
+    "x": 0.82,
     "y": 0.51
   },
-  "/media/reference/lifestyle-01-2af4dd58.webp": {
-    "x": 0.63,
-    "y": 0.61
+  "/media/photos/human-resources-brief-splitmedia-2-1-960.webp": {
+    "x": 0.28,
+    "y": 0.28
   },
-  "/media/reference/lifestyle-02-c2bf6c95.webp": {
-    "x": 0.478,
+  "/media/photos/revenue-management-lifestyle-1-960.webp": {
+    "x": 0.52,
+    "y": 0.45
+  },
+  "/media/photos/revenue-management-lifestyle-2-960.webp": {
+    "x": 0.786,
+    "y": 0.38
+  },
+  "/media/photos/revenue-management-lifestyle-3-960.webp": {
+    "x": 0.45,
+    "y": 0.45
+  },
+  "/media/photos/revenue-management-brief-cta-1-960.webp": {
+    "x": 0.3,
+    "y": 0.18
+  },
+  "/media/photos/revenue-management-brief-m10-1-960.webp": {
+    "x": 0.42,
     "y": 0.29
   },
-  "/media/reference/lifestyle-03-cb94432e.webp": {
-    "x": 0.195,
+  "/media/photos/revenue-management-brief-m4-1-960.webp": {
+    "x": 0.37,
+    "y": 0.34
+  },
+  "/media/photos/revenue-management-brief-m7-1-960.webp": {
+    "x": 0.68,
+    "y": 0.33
+  },
+  "/media/photos/revenue-management-brief-m2-1-960.webp": {
+    "x": 0.3,
+    "y": 0.4
+  },
+  "/media/photos/information-technology-product-1-960.webp": {
+    "x": 0.52,
+    "y": 0.73
+  },
+  "/media/photos/information-technology-lifestyle-1-960.webp": {
+    "x": 0.33,
+    "y": 0.2
+  },
+  "/media/photos/information-technology-lifestyle-2-960.webp": {
+    "x": 0.32,
+    "y": 0.4
+  },
+  "/media/photos/information-technology-brief-cta-1-960.webp": {
+    "x": 0.38,
+    "y": 0.4
+  },
+  "/media/photos/information-technology-brief-m2-1-960.webp": {
+    "x": 0.6,
+    "y": 0.48
+  },
+  "/media/photos/project-management-lifestyle-1-960.webp": {
+    "x": 0.6,
+    "y": 0.45
+  },
+  "/media/photos/project-management-lifestyle-2-960.webp": {
+    "x": 0.287,
+    "y": 0.34
+  },
+  "/media/photos/project-management-brief-cta-1-960.webp": {
+    "x": 0.3,
+    "y": 0.45
+  },
+  "/media/photos/project-management-brief-splitmedia-1-1-960.webp": {
+    "x": 0.37,
+    "y": 0.37
+  },
+  "/media/photos/project-management-brief-m3-1-960.webp": {
+    "x": 0.37,
+    "y": 0.38
+  },
+  "/media/photos/accounting-lifestyle-1-960.webp": {
+    "x": 0.5,
+    "y": 0.52
+  },
+  "/media/photos/accounting-lifestyle-2-960.webp": {
+    "x": 0.67,
     "y": 0.32
+  },
+  "/media/photos/accounting-brief-cta-1-960.webp": {
+    "x": 0.35,
+    "y": 0.36
+  },
+  "/media/photos/accounting-brief-splitmedia-1-1-960.webp": {
+    "x": 0.34,
+    "y": 0.3
+  },
+  "/media/photos/accounting-brief-splitmedia-2-1-960.webp": {
+    "x": 0.55,
+    "y": 0.26
+  },
+  "/media/photos/accounting-brief-splitmedia-3-1-960.webp": {
+    "x": 0.21,
+    "y": 0.34
+  },
+  "/media/photos/ota-optimization-lifestyle-1-960.webp": {
+    "x": 0.43,
+    "y": 0.58
+  },
+  "/media/photos/ota-optimization-lifestyle-2-960.webp": {
+    "x": 0.315,
+    "y": 0.385
+  },
+  "/media/photos/ota-optimization-lifestyle-3-960.webp": {
+    "x": 0.4,
+    "y": 0.42
+  },
+  "/media/photos/ota-optimization-lifestyle-4-960.webp": {
+    "x": 0.42,
+    "y": 0.42
+  },
+  "/media/photos/ota-optimization-lifestyle-5-960.webp": {
+    "x": 0.5,
+    "y": 0.56
+  },
+  "/media/photos/ota-optimization-brief-cta-1-960.webp": {
+    "x": 0.51,
+    "y": 0.52
+  },
+  "/media/photos/ota-optimization-brief-m13-1-960.webp": {
+    "x": 0.28,
+    "y": 0.42
+  },
+  "/media/photos/ota-optimization-brief-m3-1-960.webp": {
+    "x": 0.38,
+    "y": 0.3
+  },
+  "/media/photos/ota-optimization-brief-m4-1-960.webp": {
+    "x": 0.5,
+    "y": 0.4
+  },
+  "/media/photos/ota-optimization-brief-m8-1-960.webp": {
+    "x": 0.55,
+    "y": 0.28
+  },
+  "/media/photos/ota-optimization-brief-splitmedia-1-1-960.webp": {
+    "x": 0.46,
+    "y": 0.34
+  },
+  "/media/photos/ota-optimization-brief-splitmedia-3-1-960.webp": {
+    "x": 0.37,
+    "y": 0.36
   }
 }

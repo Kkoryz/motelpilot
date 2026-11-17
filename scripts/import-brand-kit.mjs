@@ -12,7 +12,7 @@ import { cliArgs, runMain, usage } from './lib/cli.mjs';
 import { writeJson } from './lib/json-io.mjs';
 
 // Files stage 00 may provide, served from the site root under the same names.
-const BRAND_FILES = ['logo.svg', 'logo-wordmark.svg', 'logo-mark.svg', 'logo-mark.png', 'favicon.svg', 'og-image.svg', 'favicon-16.png', 'favicon-32.png', 'favicon-48.png', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'logo.png', 'og-image.png', 'favicon.ico', 'site.webmanifest', 'logo.json'];
+export const BRAND_FILES = ['logo.svg', 'logo-wordmark.svg', 'logo-mark.svg', 'logo-mark.png', 'favicon.svg', 'og-image.svg', 'favicon-16.png', 'favicon-32.png', 'favicon-48.png', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'logo.png', 'og-image.png', 'favicon.ico', 'site.webmanifest', 'logo.json'];
 
 // Intrinsic size of an SVG (width/height attributes, else the viewBox) or a PNG (IHDR chunk).
 export function imageSize(name, bytes) {

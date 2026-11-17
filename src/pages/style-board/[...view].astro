@@ -9,6 +9,7 @@ import SectionChart from '../../components/blocks/SectionChart.astro';
 import { BLOCKS, type BlockEntry } from '../../components/blocks/registry';
 import { dataVisuals, pages, type Block, type Media } from '../../lib/authoring';
 import { boardBuilt } from '../../../scripts/lib/style-board.mjs';
+import { GREY_FRAME } from '../../../scripts/lib/trial-build.mjs';
 
 interface Sample { role: string; route: string; pageType: string; blockId: string; splitIndex: number; words: number; slots: number; block: Block }
 interface BoardModule { key: string; type: string; variant: string | null; uses: number; evidence: { pageType: string; index: number; module: string; gap?: string }[]; samples: Sample[] }
@@ -21,7 +22,7 @@ export function getStaticPaths() {
 
 const { board } = Astro.props as { board: Board };
 // A grey frame in each photo's place, the size of a typical photo (the frame's own ratio crops it as it would a photo).
-const grey: Media = { src: `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000"><rect width="1600" height="1000" fill="#c9c9c9"/><text x="800" y="515" font-family="sans-serif" font-size="44" text-anchor="middle" fill="#7a7a7a">photo</text></svg>')}`, alt: '', width: 1600, height: 1000 };
+const grey: Media = GREY_FRAME;
 const samples = board.modules.flatMap((module) => module.samples.map((sample) => {
   const page = pages.find((item) => item.route === sample.route);
   return page ? { module, sample, page, entry: BLOCKS[sample.block.type as keyof typeof BLOCKS] as BlockEntry | undefined } : null;

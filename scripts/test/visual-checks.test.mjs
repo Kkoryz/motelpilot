@@ -18,6 +18,9 @@ test('a module repeated more times in a row than the competitor does is found; t
   const page = ['a', 'b', 'c', 'd', 'e'].map((id) => ({ id, type: 'splitMedia' }));
   assert.deepEqual(repeatedModules(page, reference), [{ type: 'splitMedia', length: 5, allowed: 3, blocks: ['a', 'b', 'c', 'd', 'e'] }]);
   assert.deepEqual(repeatedModules(page.slice(0, 3), reference), []);
+  const faqPage = [{ id: 'intro', type: 'intro' }, ...['f1', 'f2', 'f3', 'f4'].map((id) => ({ id, type: 'faq' })), { id: 'cta', type: 'cta' }];
+  assert.deepEqual(repeatedModules(faqPage, {}), [], "an FAQ page's topics one after another are its content");
+  assert.deepEqual(repeatedModules([...faqPage.slice(1, 4), ...page], {}).map((run) => run.type), ['faq', 'splitMedia'], 'FAQ sections that are not most of the page still count, as the split run does');
   // Six rows where the competitor shows two at most: every third becomes a centred text section, copy unchanged.
   const varied = varyLongRuns(['a', 'b', 'c', 'd', 'e', 'f'].map(split), 2);
   assert.deepEqual(varied.map((block) => block.type), ['splitMedia', 'splitMedia', 'intro', 'splitMedia', 'splitMedia', 'intro']);
@@ -31,6 +34,10 @@ test('a module repeated more times in a row than the competitor does is found; t
   const goesOn = [{ id: 'a', type: 'intro' }, { id: 'b', type: 'intro' }, ...['b~2', 'b~3', 'b~4'].map((id) => ({ id, type: 'intro', continues: 'b' }))];
   assert.deepEqual(repeatedModules(goesOn, {}), []);
   assert.equal(repeatedModules([...goesOn, { id: 'c', type: 'intro' }], {}).length, 1, 'three sections in a row still are three');
+  // A card set laid out as a list (pattern bullets) is a list between two card grids, not a third grid (aloha 2026-11-17).
+  const cards = [{ id: 'g1', type: 'featureGrid', pattern: 'media' }, { id: 'm2', type: 'featureGrid', pattern: 'bullets' }, { id: 'g3', type: 'featureGrid', pattern: 'media' }];
+  assert.deepEqual(repeatedModules(cards, {}), []);
+  assert.equal(repeatedModules(cards.map((block) => ({ ...block, pattern: 'media' })), {}).length, 1);
   // Photo rows placed between the blocks of one section are not a run of photo rows: the section shows between them.
   const broken = [{ id: 'b', type: 'intro' }, ...['b~2', 'b~3', 'b~4'].flatMap((id, index) => [{ id: `g${index}`, type: 'gallery' }, { id, type: 'intro', continues: 'b' }])];
   assert.deepEqual(repeatedModules(broken, {}), []);
@@ -161,7 +168,7 @@ test('logos take the site\'s variant, a page type\'s own first; the contract kno
   assert.deepEqual(BLOCK_VARIANTS.certifications, ['grid', 'strip']);
 });
 
-test('controls smaller than 24 pixels are reported once per block and size, as warnings', async () => {
+test('controls smaller than 24 pixels are reported once per block and size (no position: no spacing exception)', async () => {
   const { smallTargets } = await import('../lib/visual-checks.mjs');
   const targets = [{ block: 'footer', text: 'FAQ', width: 30, height: 18 }, { block: 'footer', text: 'Blog', width: 30, height: 18 }, { block: 'hero', text: 'Get a quote', width: 160, height: 48 }];
   assert.deepEqual(smallTargets(targets).map((target) => target.text), ['FAQ']);
@@ -173,7 +180,32 @@ test('section headings keep to the reference\'s axis: a centred one or one off t
   const page = [heading('a', 158), heading('b', 158), heading('c', 297), heading('d', 158, { centred: true }), heading('e', 206, { boxed: true }), heading('cta', 220, { inverse: true })];
   assert.deepEqual(headingAxes(page, 'start').map((item) => [item.block, item.kind]), [['c', 'off_axis'], ['d', 'centred']]);
   assert.deepEqual(headingAxes(page, 'center'), [], 'a reference that centres its headings is not held to one left edge');
+  // A split row with its photo first sets its heading at the head of the copy beside the photo (hhmhotels.com's
+  // alternating capability rows): it heads that column, not the page's axis.
+  assert.deepEqual(headingAxes([...page, heading('split', 749, { beside: true })], 'start').map((item) => item.block), ['c', 'd']);
   const { withCapture } = await import('../scaffold-placeholder-pages.mjs');
   assert.equal(withCapture({ pageTypes: {} }, { pages: [], headings: { start: 9, center: 2 } }, null).headingAlign, 'start');
   assert.equal(withCapture({ pageTypes: {} }, { pages: [], headings: { start: 1, center: 6 } }, null).headingAlign, 'center');
+});
+
+test('a split row\'s photo and copy share their edges; a button stays with its copy', async () => {
+  const { splitEdges, actionsDetached } = await import('../lib/visual-checks.mjs');
+  // The hotel service rows: a 364px photo beside 719px of copy (top aligned), and beside 218px of copy (top aligned).
+  assert.deepEqual(splitEdges([{ block: 'm3', media: { top: 0, bottom: 364 }, copy: { top: 0, bottom: 719 } }]).map((item) => item.side), ['copy_past_photo']);
+  assert.deepEqual(splitEdges([{ block: 'm6', media: { top: 0, bottom: 364 }, copy: { top: 0, bottom: 218 } }]).map((item) => item.side), ['copy_off_middle']);
+  assert.deepEqual(splitEdges([{ block: 'ok', media: { top: 0, bottom: 719 }, copy: { top: 0, bottom: 719 } }, { block: 'mid', media: { top: 0, bottom: 364 }, copy: { top: 73, bottom: 291 } }]), [], 'shared edges, or the copy level with the photo\'s middle');
+  assert.deepEqual(splitEdges([{ block: 'm3', media: { top: 0, bottom: 578 }, copy: { top: 0, bottom: 719 }, sticky: true }]), [], 'a capped photo held beside longer copy as it is read');
+  // The closing band's button 335px under its paragraph and 414px to its right.
+  assert.deepEqual(actionsDetached([{ block: 'cta', label: 'Talk to our team', gap: 335, offset: 414, centred: false }, { block: 'hero', label: 'Talk', gap: 24, offset: 300, centred: true }]).map((item) => item.block), ['cta']);
+});
+
+test('the item titles of one section set keep one size and level, over every block the set runs over', async () => {
+  const { unevenSetType } = await import('../lib/visual-checks.mjs');
+  const card = (block, set, tag, size, text) => ({ set, block, kind: 'feature-card__title', tag, size, text });
+  // The hotel home: six service cards over two grids, the second without a heading of its own.
+  const titles = [card('featureGrid-1', 'featureGrid-1', 'h3', 22, 'Full remote management'), card('featureGrid-1', 'featureGrid-1', 'h3', 22, 'Pricing'), card('featureGrid-2', 'featureGrid-1', 'h2', 36, 'Online visibility')];
+  assert.deepEqual(unevenSetType(titles), [{ block: 'featureGrid-2', kind: 'feature-card__title', sizes: [22, 36], tags: ['h3', 'h2'], text: 'Online visibility' }]);
+  assert.deepEqual(unevenSetType(titles.slice(0, 2)), []);
+  // Two sets may differ: each keeps its own.
+  assert.deepEqual(unevenSetType([card('a', 'a', 'h3', 22, 'x'), card('b', 'b', 'h3', 18, 'y')]), []);
 });

@@ -324,6 +324,19 @@ test('a run refuses to make again more photos already made than its batch limit 
   await mkdir(join(root, 'docs/research/images/masters'), { recursive: true });
   for (const index of [0, 1, 2, 3]) await writeFile(join(root, `docs/research/images/masters/p${index}.png`), '');
   await assert.rejects(generateImages({ root, max: 3 }), /4 photos already made are queued again, more than 3 at once/);
+  // It waits for a person (exit 2 in site-run, the images step waits) with the list: which photos and why each is to be
+  // made again (Fable's plan 3.2: the remakes over the limit wait for the owner, each with its reason).
+  const { RemakeHold } = await import('../generate-images.mjs');
+  await assert.rejects(generateImages({ root, max: 3 }), RemakeHold);
+  const { readFile } = await import('node:fs/promises');
+  const hold = JSON.parse(await readFile(join(root, 'docs/research/images/remake-hold.json'), 'utf8'));
+  assert.deepEqual(hold.photos.map((photo) => photo.id), ['p0', 'p1', 'p2', 'p3']);
+  assert.equal(hold.max, 3);
+  assert.match(await readFile(join(root, 'docs/research/images/remake-hold.md'), 'utf8'), /--max 4/);
+  // Photos the plan made again after a send-back (triedScenes: the library review, the image-fit judge) are retried
+  // whatever their number (aloha 2026-11-17: thirteen image-fit send-backs held the run).
+  await writeFile(join(root, 'docs/research/image-plan.json'), JSON.stringify({ entries: Array.from({ length: 5 }, (_, index) => ({ id: `p${index}`, status: 'planned', ...(index < 3 ? { triedScenes: ['/ref.png'] } : {}) })) }));
+  await assert.rejects(generateImages({ root, max: 0 }), /^Error: 1 photos already made are queued again/);
 });
 
 test('where the competitor shows portrait heroes on phones, each hero gets a portrait twin, which phones show in its place', async () => {
@@ -468,4 +481,20 @@ test('a category refused on a model at every try shows the rest of its products 
   assert.equal(prompts.length, 1, 'no try on a model');
   assert.match(prompts[0], /product photograph with no person/);
   assert.deepEqual([made.status, made.productOnly], ['generated', true]);
+});
+
+test('the photo demand the images step works from: every position the site asks a photo for, whatever else the site sets', async () => {
+  const { photoDemand } = await import('../lib/image-plan.mjs');
+  const demand = photoDemand({ pages, components, briefs: allKinds });
+  assert.ok(demand.length > 0);
+  assert.deepEqual(Object.keys(demand[0]).sort(), ['blockId', 'category', 'intent', 'kind', 'route', 'status', 'topic']);
+  // Settings that move no photo position (here the block model on a site with no density band, a heading's fit) make no
+  // photo again (Fable's plan, Q12: the images step reran on any change of template-variants.json).
+  assert.deepEqual(photoDemand({ pages, components: { ...components, blockModel: { 'intro:text': { base: 1 } }, heroText: { leadWords: 9 } }, briefs: allKinds }), demand);
+  // A photo position more is a photo more.
+  const more = pages.map((page) => (page.route === '/t-shirts-manufacturer/' ? { ...page, blocks: [...page.blocks, split('f')] } : page));
+  assert.ok(photoDemand({ pages: more, components, briefs: allKinds }).length > demand.length);
+  // The plan's library entries come from the same demand.
+  const plan = planLibrary({ pages, components, line: 'activewear', briefs: allKinds, styleRefs });
+  assert.ok(plan.entries.length > 0);
 });

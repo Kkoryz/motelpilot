@@ -1,0 +1,14 @@
+{
+  "at": "2026-11-17T21:16:49.746Z",
+  "published": 1,
+  "report": [
+    {
+      "file": "what-is-hotel-revenue-management.json",
+      "slug": "what-is-hotel-revenue-management",
+      "failures": [],
+      "warnings": [
+        "20 placeholder(s) still the writer's stand-in for our own claim: R15 (case), R16 (test_result), R35 (case), R36 (case), R37 (case), R38 (case), R39 (case), R40 (test_result), R41 (case), R42 (case), R43 (case), R44 (case), R45 (case), R46 (case), R47 (case), R61 (case), R62 (case), R63 (case), R64 (test_result), R65 (case)"
+      ]
+    }
+  ]
+}

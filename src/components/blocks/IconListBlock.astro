@@ -1,4 +1,5 @@
 ---
+import { iconListLayout } from '../../../scripts/lib/block-layout.mjs';
 import type { IconListBlock } from '../../lib/authoring';
 import Eyebrow from './Eyebrow.astro';
 import InlineText from '../blog/InlineText.astro';
@@ -6,22 +7,12 @@ import TextFlow from './TextFlow.astro';
 
 interface Props { block: IconListBlock; variant?: string }
 const { block, variant = 'checks' } = Astro.props;
-const hasIntro = Boolean(block.heading || block.paragraphs);
-// An item without a heading among items with headings is a note to them: it runs the list's full width after them
-// (site10's packaging list ended in one, and its text sat beside a two-line heading at another height).
-const headed = block.items.some((item) => item.heading);
-const listed = headed ? block.items.filter((item) => item.heading) : block.items;
-const notes = headed ? block.items.filter((item) => !item.heading) : [];
-// Two columns for an even count of short items only: beside an introduction the list has about half the container, so
-// two columns there hold a few words each; without one, a sentence or two each (the hotel site's style board: detailed
-// items squeezed into two narrow columns, and a split list read as three columns).
-const ICON_LIST_TWO_COLUMN_CHARS = { split: 60, list: 160 };
-const longest = Math.max(0, ...listed.map((item) => `${item.heading ?? ''} ${item.text}`.trim().length));
-const columns = listed.length % 2 === 0 && longest <= ICON_LIST_TWO_COLUMN_CHARS[hasIntro ? 'split' : 'list'] ? 2 : 1;
+// Columns, notes and the split beside an introduction (scripts/lib/block-layout.mjs, shared with the layout plan).
+const { hasIntro, layout, listed, notes, columns } = iconListLayout(block);
 ---
 
-<section class="block block--icon-list" data-authoring-block="iconList" data-block-id={block.id} data-variant={variant}>
-  <div class="container icon-list" data-layout={hasIntro ? 'split' : 'list'}>
+<section class="block block--icon-list" id={block.anchor} data-authoring-block="iconList" data-block-id={block.id} data-variant={variant}>
+  <div class="container icon-list" data-layout={layout}>
     {hasIntro && (
       <div class="icon-list__intro">
         <Eyebrow text={block.eyebrow} />

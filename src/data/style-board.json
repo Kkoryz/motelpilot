@@ -6,7 +6,7 @@
       "key": "intro:text",
       "type": "intro",
       "variant": "text",
-      "uses": 31,
+      "uses": 28,
       "names": [
         "intro/proof"
       ],
@@ -40,11 +40,11 @@
       "samples": [
         {
           "role": "longest",
-          "route": "/capabilities/",
+          "route": "/case-studies/",
           "pageType": "general",
           "blockId": "overview",
           "splitIndex": 0,
-          "words": 107,
+          "words": 105,
           "slots": 0,
           "block": {
             "id": "overview",
@@ -52,21 +52,21 @@
             "sourceSectionIds": [
               "overview"
             ],
-            "heading": "Choose how much you hand over",
+            "heading": "How to read these case results",
             "paragraphs": [
-              "You can give us the day-to-day running of your hotel, or bring us in for a single service while you keep running the property yourself. Under full remote management, we lead daily operations and you keep ownership. Our team works entirely remotely, so partners or local contractors do any on-site work.",
-              "Need help with just one part of the business? We can take that work on separately. Standalone services don't need a management agreement or a long-term contract. The only time you need a full management agreement is if you want us to lead your hotel staff on an ongoing basis."
+              "These anonymised case studies show what we changed and how each property's results compared before and after our work began. Each result states its comparison period: either the same six months a year earlier or a later month against the month before takeover. Owner workload figures compare weekly averages.",
+              "Before you sign, we also share anonymised revenue per available room (RevPAR), occupancy and net operating income (NOI) figures comparing the 12 months before we took over with the 12 months after. We can arrange calls with up to three current owner clients who have agreed to act as references."
             ],
-            "wordCount": 101
+            "wordCount": 99
           }
         },
         {
           "role": "shortest",
-          "route": "/development/",
+          "route": "/information-technology/",
           "pageType": "solution",
           "blockId": "overview",
           "splitIndex": 0,
-          "words": 45,
+          "words": 49,
           "slots": 0,
           "block": {
             "id": "overview",
@@ -74,99 +74,11 @@
             "sourceSectionIds": [
               "overview"
             ],
-            "heading": "Development Support Through One Point of Coordination",
+            "heading": "Motel Information Technology, Tailored to the Way You Work",
             "paragraphs": [
-              "You deal with your hotel brand through a single point of coordination that covers design, construction management and technical services. Our hotel development support also covers purchasing, handled through a buying group set up specifically for this work."
+              "You'll have a dedicated IT representative who gets to know how your motel runs and helps you choose the technologies that suit it. We don't hand you a standard package. We build your motel information technology around what you need."
             ],
-            "wordCount": 38
-          }
-        }
-      ]
-    },
-    {
-      "key": "featureGrid:icons",
-      "type": "featureGrid",
-      "variant": "icons",
-      "uses": 3,
-      "names": [
-        "featureGrid:icons"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/about-us/",
-          "pageType": "about",
-          "blockId": "featureGrid-1",
-          "splitIndex": 0,
-          "words": 75,
-          "slots": 0,
-          "block": {
-            "id": "featureGrid-1",
-            "type": "featureGrid",
-            "sourceSectionIds": [
-              "overview_2"
-            ],
-            "heading": "How we work with you",
-            "items": [
-              {
-                "heading": "Your property, your accounts",
-                "paragraphs": [
-                  "Your property and its accounts stay yours. To do our work, we use only the access you authorise."
-                ]
-              },
-              {
-                "heading": "Remote work in your systems",
-                "paragraphs": [
-                  "Everything happens remotely, inside the systems your property already uses. Our partners or local contractors handle any on-site tasks."
-                ]
-              },
-              {
-                "heading": "Services bought separately",
-                "paragraphs": [
-                  "Each service is agreed directly with you. You can buy just the one you need without taking on a wider package."
-                ]
-              }
-            ],
-            "mediaKind": "process"
-          }
-        },
-        {
-          "role": "shortest",
-          "route": "/",
-          "pageType": "home",
-          "blockId": "featureGrid-1",
-          "splitIndex": 0,
-          "words": 55,
-          "slots": 0,
-          "block": {
-            "id": "featureGrid-1",
-            "type": "featureGrid",
-            "sourceSectionIds": [
-              "overview_2"
-            ],
-            "heading": "Choose the support your property needs",
-            "items": [
-              {
-                "heading": "Full remote management",
-                "paragraphs": [
-                  "Our [property operations services](/operations-management/) cover day-to-day work and the guest experience, all overseen remotely."
-                ]
-              },
-              {
-                "heading": "Pricing and revenue",
-                "paragraphs": [
-                  "With our [revenue management service](/revenue-management/), rates are planned around your property and your market."
-                ]
-              },
-              {
-                "heading": "Booking.com and Expedia",
-                "paragraphs": [
-                  "Listings, rates and distribution are managed together under our [OTA management service](/ota-optimization/)."
-                ]
-              }
-            ],
-            "mediaKind": "product"
+            "wordCount": 40
           }
         }
       ]
@@ -175,7 +87,7 @@
       "key": "gallery:band",
       "type": "gallery",
       "variant": "band",
-      "uses": 74,
+      "uses": 47,
       "names": [
         "gallery:band",
         "figure"
@@ -239,59 +151,205 @@
               }
             ],
             "competitor": true,
-            "signature": true
+            "signature": true,
+            "action": true
           }
         }
       ]
     },
     {
-      "key": "featureGrid:columns",
+      "key": "featureGrid:icons",
       "type": "featureGrid",
-      "variant": "columns",
-      "uses": 1,
+      "variant": "icons",
+      "uses": 7,
       "names": [
-        "featureGrid:columns"
+        "featureGrid:icons"
       ],
       "evidence": [],
       "samples": [
         {
-          "role": "only",
-          "route": "/",
-          "pageType": "home",
-          "blockId": "featureGrid-2",
+          "role": "longest",
+          "route": "/services/",
+          "pageType": "solutions_hub",
+          "blockId": "entries-2",
           "splitIndex": 0,
-          "words": 61,
+          "words": 99,
           "slots": 0,
           "block": {
-            "id": "featureGrid-2",
+            "id": "entries-2",
+            "type": "featureGrid",
+            "sourceSectionIds": [
+              "entries"
+            ],
+            "continues": "entries",
+            "items": [
+              {
+                "heading": "Operations Management",
+                "paragraphs": [
+                  "Keep daily motel work aligned with your goals through our [remote operations service](/operations-management/). We oversee improvements, support your staff and reduce purchasing costs, with help preparing new properties to open."
+                ]
+              },
+              {
+                "heading": "Revenue Management",
+                "paragraphs": [
+                  "Hand off room pricing with our [remote revenue management service](/revenue-management/). We adjust rates each business day, turn expected demand into financial targets and manage distribution around your property’s needs and existing systems."
+                ]
+              },
+              {
+                "heading": "Information Technology",
+                "paragraphs": [
+                  "Whether you need a system change or ongoing help, our [motel IT service](/information-technology/) supports the way you work. We select and deploy technology, protect access and data, and keep systems updated."
+                ]
+              }
+            ],
+            "mediaKind": "product"
+          }
+        },
+        {
+          "role": "shortest",
+          "route": "/",
+          "pageType": "home",
+          "blockId": "featureGrid-1",
+          "splitIndex": 0,
+          "words": 57,
+          "slots": 0,
+          "block": {
+            "id": "featureGrid-1",
             "type": "featureGrid",
             "sourceSectionIds": [
               "overview_2"
             ],
-            "continues": "featureGrid-1",
+            "heading": "Management company services for your motel or hotel",
             "items": [
               {
-                "heading": "Online visibility and direct bookings",
+                "heading": "Full remote management",
                 "paragraphs": [
-                  "Our [digital marketing services](/digital-marketing/) build your presence online and help you get more direct bookings."
+                  "Our [property operations services](/operations-management/) cover day-to-day work and the guest experience, all overseen remotely."
                 ]
               },
               {
-                "heading": "Accounting and reporting",
+                "heading": "Pricing and revenue",
                 "paragraphs": [
-                  "Financial admin is taken care of, and you get statements that are easy to read, through our [hotel accounting services](/accounting/)."
+                  "With our [revenue management service](/revenue-management/), rates are planned around your property and your market."
                 ]
               },
               {
-                "heading": "More ways we can help",
+                "heading": "Booking.com and Expedia",
                 "paragraphs": [
-                  "Other parts of running your property are covered too—[explore all our services](/services/)."
+                  "Listings, rates and distribution are managed together under our [OTA management service](/ota-optimization/)."
                 ]
               }
             ],
-            "mediaKind": "product",
-            "variant": "columns",
-            "planned": true
+            "mediaKind": "product"
+          }
+        }
+      ]
+    },
+    {
+      "key": "featureGrid:bullets",
+      "type": "featureGrid",
+      "variant": "bullets",
+      "uses": 40,
+      "names": [
+        "featureGrid:bullets"
+      ],
+      "evidence": [],
+      "samples": [
+        {
+          "role": "longest",
+          "route": "/operations-management/",
+          "pageType": "solution",
+          "blockId": "featureGrid-1",
+          "splitIndex": 0,
+          "words": 307,
+          "slots": 0,
+          "block": {
+            "id": "featureGrid-1",
+            "type": "featureGrid",
+            "sourceSectionIds": [
+              "overview_2"
+            ],
+            "heading": "Ownership-Aligned Business Plans and Hands-On Oversight",
+            "items": [
+              {
+                "heading": "Ownership-led planning",
+                "paragraphs": [
+                  "Your return targets drive our budget, staffing and capital decisions, not last year's budget. If a target is unrealistic for your market, we flag it during planning because it requires early reforecasting."
+                ]
+              },
+              {
+                "heading": "Whole-property coverage",
+                "paragraphs": [
+                  "We provide operations management for motels and hotels remotely. That covers budgets, pricing, staffing, costs, contracts and reporting. We have no staff on site, so your teams deliver the on-site services."
+                ]
+              },
+              {
+                "heading": "Local management contact",
+                "paragraphs": [
+                  "If you don't have a resident GM, we handle planning, pricing, budgets, vendors and staff leadership through the on-site lead you nominate. If your property has more than 50 rooms or has food and beverage outlets, we recommend an on-site duty manager on every shift."
+                ]
+              },
+              {
+                "heading": "Evidence before signing",
+                "paragraphs": [
+                  "Before you sign, our [case studies and owner references](/case-studies/) give you calls with up to 3 current clients who have consented to speak with you. You also get anonymised RevPAR, occupancy and NOI comparisons covering the 12 months before and the 12 months after we took over."
+                ],
+                "placeholder": true
+              },
+              {
+                "heading": "Existing agreement restrictions",
+                "paragraphs": [
+                  "We keep your SOPs and brand standards, support your department heads and follow your franchise, loan, lease and supply restrictions. Our onboarding review identifies any savings or changes those terms block, and you decide whether to keep or renegotiate those terms."
+                ]
+              },
+              {
+                "heading": "Your business plan",
+                "paragraphs": [
+                  "Your plan includes a 12-month budget, a staffing model, revenue, GOP and NOI targets and a 5-year capital plan. We base it on the last 24 months of your P&L and bookings, on market and competitive-set data and on your return targets."
+                ]
+              },
+              {
+                "heading": "Delivery and review",
+                "paragraphs": [
+                  "We deliver your plan within 20 business days of receiving your data and read-only system access. We review actual results with you on monthly strategy calls. When results diverge from the plan, we update forecasts quarterly, and we rebuild the plan every year."
+                ]
+              }
+            ],
+            "variant": "cards",
+            "mediaKind": "process"
+          }
+        },
+        {
+          "role": "shortest",
+          "route": "/commercial-strategy/",
+          "pageType": "solution",
+          "blockId": "m6",
+          "splitIndex": 0,
+          "words": 69,
+          "slots": 0,
+          "block": {
+            "id": "m6",
+            "type": "featureGrid",
+            "sourceSectionIds": [
+              "m6"
+            ],
+            "heading": "Commercial Team Development, Processes and Technology",
+            "items": [
+              {
+                "heading": "Coaching and operating procedures",
+                "paragraphs": [
+                  "We coach your commercial team as they make live decisions. We also work with your revenue-generating departments to set best practices and standard operating procedures, so those practices carry on after we step back."
+                ]
+              },
+              {
+                "heading": "Commercial technology support",
+                "paragraphs": [
+                  "Our [technology service](/information-technology/) covers assessment, selection, installation and configuration. It also includes training your staff on your systems, marketing applications and programs."
+                ]
+              }
+            ],
+            "variant": "cards",
+            "mediaKind": "process"
           }
         }
       ]
@@ -300,46 +358,14 @@
       "key": "process:circles",
       "type": "process",
       "variant": "circles",
-      "uses": 2,
+      "uses": 1,
       "names": [
         "process:circles"
       ],
       "evidence": [],
       "samples": [
         {
-          "role": "longest",
-          "route": "/our-process/",
-          "pageType": "general",
-          "blockId": "m2",
-          "splitIndex": 0,
-          "words": 194,
-          "slots": 0,
-          "block": {
-            "id": "m2",
-            "type": "process",
-            "sourceSectionIds": [
-              "m2"
-            ],
-            "heading": "Your three onboarding steps",
-            "steps": [
-              {
-                "heading": "Send us your property details",
-                "text": "You send the address, listing links and a summary of what you need. Allow around 15–30 minutes to gather these; we reply within one business day."
-              },
-              {
-                "heading": "Agree the work and set up access",
-                "text": "We review the scope together and show you our reporting platform. You nominate an approver, arrange the agreed user access and supply relevant vendor contracts. Allow roughly 1–3 business days, depending on access readiness; the reporting demo takes 30 minutes."
-              },
-              {
-                "heading": "Complete the handover so we can begin",
-                "text": "Our remote handover team coordinates the transition so sales and operations keep running. You provide current procedures, local contact details and outstanding priorities. We connect to your existing systems and review each channel, keeping your accounts, PMS history and future reservations under your name. Most quick services finish within 2 to 3 business days after we receive details and access; PriceLabs work typically takes 1–2 business days. For a full hotel handover, we establish operations and marketing workflows within the first 30 days, with multi-property groups delivered in batches. Our team works entirely remotely; partners or local contractors carry out on-site work."
-              }
-            ],
-            "mediaKind": "process"
-          }
-        },
-        {
-          "role": "shortest",
+          "role": "only",
           "route": "/",
           "pageType": "home",
           "blockId": "m2",
@@ -395,7 +421,7 @@
           "pageType": "home",
           "blockId": "owner-logos",
           "splitIndex": 0,
-          "words": 33,
+          "words": 34,
           "slots": 0,
           "block": {
             "id": "owner-logos",
@@ -403,92 +429,28 @@
             "heading": "Clients we work with",
             "items": [
               {
-                "name": "Pine Hollow Holdings",
-                "note": "Ohio, USA"
-              },
-              {
-                "name": "Redstone Family Partners",
-                "note": "Texas, USA"
-              },
-              {
-                "name": "Bayline Properties",
-                "note": "Florida, USA"
-              },
-              {
-                "name": "Northgate Owners Group",
+                "name": "Rosewood Hospitality",
                 "note": "Minnesota, USA"
               },
               {
-                "name": "Copper Mesa Ventures",
-                "note": "Arizona, USA"
-              },
-              {
-                "name": "Harbor Lane Partners",
+                "name": "Redstone Hotel Group",
                 "note": "Oregon, USA"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "key": "orderCase:default",
-      "type": "orderCase",
-      "variant": null,
-      "uses": 5,
-      "names": [
-        "orderCase"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/",
-          "pageType": "home",
-          "blockId": "cases",
-          "splitIndex": 0,
-          "words": 108,
-          "slots": 0,
-          "block": {
-            "id": "cases",
-            "type": "orderCase",
-            "heading": "Client results",
-            "items": [
-              {
-                "product": "Revenue management",
-                "text": "Daily pricing and closer attention to booking pace helped a 32-room Oregon motel lift occupancy from 58% to 69%. Revenue per available room increased 30% over six months compared with the same period a year earlier.",
-                "placeholder": true
               },
               {
-                "product": "OTA management",
-                "text": "Clearer listings and coordinated availability improved conversion on Booking.com and Expedia for a 46-room Ontario hotel. The owner's weekly OTA administration fell from eight hours to two.",
-                "placeholder": true
+                "name": "Maple Crest Holdings",
+                "note": "Michigan, USA"
               },
               {
-                "product": "Full remote management",
-                "text": "A 28-room Queensland motel moved routine operations to MotelPilot's remote team, with local contractors handling on-site work. Within six months, guest replies were faster and the owner's operational workload had fallen by 20 hours a week.",
-                "placeholder": true
-              }
-            ]
-          }
-        },
-        {
-          "role": "shortest",
-          "route": "/ota-optimization/",
-          "pageType": "solution",
-          "blockId": "cases",
-          "splitIndex": 0,
-          "words": 31,
-          "slots": 0,
-          "block": {
-            "id": "cases",
-            "type": "orderCase",
-            "heading": "Client results",
-            "items": [
+                "name": "Blue Heron Properties",
+                "note": "Colorado, USA"
+              },
               {
-                "product": "OTA management",
-                "text": "Clearer listings and coordinated availability improved conversion on Booking.com and Expedia for a 46-room Ontario hotel. The owner's weekly OTA administration fell from eight hours to two.",
-                "placeholder": true
+                "name": "Kestrel Hotel Holdings",
+                "note": "North Carolina, USA"
+              },
+              {
+                "name": "Highfield Family Partners",
+                "note": "Wisconsin, USA"
               }
             ]
           }
@@ -562,27 +524,27 @@
       ]
     },
     {
-      "key": "relatedPages:tiles",
+      "key": "relatedPages:links",
       "type": "relatedPages",
-      "variant": "tiles",
-      "uses": 12,
+      "variant": "links",
+      "uses": 22,
       "names": [
-        "relatedPages:tiles"
+        "relatedPages:links"
       ],
       "evidence": [],
       "samples": [
         {
           "role": "longest",
-          "route": "/accounting/",
-          "pageType": "solution",
-          "blockId": "related",
+          "route": "/",
+          "pageType": "home",
+          "blockId": "categories",
           "splitIndex": 0,
-          "words": 23,
+          "words": 24,
           "slots": 0,
           "block": {
-            "id": "related",
+            "id": "categories",
             "type": "relatedPages",
-            "heading": "Related services",
+            "heading": "Services",
             "links": [
               {
                 "label": "Services",
@@ -625,15 +587,18 @@
                 "href": "/development/"
               },
               {
-                "label": "Receivership",
-                "href": "/receivership/"
-              },
-              {
                 "label": "Asset Management",
                 "href": "/asset-management/"
+              },
+              {
+                "label": "Accounting",
+                "href": "/accounting/"
+              },
+              {
+                "label": "OTA Optimization",
+                "href": "/ota-optimization/"
               }
-            ],
-            "variant": "tiles"
+            ]
           }
         },
         {
@@ -663,7 +628,7 @@
       "key": "faq:accordion",
       "type": "faq",
       "variant": "accordion",
-      "uses": 2,
+      "uses": 22,
       "names": [
         "faq:accordion"
       ],
@@ -671,74 +636,74 @@
       "samples": [
         {
           "role": "longest",
-          "route": "/request-a-quote/",
-          "pageType": "general",
-          "blockId": "m2",
+          "route": "/human-resources/",
+          "pageType": "solution",
+          "blockId": "faq",
           "splitIndex": 0,
-          "words": 174,
+          "words": 373,
           "slots": 0,
           "block": {
-            "id": "m2",
+            "id": "faq",
             "type": "faq",
             "sourceSectionIds": [
-              "m2"
+              "faq"
             ],
-            "heading": "Your questions before requesting a quote",
+            "heading": "Frequently Asked Questions",
             "items": [
               {
-                "question": "Does the first call cost anything?",
-                "answer": "No. The 30-minute consultation is free and comes with no obligation. Using your property's own figures, we'll estimate the net effect before you commit to anything."
+                "question": "Can I hire you just for HR or recruitment without handing over management of the motel, and what scope options do you offer?",
+                "answer": "Yes, we provide HR services on their own or as part of full management, and you buy only the modules you need. Full HR planning, executive search, recruitment, payroll, and consulting and policy projects are each available on their own; only ongoing leadership of your property team requires full management."
               },
               {
-                "question": "How long does a quote take?",
-                "answer": "Expect a reply within one business day, followed by a short call before we quote. Once we understand the work, we'll confirm the quote timeline with you. Hotels with more than 200 rooms, luxury properties and multi-property groups get a custom quote."
+                "question": "Who remains the legal employer, and which hiring, pay and dismissal decisions remain with the owner?",
+                "answer": "Your ownership entity stays the legal employer, and pay scales, yearly wage rises, bonuses and dismissals stay under your final control. Within the budget you approve, we set hourly rates and propose disciplinary measures, but any salary or senior appointment outside that budget needs your approval, and nobody is terminated until you or the manager you nominate signs off."
               },
               {
-                "question": "Do you need system access to quote?",
-                "answer": "To begin, we work from your property details and whatever figures you share on the call. Please don't put passwords in your request. If some access turns out to be needed, we'll talk it through with you before you set it up."
+                "question": "How do you recruit for my motel remotely, how long does it take to fill a role, and do I approve each hire?",
+                "answer": "We recruit, place and onboard candidates remotely and interview them by video, while your named local contact checks original identity and right-to-work documents in person. From the start of the search, hourly roles take 14 to 21 days to fill and management roles take 30 to 45 days. Within the agreed budget, we hire with your general manager, unless you want to approve hires yourself."
               },
               {
-                "question": "Do I have to sign a long contract?",
-                "answer": "Asking for a quote doesn't tie you to a contract. You'll get the proposed engagement length and terms to look over first, and only then agree them directly with our team."
+                "question": "How is HR charged — per employee, per hire, per property — and is it included in the management fee?",
+                "answer": "If we manage your motel, staff leadership, recruitment and payroll processing are covered by your management fee. For standalone recruitment you pay per hire, and for HR consulting or policy work you pay a fixed project fee. We quote before you sign, based on your headcount, the hires you expect each year, the modules you select and how many properties you have."
+              },
+              {
+                "question": "Is your HR service worth it for a 20-room motel with five staff, or is it for larger hotels?",
+                "answer": "There's no minimum headcount, so a 20-room motel with five staff is eligible. For a small property, we concentrate on recruitment, onboarding, payroll and employment compliance, and leave out programmes designed only for larger hotels."
               }
             ]
           }
         },
         {
           "role": "shortest",
-          "route": "/",
-          "pageType": "home",
-          "blockId": "m3",
+          "route": "/resources/",
+          "pageType": "general",
+          "blockId": "faq",
           "splitIndex": 0,
-          "words": 172,
+          "words": 135,
           "slots": 0,
           "block": {
-            "id": "m3",
+            "id": "faq",
             "type": "faq",
             "sourceSectionIds": [
-              "m3"
+              "faq"
             ],
-            "heading": "Answers before you get started",
+            "heading": "Frequently Asked Questions",
             "items": [
               {
-                "question": "Which properties do you take on?",
-                "answer": "Hotels, motels, hostels, B&Bs, serviced apartments, short-term rentals and vacation rental portfolios. There's no minimum number of units."
+                "question": "How do I request one of these resources?",
+                "answer": "Contact our team and let us know which resource you'd like. If you have a question at the same time, tell us the term, checklist item or reporting measure you need help with."
               },
               {
-                "question": "Is there a long contract?",
-                "answer": "That depends on the service. Each agreement sets its own initial period and notice terms, and you see them in writing before you sign."
+                "question": "What does the handover checklist cover?",
+                "answer": "It lists everything to get ready before you hand over tasks, including system access, booking records, property policies and supplier documents."
               },
               {
-                "question": "How are fees set?",
-                "answer": "That depends on the service: management is charged as a share of revenue or a fixed monthly fee, and revenue and OTA plans by room count. After a first call, you get the price for your property in writing before you commit."
+                "question": "What does the sample monthly owner report show?",
+                "answer": "It's an example of how occupancy, average daily rate, channel performance and outstanding actions can be laid out for you to review, so you can agree in advance what to expect from reporting."
               },
               {
-                "question": "Who handles on-site work?",
-                "answer": "Anything that needs someone at the property is done by our partners or local contractors. Our own team is remote only."
-              },
-              {
-                "question": "How does the handover work?",
-                "answer": "First we go over the agreed work with you, set up account and system access, and confirm your leadership contact. Access starts out read-only, and the plan and any major rate or budget changes need your sign-off."
+                "question": "What can I check with the weekly rate-review template?",
+                "answer": "It's a worksheet for checking booking pace, availability, local demand and proposed rate changes."
               }
             ]
           }
@@ -746,28 +711,22 @@
       ]
     },
     {
-      "key": "cta:image-band",
+      "key": "cta:form",
       "type": "cta",
-      "variant": "image-band",
-      "uses": 1,
+      "variant": "form",
+      "uses": 23,
       "names": [
-        "cta:image-band"
+        "cta:form"
       ],
-      "evidence": [
-        {
-          "pageType": "home",
-          "index": 2,
-          "module": "cta:image-band"
-        }
-      ],
+      "evidence": [],
       "samples": [
         {
-          "role": "only",
-          "route": "/",
-          "pageType": "home",
+          "role": "longest",
+          "route": "/capabilities/",
+          "pageType": "general",
           "blockId": "cta",
           "splitIndex": 0,
-          "words": 42,
+          "words": 53,
           "slots": 1,
           "block": {
             "id": "cta",
@@ -775,23 +734,57 @@
             "sourceSectionIds": [
               "cta"
             ],
-            "heading": "Talk through your property's needs",
+            "heading": "Talk through the right level of support",
             "paragraphs": [
-              "Tell us about your property and what you'd like to hand over. You can [arrange a free 30-minute consultation with our team](/contact-us/) with no obligation, and you'll hear back within one business day."
+              "Tell us which parts you want to keep handling yourself and where you could use help. Then we'll work out with you whether full remote management, a standalone service or a one-off project suits your property.",
+              "[Discuss your options with our team](/contact-us/)."
             ],
             "cta": {
               "label": "Talk to our team",
               "href": "/contact-us/"
             },
             "links": [],
-            "variant": "image-band",
             "visuals": [
               {
                 "id": "brief-cta-1",
                 "type": "photo",
-                "content": "An independent motel owner sits beside a window overlooking the property's exterior room entrances, speaking into a smartphone while resting one hand on the desk during a consultation about handing over daily management.",
-                "setting": "Small office at an independent motel",
-                "caption": "Talk through what you’d like to hand over."
+                "content": "An independent motel owner wearing a plain shirt sits behind the reception counter, speaking into a phone and gesturing toward a laptop with its screen turned away from the camera during a discussion about which daily tasks to hand over to the remote management team.",
+                "setting": "Reception of a small US motel",
+                "caption": "Talk through what you want to keep handling and where you need support."
+              }
+            ]
+          }
+        },
+        {
+          "role": "shortest",
+          "route": "/human-resources/",
+          "pageType": "solution",
+          "blockId": "cta",
+          "splitIndex": 0,
+          "words": 18,
+          "slots": 1,
+          "block": {
+            "id": "cta",
+            "type": "cta",
+            "sourceSectionIds": [
+              "cta"
+            ],
+            "heading": "Discuss Your HR Project",
+            "paragraphs": [
+              "Send us an [enquiry about your HR project](/contact-us/)."
+            ],
+            "cta": {
+              "label": "Talk to us about HR support",
+              "href": "/request-a-quote/"
+            },
+            "links": [],
+            "visuals": [
+              {
+                "id": "brief-cta-1",
+                "type": "photo",
+                "content": "An HR adviser wearing a headset listens to a property owner's call at a small office desk, with one hand resting beside a closed, unmarked notebook.",
+                "setting": "Motel management team's remote office",
+                "caption": "Talk through your property's HR needs."
               }
             ]
           }
@@ -799,159 +792,90 @@
       ]
     },
     {
-      "key": "process:photo-cards",
+      "key": "process:list",
       "type": "process",
-      "variant": "photo-cards",
-      "uses": 2,
+      "variant": "list",
+      "uses": 21,
       "names": [
-        "process:photo-cards"
+        "process:list"
       ],
       "evidence": [],
       "samples": [
         {
           "role": "longest",
-          "route": "/terms-and-conditions/",
-          "pageType": "privacy",
-          "blockId": "m2-steps",
+          "route": "/operations-management/",
+          "pageType": "solution",
+          "blockId": "m2",
           "splitIndex": 0,
-          "words": 47,
-          "slots": 1,
+          "words": 242,
+          "slots": 0,
           "block": {
-            "id": "m2-steps",
+            "id": "m2",
             "type": "process",
+            "sourceSectionIds": [
+              "m2"
+            ],
+            "heading": "Data-Driven Assessment of Your Current Operations",
             "paragraphs": [
-              "Agreed targets, monthly reviews and strategy changes—not guaranteed revenue."
+              "We assess how your property runs today using benchmarking, reporting and technology for upgrading your systems."
             ],
             "steps": [
               {
-                "heading": "Agree measurable targets",
-                "text": "Agree measurable targets with the owner at the start."
+                "heading": "Share operating records",
+                "text": "You give us read-only access to 12 months of P&L statements, PMS reports, payroll and timekeeping records, maintenance and work-order logs, and guest reviews and complaint logs, along with your current vendor contracts."
               },
               {
-                "heading": "Review results monthly",
-                "text": "Review results against agreed targets on every monthly strategy call."
+                "heading": "Rebuild missing baselines",
+                "text": "If your labour, maintenance or guest-service records are incomplete, the assessment still goes ahead. We rebuild baselines from payroll exports, vendor invoices and online reviews. We mark the less precise findings as estimates that show direction, not exact figures."
               },
               {
-                "heading": "Change strategy when needed",
-                "text": "Change the strategy when a target is missed."
+                "heading": "Assessment fee",
+                "text": "You pay a fixed assessment fee. It rises with your room count, your revenue outlets and the number of systems we connect beyond your PMS and channel manager. Rebuilding missing records also raises the fee."
+              },
+              {
+                "heading": "Extra scope",
+                "text": "Analysing more than 3 years of history costs more, and so does reviewing several properties together. If your hotel has more than 200 rooms, you get a custom quote."
+              },
+              {
+                "heading": "Establish complete tracking",
+                "text": "We don't hold back the assessment until your records are perfect. Instead, we set up tracking while we diagnose, which gives you 90 days of complete data for the follow-up review."
+              },
+              {
+                "heading": "Identify recovery priorities",
+                "text": "Our recovery diagnosis examines your financial health, market position, physical condition and operating performance. We trace revenue, cost, staffing and brand-compliance problems to their causes. Then we define corrections and repositioning opportunities specific to your property."
               }
             ],
-            "variant": "photo-cards",
-            "continues": "m2"
+            "mediaKind": "process"
           }
         },
         {
           "role": "shortest",
-          "route": "/services/",
-          "pageType": "solutions_hub",
-          "blockId": "overview-steps",
+          "route": "/ota-optimization/",
+          "pageType": "solution",
+          "blockId": "m6-steps",
           "splitIndex": 0,
-          "words": 39,
-          "slots": 1,
+          "words": 38,
+          "slots": 0,
           "block": {
-            "id": "overview-steps",
+            "id": "m6-steps",
             "type": "process",
-            "paragraphs": [
-              "Management across the investment cycle"
-            ],
+            "heading": "Select suitable channels, then tailor their content and promotions.",
             "steps": [
               {
-                "heading": "First analysis",
-                "text": "Management starts with the first analysis."
+                "heading": "Choose suitable channels",
+                "text": "Pick channels that suit the hotel's market."
               },
               {
-                "heading": "Launch",
-                "text": "Management continues through launch."
+                "heading": "Write channel content",
+                "text": "Write content for each selected platform."
               },
               {
-                "heading": "Ongoing operations",
-                "text": "Remote day-to-day management covers guest experience through financial management, with your on-site team or local contractors on the ground."
+                "heading": "Set up promotions",
+                "text": "Set up promotions for each selected platform."
               }
             ],
-            "variant": "photo-cards",
-            "continues": "overview"
-          }
-        }
-      ]
-    },
-    {
-      "key": "gallery:grid",
-      "type": "gallery",
-      "variant": "grid",
-      "uses": 1,
-      "names": [
-        "gallery:grid"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "only",
-          "route": "/services/",
-          "pageType": "solutions_hub",
-          "blockId": "plan-children",
-          "splitIndex": 0,
-          "words": 23,
-          "slots": 12,
-          "block": {
-            "id": "plan-children",
-            "type": "gallery",
-            "sourceSectionIds": [],
-            "items": [
-              {
-                "caption": "Business Development",
-                "href": "/business-development/"
-              },
-              {
-                "caption": "Digital Marketing",
-                "href": "/digital-marketing/"
-              },
-              {
-                "caption": "Human Resources",
-                "href": "/human-resources/"
-              },
-              {
-                "caption": "Operations Management",
-                "href": "/operations-management/"
-              },
-              {
-                "caption": "Revenue Management",
-                "href": "/revenue-management/"
-              },
-              {
-                "caption": "Information Technology",
-                "href": "/information-technology/"
-              },
-              {
-                "caption": "Commercial Strategy",
-                "href": "/commercial-strategy/"
-              },
-              {
-                "caption": "Project Management",
-                "href": "/project-management/"
-              },
-              {
-                "caption": "Development",
-                "href": "/development/"
-              },
-              {
-                "caption": "Receivership",
-                "href": "/receivership/"
-              },
-              {
-                "caption": "Asset Management",
-                "href": "/asset-management/"
-              },
-              {
-                "caption": "Accounting",
-                "href": "/accounting/"
-              }
-            ],
-            "links": [
-              {
-                "label": "OTA Optimization",
-                "href": "/ota-optimization/"
-              }
-            ]
+            "variant": "list",
+            "continues": "m6"
           }
         }
       ]
@@ -960,7 +884,7 @@
       "key": "iconList:checks",
       "type": "iconList",
       "variant": "checks",
-      "uses": 26,
+      "uses": 21,
       "names": [
         "iconList:checks"
       ],
@@ -1006,7 +930,7 @@
           "pageType": "privacy",
           "blockId": "iconList-1",
           "splitIndex": 0,
-          "words": 342,
+          "words": 349,
           "slots": 0,
           "block": {
             "id": "iconList-1",
@@ -1030,11 +954,11 @@
               },
               {
                 "heading": "Ending a plan",
-                "text": "Once the three-month initial period is over, you can end your plan with 30 days' written notice, and there's no exit fee. The one-time setup fee can't be refunded after setup work starts, and we don't refund fees already paid for the current month."
+                "text": "Each service's minimum term is set out in its proposal. Once that term is over, you can end your plan with 30 days' written notice, and there's no exit fee. The one-time setup fee can't be refunded after setup work starts, and we don't refund fees already paid for the current month."
               },
               {
                 "heading": "Pausing a plan",
-                "text": "After the three-month initial period, you can also pause, again with 30 days' written notice. Monthly billing then stops for up to three months. You won't pay a pause fee, and if you restart within that time, you won't pay a new setup fee either."
+                "text": "After the minimum term, you can also pause, again with 30 days' written notice. Monthly billing then stops for up to three months. You won't pay a pause fee, and if you restart within that time, you won't pay a new setup fee either."
               },
               {
                 "heading": "Changing plans",
@@ -1045,32 +969,61 @@
                 "text": "Revenue results aren't guaranteed, and we don't offer refunds, because market demand, competitors and other outside factors all affect performance. What we do is work closely with you, check results against agreed targets on every monthly strategy call and change the strategy whenever a target is missed."
               }
             ],
-            "mediaKind": "material"
+            "mediaKind": "material",
+            "visuals": [
+              {
+                "id": "m2_sequence",
+                "type": "data",
+                "purpose": "Explain the target-review process MotelPilot commits to instead of guaranteeing revenue or offering refunds.",
+                "caption": "Agreed targets, monthly reviews and strategy changes—not guaranteed revenue.",
+                "data": {
+                  "shape": "sequence",
+                  "items": [
+                    {
+                      "label": "Agree measurable targets",
+                      "detail": "Agree measurable targets with the owner at the start."
+                    },
+                    {
+                      "label": "Review results monthly",
+                      "detail": "Review results against agreed targets on every monthly strategy call."
+                    },
+                    {
+                      "label": "Change strategy when needed",
+                      "detail": "Change the strategy when a target is missed."
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
           "role": "shortest",
-          "route": "/services/",
-          "pageType": "solutions_hub",
-          "blockId": "iconList-1",
+          "route": "/business-development/",
+          "pageType": "solution",
+          "blockId": "m5",
           "splitIndex": 0,
-          "words": 60,
+          "words": 61,
           "slots": 0,
           "block": {
-            "id": "iconList-1",
+            "id": "m5",
             "type": "iconList",
             "sourceSectionIds": [
-              "overview_2"
+              "m5"
             ],
-            "heading": "Staffing Support and the Owners We Serve",
+            "heading": "Pre-Opening Services and Launch",
             "items": [
               {
-                "heading": "Property staffing",
-                "text": "We take care of [recruiting, staffing and training](/human-resources/) for your property and support the team that delivers your guest experience."
+                "heading": "Annual marketing plan",
+                "text": "Before you open, we prepare your motel's annual marketing plan, which sets the commercial plan for your launch."
               },
               {
-                "heading": "Owners we serve",
-                "text": "We [serve independent lodging owners](/about-us/) in countries including the United States, France, Canada and Australia. Our owners run hotels, motels, hostels, B&Bs, serviced apartments and short-term rentals."
+                "heading": "Budget and revenue execution",
+                "text": "We prepare your operating budget before opening and put your revenue strategy into action from day one."
+              },
+              {
+                "heading": "Motel staff recruitment",
+                "text": "We recruit and hire your motel's staff through our [human resources service](/human-resources/)."
               }
             ],
             "mediaKind": "process"
@@ -1082,7 +1035,7 @@
       "key": "featureGrid:cards",
       "type": "featureGrid",
       "variant": "cards",
-      "uses": 25,
+      "uses": 23,
       "names": [
         "featureGrid:cards"
       ],
@@ -1163,7 +1116,7 @@
               {
                 "heading": "Property type",
                 "paragraphs": [
-                  "Whether it's a hotel, motel, hostel, B&B, serviced apartments or short-term rentals."
+                  "Whether it's a motel, hotel, hostel, B&B, serviced apartments or short-term rentals."
                 ]
               }
             ],
@@ -1176,7 +1129,7 @@
       "key": "splitMedia:single",
       "type": "splitMedia",
       "variant": "single",
-      "uses": 24,
+      "uses": 21,
       "names": [
         "splitMedia:single"
       ],
@@ -1195,155 +1148,69 @@
       "samples": [
         {
           "role": "longest",
-          "route": "/services/",
-          "pageType": "solutions_hub",
-          "blockId": "m3",
-          "splitIndex": 0,
-          "words": 150,
+          "route": "/accounting/",
+          "pageType": "solution",
+          "blockId": "splitMedia-2",
+          "splitIndex": 1,
+          "words": 141,
           "slots": 1,
           "block": {
-            "id": "m3",
+            "id": "splitMedia-2",
             "type": "splitMedia",
             "sourceSectionIds": [
-              "m3"
+              "m2_3"
             ],
-            "heading": "Transition, Pre-Opening and Licensing Support",
+            "heading": "Tax Filings, Privacy and Payment Compliance",
             "paragraphs": [
-              "Before handover or opening, we review your systems, staffing, contracts and permits, and we handle the licenses your hotel needs. Fixing gaps before guests arrive is cheaper and faster, but it takes your time and access to your data. If the handover window is short, we complete less of this work.",
-              "Our [management and pre-opening services](/) need 6 to 8 weeks before handover or 3 to 6 months before opening, and we also give advice earlier, at the design stage. You choose either a fixed monthly fee based on your room count or a percentage fee of 3% to 5% of total hotel revenue. On the percentage fee, full management that includes revenue and OTA management is at the upper end of that range, and properties with more than 100 rooms are toward the lower end. The agreed percentage changes only when your services change."
+              "We process and report your lodging, occupancy, sales and use taxes by each local deadline. Licensed local tax partners submit your returns, payroll filings and other statutory filings, and we oversee their work. Your own accountant keeps your corporate income tax returns, statutory financial statement audits and any filings that need their locally licensed signature. We supply the supporting schedules for that work. Each month we also export your ledger to QuickBooks, so your accountant can keep using it for year-end and tax work.",
+              "Our [privacy and payment safeguards](/privacy-policy/) follow Canada's PIPEDA, the GDPR for French properties, the Australian Privacy Act and relevant US state laws. Card data stays outside our systems because we use PCI DSS-compliant processors. We provide Canadian cloud hosting, and on request we store data for French properties in the EU."
             ],
-            "wordCount": 145,
+            "wordCount": 132,
             "media": null,
+            "variant": "panel",
             "mediaKind": "process",
             "visuals": [
               {
-                "id": "planning_lead_times",
-                "type": "data",
-                "purpose": "Help owners distinguish the recommended preparation windows for a management change and a new opening.",
-                "caption": "When to bring us on board",
-                "data": {
-                  "shape": "ranges",
-                  "items": [
-                    {
-                      "label": "Management handover",
-                      "min": 6,
-                      "max": 8,
-                      "unit": "weeks"
-                    },
-                    {
-                      "label": "Core pre-opening programme",
-                      "min": 3,
-                      "max": 6,
-                      "unit": "months"
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "management_fee_range",
-                "type": "data",
-                "purpose": "Show the stated management fee range and what determines an owner's agreed rate.",
-                "caption": "Your rate is fixed in the agreement before signing",
-                "data": {
-                  "shape": "ranges",
-                  "items": [
-                    {
-                      "label": "Management fee",
-                      "min": 3,
-                      "max": 5,
-                      "unit": "% of total hotel revenue"
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "brief-m3-1",
+                "id": "brief-splitMedia-2-1",
                 "type": "photo",
-                "content": "A management supervisor tests a guestroom key card at the door while the incoming front-desk employee watches during a pre-opening walkthrough.",
-                "setting": "Exterior corridor of a US motel",
-                "caption": "Checking readiness before guests arrive."
+                "content": "An accounting team member places a closed folder of a motel's tax supporting records into a lockable filing cabinet beside a cleared desk, with no visible writing or logos.",
+                "setting": "Management team's secure records room",
+                "caption": "Keeping tax supporting records secure."
               }
             ]
           }
         },
         {
           "role": "shortest",
-          "route": "/services/",
-          "pageType": "solutions_hub",
-          "blockId": "m6",
+          "route": "/ota-optimization/",
+          "pageType": "solution",
+          "blockId": "m4",
           "splitIndex": 2,
-          "words": 26,
+          "words": 28,
           "slots": 1,
           "block": {
-            "id": "m6",
+            "id": "m4",
             "type": "splitMedia",
             "sourceSectionIds": [
-              "m6"
+              "m4"
             ],
-            "heading": "OTA Distribution and Listing Content",
+            "heading": "Trip.com promotions, rate plans and instant confirmation",
             "paragraphs": [
-              "We [refresh your Booking.com listing](/ota-optimization/), covering photos, title, description, policies and amenity tags, and your existing reviews stay as they are."
+              "On Trip.com, we set up your promotions and flash sales, structure your rate plans and switch on instant confirmation for you."
             ],
             "wordCount": 21,
             "media": null,
+            "variant": "panel",
             "mediaKind": "process",
             "visuals": [
               {
-                "id": "brief-m6-1",
+                "id": "brief-m4-1",
                 "type": "photo",
-                "content": "A staff photographer adjusts a tripod-mounted camera aimed at a freshly prepared motel guestroom to capture updated listing photos.",
-                "setting": "Bright motel guestroom",
-                "caption": "Photographing the rooms guests will book."
+                "content": "A revenue specialist adjusts a promotional rate plan on a laptop at a small desk, photographed from across the desk with only the unmarked laptop lid visible.",
+                "setting": "Motel back office at dusk",
+                "caption": "Setting promotions and rates for your listing."
               }
             ]
-          }
-        }
-      ]
-    },
-    {
-      "key": "table:grid",
-      "type": "table",
-      "variant": "grid",
-      "uses": 1,
-      "names": [
-        "table:grid"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "only",
-          "route": "/services/",
-          "pageType": "solutions_hub",
-          "blockId": "m5",
-          "splitIndex": 0,
-          "words": 176,
-          "slots": 0,
-          "block": {
-            "id": "m5",
-            "type": "table",
-            "sourceSectionIds": [
-              "m5"
-            ],
-            "heading": "Revenue Strategy and Dynamic Pricing",
-            "columns": [
-              "Service consideration",
-              "What it means for you"
-            ],
-            "rows": [
-              [
-                "Performance measures",
-                "We measure revenue management by gains in market share and profit per booking. Chasing occupancy or rate on its own loses value when channel costs and competitors are overlooked."
-              ],
-              [
-                "Engagement scope",
-                "We include revenue management in our hotel management or provide it on its own. When it's standalone, pricing decisions have less influence over sales, distribution and on-property operations."
-              ],
-              [
-                "Dedicated service and pricing",
-                "Our [revenue management service](/revenue-management/) gives you daily pricing decisions, weekly occupancy, ADR and RevPAR reports, and dashboard updates every 24 hours. Monthly Base / Extended / Complete prices are set by room band: up to 20 rooms, USD 750 / USD 1,040 / USD 1,300; 21–50 rooms, USD 1,090 / USD 1,500 / USD 1,900; 51–100 rooms, USD 1,600 / USD 2,200 / USD 2,800; 101–200 rooms, USD 2,300 / USD 3,100 / USD 4,000. One-time setup fees for those bands are USD 860, USD 1,400, USD 2,000 and USD 2,900 respectively."
-              ]
-            ],
-            "mediaKind": "product"
           }
         }
       ]
@@ -1352,7 +1219,7 @@
       "key": "proof:band",
       "type": "proof",
       "variant": "band",
-      "uses": 11,
+      "uses": 10,
       "names": [
         "intro/proof"
       ],
@@ -1386,51 +1253,58 @@
       "samples": [
         {
           "role": "longest",
-          "route": "/accounting/",
+          "route": "/ota-optimization/",
           "pageType": "solution",
           "blockId": "proof-1",
           "splitIndex": 0,
-          "words": 129,
+          "words": 77,
           "slots": 0,
           "block": {
             "id": "proof-1",
             "type": "proof",
             "sourceSectionIds": [
-              "m2_6"
+              "m2_2"
             ],
-            "heading": "Fees, Sales Taxes and Payment Terms",
+            "heading": "How OTA work is priced by listing and room band",
             "paragraphs": [
-              "We quote your fixed monthly accounting fee before you sign. It's based on your transaction volume, your payroll headcount, how many properties and legal entities you have, and which functions you hand over to us. Connections that have no standard data feed and cleanup of historical records each carry a separate one-time fee, so that work stays out of your recurring charge. We quote the cleanup once we've reviewed your books, and we bill third-party software to your property at cost.",
-              "Under our [pricing and payment terms](/terms-and-conditions/), USD prices exclude sales taxes. We add those only where your property's local law requires them. You pay your bank's transfer charges, and if you pay in CAD, EUR or AUD, we cover the currency-conversion costs."
+              "One-time optimisation is priced only by listing count: each property on each channel is one listing, including Google’s free booking links.",
+              "Listing condition doesn’t change your price for ongoing management or optimisation, so rebuilding a neglected Expedia or Agoda listing costs the same as optimising a live one. Room types and content languages don’t affect price, and we fix room and rate mappings at no extra charge."
             ],
-            "wordCount": 123,
+            "wordCount": 67,
             "mediaKind": "material",
             "visuals": [
               {
-                "id": "m2_6_comparison",
+                "id": "m2_2_comparison",
                 "type": "data",
-                "purpose": "Distinguish recurring accounting fees from separately priced one-time work.",
-                "caption": "Recurring accounting and one-time work are priced separately.",
+                "purpose": "Distinguish the pricing basis for ongoing management from one-time listing optimisation.",
+                "caption": "Room count determines ongoing pricing; listing count determines one-time pricing.",
                 "data": {
                   "shape": "comparison",
                   "items": {
                     "options": [
-                      "Recurring accounting",
-                      "One-time work"
+                      "Ongoing OTA management",
+                      "One-time listing optimisation"
                     ],
                     "rows": [
                       {
-                        "label": "Fee structure",
+                        "label": "Price basis",
                         "values": [
-                          "Fixed monthly amount quoted before you sign",
-                          "Separate one-time fees"
+                          "Number of rooms",
+                          "Number of listings"
                         ]
                       },
                       {
-                        "label": "Work covered",
+                        "label": "Fee arrangement",
                         "values": [
-                          "The accounting functions you hand over to us",
-                          "Connecting systems with no standard data feed and cleaning up historical books"
+                          "Flat monthly fee",
+                          "One-time optimisation fee"
+                        ]
+                      },
+                      {
+                        "label": "Listing condition",
+                        "values": [
+                          "Does not affect pricing",
+                          "Does not affect pricing"
                         ]
                       }
                     ]
@@ -1456,7 +1330,7 @@
             ],
             "heading": "Your Named HR Contact, Ready to Help",
             "paragraphs": [
-              "You get one named HR contact for your hotel, not a shared ticket queue. Your managers phone or email that person directly with day-to-day HR questions, and they get an answer within one business day."
+              "You get one named HR contact for your motel, not a shared ticket queue. Your managers phone or email that person directly with day-to-day HR questions, and they get an answer within one business day."
             ],
             "wordCount": 35,
             "mediaKind": "material"
@@ -1465,388 +1339,10 @@
       ]
     },
     {
-      "key": "relatedPages:links",
-      "type": "relatedPages",
-      "variant": "links",
-      "uses": 12,
-      "names": [
-        "relatedPages:links"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/human-resources/",
-          "pageType": "solution",
-          "blockId": "related",
-          "splitIndex": 0,
-          "words": 23,
-          "slots": 0,
-          "block": {
-            "id": "related",
-            "type": "relatedPages",
-            "heading": "Related services",
-            "links": [
-              {
-                "label": "Services",
-                "href": "/services/"
-              },
-              {
-                "label": "Business Development",
-                "href": "/business-development/"
-              },
-              {
-                "label": "Digital Marketing",
-                "href": "/digital-marketing/"
-              },
-              {
-                "label": "Operations Management",
-                "href": "/operations-management/"
-              },
-              {
-                "label": "Revenue Management",
-                "href": "/revenue-management/"
-              },
-              {
-                "label": "Information Technology",
-                "href": "/information-technology/"
-              },
-              {
-                "label": "Commercial Strategy",
-                "href": "/commercial-strategy/"
-              },
-              {
-                "label": "Project Management",
-                "href": "/project-management/"
-              },
-              {
-                "label": "Development",
-                "href": "/development/"
-              },
-              {
-                "label": "Receivership",
-                "href": "/receivership/"
-              },
-              {
-                "label": "Asset Management",
-                "href": "/asset-management/"
-              },
-              {
-                "label": "OTA Optimization",
-                "href": "/ota-optimization/"
-              }
-            ],
-            "variant": "links",
-            "planned": true
-          }
-        },
-        {
-          "role": "shortest",
-          "route": "/services/",
-          "pageType": "solutions_hub",
-          "blockId": "related",
-          "splitIndex": 0,
-          "words": 5,
-          "slots": 0,
-          "block": {
-            "id": "related",
-            "type": "relatedPages",
-            "heading": "Related services",
-            "links": [
-              {
-                "label": "Operations Management",
-                "href": "/operations-management/"
-              },
-              {
-                "label": "Development",
-                "href": "/development/"
-              }
-            ],
-            "variant": "links",
-            "planned": true
-          }
-        }
-      ]
-    },
-    {
-      "key": "cta:form",
-      "type": "cta",
-      "variant": "form",
-      "uses": 25,
-      "names": [
-        "cta:form"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/privacy-policy/",
-          "pageType": "privacy",
-          "blockId": "cta",
-          "splitIndex": 0,
-          "words": 96,
-          "slots": 1,
-          "block": {
-            "id": "cta",
-            "type": "cta",
-            "sourceSectionIds": [
-              "cta"
-            ],
-            "heading": "Ask a privacy question or exercise your rights",
-            "paragraphs": [
-              "You can use our [contact page to send a privacy question or rights request](/contact-us/). Let us know what you need and, if relevant, how you're connected to the property. Please leave payment card details and identity documents out of your first message.",
-              "You'll hear back from us within one business day. Before we complete a request, we may need to verify your identity or check with the property responsible for your data. Every request is handled within the time limits set by applicable law."
-            ],
-            "cta": {
-              "label": "Ask a privacy question",
-              "href": "/contact-us/"
-            },
-            "links": []
-          }
-        },
-        {
-          "role": "shortest",
-          "route": "/human-resources/",
-          "pageType": "solution",
-          "blockId": "cta",
-          "splitIndex": 0,
-          "words": 18,
-          "slots": 1,
-          "block": {
-            "id": "cta",
-            "type": "cta",
-            "sourceSectionIds": [
-              "cta"
-            ],
-            "heading": "Discuss Your HR Project",
-            "paragraphs": [
-              "Send us an [enquiry about your HR project](/contact-us/)."
-            ],
-            "cta": {
-              "label": "Talk to us about HR support",
-              "href": "/request-a-quote/"
-            },
-            "links": [],
-            "visuals": [
-              {
-                "id": "brief-cta-1",
-                "type": "photo",
-                "content": "An HR adviser wearing a headset listens to a property owner's call at a small office desk, with one hand resting beside a closed, unmarked notebook.",
-                "setting": "Motel management team's remote office",
-                "caption": "Talk through your property's HR needs."
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "key": "featureGrid:bullets",
-      "type": "featureGrid",
-      "variant": "bullets",
-      "uses": 52,
-      "names": [
-        "featureGrid:bullets"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/human-resources/",
-          "pageType": "solution",
-          "blockId": "m2",
-          "splitIndex": 0,
-          "words": 303,
-          "slots": 0,
-          "block": {
-            "id": "m2",
-            "type": "featureGrid",
-            "sourceSectionIds": [
-              "m2"
-            ],
-            "heading": "Recruitment & Team Building",
-            "items": [
-              {
-                "heading": "Hiring decisions and timing",
-                "paragraphs": [
-                  "Before we start searching, we agree your budget and how you want sign-off to work. Within that budget, we hire with your general manager, unless you want to approve hires yourself. Once the search starts, hourly roles take 14 to 21 days and management roles take 30 to 45 days."
-                ]
-              },
-              {
-                "heading": "Candidate and contract fit",
-                "paragraphs": [
-                  "We screen candidates for the skills each role needs and for a personality that suits your hotel. We recruit hourly, salaried and tipped employees on full-time, part-time, seasonal and temporary terms."
-                ]
-              },
-              {
-                "heading": "Departments and seasonal preparation",
-                "paragraphs": [
-                  "We recruit across front desk, housekeeping, maintenance, food and beverage, and management. If your property is seasonal, we start 8 weeks before opening, so your team is ready on day one."
-                ]
-              },
-              {
-                "heading": "Training and development",
-                "paragraphs": [
-                  "Your front-desk team completes six structured remote video sessions within the first 30 days of working with us. We also develop and support staff retention, deliver leadership development, and provide sales and marketing training and direction."
-                ]
-              },
-              {
-                "heading": "Replacement recruitment",
-                "paragraphs": [
-                  "If someone we recruited resigns or is dismissed for performance within their first 90 days, we find you a replacement with no additional recruitment fee."
-                ]
-              },
-              {
-                "heading": "Required pre-start checks",
-                "paragraphs": [
-                  "Before anyone starts, we check at least two employment references, the required licences and certificates (including food-handling or first-aid credentials), and their right to work under your country’s rules. All of these checks are finished within 5 business days of the offer."
-                ]
-              },
-              {
-                "heading": "Conditional background screening",
-                "paragraphs": [
-                  "Where local law permits it and your candidate consents, we arrange background checks through licensed local screening providers, and your property is billed at cost."
-                ]
-              },
-              {
-                "heading": "Full hotel management",
-                "paragraphs": [
-                  "With [third-party management](/), we run an independent hotel’s daily operations remotely while you keep ownership. We recruit, onboard, orient and train your General Manager and Director of Sales, including brand immersion when it’s required."
-                ]
-              }
-            ],
-            "variant": "cards",
-            "mediaKind": "process"
-          }
-        },
-        {
-          "role": "shortest",
-          "route": "/receivership/",
-          "pageType": "solution",
-          "blockId": "featureGrid-6",
-          "splitIndex": 0,
-          "words": 66,
-          "slots": 0,
-          "block": {
-            "id": "featureGrid-6",
-            "type": "featureGrid",
-            "sourceSectionIds": [
-              "m6_2"
-            ],
-            "heading": "Capital Planning and Renovation Oversight",
-            "items": [
-              {
-                "heading": "Qualified project oversight",
-                "paragraphs": [
-                  "Our [project management](/project-management/) team is made up of PMP-certified managers with construction experience and carries professional liability insurance. We send you the insurance certificate before you sign."
-                ]
-              },
-              {
-                "heading": "Your contracting authority",
-                "paragraphs": [
-                  "We act as your agent, not as the builder. You sign contracts directly with contractors and vendors. We review the bids and, where needed, select or recommend providers."
-                ]
-              }
-            ],
-            "variant": "cards",
-            "mediaKind": "process"
-          }
-        }
-      ]
-    },
-    {
-      "key": "caseStudies:default",
-      "type": "caseStudies",
-      "variant": null,
-      "uses": 10,
-      "names": [
-        "caseStudies"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/business-development/",
-          "pageType": "solution",
-          "blockId": "owner-caseStudies",
-          "splitIndex": 0,
-          "words": 46,
-          "slots": 1,
-          "block": {
-            "id": "owner-caseStudies",
-            "type": "caseStudies",
-            "heading": "Client results",
-            "items": [
-              {
-                "client": "Family business owner",
-                "market": "Columbus, USA",
-                "title": "Business development for a family-owned business",
-                "summary": "Business development set up with the owners over a planned handover, with the results reported to them every week.",
-                "results": [
-                  {
-                    "value": "6 weeks",
-                    "label": "handover"
-                  },
-                  {
-                    "value": "1",
-                    "label": "weekly report"
-                  },
-                  {
-                    "value": "2",
-                    "label": "owner meetings a month"
-                  }
-                ],
-                "href": "/business-development/"
-              }
-            ],
-            "linkLabel": "About this service"
-          }
-        },
-        {
-          "role": "shortest",
-          "route": "/digital-marketing/",
-          "pageType": "solution",
-          "blockId": "owner-caseStudies",
-          "splitIndex": 0,
-          "words": 41,
-          "slots": 1,
-          "block": {
-            "id": "owner-caseStudies",
-            "type": "caseStudies",
-            "heading": "Client results",
-            "items": [
-              {
-                "client": "Owner-operator",
-                "market": "San Antonio, USA",
-                "title": "Digital marketing for an owner with two sites",
-                "summary": "Digital marketing brought both sites under one way of working and one report.",
-                "results": [
-                  {
-                    "value": "2",
-                    "label": "sites"
-                  },
-                  {
-                    "value": "1",
-                    "label": "shared report"
-                  },
-                  {
-                    "value": "3 months",
-                    "label": "to a settled routine"
-                  }
-                ],
-                "href": "/digital-marketing/"
-              }
-            ],
-            "linkLabel": "About this service"
-          }
-        }
-      ]
-    },
-    {
       "key": "featureGrid:single",
       "type": "featureGrid",
       "variant": "single",
-      "uses": 5,
+      "uses": 6,
       "names": [
         "featureGrid:single"
       ],
@@ -1854,11 +1350,11 @@
       "samples": [
         {
           "role": "longest",
-          "route": "/accounting/",
+          "route": "/asset-management/",
           "pageType": "solution",
           "blockId": "m4",
           "splitIndex": 0,
-          "words": 124,
+          "words": 108,
           "slots": 0,
           "block": {
             "id": "m4",
@@ -1866,30 +1362,24 @@
             "sourceSectionIds": [
               "m4"
             ],
-            "heading": "Financial Statements and Owner Reporting",
+            "heading": "What Owner-Side Operator Oversight Includes",
             "items": [
               {
-                "heading": "Lender-ready financial statements",
+                "heading": "Choosing the right scope",
                 "paragraphs": [
-                  "Every period, you get a profit and loss statement, a balance sheet and a cash flow statement, all ready for your lenders and investors to review."
+                  "Choose owner-side oversight when you trust your operator to implement our recommendations, because the results depend on your operator acting on them. With full asset management, we deliver the plans ourselves and measure the RevPAR and GOP effect, though results aren't guaranteed."
                 ]
               },
               {
-                "heading": "Reviewed monthly delivery",
+                "heading": "Strategy and operating analysis",
                 "paragraphs": [
-                  "After each close, our staff accountants and a licensed CPA review your full P&L. You receive it within 10 business days of month-end. We also reconcile your cash, cash flows, assets and liabilities promptly."
+                  "We review positioning, strategy, revenue budgets and forecasts, plan capital and investment, and evaluate internal processes and detailed internal data against industry benchmarks."
                 ]
               },
               {
-                "heading": "International payroll delivery",
+                "heading": "Owner investment advice",
                 "paragraphs": [
-                  "We run payroll remotely ourselves for hotels in the United States, France, Canada, Australia and the other countries where we work with owners."
-                ]
-              },
-              {
-                "heading": "Payments and registers",
-                "paragraphs": [
-                  "We handle your vendor invoices, utilities management, loan payments and partner distributions. We also process electronic ACH payments and keep your check registers."
+                  "We advise you on franchise affiliation, management contract terms, budgets, capital investment and whether to buy, hold or sell, and we monitor how the asset is performing."
                 ]
               }
             ],
@@ -1899,11 +1389,11 @@
         },
         {
           "role": "shortest",
-          "route": "/digital-marketing/",
+          "route": "/development/",
           "pageType": "solution",
           "blockId": "m4",
           "splitIndex": 0,
-          "words": 97,
+          "words": 47,
           "slots": 0,
           "block": {
             "id": "m4",
@@ -1911,24 +1401,18 @@
             "sourceSectionIds": [
               "m4"
             ],
-            "heading": "From the metasearch click to a tracked direct booking",
+            "heading": "From Pre-Opening to Day-to-Day Running",
             "items": [
               {
-                "heading": "Landing page repairs",
+                "heading": "Your motel team",
                 "paragraphs": [
-                  "Before we judge performance, we fix your metasearch landing page so it shows clear rates, direct booking incentives and trust signals."
+                  "Our [human resources support](/human-resources/) can staff your new property and train its team before opening."
                 ]
               },
               {
-                "heading": "Booking flow checks",
+                "heading": "Opening programme",
                 "paragraphs": [
-                  "We audit every step up to reservation confirmation and test bookings on mobile. Where a change has to be made inside your booking-engine supplier's system, we give your supplier the exact settings changes in writing."
-                ]
-              },
-              {
-                "heading": "Consent before tracking",
-                "paragraphs": [
-                  "Conversion tracking starts only after a visitor gives consent. We use a consent banner and Google's consent mode, in line with the GDPR."
+                  "We coordinate hiring, training, system setup, sales ramp-up and launch as one programme, adapted to your brand's standards or your independent positioning."
                 ]
               }
             ],
@@ -1942,7 +1426,7 @@
       "key": "splitMedia:panel",
       "type": "splitMedia",
       "variant": "panel",
-      "uses": 16,
+      "uses": 14,
       "names": [
         "splitMedia:panel"
       ],
@@ -1957,75 +1441,60 @@
       "samples": [
         {
           "role": "longest",
-          "route": "/ota-optimization/",
+          "route": "/operations-management/",
           "pageType": "solution",
-          "blockId": "m12",
-          "splitIndex": 7,
-          "words": 124,
-          "slots": 0,
+          "blockId": "m3",
+          "splitIndex": 0,
+          "words": 109,
+          "slots": 1,
           "block": {
-            "id": "m12",
+            "id": "m3",
             "type": "splitMedia",
             "sourceSectionIds": [
-              "m12"
+              "m3"
             ],
-            "heading": "What OTA optimization covers and what stays with your team",
+            "heading": "Group Purchasing Power and Supplier Savings",
             "paragraphs": [
-              "If you take OTA optimisation only, your front desk handles guest replies, booking amendments and cancellations. If you take ongoing OTA management, we answer OTA messages before arrival and during stays, and we process date changes and cancellations within your agreed policy.",
-              "You make the call on cancellation disputes, refund requests and chargebacks, and we pass your decision on to the OTA. We mark no-shows and request commission waivers for cancellations and invalid cards. We also file commission disputes and invalid-card claims in every extranet, including Booking.com and Expedia, within 2 business days after the stay date.",
-              "Whichever service you choose, check-in, on-site guest matters and relocating overbooked guests stay with your property team."
+              "Our purchasing programmes turn our combined buying volume into supplier savings for your property. They cover the United States, Canada, France and Australia, and they also cover clients who take only revenue management or OTA management. These programmes also give you category expertise, an account manager, and compliance and risk management, with sustainability and ESG kept in view.",
+              "Before you switch, you compare our negotiated prices with your current contracts item by item and move only the categories where the savings are clear. Categories restricted by franchise-approved lists or exclusive local contracts are excluded. Suppliers outside the countries we cover are also excluded."
             ],
-            "wordCount": 114,
+            "wordCount": 103,
             "media": null,
             "variant": "panel",
             "mediaKind": "process",
             "visuals": [
               {
-                "id": "m12_comparison",
+                "id": "m3_purchasing_process",
                 "type": "data",
-                "purpose": "Distinguish optimisation-only responsibilities from the additional remote coverage of ongoing management.",
-                "caption": "Ongoing management adds policy-based support; on-site duties and judgement stay with you.",
+                "purpose": "Explain how pooled purchasing produces savings that go to the property.",
+                "caption": "From pooled purchasing to owner savings.",
                 "data": {
-                  "shape": "comparison",
-                  "items": {
-                    "options": [
-                      "OTA optimisation only",
-                      "With ongoing OTA management"
-                    ],
-                    "rows": [
-                      {
-                        "label": "Guest replies",
-                        "values": [
-                          "Your front desk",
-                          "Our remote team through OTA messaging before arrival and during the stay"
-                        ]
-                      },
-                      {
-                        "label": "Booking changes and cancellations",
-                        "values": [
-                          "Your front desk",
-                          "Our remote team within the policy agreed with you"
-                        ]
-                      },
-                      {
-                        "label": "Check-in and on-site matters",
-                        "values": [
-                          "Your property team",
-                          "Your property team"
-                        ]
-                      },
-                      {
-                        "label": "Relocating overbooked guests",
-                        "values": [
-                          "Your property team",
-                          "Your property team"
-                        ]
-                      }
-                    ]
-                  }
+                  "shape": "sequence",
+                  "items": [
+                    {
+                      "label": "Pool purchasing volume",
+                      "detail": "We pool your orders with other clients' through our group purchasing programme."
+                    },
+                    {
+                      "label": "Secure better pricing",
+                      "detail": "We use a group purchasing programme to secure better commodity pricing."
+                    },
+                    {
+                      "label": "Pass savings to you",
+                      "detail": "Orders are placed in your property's name and the negotiated savings are passed to you in full."
+                    }
+                  ]
                 }
+              },
+              {
+                "id": "brief-m3-1",
+                "type": "photo",
+                "content": "A motel owner checks a delivery of plain bulk cartons of housekeeping supplies beside a stocked utility shelf, lifting one unlabelled refill bottle from an open carton.",
+                "setting": "Independent motel supply room",
+                "caption": "Bulk purchasing for everyday motel supplies."
               }
-            ]
+            ],
+            "stepsKeepPhoto": true
           }
         },
         {
@@ -2083,97 +1552,6 @@
               }
             ],
             "stepsKeepPhoto": true
-          }
-        }
-      ]
-    },
-    {
-      "key": "process:list",
-      "type": "process",
-      "variant": "list",
-      "uses": 21,
-      "names": [
-        "process:list"
-      ],
-      "evidence": [],
-      "samples": [
-        {
-          "role": "longest",
-          "route": "/operations-management/",
-          "pageType": "solution",
-          "blockId": "m2",
-          "splitIndex": 0,
-          "words": 242,
-          "slots": 0,
-          "block": {
-            "id": "m2",
-            "type": "process",
-            "sourceSectionIds": [
-              "m2"
-            ],
-            "heading": "Data-Driven Assessment of Your Current Operations",
-            "paragraphs": [
-              "We assess how your property runs today using benchmarking, reporting and technology for upgrading your systems."
-            ],
-            "steps": [
-              {
-                "heading": "Share operating records",
-                "text": "You give us read-only access to 12 months of P&L statements, PMS reports, payroll and timekeeping records, maintenance and work-order logs, and guest reviews and complaint logs, along with your current vendor contracts."
-              },
-              {
-                "heading": "Rebuild missing baselines",
-                "text": "If your labour, maintenance or guest-service records are incomplete, the assessment still goes ahead. We rebuild baselines from payroll exports, vendor invoices and online reviews. We mark the less precise findings as estimates that show direction, not exact figures."
-              },
-              {
-                "heading": "Assessment fee",
-                "text": "You pay a fixed assessment fee. It rises with your room count, your revenue outlets and the number of systems we connect beyond your PMS and channel manager. Rebuilding missing records also raises the fee."
-              },
-              {
-                "heading": "Extra scope",
-                "text": "Analysing more than 3 years of history costs more, and so does reviewing several properties together. If your hotel has more than 200 rooms, you get a custom quote."
-              },
-              {
-                "heading": "Establish complete tracking",
-                "text": "We don't hold back the assessment until your records are perfect. Instead, we set up tracking while we diagnose, which gives you 90 days of complete data for the follow-up review."
-              },
-              {
-                "heading": "Identify recovery priorities",
-                "text": "Our [recovery diagnosis](/receivership/) examines your financial health, market position, physical condition and operating performance. We trace revenue, cost, staffing and brand-compliance problems to their causes. Then we define corrections and repositioning opportunities specific to your property."
-              }
-            ],
-            "mediaKind": "process"
-          }
-        },
-        {
-          "role": "shortest",
-          "route": "/ota-optimization/",
-          "pageType": "solution",
-          "blockId": "m6-steps",
-          "splitIndex": 0,
-          "words": 38,
-          "slots": 0,
-          "block": {
-            "id": "m6-steps",
-            "type": "process",
-            "paragraphs": [
-              "Select suitable channels, then tailor their content and promotions."
-            ],
-            "steps": [
-              {
-                "heading": "Choose suitable channels",
-                "text": "Pick channels that suit the hotel's market."
-              },
-              {
-                "heading": "Write channel content",
-                "text": "Write content for each selected platform."
-              },
-              {
-                "heading": "Set up promotions",
-                "text": "Set up promotions for each selected platform."
-              }
-            ],
-            "variant": "list",
-            "continues": "m6"
           }
         }
       ]
@@ -2258,10 +1636,74 @@
               },
               {
                 "heading": "Engagement options",
-                "text": "You can take development, construction support, procurement and IT as standalone services or add them to your [hotel management agreement](/). Without them, full management covers day-to-day operations."
+                "text": "You can take development, construction support, procurement and IT as standalone services or add them to your [motel management agreement](/). Without them, full management covers day-to-day operations."
               }
             ],
             "mediaKind": "material"
+          }
+        }
+      ]
+    },
+    {
+      "key": "orderCase:default",
+      "type": "orderCase",
+      "variant": null,
+      "uses": 4,
+      "names": [
+        "orderCase"
+      ],
+      "evidence": [],
+      "samples": [
+        {
+          "role": "longest",
+          "route": "/case-studies/",
+          "pageType": "general",
+          "blockId": "cases",
+          "splitIndex": 0,
+          "words": 108,
+          "slots": 0,
+          "block": {
+            "id": "cases",
+            "type": "orderCase",
+            "heading": "Client results",
+            "items": [
+              {
+                "product": "Revenue management",
+                "text": "Daily pricing and closer attention to booking pace helped a 32-room Oregon motel lift occupancy from 58% to 69%. Revenue per available room increased 30% over six months compared with the same period a year earlier.",
+                "placeholder": true
+              },
+              {
+                "product": "OTA management",
+                "text": "Clearer listings and coordinated availability improved conversion on Booking.com and Expedia for a 46-room Ontario hotel. The owner's weekly OTA administration fell from eight hours to two.",
+                "placeholder": true
+              },
+              {
+                "product": "Full remote management",
+                "text": "A 28-room Queensland motel moved routine operations to MotelPilot's remote team, with local contractors handling on-site work. Within six months, guest replies were faster and the owner's operational workload had fallen by 20 hours a week.",
+                "placeholder": true
+              }
+            ]
+          }
+        },
+        {
+          "role": "shortest",
+          "route": "/ota-optimization/",
+          "pageType": "solution",
+          "blockId": "cases",
+          "splitIndex": 0,
+          "words": 31,
+          "slots": 0,
+          "block": {
+            "id": "cases",
+            "type": "orderCase",
+            "heading": "Client results",
+            "items": [
+              {
+                "product": "OTA management",
+                "text": "Clearer listings and coordinated availability improved conversion on Booking.com and Expedia for a 46-room Ontario hotel. The owner's weekly OTA administration fell from eight hours to two.",
+                "placeholder": true
+              }
+            ]
           }
         }
       ]
@@ -2318,7 +1760,7 @@
               ],
               [
                 "Contingency",
-                "We set aside 10% of hard costs for new builds and 15% for renovations at operating hotels. No draw happens without your prior written approval."
+                "We set aside 10% of hard costs for new builds and 15% for renovations at operating motels. No draw happens without your prior written approval."
               ],
               [
                 "Budget and schedule",
@@ -2360,7 +1802,7 @@
             ],
             "heading": "Engagement Options and Fees",
             "paragraphs": [
-              "Your [first consultation](/request-a-quote/) is a free 30-minute call with no obligation. On that call, we use your hotel's figures to estimate the net effect before you commit."
+              "Your [first consultation](/request-a-quote/) is a free 30-minute call with no obligation. On that call, we use your motel's figures to estimate the net effect before you commit."
             ],
             "columns": [
               "Engagement",
@@ -2385,10 +1827,70 @@
       ]
     },
     {
+      "key": "team:default",
+      "type": "team",
+      "variant": null,
+      "uses": 1,
+      "names": [
+        "team"
+      ],
+      "evidence": [],
+      "samples": [
+        {
+          "role": "only",
+          "route": "/about-us/",
+          "pageType": "about",
+          "blockId": "owner-team",
+          "splitIndex": 0,
+          "words": 66,
+          "slots": 0,
+          "block": {
+            "id": "owner-team",
+            "type": "team",
+            "heading": "Meet the team",
+            "items": [
+              {
+                "anchor": "team-ethan-ashby",
+                "name": "Ethan Ashby",
+                "role": "Founder",
+                "years": 18,
+                "bio": "Runs the company and agrees the scope of the work with each new owner.",
+                "reviews": [
+                  "place",
+                  "location"
+                ]
+              },
+              {
+                "anchor": "team-brandon-vance",
+                "name": "Brandon Vance",
+                "role": "Revenue manager",
+                "years": 12,
+                "bio": "Sets the rates and watches the booking pace for the properties we work for.",
+                "blogAuthor": true,
+                "reviews": [
+                  "solution",
+                  "service",
+                  "product_manufacturer",
+                  "product_wholesale"
+                ]
+              },
+              {
+                "anchor": "team-grant-yates",
+                "name": "Grant Yates",
+                "role": "Account lead",
+                "years": 9,
+                "bio": "The owner's day-to-day contact: the weekly report, questions and changes to the plan."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
       "key": "form:plain",
       "type": "form",
       "variant": "plain",
-      "uses": 1,
+      "uses": 3,
       "names": [
         "form",
         "form:plain"
@@ -2402,12 +1904,86 @@
       ],
       "samples": [
         {
-          "role": "only",
+          "role": "longest",
+          "route": "/resources/",
+          "pageType": "general",
+          "blockId": "resource-request",
+          "splitIndex": 0,
+          "words": 156,
+          "slots": 0,
+          "block": {
+            "id": "resource-request",
+            "type": "form",
+            "request": "resource",
+            "requestType": "resource",
+            "heading": "Request a resource",
+            "paragraphs": [
+              "Tell us which resource you would like and where to send it: we email it to you."
+            ],
+            "fields": [
+              {
+                "name": "name",
+                "label": "Name",
+                "kind": "text",
+                "required": true,
+                "autocomplete": "name",
+                "purpose": "So we know whom we are writing to."
+              },
+              {
+                "name": "email",
+                "label": "Email",
+                "kind": "email",
+                "required": true,
+                "autocomplete": "email",
+                "purpose": "Where we send the resource."
+              },
+              {
+                "name": "resource",
+                "label": "Which resource",
+                "kind": "select",
+                "required": true,
+                "purpose": "The guide, template or checklist we send you.",
+                "options": [
+                  "Revenue and OTA glossary",
+                  "Handover checklist",
+                  "Sample monthly owner report",
+                  "Weekly rate-review template",
+                  "Something else (tell us below)"
+                ]
+              },
+              {
+                "name": "message",
+                "label": "Anything else",
+                "kind": "textarea",
+                "required": false,
+                "purpose": "Optional: a question, or the resource if it is not listed.",
+                "recorded": "anything else you tell us"
+              }
+            ],
+            "consent": {
+              "label": "I agree that my details are used to send me this resource, as described in the privacy policy.",
+              "privacyRoute": "/privacy/"
+            },
+            "honeypot": "website",
+            "endpoint": "/api/leads",
+            "status": "ready",
+            "submitLabel": "Request the resource",
+            "requiredNote": "Fields marked * are required.",
+            "messages": {
+              "invalid": "Please check the highlighted fields.",
+              "sending": "Sending…",
+              "sent": "Thank you: your message has been sent. We will reply by email.",
+              "failed": "Your message could not be sent. Please try again, or write to us by email."
+            }
+          }
+        },
+        {
+          "role": "shortest",
           "route": "/contact-us/",
           "pageType": "contact",
           "blockId": "form",
           "splitIndex": 0,
-          "words": 46,
+          "words": 119,
           "slots": 0,
           "block": {
             "id": "form",
@@ -2419,34 +1995,39 @@
                 "label": "Name",
                 "kind": "text",
                 "required": true,
-                "autocomplete": "name"
+                "autocomplete": "name",
+                "purpose": "So we know whom we are answering."
               },
               {
                 "name": "email",
                 "label": "Email",
                 "kind": "email",
                 "required": true,
-                "autocomplete": "email"
+                "autocomplete": "email",
+                "purpose": "Where we send our reply."
               },
               {
                 "name": "company",
                 "label": "Company",
                 "kind": "text",
                 "required": false,
-                "autocomplete": "organization"
+                "autocomplete": "organization",
+                "purpose": "Optional: helps us answer for your business."
               },
               {
                 "name": "phone",
                 "label": "Phone",
                 "kind": "tel",
                 "required": false,
-                "autocomplete": "tel"
+                "autocomplete": "tel",
+                "purpose": "Optional: only if you would like a call back."
               },
               {
                 "name": "message",
                 "label": "Message",
                 "kind": "textarea",
-                "required": true
+                "required": true,
+                "purpose": "What you would like to know or order."
               }
             ],
             "consent": {
@@ -2455,28 +2036,28 @@
             },
             "honeypot": "website",
             "endpoint": "/api/leads",
-            "status": "not-connected",
-            "submitLabel": "Send enquiry"
+            "status": "ready",
+            "submitLabel": "Send enquiry",
+            "requiredNote": "Fields marked * are required.",
+            "messages": {
+              "invalid": "Please check the highlighted fields.",
+              "sending": "Sending…",
+              "sent": "Thank you: your message has been sent. We will reply by email.",
+              "failed": "Your message could not be sent. Please try again, or write to us by email."
+            }
           }
         }
       ]
     },
     {
-      "key": "contactChannels:list",
+      "key": "contactChannels:row",
       "type": "contactChannels",
-      "variant": "list",
+      "variant": "row",
       "uses": 1,
       "names": [
-        "contactChannels:list"
+        "contactChannels:row"
       ],
-      "evidence": [
-        {
-          "pageType": "contact",
-          "index": 2,
-          "module": "contactChannels:list",
-          "gap": "layout"
-        }
-      ],
+      "evidence": [],
       "samples": [
         {
           "role": "only",
@@ -2510,7 +2091,7 @@
           "pageType": "contact",
           "blockId": "cta",
           "splitIndex": 0,
-          "words": 83,
+          "words": 50,
           "slots": 0,
           "block": {
             "id": "cta",
@@ -2520,8 +2101,8 @@
             ],
             "heading": "Tell us what you need",
             "paragraphs": [
-              "In the form below, give us your name, email address, the reason you're writing and the language you'd prefer. If it's about a property, add its name, location, lodging type, number of rooms or units, and the kind of support you want. Please don't include passwords or guest information.",
-              "You'll hear back from us within one business day. We'll answer your request, ask for anything that's missing and, if a call would help, suggest one."
+              "In the form below, give your name, email, reason for writing, preferred language and any property details. Please don't include passwords or guest information.",
+              "We reply within one business day with an answer, any follow-up questions and, if helpful, a suggested call."
             ],
             "cta": {
               "label": "Request a quote",
@@ -2531,26 +2112,92 @@
           }
         }
       ]
+    },
+    {
+      "key": "dataPractices:default",
+      "type": "dataPractices",
+      "variant": null,
+      "uses": 1,
+      "names": [
+        "dataPractices"
+      ],
+      "evidence": [],
+      "samples": [
+        {
+          "role": "only",
+          "route": "/privacy-policy/",
+          "pageType": "privacy",
+          "blockId": "data-practices",
+          "splitIndex": 0,
+          "words": 4,
+          "slots": 0,
+          "block": {
+            "id": "data-practices",
+            "type": "dataPractices",
+            "heading": "What this site collects"
+          }
+        }
+      ]
+    },
+    {
+      "key": "process:photo-cards",
+      "type": "process",
+      "variant": "photo-cards",
+      "uses": 1,
+      "names": [
+        "process:photo-cards"
+      ],
+      "evidence": [],
+      "samples": [
+        {
+          "role": "only",
+          "route": "/terms-and-conditions/",
+          "pageType": "privacy",
+          "blockId": "iconList-1-steps",
+          "splitIndex": 0,
+          "words": 47,
+          "slots": 1,
+          "block": {
+            "id": "iconList-1-steps",
+            "type": "process",
+            "heading": "Agreed targets, monthly reviews and strategy changes—not guaranteed revenue.",
+            "steps": [
+              {
+                "heading": "Agree measurable targets",
+                "text": "Agree measurable targets with the owner at the start."
+              },
+              {
+                "heading": "Review results monthly",
+                "text": "Review results against agreed targets on every monthly strategy call."
+              },
+              {
+                "heading": "Change strategy when needed",
+                "text": "Change the strategy when a target is missed."
+              }
+            ],
+            "variant": "photo-cards",
+            "continues": "iconList-1"
+          }
+        }
+      ]
     }
   ],
   "unbacked": [
     "featureGrid:icons",
-    "featureGrid:columns",
-    "process:circles",
-    "orderCase:default",
-    "relatedPages:tiles",
-    "faq:accordion",
-    "process:photo-cards",
-    "gallery:grid",
-    "table:grid",
-    "relatedPages:links",
-    "cta:form",
     "featureGrid:bullets",
-    "caseStudies:default",
-    "featureGrid:single",
+    "process:circles",
+    "relatedPages:links",
+    "faq:accordion",
+    "cta:form",
     "process:list",
+    "featureGrid:single",
     "iconList:single",
+    "orderCase:default",
     "table:cards",
-    "cta:inline"
+    "team:default",
+    "contactChannels:row",
+    "cta:inline",
+    "dataPractices:default",
+    "process:photo-cards"
   ]
 }

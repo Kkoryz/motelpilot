@@ -1,0 +1,4 @@
+[
+  { "n": 1, "url": "/blog/motel-management-models-compared/", "old": "We work with independent motel owners in the United States; learn", "new": "We work with independent motel owners in countries including the United States, Canada, France and Australia; learn", "reason": "Site Factory 2026-11-18: the blog follows the site's service area (the US, Canada, France and Australia)" },
+  { "n": 2, "url": "/blog/motel-management-fees-reasonable-structure/", "old": "Our coverage proposal assigns a property desk team", "new": "A complete coverage proposal, like Bid A below, assigns a property desk team", "reason": "Site Factory 2026-11-18: the post read as MotelPilot staffing the property itself; on-site work is done by partners the company coordinates, so the paragraph describes a bid, as its table does" }
+]

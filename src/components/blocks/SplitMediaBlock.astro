@@ -20,11 +20,11 @@ const { block, index, media: given, variant: asked = 'single', cta = null, pageT
 const media = given.filter((item) => !item.slot);
 const slots = given.filter((item) => item.slot);
 // The section's data takes the photo's place (lib/media-slots.mjs gives such a row no template photo), in a plain
-// text-beside row: the photo variants bleed or frame a photo, not a chart.
+// text-beside row (resolveVariant sets such a row single).
 const charts = dataVisuals(block);
 // A wide row's banner (16 / 7) only with photos it shows enough of; a square or portrait photo makes the row a plain
 // photo-beside-text row instead of a banner cut to a strip.
-const variant = charts.length || (asked === 'wide' && !media.every((photo) => fitsFrames(FIXED_FRAMES.wideRow, photo))) ? 'single' : asked;
+const variant = asked === 'wide' && !media.every((photo) => fitsFrames(FIXED_FRAMES.wideRow, photo)) ? 'single' : asked;
 // The photo's side: the site's choice for this section (as the competitor's row has it), else the site-wide order.
 const side = splitSide(block, pageType, index, variants);
 const layout = !media.length && !charts.length ? 'text' : variant === 'wide' ? 'stack' : 'split';
@@ -32,7 +32,7 @@ const layout = !media.length && !charts.length ? 'text' : variant === 'wide' ? '
 const ratio = variant === 'wide' ? '16 / 7' : fitRatio(usualRatio('splitMedia', variant), media);
 ---
 
-<section class="block block--split" data-authoring-block="splitMedia" data-block-id={block.id} data-continues={block.continues} data-variant={variant}>
+<section class="block block--split" id={block.anchor} data-authoring-block="splitMedia" data-block-id={block.id} data-continues={block.continues} data-variant={variant}>
   <div class="container">
     <div class="split" data-layout={layout} data-side={side} data-density={density(block.wordCount)} data-media-count={media.length}>
       <div class="split__copy">
@@ -46,7 +46,8 @@ const ratio = variant === 'wide' ? '16 / 7' : fitRatio(usualRatio('splitMedia', 
         <div class="split__media-set split__charts">{charts.map((visual) => <SectionChart visual={visual} />)}</div>
       ) : media.length > 0 && (
         <div class="split__media-set">
-          {media.map((item) => <MediaFigure media={item} ratio={ratio} class="split__media" />)}
+          {/* A wide row's photo spans the content under the text (2026-11-15: half-width sizes chose the 960 file for a 1400px banner). */}
+          {media.map((item) => <MediaFigure media={item} ratio={ratio} class="split__media" sizes={layout === 'stack' ? '100vw' : undefined} />)}
         </div>
       )}
       {slots.map((item) => <span hidden data-media-slot={item.slot} />)}

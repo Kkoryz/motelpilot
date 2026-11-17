@@ -4,49 +4,13 @@
       {
         "id": "brief-cta-1",
         "type": "photo",
-        "content": "An independent motel owner sits beside a window overlooking the property's exterior room entrances, speaking into a smartphone while resting one hand on the desk during a consultation about handing over daily management.",
-        "setting": "Small office at an independent motel",
-        "caption": "Talk through what you’d like to hand over."
+        "content": "A middle-aged motel owner sits at the front-desk counter of their small motel, holding a phone to their ear and leaning in to talk while a mug of coffee and a closed notebook sit beside them.",
+        "setting": "Small motel lobby front desk, morning light",
+        "caption": "A first call about the property and what the owner wants to hand over."
       }
     ]
   },
   "/services/": {
-    "m3": [
-      {
-        "id": "brief-m3-1",
-        "type": "photo",
-        "content": "A management supervisor tests a guestroom key card at the door while the incoming front-desk employee watches during a pre-opening walkthrough.",
-        "setting": "Exterior corridor of a US motel",
-        "caption": "Checking readiness before guests arrive."
-      }
-    ],
-    "m4": [
-      {
-        "id": "brief-m4-1",
-        "type": "photo",
-        "content": "A property manager shows a visiting franchise representative an existing lobby counter while the motel owner stands beside them during a renovation requirements review.",
-        "setting": "Independent motel reception lobby",
-        "caption": "Reviewing proposed brand requirements with the owner."
-      }
-    ],
-    "m6": [
-      {
-        "id": "brief-m6-1",
-        "type": "photo",
-        "content": "A staff photographer adjusts a tripod-mounted camera aimed at a freshly prepared motel guestroom to capture updated listing photos.",
-        "setting": "Bright motel guestroom",
-        "caption": "Photographing the rooms guests will book."
-      }
-    ],
-    "m8": [
-      {
-        "id": "brief-m8-1",
-        "type": "photo",
-        "content": "A project manager watches a contractor measure a bathroom doorway in a stripped motel room during a renovation site inspection.",
-        "setting": "Motel guestroom under renovation",
-        "caption": "Checking renovation work on site."
-      }
-    ],
     "cta": [
       {
         "id": "brief-cta-1",
@@ -214,9 +178,9 @@
       {
         "id": "brief-cta-1",
         "type": "photo",
-        "content": "A motel owner pauses beside the courtyard’s outdoor chairs to speak with a revenue manager by phone, with a row of guestroom doors behind her.",
-        "setting": "Independent motel courtyard",
-        "caption": "Start a conversation about your motel’s pricing."
+        "content": "A consultant's hand slides a de-identified one-page pricing review across a table toward the edge of the frame; the page has a weekday and weekend rate chart and margin notes, and every figure and name is blurred.",
+        "setting": "Consultation table, medium distance",
+        "caption": "Your pricing, reviewed with a revenue manager"
       }
     ]
   },
@@ -351,26 +315,6 @@
         "content": "A motel owner speaks on a mobile phone in the courtyard of their partly renovated two-story property, with unoccupied exterior corridors and newly installed guestroom doors behind them and no visible text or logos.",
         "setting": "Wide view across a motel courtyard",
         "caption": "Talk through your development project with us."
-      }
-    ]
-  },
-  "/receivership/": {
-    "m6": [
-      {
-        "id": "brief-m6-1",
-        "type": "photo",
-        "content": "A local property-services agent holds a phone with its screen facing away from the camera to show the remote receiver a loose handrail mounting on a motel staircase.",
-        "setting": "Exterior staircase at an independent motel",
-        "caption": "Assessing an urgent safety repair."
-      }
-    ],
-    "cta": [
-      {
-        "id": "brief-cta-1",
-        "type": "photo",
-        "content": "An independent motel owner sits at a small desk behind reception, speaking on a phone while looking through an open doorway toward the quiet guest parking area.",
-        "setting": "An independent US motel’s back office",
-        "caption": "Talk with us about keeping your hotel running."
       }
     ]
   },
@@ -560,17 +504,6 @@
         "content": "A motel management coordinator listens on the phone at a modest desk, pen poised over an open notebook with indistinct marks beside a closed laptop, with exterior motel room doors visible through the window.",
         "setting": "Independent motel back office",
         "caption": "Talk through your resource questions with our team."
-      }
-    ]
-  },
-  "/careers/": {
-    "cta": [
-      {
-        "id": "brief-cta-1",
-        "type": "photo",
-        "content": "A remote hiring teammate wearing a headset listens to an applicant through an open laptop whose screen faces away from the camera, leaning forward slightly at a home desk.",
-        "setting": "A quiet home office",
-        "caption": "Meet your potential teammate in a remote interview."
       }
     ]
   },

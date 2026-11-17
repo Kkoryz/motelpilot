@@ -11,14 +11,14 @@ import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cliArgs, runMain } from './lib/cli.mjs';
-import { runCodex } from './lib/codex-exec.mjs';
+import { runJudge } from './lib/judge-exec.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { NO_BAND_PAGE_TYPES, PAGE_FIGURES_SCHEMA, SITE_BAND_PAGE_TYPES, normalizeText, pageText, parseFigures, pickFigures } from './lib/page-figures.mjs';
 
 const PROMPT = fileURLToPath(new URL('../config/agent-steps/page-figures.md', import.meta.url));
 const hash = (text) => createHash('sha256').update(text).digest('hex').slice(0, 16);
 
-export async function derivePageFigures({ root = process.cwd(), concurrency = 2, run = runCodex } = {}) {
+export async function derivePageFigures({ root = process.cwd(), concurrency = 2, run = runJudge } = {}) {
   const template = await readFile(PROMPT, 'utf8');
   const rules = hash(template);
   const pages = [...await readJson(resolve(root, 'src/data/authoring-pages.json'), []), ...await readJson(resolve(root, 'src/data/placeholder-pages.json'), [])];

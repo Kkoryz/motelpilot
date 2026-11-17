@@ -2,6 +2,7 @@
 // reference and on the candidate so "looks like the source" becomes a checkable band.
 
 import { PAGE_SHELL } from './page-shell.mjs';
+import { pictureBand } from './rules.mjs';
 import { scrollThroughPage } from './reveal.mjs';
 
 // v2 (owner 2026-11-10 via Site Factory): tables, charts, step and figure cards, embeds and video are visual or
@@ -32,8 +33,11 @@ export async function measureDensity(page) {
   await scrollThroughPage(page);
   await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
   return page.evaluate(({ shell, own }) => {
-    const header = document.querySelector(shell.header);
-    const footer = document.querySelector(shell.footer);
+    // The site's header and footer: none inside the page's own content (shell.page).
+    const site = (box) => Boolean(box) && !box.parentElement?.closest(shell.page);
+    const header = [...document.querySelectorAll(shell.header)].find(site);
+    const footer = [...document.querySelectorAll(shell.footer)].find(site);
+    const inShell = (element) => { for (let box = element.closest(shell.shell); box; box = box.parentElement?.closest(shell.shell)) if (site(box)) return true; return false; };
     const top = header ? header.getBoundingClientRect().bottom + scrollY : 0;
     const bottom = footer ? footer.getBoundingClientRect().top + scrollY : document.documentElement.scrollHeight;
     const height = Math.max(bottom - top, 1);
@@ -43,9 +47,11 @@ export async function measureDensity(page) {
       const rect = element.getBoundingClientRect();
       return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 60 && rect.height > 60;
     };
-    // Off-canvas carousel slides are not visible content.
-    const inside = (rect) => rect.top + scrollY >= top - 1 && rect.bottom + scrollY <= bottom + 1 && rect.right > 0 && rect.left < width;
-    const content = (element) => !element.closest(shell.shell);
+    // Off-canvas carousel slides are not visible content. A box reaching past the content's top or foot counts for its
+    // part inside (area and runs are clipped to it): a hero photo under the header starts above the header's foot, and
+    // counted for nothing (hotel-rm's home and hhmhotels.com's, 2026-11-14).
+    const inside = (rect) => rect.bottom + scrollY > top + 1 && rect.top + scrollY < bottom - 1 && rect.right > 0 && rect.left < width;
+    const content = (element) => !inShell(element);
     const boxes = (elements) => elements.filter((element) => content(element) && visible(element)).map((element) => element.getBoundingClientRect()).filter(inside);
     // Photos: images, video and background photos.
     const photos = [...boxes([...document.querySelectorAll('img, video')]), ...boxes([...document.querySelectorAll('body *')].filter((element) => /url\(/.test(getComputedStyle(element).backgroundImage)))];
@@ -66,7 +72,7 @@ export async function measureDensity(page) {
       const cells = new Set();
       for (const rect of rects) {
         const x0 = Math.max(0, Math.floor(rect.left / 20)), x1 = Math.min(Math.ceil(width / 20), Math.ceil(rect.right / 20));
-        const y0 = Math.floor((rect.top + scrollY) / 20), y1 = Math.ceil((rect.bottom + scrollY) / 20);
+        const y0 = Math.floor(Math.max(top, rect.top + scrollY) / 20), y1 = Math.ceil(Math.min(bottom, rect.bottom + scrollY) / 20);
         for (let y = y0; y < y1; y += 1) for (let x = x0; x < x1; x += 1) cells.add(y * 10000 + x);
       }
       return cells.size * 400;
@@ -75,10 +81,10 @@ export async function measureDensity(page) {
     // Rendered text only (a collapsed tab or accordion has no boxes), tables apart.
     const rendered = (element) => element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden';
     const words = [...document.querySelectorAll('p, li, h1, h2, h3, h4, summary')]
-      .filter((element) => !element.closest(`${shell.shell}, nav, form, table`) && !element.querySelector('p, li, h2, h3') && rendered(element))
+      .filter((element) => !inShell(element) && !element.closest('nav, form, table') && !element.querySelector('p, li, h2, h3') && rendered(element))
       .map((element) => element.innerText).join(' ').split(/\s+/).filter(Boolean).length;
     // The longest stretch with neither a photo nor a structured block.
-    const breaks = [...photos, ...structured].map((rect) => ({ top: rect.top + scrollY, bottom: rect.bottom + scrollY })).sort((left, right) => left.top - right.top);
+    const breaks = [...photos, ...structured].map((rect) => ({ top: Math.max(top, rect.top + scrollY), bottom: Math.min(bottom, rect.bottom + scrollY) })).sort((left, right) => left.top - right.top);
     let cursor = top;
     let longest = 0;
     for (const item of breaks) { longest = Math.max(longest, item.top - cursor); cursor = Math.max(cursor, item.bottom); }
@@ -136,12 +142,14 @@ export function textRunWords(referencePages, bands) {
   return perPx.length ? Math.round(bands.longestTextOnlyPx.max * Math.min(...perPx)) : null;
 }
 
-// The issue names stay those of photos (break-text-runs.mjs answers a page short of visuals with a photo row).
+// The issue names stay those of photos (a page short of visuals takes a photo row when it is planned: lib/visual-budget.mjs).
 export function densityFailures(metrics, bands) {
   const failures = [];
   if (metrics.wordsPer1000px > bands.wordsPer1000px.max) failures.push({ issue: 'density_text_heavy', value: metrics.wordsPer1000px, maximum: bands.wordsPer1000px.max });
-  if (metrics.visualAreaPct < bands.visualAreaPct.min) failures.push({ issue: 'density_too_few_images', value: metrics.visualAreaPct, minimum: bands.visualAreaPct.min });
-  if (metrics.visualAreaPct > bands.visualAreaPct.max) failures.push({ issue: 'density_too_many_images', value: metrics.visualAreaPct, maximum: bands.visualAreaPct.max });
+  // The picture area within a fifth either way of the band (lib/rules.mjs pictureBand, owner 2026-11-16).
+  const passes = pictureBand(bands.visualAreaPct);
+  if (metrics.visualAreaPct < passes.min) failures.push({ issue: 'density_too_few_images', value: metrics.visualAreaPct, minimum: passes.min });
+  if (metrics.visualAreaPct > passes.max) failures.push({ issue: 'density_too_many_images', value: metrics.visualAreaPct, maximum: passes.max });
   if (metrics.longestTextOnlyPx > bands.longestTextOnlyPx.max) failures.push({ issue: 'density_long_text_run', value: metrics.longestTextOnlyPx, maximum: bands.longestTextOnlyPx.max });
   return failures;
 }
@@ -168,7 +176,9 @@ export async function measureBlocks(page) {
       const inside = rects.filter((rect) => rect.bottom > box.top + 1 && rect.top < box.bottom - 1).map((rect) => ({ ...rect.toJSON(), top: Math.max(rect.top, box.top), bottom: Math.min(rect.bottom, box.bottom) })).sort((a, b) => a.top - b.top);
       const cells = new Set();
       for (const rect of inside) for (let y = Math.floor(rect.top / 20); y < Math.ceil(rect.bottom / 20); y += 1) for (let x = Math.max(0, Math.floor(rect.left / 20)); x < Math.min(Math.ceil(width / 20), Math.ceil(rect.right / 20)); x += 1) cells.add(y * 10000 + x);
-      const words = [...element.querySelectorAll('p, li, h1, h2, h3, h4, summary')].filter((item) => !item.closest('nav, form, table') && !item.querySelector('p, li, h2, h3')).map((item) => item.innerText).join(' ').split(/\s+/).filter(Boolean).length;
+      // A table's cells count here (not in the page's words above): a table is as tall as its rows, and the block model
+      // fits height on these words (motel /project-management/ 2026-11-14: a table estimated 1,113px for 1,885px).
+      const words = [...element.querySelectorAll('p, li, h1, h2, h3, h4, summary, th, td, dt, dd')].filter((item) => !item.closest('nav, form') && !item.querySelector('p, li, h2, h3, th, td, dt, dd')).map((item) => item.innerText).join(' ').split(/\s+/).filter(Boolean).length;
       const type = element.getAttribute('data-authoring-block');
       const variant = element.getAttribute(type === 'featureGrid' ? 'data-pattern' : 'data-variant') ?? '';
       // A closing band with its photo behind it is another module than one without (CtaBlock data-has-photo).

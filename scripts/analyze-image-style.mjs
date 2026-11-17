@@ -13,7 +13,7 @@
 import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { cliArgs, runMain } from './lib/cli.mjs';
-import { runCodex } from './lib/codex-exec.mjs';
+import { runJudge } from './lib/judge-exec.mjs';
 import { IMAGE_STYLE_SCHEMA, PROFILE_FIELDS, SITE_STYLE, garmentsPrompt, ideasPrompt, imageStats, parseGarments, parseIdeas, parsePlainShare, parseProductSettings, parseProps, parseShots, parseStyleProfile, plainSharePrompt, productSettingsPrompt, propsPrompt, scenesPrompt, shotsPrompt, statsRange, styleProfilePrompt } from './lib/image-style.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { isProductionScene } from './lib/image-plan.mjs';
@@ -52,7 +52,7 @@ export async function analyzeImageStyle({ root = process.cwd(), force = false } 
     if (!force && kept && JSON.stringify(before) === JSON.stringify(paths)) return kept;
     const images = spread(paths, most);
     const lastMessage = resolve(root, `docs/research/images/${name}.reply.txt`);
-    const run = await runCodex({ root, prompt: prompt(images.length), images, lastMessage, sandbox: 'read-only' });
+    const run = await runJudge({ root, prompt: prompt(images.length), images, lastMessage, sandbox: 'read-only', judge: true });
     if (run.code !== 0) throw new Error(`codex exit ${run.code} on ${name}: ${run.stderr.trim().slice(-300)}`);
     return parse(await readFile(lastMessage, 'utf8'));
   };
@@ -82,7 +82,7 @@ export async function analyzeImageStyle({ root = process.cwd(), force = false } 
   let ideas = previous?.ideas;
   if (force || !ideas || JSON.stringify(ideas.from) !== JSON.stringify(sources)) {
     const lastMessage = resolve(root, 'docs/research/images/ideas.reply.txt');
-    const run = await runCodex({ root, prompt: ideasPrompt({ ...sources, profile: kinds[SITE_STYLE].profile }), images: [], lastMessage, sandbox: 'read-only' });
+    const run = await runJudge({ root, prompt: ideasPrompt({ ...sources, profile: kinds[SITE_STYLE].profile }), images: [], lastMessage, sandbox: 'read-only', judge: true });
     if (run.code !== 0) throw new Error(`codex exit ${run.code} on ideas: ${run.stderr.trim().slice(-300)}`);
     ideas = { from: sources, ...parseIdeas(await readFile(lastMessage, 'utf8'), shotClasses) };
   }
@@ -91,7 +91,7 @@ export async function analyzeImageStyle({ root = process.cwd(), force = false } 
   let props = previous?.props;
   if (force || !props || JSON.stringify(props.from) !== JSON.stringify(propSources)) {
     const lastMessage = resolve(root, 'docs/research/images/props.reply.txt');
-    const run = await runCodex({ root, prompt: propsPrompt({ ...propSources, profile: kinds[SITE_STYLE].profile }), images: [], lastMessage, sandbox: 'read-only' });
+    const run = await runJudge({ root, prompt: propsPrompt({ ...propSources, profile: kinds[SITE_STYLE].profile }), images: [], lastMessage, sandbox: 'read-only', judge: true });
     if (run.code !== 0) throw new Error(`codex exit ${run.code} on props: ${run.stderr.trim().slice(-300)}`);
     props = { from: propSources, list: parseProps(await readFile(lastMessage, 'utf8')) };
   }
@@ -99,7 +99,7 @@ export async function analyzeImageStyle({ root = process.cwd(), force = false } 
   let plain = previous?.plain;
   if (force || !plain || plain.from !== garments.prints) {
     const lastMessage = resolve(root, 'docs/research/images/plain-share.reply.txt');
-    const run = await runCodex({ root, prompt: plainSharePrompt(garments), images: [], lastMessage, sandbox: 'read-only' });
+    const run = await runJudge({ root, prompt: plainSharePrompt(garments), images: [], lastMessage, sandbox: 'read-only', judge: true });
     if (run.code !== 0) throw new Error(`codex exit ${run.code} on the plain share: ${run.stderr.trim().slice(-300)}`);
     plain = { from: garments.prints, share: parsePlainShare(await readFile(lastMessage, 'utf8')) };
   }

@@ -4,6 +4,7 @@
 :root:root {
   --surface-primary: rgb(255, 255, 255);
   --surface-secondary: rgb(248, 249, 249);
+  --surface-feature-card: rgb(248, 249, 249);
   --surface-dark: rgb(28, 28, 28);
   --text-primary: rgb(28, 28, 28);
   --text-inverse: rgb(255, 255, 255);
@@ -26,10 +27,7 @@
   --font-eyebrow: var(--font-ui);
   --size-body: 1.0625rem;
   --line-body: 2;
-  --size-hero: 4rem;
-  --size-display: 2.5rem;
-  --size-card-heading: 2.125rem;
-  --size-subheading: 1.5rem;
+
   --size-lead: 1.0625rem;
   --size-eyebrow: 0.875rem;
   --tracking-eyebrow: 0.0625em;
@@ -67,13 +65,15 @@
   --article-paragraph-gap: 1.5rem;
   --article-heading-gap: 1.5rem;
   --article-section-gap: 4rem;
-  --article-figure-gap: 4rem;
+  /* Figures keep to the text's rhythm: less room than before a sub-heading, so a figure stays with its text. */
+  --article-figure-gap: 2.5rem;
   --channel-align: start;
   --channel-icon-bg: transparent;
-  --channel-icon-color: rgb(137, 110, 51);
+  /* Contact channel marks in the reference's gold accent, drawn about as tall as the value's text beside them. */
+  --channel-icon-color: var(--accent);
   --channel-icon-radius: 0;
   --channel-icon-box: 1.5rem;
-  --channel-icon-size: 1rem;
+  --channel-icon-size: 1.25rem;
   --surface-testimonial: rgb(248, 249, 249);
   --testimonial-padding: 3rem 1.875rem;
   --carousel-item-width: calc((100% - var(--grid-gap)) / 2);
@@ -137,9 +137,8 @@ main[data-page-type="solution"] .table-card__row {
   --focus-ring: rgb(240, 193, 89);
 }
 main[data-page-type="home"] .page-hero {
-  --hero-align: center;
+  --hero-align: start;
   --hero-min-height: min(1000px, 100svh);
-  --hero-overlay: rgb(16 16 16 / 0.58);
 }
 .breadcrumbs { --accent: rgb(137, 110, 51); }
 .block--logos { --border-color: transparent; }
@@ -153,7 +152,6 @@ main .page-hero h1, main .block h2 {
 main .block .feature-card__title {
   font-family: var(--font-subheading);
   font-weight: 700;
-  font-size: var(--size-subheading);
   line-height: 1.35;
 }
 .site-header .site-menu > summary {
@@ -163,29 +161,39 @@ main .block .feature-card__title {
 }
 .site-header .site-menu__toggle { color: var(--text-inverse); }
 
-/* Interior navigation overlays the hero photo from the top of the window, as the reference; the breadcrumb trail
-   follows the hero (components.breadcrumbs after-hero). */
-body:has(main:is([data-page-type="contact"], [data-page-type="about"], [data-page-type="solution"])) .site-header {
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  background: rgb(16 16 16 / 0.58);
-  border: 0;
-}
-body:has(main[data-page-type="home"]) .site-header {
+/* On every page that opens on a photo the navigation overlays it from the top of the window and stays over the page
+   as it scrolls, one behaviour for all of them, as the reference's header; the breadcrumb trail follows the hero
+   (components.breadcrumbs after-hero). */
+body:has(main[data-hero-photo]) .site-header {
   position: fixed;
   inset-inline: 0;
   top: 0;
   background: rgb(16 16 16 / 0.58);
   border: 0;
 }
-body:has(main:is([data-page-type="home"], [data-page-type="about"], [data-page-type="contact"], [data-page-type="solution"])) .site-header__bar {
+body:has(main[data-hero-photo]) .site-header__bar {
   height: var(--header-height);
   min-height: var(--header-height);
 }
-body:has(main:is([data-page-type="home"], [data-page-type="about"], [data-page-type="contact"], [data-page-type="solution"])) .site-header__cta { padding-block: 0.5rem; }
-body:has(main:is([data-page-type="home"], [data-page-type="about"], [data-page-type="contact"], [data-page-type="solution"])) .site-header__brand-row { padding-block: 0; line-height: 0; }
-body:has(main:is([data-page-type="home"], [data-page-type="about"], [data-page-type="contact"], [data-page-type="solution"])) .site-menu__toggle svg { width: 24px; height: 24px; }
+/* The header's call to action (header.ctaRoute) at the menu's right end, set apart as the reference's: no filled pill,
+   the menu's type, a 2px gold underline under its label, a 44px tap height. The label keeps the menu's white ink: gold
+   type on the header's .58 shade over a light pixel of the photo (or a white section under the fixed home header)
+   reaches only about 2.8:1. */
+.site-header .site-header__cta {
+  min-height: 44px;
+  padding: 0 0 0 1rem;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-transform: var(--nav-transform, none);
+  text-decoration: underline 2px var(--accent);
+  text-underline-offset: 0.5em;
+}
+.site-header .site-header__cta:is(:hover, :focus-visible) { color: var(--text-primary); text-decoration-color: currentColor; }
+body:has(main[data-hero-photo]) .site-header__brand-row { padding-block: 0; line-height: 0; }
+body:has(main[data-hero-photo]) .site-menu__toggle svg { width: 24px; height: 24px; }
 main:is([data-page-type="contact"], [data-page-type="about"], [data-page-type="solution"]) .breadcrumbs { min-height: 40px; padding-block: 10px; line-height: 20px; }
 main :is(.feature-grid__heading, .process__heading) { text-align: start; }
 /* Keep introductions on the same axis as their flush headings at every width. */
@@ -199,12 +207,12 @@ main :is(.block--grid, .block--process) .point-list__intro > .block__lead {
    Cap its trailing space: the measured desktop gap falls from 245px to 175px. */
 main .block--charts { padding-bottom: min(calc(var(--section-space) / 2), 50px); }
 
-.page-hero .button, .form-block__form .button, .cta__content > .button {
+.page-hero .button, .form-block__form .button, .cta__content > .button, .gallery__band-action {
   font-weight: 700;
   gap: 1.5rem;
 }
 .page-hero .button::after, .form-block__form .button::after, .cta__content > .button::after,
-[data-authoring-block="relatedPages"][data-variant="tiles"] .related-tile__button::after {
+[data-authoring-block="relatedPages"][data-variant="tiles"] .related-tile__button::after, .gallery__band-action::after {
   content: "";
   width: 1rem;
   height: 1rem;
@@ -225,13 +233,15 @@ main .block--charts { padding-bottom: min(calc(var(--section-space) / 2), 50px);
   white-space: nowrap;
 }
 
-main[data-page-type="home"] .block--intro[data-variant="text"] .text-block { max-width: none; }
-main[data-page-type="home"] .block--intro .text-flow { max-width: 70ch; }
+/* Introductions: the heading runs across the content column, the prose keeps its measure. */
+main:is([data-page-type="home"], [data-page-type="about"], [data-page-type="general"]) .block--intro[data-variant="text"] .text-block { max-width: none; }
+main:is([data-page-type="home"], [data-page-type="about"], [data-page-type="general"]) .block--intro .text-flow { max-width: 70ch; }
 @media (min-width: 900px) {
-  /* Heading and prose columns, not a grid of repeatable items. */
+  /* Heading and prose columns, not a grid of repeatable items: the same split and gap as the template's list beside
+     its heading (.point-list), so the copy of every heading-beside-copy section starts on one line. */
   main[data-page-type="home"] .block--intro .text-block__copy {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: var(--grid-gap);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
     align-items: start;
   }
   main[data-page-type="home"] .block--intro .text-block__copy > .eyebrow { grid-column: 1 / -1; }
@@ -239,21 +249,55 @@ main[data-page-type="home"] .block--intro .text-flow { max-width: 70ch; }
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   main .block--form .form-block__form { padding-inline: 40px 0; }
-  main .block--form .form-block__form .button { margin-inline-start: -40px; }
 }
 main .block--grid[data-pattern="cards"] .feature-card {
+  /* The template's alternation swaps --surface-secondary: pale cards on a white section, white cards on a tinted one,
+     so the card's inset always reads against a visible edge. */
   background: var(--surface-secondary);
   padding: 1.875rem;
   border: 0;
   border-bottom: 1px solid #dedede;
 }
+/* Padded tiles must let their inner grid tracks shrink at tablet widths.
+   Long words wrap inside the inset without changing the shared card widths. */
+main .block--grid .feature-card,
+main .block--grid .feature-card :is(.feature-card__title, .text-flow, .text-flow__runs, p) {
+  min-inline-size: 0;
+}
+main .block--grid .feature-card :is(.feature-card__title, p) {
+  overflow-wrap: anywhere;
+}
 .block--faq .faq__item {
   border: 0;
   border-bottom: 1px solid #dedede;
 }
-.block--faq .faq__item summary::after { color: var(--accent-text); }
-main[data-page-type="contact"] .faq__item { border: 0; }
-main[data-page-type="contact"] .faq__item :is(summary, p) { padding-inline: 0; }
+/* The open/close mark drawn as two 2px strokes in the heading ink, about 18px (the regular-only face drew a hairline +),
+   centred on its question; open, only the bar stays. */
+.block--faq .faq__item summary::after {
+  content: "";
+  flex: 0 0 1.125rem;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  align-self: center;
+  color: var(--heading-color, var(--text-primary));
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+}
+.block--faq .faq__item[open] summary::after {
+  content: "";
+  background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat;
+}
+/* Questions are running sentences: the reference keeps capitals to short labels. */
+main .block--faq .faq__item h3 {
+  text-transform: none;
+  letter-spacing: normal;
+}
+/* Questions stand on the section's own surface, parted by the bottom hairline (no white box on a tinted section). */
+main .block--faq .faq__item { background: transparent; }
+/* No box is drawn round a question, so none of its inset stays: questions and answers start on the heading's edge
+   (the +/- mark keeps the right edge); the summary keeps its block padding and tap height. */
+main .block--faq .faq__item :is(summary, p) { padding-inline: 0; }
 
 /* Service photo breaks reach the page edges; item layout remains template-owned. */
 main[data-page-type="solution"] .block--gallery[data-variant="grid"] > .container {
@@ -269,8 +313,10 @@ main[data-page-type="solution"] .block--gallery[data-variant="grid"] .media-box 
 }
 
 @media (max-width: 767px) {
+  main .block--faq .faq__item h3 {
+    line-height: 1.4;
+  }
   main[data-page-type="contact"] .block--faq .faq__item h3 {
-    font-size: 20px;
     font-weight: 700;
   }
 }
@@ -287,31 +333,48 @@ main[data-page-type="solution"] .block--gallery[data-variant="grid"] .media-box 
 }
 .block--cta[data-variant="image-band"] :is(.cta__heading, .cta__text) { flex-basis: auto; }
 
-main[data-page-type="solution"] .block--cta[data-variant="form"],
-main[data-page-type="about"] .block--cta[data-variant="form"] {
+main .block--cta[data-variant="form"] {
   background: var(--surface-dark);
   --input-border: #909092;
   --focus-ring: rgb(240, 193, 89);
 }
-main:is([data-page-type="solution"], [data-page-type="about"]) .block--cta[data-variant="form"] .cta {
+.block.block--cta[data-variant="form"] .cta,
+.block.block--cta[data-variant="form"][data-has-photo] .cta {
   padding: 0;
   background: transparent;
   aspect-ratio: auto;
 }
-main:is([data-page-type="solution"], [data-page-type="about"]) .block--cta[data-variant="form"] .cta__backdrop { display: none; }
-main:is([data-page-type="solution"], [data-page-type="about"]) .block--cta[data-variant="form"] .cta::after { content: none; }
-main:is([data-page-type="solution"], [data-page-type="about"]) .block--cta[data-variant="form"] .cta__form {
+main .block--cta[data-variant="form"] .cta__backdrop { display: none; }
+/* An art-directed backdrop comes inside a <picture>: hidden with its image, so it takes no cell of the band's grid and
+   the copy (left) and the form (right) start on one top line on every page. */
+main .block--cta[data-variant="form"] .cta > picture:has(> .cta__backdrop) { display: none; }
+.block.block--cta[data-variant="form"] .cta::after,
+.block.block--cta[data-variant="form"][data-has-photo] .cta::after { content: none; }
+main .block--cta[data-variant="form"] .cta__form {
   padding: 0;
   background: transparent;
   color: var(--text-inverse);
   --text-primary: var(--text-inverse);
   --heading-color: var(--text-inverse);
-  --text-muted: var(--text-inverse);
+  --text-muted: #b8b8b8;
   --link: var(--text-inverse);
 }
-main:is([data-page-type="solution"], [data-page-type="about"]) .block--cta[data-variant="form"] a:not(.button) { color: var(--text-inverse); }
+main .block--cta[data-variant="form"] a:not(.button) { color: var(--text-inverse); }
+.block--cta[data-variant="form"] .form-block__consent a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+/* The consent box in the gold accent, sized for touch; the whole label row is its tap target. */
+.block--cta[data-variant="form"] .form-block__consent { min-height: 44px; }
+.block--cta[data-variant="form"] .form-block__consent input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2rem;
+  accent-color: var(--accent);
+}
 main:is([data-page-type="solution"], [data-page-type="about"], [data-page-type="contact"]) .form-block__field { font-weight: 400; }
-main:is([data-page-type="solution"], [data-page-type="about"], [data-page-type="contact"]) .form-block__field :is(input, textarea) {
+main:is([data-page-type="solution"], [data-page-type="about"], [data-page-type="contact"]) .form-block__field :is(input, textarea, select) {
   background: transparent;
   color: var(--text-primary);
   border: 0;
@@ -327,7 +390,8 @@ main[data-page-type="contact"] .form-block__field {
   line-height: 1;
   gap: 0;
 }
-main[data-page-type="contact"] .form-block__form { row-gap: 6px; }
+/* Each field (label, control, hint) one unit: a clearly larger gap before the next field than inside it, at every width. */
+main .block--form .form-block__form { row-gap: 1.5rem; }
 main[data-page-type="contact"] .form-block__field textarea { height: 44px; }
 .site-footer .site-footer__links {
   font-family: var(--font-ui);
@@ -359,39 +423,56 @@ main[data-page-type="contact"] .form-block__field textarea { height: 44px; }
   main .block--table :is(.table-block__heading, .table-block__lead) { text-align: start; }
   main .block--table .table-block__lead { margin-inline: 0; }
   main:is([data-page-type="about"], [data-page-type="solution"]) .block--cta[data-variant="form"] { padding-top: 64px; }
-  main[data-page-type="solution"] .block:has(+ .block--cta[data-variant="form"]) {
+  main[data-page-type="solution"] .block:not(.block--gallery):has(+ .block--cta[data-variant="form"]) {
     padding-bottom: min(calc(var(--section-space) / 2), max(0px, calc(var(--authoring-max-boundary-gap) - 64px)));
   }
-  main[data-page-type="contact"] .block--form .form-block__form { padding-inline: 40px 0; }
-  /* The wrapping label and 32px control together provide a 48px target, plus the 6px row gap. */
-  main[data-page-type="contact"] .form-block__field :is(input, textarea) { min-height: 32px; height: 32px; }
+  /* The wrapping label and 32px control together provide a 48px target, the fields 1.5rem apart. */
+  main[data-page-type="contact"] .form-block__field :is(input, textarea, select) { min-height: 32px; height: 32px; }
   /* Hero prose wraps past three lines on phones: heading and prose go flush together (none centred over flush text). */
   main .page-hero__lead { text-align: start; }
   main[data-page-type="home"] .page-hero { --hero-align: start; }
   :root:root {
     --gutter: 0.9375rem;
-    --size-hero: 2rem;
-    --size-display: 1.75rem;
-    --size-card-heading: 1.5rem;
-    --size-subheading: 1.5rem;
+
     --grid-gap: 1rem;
     --testimonial-padding: 3rem 0.9375rem;
   }
 }
 
-/* Names and notes share content-sized rows at every width. */
-  .block--logos .logos > .logos__item {
-    grid-row: span 2;
-    grid-template-rows: subgrid;
-    align-items: start;
-    align-content: start;
-    row-gap: 0.25rem;
-  }
+/* Trust bar figures start on the content's left edge, as the reference's tab row. At every width each figure starts at
+   the top of its cell and its label follows it, so every value of a row starts on one top line whatever it wraps to
+   (as the reference's tiles); a value's last word does not stand alone. */
+body[data-heading-align="start"] main .trust-bar__items { text-align: start; }
+main .trust-bar__items { align-items: start; }
+main .trust-bar__item { align-content: start; row-gap: 0.2rem; }
+main .trust-bar__value { text-transform: uppercase; letter-spacing: normal; text-wrap: pretty; }
+/* A figure with no rule before it starts on the content edge; one after a rule keeps its inset from that rule. */
+main .trust-bar__item { padding-inline-start: 0; }
+main .trust-bar__item + .trust-bar__item { padding-inline-start: 1rem; }
+@media (max-width: 767px) {
+  /* Phones: two a row, the rule only before the second of each row. */
+  main .trust-bar__item:nth-child(odd) { padding-inline-start: 0; }
+}
+
+/* Each name with its note directly under it, from the top of its cell (no row shared across the logos, which left a
+   one-line name's note a line below it beside a two-line name). */
+.block--logos .logos > .logos__item {
+  align-items: start;
+  align-content: start;
+  row-gap: 0.25rem;
+}
+/* Under a heading on the content's left edge, each name and its location start on their column's left edge (the
+   first column on the heading's) at every width, one alignment for the section. */
+body[data-heading-align="start"] main .block--logos .logos__item {
+  justify-items: start;
+  text-align: start;
+  padding-inline: 0;
+}
 @media (min-width: 1024px) {
-  main[data-page-type="about"] .block--cta[data-variant="form"] .cta { align-items: start; }
   main[data-page-type="about"] .block--cta[data-variant="form"] { padding-block: 140px; }
-  /* Redistribute the boundary space so the deeper band inset stays within the audit budget. */
-  main[data-page-type="about"] .block:has(+ .block--cta[data-variant="form"]) {
+  /* Redistribute the boundary space so the deeper band inset stays within the audit budget (a photo band before it
+     keeps no padding: it meets the dark band edge to edge). */
+  main[data-page-type="about"] .block:not(.block--gallery):has(+ .block--cta[data-variant="form"]) {
     padding-bottom: min(calc(var(--section-space) / 2), max(0px, calc(var(--authoring-max-boundary-gap) - 140px)));
   }
 }
@@ -399,14 +480,22 @@ main[data-page-type="contact"] .form-block__field textarea { height: 44px; }
 /* Open design-review repairs: keep the existing reading measure on the heading axis. */
 .block--order-case .order-cases { margin-inline: 0; }
 .block--order-case .order-case__text { font-size: 17px; line-height: 2; }
+/* Unboxed cases keep no box inset either: the first case starts the heading's usual gap under it. */
 .block--order-case .order-case {
   background: transparent;
   border-left: 0;
-  padding-inline: 0;
+  padding: 0;
 }
-main[data-page-type="home"] .related-tile__button {
+/* Related tiles: the reference's 215 x 66 gold action sits on the photo's lower-left corner and hangs half its height
+   below the edge (the tile's own padding holds that half), with the title 12px above it; the tiles keep the
+   heading-to-content gap of the other sections. */
+main [data-authoring-block="relatedPages"][data-variant="tiles"] .related-tiles { margin-block-start: 1.5rem; }
+main [data-authoring-block="relatedPages"][data-variant="tiles"] .related-tile { padding-bottom: 33px; }
+main [data-authoring-block="relatedPages"][data-variant="tiles"] .related-tile__button {
+  left: 0;
+  bottom: 0;
   width: 215px;
-  max-width: calc(100% - 2.5rem);
+  max-width: 100%;
   min-height: 66px;
   padding: 1rem 1.5rem;
   justify-content: space-between;
@@ -415,22 +504,60 @@ main[data-page-type="home"] .related-tile__button {
   font-weight: 700;
   line-height: 1.25;
 }
-/* Keep photo titles above the review's 66px actions, with the original 12px gap. */
-main[data-page-type="home"] .related-tile__label {
+main [data-authoring-block="relatedPages"][data-variant="tiles"] .related-tile__label {
   bottom: calc(66px + 0.75rem);
 }
-main:is([data-page-type="home"], [data-page-type="solution"]) .related-tile__label {
+/* Each arrow follows its own label instead of the far end of a wide column. The links under the tiles run as one
+   left-set row of their own widths (no equal columns out of line with the tiles), each label on the heading's edge;
+   on phones one tight run, a 44px tap row each. */
+main [data-authoring-block="relatedPages"][data-variant="tiles"] .related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2.5rem;
+}
+main [data-authoring-block="relatedPages"][data-variant="tiles"] .related-links__link {
+  justify-content: flex-start;
+  height: auto;
+  min-height: 44px;
+  padding: 0;
+}
+@media (max-width: 767px) {
+  main [data-authoring-block="relatedPages"][data-variant="tiles"] .related-links { flex-direction: column; }
+}
+.related-tile__label {
   --font-heading: var(--font-display);
-  font-size: 34px;
   font-weight: 700;
 }
 .block--testimonials {
-  background: var(--surface-secondary);
   --surface-testimonial: transparent;
 }
 .block--testimonials .testimonial figcaption {
   border-top: 0;
-  text-align: center;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  text-align: start;
+  column-gap: 0.85rem;
+  align-items: center;
+}
+/* Without metadata, the portrait and attribution occupy one centred row. */
+.block--testimonials .testimonial figcaption:not(:has(.testimonial__meta)) .testimonial__photo {
+  grid-row: 1;
+}
+.block--testimonials .testimonial__author {
+  /* A small uppercase label in the sans display face, as the trust-bar labels; the serif stays for running text. */
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+/* Team members' names are the cards' titles: the heading face at heading weight, as the other card titles (the size
+   stays the template's). */
+main .team-card__name {
+  font-family: var(--font-subheading);
+  font-weight: 700;
+  letter-spacing: normal;
 }
 .block--testimonials .testimonial blockquote::before {
   content: "";
@@ -442,24 +569,36 @@ main:is([data-page-type="home"], [data-page-type="solution"]) .related-tile__lab
   /* Decorative paired quotation marks, not low-contrast text. */
   clip-path: polygon(0 45%, 18% 10%, 35% 10%, 20% 45%, 38% 45%, 38% 90%, 0 90%, 0 45%, 55% 45%, 73% 10%, 90% 10%, 75% 45%, 93% 45%, 93% 90%, 55% 90%, 55% 45%);
 }
-main[data-page-type="solution"] .point-list__items[data-columns="2"] { columns: 1; }
 main[data-page-type="solution"] .case { background: transparent; padding: 0; }
 main[data-page-type="solution"] .block--charts .prose__chart {
   background: transparent;
   padding: 0;
 }
-main[data-page-type="solution"] .block--charts .prose__table table { border: 0; }
-main[data-page-type="solution"] .block--charts .prose__table :is(th, td) {
+/* Every data table (charts, split rows, articles): row hairlines only, and its own compact leading. */
+main .block .prose__table table { border: 0; }
+main .block .prose__table :is(th, td) {
   border: 0;
   border-bottom: 1px solid #dedede;
 }
-main[data-page-type="solution"] .block--charts .prose__table tbody tr:last-child > :is(th, td) {
+main .block .prose__table tbody tr:last-child > :is(th, td) {
   border-bottom: 0;
 }
-main[data-page-type="contact"] .point-list__title {
-  font-family: var(--font-display);
+main .block .prose__table th { background: transparent; }
+main .block .prose__table :is(th, td),
+main .block .prose__table :is(th, td) :is(p, li) { line-height: 1.45; }
+@media (max-width: 767px) {
+  main .block .prose__table :is(th, td) { padding-block: 0.4rem; }
+  /* Three columns at 390px: two steps smaller so a cell keeps two or three words a line. */
+  main .block--split .split__charts .prose__table table { font-size: 0.8125rem; }
+}
+/* Every point list (featureGrid bullets, process list) and every icon list titles its items one way, in the heading
+   face, as the reference's one list style down the page. */
+main .point-list__title,
+main .block--icon-list .icon-list__item h3 {
+  font-family: var(--font-subheading);
   font-weight: 700;
-  font-size: 24px;
+  letter-spacing: normal;
+  line-height: 1.35;
   margin-bottom: 0.25rem;
 }
 main[data-page-type="contact"] .block--cta .cta__content {
@@ -471,7 +610,6 @@ main[data-page-type="contact"] .block--cta .cta__content > .button { margin-inli
 main[data-page-type="contact"] .block--cta :is(.cta__heading, .cta__text) { flex-basis: auto; }
 
 @media (max-width: 767px) {
-  main:is([data-page-type="home"], [data-page-type="solution"]) .related-tile__label { font-size: 24px; }
   main[data-page-type="solution"] .block--proof[data-variant="band"] .text-block { padding-inline: 0; }
   /* Reallocate the hero's existing padding budget below the overlaid navigation. */
   main[data-page-type="solution"] .page-hero .page-hero__inner {
@@ -479,51 +617,78 @@ main[data-page-type="contact"] .block--cta :is(.cta__heading, .cta__text) { flex
     gap: 1rem;
   }
   main[data-page-type="solution"] .page-hero__copy { gap: 12px; }
-  .block--icon-list[data-variant="checks"] .icon-list__item h3 {
-    font-size: 18px;
-    line-height: 1.35;
-    margin-bottom: 0.25rem;
-  }
   main[data-page-type="solution"] .block--charts .prose__table :is(th, td) {
     border-inline: 0;
     padding-inline: 0.25rem;
     text-align: left;
   }
-  main[data-page-type="contact"] .point-list { row-gap: 24px; }
-  main[data-page-type="contact"] .point-list__intro,
-  main[data-page-type="contact"] .point-list__intro > h2 { margin-bottom: 0 !important; }
-  main[data-page-type="contact"] .point-list__intro > .block__lead:empty { display: none; }
-  main[data-page-type="contact"] .point-list__title { font-size: 22px; }
-  main[data-page-type="contact"] .point-list__items { margin-top: 0; }
+  /* Stacked point lists: one even gap from heading (and lead) to the list, set by the list's own row gap. */
+  main .point-list { row-gap: 1.5rem; }
+  main .point-list__intro > .block__lead:empty { display: none; }
+  /* The intro's last line (heading or lead) keeps no margin of its own: the list follows at the row gap alone. */
+  main .point-list__intro,
+  main .point-list__intro > :last-child,
+  main .point-list__intro > h2:has(+ .block__lead:empty:last-child) { margin-bottom: 0 !important; }
+  main .point-list__items { margin-top: 0; }
   main[data-page-type="contact"] .page-hero .button { min-height: 66px; align-items: center; }
 }
 
-
 /* Style-board repairs: selectors follow modules and supported variants. */
-.block--intro[data-variant="text"] .text-flow__lead {
+.block--intro[data-variant="text"] .text-flow__lead,
+.block--proof[data-variant="band"] .text-flow__lead,
+.block--grid[data-pattern="cards"] .text-flow__lead,
+.block--split .text-flow__lead {
   font-size: inherit;
   line-height: inherit;
 }
-/* Auto uses the supplied image dimensions at every breakpoint. */
-.block--gallery[data-variant="band"] { --band-ratio: auto; }
-.block--gallery[data-variant="band"] .gallery__band img { height: auto; }
+/* One card set, one text size and colour: no card opens with a lead its neighbours lack. */
+.block--grid[data-pattern="cards"] .text-flow__lead { color: var(--text-primary); }
+.block--gallery[data-variant="band"] { width: 100%; max-width: none; }
+.block--gallery[data-variant="band"] .gallery__band { width: 100%; max-width: none; }
+/* Below desktops the band keeps the supplied photo's own shape (about 290px tall); from 1024px up it takes the
+   template's wide band frame (2 / 1, cover: three quarters of a 3:2 photo), so a band stays within one screen and text
+   and photo alternate down the page. */
+@media (max-width: 1023px) {
+  .block--gallery[data-variant="band"] { --band-ratio: auto; }
+  .block--gallery[data-variant="band"] .gallery__band img { width: 100%; height: auto; }
+}
 .block--process[data-variant="circles"] .process-step__title { line-height: 1.3; margin-bottom: 0.5rem; }
-main .block--logos .logos__heading { font-size: 1rem; font-weight: 400; line-height: 1.3; }
+main .block--logos .logos__heading { line-height: 1.3; }
+@media (max-width: 767px) {
+  /* A content-width action on the photo's lower edge, toward the right, its label on one line. */
+  .block--gallery .gallery__band-action {
+    inset-inline: auto var(--gutter);
+    width: auto;
+    white-space: nowrap;
+  }
+}
 @media (min-width: 1024px) {
-  /* Introduction and collection, not columns of repeatable items. */
+  /* Introduction and collection, not columns of repeatable items: the template's heading-beside-list split and gap
+     (.point-list), so the collection starts on the page's one copy line. */
   .block--logos > .container:has(> .logos) {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: 2rem;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
     align-items: start;
   }
+  /* Short names on even lines in their narrow cells, the location under each at a readable small size. */
+  main .block--logos .logos__name { letter-spacing: 0.02em; text-wrap: balance; }
+  main .block--logos .logos__note { font-size: 0.875rem; }
 }
 .block--testimonials .testimonial { background: transparent; }
 @media (min-width: 768px) {
   .block--testimonials .testimonial blockquote p { font-size: 17px; line-height: 2; }
 }
 [data-authoring-block="relatedPages"][data-variant="tiles"] {
-  --tile-shade: linear-gradient(to top, rgb(16 16 16 / 0.7) 0%, rgb(16 16 16 / 0.58) 40%, rgb(16 16 16 / 0.3) 65%, transparent 100%);
+  /* The title now sits above the action on the photo: keep the contrast ink under it. */
+  --tile-shade: linear-gradient(to top, rgb(16 16 16 / 0.7) 0%, rgb(16 16 16 / 0.58) 55%, rgb(16 16 16 / 0.3) 70%, transparent 100%);
+}
+@media (max-width: 767px) {
+  /* Phone labels span the photo: .45 is the least hundredth of this ink
+     that gives white large text 3:1 even over a white image pixel. */
+  [data-authoring-block="relatedPages"][data-variant="tiles"] {
+    --tile-shade: rgb(16 16 16 / 0.45);
+  }
 }
 [data-authoring-block="relatedPages"][data-variant="tiles"] .related-links__link { border: 0; }
 .block--cta[data-variant="image-band"] > .container { width: 100%; max-width: none; padding-inline: 0; }
@@ -541,13 +706,8 @@ main .block--logos .logos__heading { font-size: 1rem; font-weight: 400; line-hei
     grid-area: 1 / 1;
     margin-inline: max(var(--gutter), calc((100% - var(--container-max, 1200px)) / 2));
     justify-content: center;
-    /* Reserve the action's height so longer copy cannot overlap it. */
-    padding-block: 2rem calc(66px + 2rem);
-  }
-  .block--cta[data-variant="image-band"] .cta__content > .button--primary {
-    position: absolute;
-    inset-block-end: 0;
-    inset-inline-end: 0;
+    /* The action follows its copy in the shared flex flow. */
+    padding-block: 2rem;
   }
 }
 .block--process[data-variant="photo-cards"] .process-step__title { line-height: 1.3; }
@@ -557,17 +717,35 @@ main .block--logos .logos__heading { font-size: 1rem; font-weight: 400; line-hei
   backdrop-filter: none;
 }
 .block--process[data-variant="photo-cards"] .process-step__marker { background: transparent; border: 0; border-radius: 0; }
+/* Unboxed steps keep no box inset: number, title and text start on the band's caption edge. */
+.block--process[data-variant="photo-cards"] .process-step { padding-inline: 0; }
+.block--process[data-variant="photo-cards"] .process-step__marker {
+  left: 0;
+  width: auto;
+  margin-inline: 0;
+  padding-inline: 0;
+  justify-items: start;
+}
+@media (max-width: 767px) {
+  /* No box to fill: the band ends at its own padding after the last step. */
+  .block--process[data-variant="photo-cards"] .process-step { padding-block-end: 0; }
+}
 .block--gallery[data-variant="grid"] .gallery__item { grid-template-rows: auto 1fr; align-content: start; }
 main .block--icon-list h2 { font-weight: 400; }
 main .block--icon-list[data-variant="checks"] h2 { font-weight: 700; }
+/* The bullet lists' marker at every width: a round dot of the disc's size (about a third of the body size), centred on
+   the capitals of the title's first line, measured in that line's own size and leading (the icon holds no text). One
+   indent with the bullet lists: the dot at the content edge, the text about 1.25em in. */
 .block--icon-list[data-variant="checks"] .icon-list__icon {
-  width: 0.35rem;
-  height: 0.35rem;
-  margin: 0.85rem 0.5rem 0;
+  --dot: calc(var(--size-body) * 0.36);
+  width: var(--dot);
+  height: var(--dot);
+  font-size: var(--size-subheading);
+  line-height: 1.35;
+  margin: calc((1lh - var(--dot)) / 2 - 0.1em) 0.15rem 0 0;
   border-radius: 50%;
   background: var(--text-primary);
   color: transparent;
-  font-size: 0;
 }
 .block--icon-list[data-variant="checks"] .icon-list__icon svg { display: none; }
 /* Keep the template's shared title tracks; only prose flows without stretched rows. */
@@ -575,20 +753,28 @@ main .block--icon-list[data-variant="checks"] h2 { font-weight: 700; }
 .block--grid[data-pattern="cards"] .text-flow__runs { display: block; }
 .block--grid[data-pattern="cards"] .text-flow__lead + .text-flow__runs,
 .block--grid[data-pattern="cards"] .text-flow p + p { margin-top: 0.875rem; }
-.block--split[data-variant="single"] .split__media { aspect-ratio: 1.27; }
+/* Flush copy at every width; the template retains vertical centring beside photos. */
+.block--split[data-variant="panel"] .split__copy { background: transparent; padding: 0; }
 @media (min-width: 900px) {
-  .block--split[data-variant="single"] .split {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 462px);
-    column-gap: clamp(3rem, 7vw, 100px);
-    align-items: start;
+  main .block--split[data-variant="single"] .split[data-layout="split"] > .split__media-set {
+    min-width: 0;
   }
-  .block--split[data-variant="single"] .split[data-side="media-start"] {
-    grid-template-columns: minmax(0, 462px) minmax(0, 1fr);
+  main .block--split[data-variant="single"] .split[data-layout="split"] > .split__media-set > .split__media {
+    width: 100%;
+    max-width: 100%;
   }
 }
 .block--table[data-variant="grid"] .table-block { max-width: 90ch; }
 body[data-heading-align="center"] .block--table[data-variant="grid"] .table-block { margin-inline: auto; }
 main .block--proof[data-variant="band"] .text-block { padding: 0; }
+@media (min-width: 1024px) {
+  main .block--proof[data-variant="band"] .text-block__copy > h2 {
+    line-height: 48px;
+    font-weight: 700;
+  }
+  main .block--proof[data-variant="band"] .text-block__copy { row-gap: 25px; }
+}
+.block--table[data-variant="cards"] .table-card__row dd { max-inline-size: 70ch; }
 .block--charts .prose__table th { background: transparent; }
 main .block--related[data-variant="links"] .related-pages--grid .related-links__link {
   background: var(--surface-secondary);
@@ -603,19 +789,40 @@ main .block--related[data-variant="links"] .related-pages--grid .related-links__
   color: var(--text-inverse);
   --text-primary: var(--text-inverse);
   --heading-color: var(--text-inverse);
-  --text-muted: var(--text-inverse);
+  /* Field hints in the band's muted grey (8.7:1 on the dark ground), quieter than the white labels. */
+  --text-muted: #b8b8b8;
   --link: var(--text-inverse);
   --input-border: #909092;
 }
+/* A hint a step smaller than its label, at regular weight, so label and hint do not read as one run of white. */
+main .block--cta[data-variant="form"] .form-block__hint {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+/* Every closing form band: each field (label, control, hint) one unit, a clearly larger gap before the next field than
+   inside it, at every width. */
+main .block--cta[data-variant="form"] .form-block__form { row-gap: 1.5rem; }
 .block--cta[data-variant="form"] .cta__form a:not(.button) { color: var(--text-inverse); }
 .block--cta[data-variant="form"] .form-block__field { font-weight: 400; }
-.block--cta[data-variant="form"] .form-block__field :is(input, textarea) {
+.block--cta[data-variant="form"] .form-block__field :is(input, textarea, select) {
+  /* The controls' own glyphs (the date field's calendar) drawn light on the dark band. */
+  color-scheme: dark;
   background: transparent;
   color: var(--text-inverse);
   border: 0;
   border-bottom: 1px solid var(--input-border);
   padding: 0.25rem 0;
 }
+/* The select's list opens on the system's light menu: its choices keep the dark ink there. */
+.block--cta[data-variant="form"] .form-block__field select option { color: rgb(28, 28, 28); background: rgb(255, 255, 255); }
+/* Every form's label and hint keep their own leading, the hint a small gap under its control: at the fields' line-height
+   1 with no gap their glyphs met the control's rule (#909092 on the dark band, #727273 on white; audit low_contrast). */
+main :is(.block--form, .block--cta[data-variant="form"]) .form-block__field > :is(span, .form-block__hint, .form-block__error) { line-height: 1.35; }
+main :is(.block--form, .block--cta[data-variant="form"]) .form-block__field > :is(.form-block__hint, .form-block__error) { padding-block-start: 0.25rem; }
+/* The label keeps the same small gap above its control: on a general page's form (/request-a-quote/) the control keeps
+   the template's full #727273 border, and at the desktop fields' gap 0 the label's text sat on its top edge (3.55:1). */
+main :is(.block--form, .block--cta[data-variant="form"]) .form-block__field > span:first-child { padding-block-end: 0.25rem; }
 .case__summary { font-size: 17px; line-height: 2; }
 .case__result { align-content: start; grid-template-rows: auto auto; }
 .block--split .split__charts .prose__chart { background: transparent; padding: 0; }
@@ -624,31 +831,57 @@ main .block--related[data-variant="links"] .related-pages--grid .related-links__
   border: 0;
   border-bottom: 1px solid #dedede;
 }
-.block--process[data-variant="list"] .point-list__title {
-  font-family: var(--font-subheading);
-  font-weight: 700;
-  font-size: 1.125rem;
-  line-height: 1.35;
-}
-main .contact-channels__heading { font-size: 1.5rem; line-height: 1.3; }
 @media (min-width: 1024px) {
-  main .contact-channels__heading { font-size: 28px; }
+  /* A split row beside a table (not a photo) gives the table the larger share and the copy the smaller, whichever side
+     the table is on, with tighter cell insets, so headers and row labels keep to one or two lines. */
+  .block--split .split[data-layout="split"]:has(> .split__charts) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .block--split .split[data-layout="split"][data-side="media-start"]:has(> .split__charts) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .block--split .split__charts .prose__table :is(th, td) { padding-inline: 0.5rem; }
+  .block--split .split__charts .prose__table :is(th, td):first-child { padding-inline-start: 0; }
+  /* A comparison (a label per row, an option per column) shares the table's width evenly among its columns, so the
+     short option headers and row labels keep to one or two lines and the long values wrap in their own column,
+     whatever the number of options. */
+  .block--split .split__charts .prose__table table:has(tbody th[scope="row"]) {
+    width: 100%;
+    table-layout: fixed;
+  }
 }
+main .contact-channels__heading { line-height: 1.3; }
+
 .contact-channels[data-variant="list"] { row-gap: 1rem; }
-.contact-channels[data-variant="list"] .contact-channel {
+/* Row and list: each icon stands level with the value it marks, under the label; every value's text starts at the
+   top of its line (a link keeps its 44px tap height below its text), so linked and plain values line up. */
+.contact-channels:is([data-variant="row"], [data-variant="list"]) .contact-channel {
   grid-template-areas: ". name" "icon value";
   row-gap: 0;
+  align-items: start;
 }
-.contact-channels[data-variant="list"] .contact-channel__icon { grid-area: icon; }
-.contact-channels[data-variant="list"] .contact-channel__name { grid-area: name; }
-.contact-channels[data-variant="list"] .contact-channel__value { grid-area: value; }
+main .contact-channels:is([data-variant="row"], [data-variant="list"]) .contact-channel__icon {
+  grid-area: icon;
+  margin-block-start: max(0px, calc((1lh - var(--channel-icon-box)) / 2));
+}
+.contact-channels:is([data-variant="row"], [data-variant="list"]) .contact-channel__name { grid-area: name; line-height: 1.3; }
+.contact-channels:is([data-variant="row"], [data-variant="list"]) .contact-channel__value { grid-area: value; }
+.contact-channels:is([data-variant="row"], [data-variant="list"]) a.contact-channel__value {
+  display: block;
+  padding-block: 0;
+  min-block-size: 44px;
+}
 .contact-channels[data-variant="list"] a.contact-channel__value { color: var(--text-primary); }
+@media (min-width: 768px) {
+  /* A row of channels shares the content width, so a long value wraps inside its own item and no item is left alone
+     on a second row. */
+  .contact-channels[data-variant="row"] > .contact-channel { flex: 1 1 0; min-inline-size: 8rem; }
+}
 @media (min-width: 900px) {
+  /* Match the reference's breathing room between underlined field rows. */
+  main .block--form .form-block__form { row-gap: 1.5rem; }
   main .block--form .form-block__field { line-height: 1; gap: 0; }
-  main .block--form .form-block__field :is(input, textarea) { height: 28px; min-height: 28px; }
+  /* The select stands as tall as the inputs beside it, so the underlines of a paired row run level. */
+  main .block--form .form-block__field :is(input, textarea, select) { height: 28px; min-height: 28px; }
 }
 @media (max-width: 767px) {
-  .block--logos .logos__name { font-size: 0.875rem; font-weight: 400; line-height: 1.3; }
+  .block--logos .logos__name { font-size: 0.875rem; line-height: 1.3; }
   .block--logos .logos__item { padding: 0.25rem; }
   main .block--logos .logos__heading { margin-bottom: 1rem !important; }
   .block--testimonials { --testimonial-padding: 0.5rem 0.9375rem; }
@@ -662,33 +895,426 @@ main .contact-channels__heading { font-size: 1.5rem; line-height: 1.3; }
     overflow-wrap: normal;
     word-break: normal;
   }
-  main .block.block--cta[data-variant="form"] .cta { padding-inline: 15px; }
+  main .block.block--cta[data-variant="form"] .cta { padding-inline: 0; }
   .case__summary { font-size: 16px; }
   .block--order-case .order-case__text { font-size: 16px; }
   .block--split[data-variant="panel"] .split__media-set { order: -1; }
-  .block--split[data-variant="panel"] .split__copy { background: transparent; padding: 0; }
-  .block--split .split__charts .prose__table table { width: 100%; min-width: 0; table-layout: fixed; }
-  .block--split .split__charts .prose__table :is(th, td) { padding-inline: 0.25rem; overflow-wrap: anywhere; text-align: start; }
+  .block--split .split__charts .prose__table table { width: 100%; min-width: 0; table-layout: auto; }
+  /* Natural word minima allocate the columns; smaller insets leave room for prose. */
+  .block--split .split__charts .prose__table :is(th, td) { padding-inline: 0.25rem; overflow-wrap: normal; word-break: normal; text-align: start; }
   /* Column styles and their inner wrappers must share the table's reading edge. */
   .block--split .split__charts .prose__table :is(th, td),
   .block--split .split__charts .prose__table :is(th, td) * { text-align: start !important; }
   .block--table[data-variant="cards"] .table-card { padding: 0.5rem 0; }
   .block--table[data-variant="cards"] .table-cards { row-gap: 1rem; }
+  /* Comparison tables (a label per row, values in columns): on phones the row label takes its own line over its
+     values, so the value columns share the full width and their headers keep to one or two lines. */
+  main :is(.block--split .split__charts, .block--charts) .prose__table table:has(tbody th[scope="row"]),
+  main :is(.block--split .split__charts, .block--charts) .prose__table table:has(tbody th[scope="row"]) :is(thead, tbody) {
+    display: block;
+    width: 100%;
+  }
+  main :is(.block--split .split__charts, .block--charts) .prose__table table:has(tbody th[scope="row"]) tr {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  main :is(.block--split .split__charts, .block--charts) .prose__table table:has(tbody th[scope="row"]) tr > :is(th, td) {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  main :is(.block--split .split__charts, .block--charts) .prose__table table:has(tbody th[scope="row"]) thead tr > td:first-child { display: none; }
+  main :is(.block--split .split__charts, .block--charts) .prose__table table:has(tbody th[scope="row"]) tbody th[scope="row"] {
+    flex-basis: 100%;
+    border-bottom: 0;
+    padding-block-end: 0;
+  }
 }
 
 /* Shared repairs for the current style-board review. */
 body[data-heading-align="start"] main .block--testimonials .testimonials__heading { text-align: start; }
 @media (max-width: 767px) {
   .block--split[data-variant="single"] .split__media-set { order: -1; }
-  .block--split .split__charts { width: 100%; min-width: 0; }
-  .block--icon-list[data-variant="single"] .icon-list__item h3 {
-    line-height: 1.3;
-    margin-bottom: 0.5rem;
-  }
+  /* Tables follow their introduction; actual photos retain their photo-first order. */
+  .block--split .split__media-set.split__charts { order: 1; width: 100%; min-width: 0; }
   main .block--cta[data-variant="form"] .form-block__field { line-height: 1; gap: 0; }
-  main .block--cta[data-variant="form"] .form-block__form { row-gap: 6px; }
-  main .block--cta[data-variant="form"] .form-block__field input { height: 32px; min-height: 32px; }
+  main .block--cta[data-variant="form"] .form-block__field :is(input, select) { height: 32px; min-height: 32px; }
   main .block--cta[data-variant="form"] .form-block__field textarea { height: 5rem; min-height: 5rem; resize: vertical; }
-  .contact-channels[data-variant="list"] .contact-channel__name { line-height: 1.3; }
-  .contact-channels[data-variant="list"] .contact-channel__value { padding-block: 0; min-block-size: 44px; }
+}
+
+/* Current page review: reusable section treatments; item grids remain template-owned. */
+main[data-page-type="home"] .process-step__title { font-weight: 700; line-height: 1.3; }
+main[data-page-type="privacy"] .block--grid[data-pattern="columns"] .feature-card {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.related-tile__button { display: inline-flex; align-items: center; gap: 0.75rem; font-weight: 600; }
+
+main .block--cta[data-variant="form"] .cta { align-items: start; }
+main:has(> .block--cta:last-child) { padding-bottom: 0; }
+
+.blog-hub-hero h1, .post-header__title { font-weight: 700; }
+main .block--posts[data-card] .post-card { border: 0; outline: 0; }
+/* Unframed cards: title, date and excerpt line up with the photo's edge. */
+main .block--posts[data-card] .post-card__body { padding-inline: 0; }
+/* Contents: tight lines within an entry, clear space between entries. */
+.post-toc :is(ol, li) { line-height: 1.4; }
+.post-toc ol { gap: 0.75rem; }
+/* The page's own contents box the same way: a wrapped entry holds together, entries stand apart. */
+main .page-toc :is(li, a) { line-height: 1.4; }
+main .page-toc li { padding-block: 0.375rem; }
+.blog-hub-hero[data-header="banner"] {
+  --text-primary: var(--text-inverse);
+  --hero-overlay: rgb(16 16 16 / 0.58);
+}
+.blog-hub-hero[data-header="banner"]::before { background: var(--hero-overlay); }
+.blog-hub-hero[data-header="banner"] .blog-hub-hero__inner { justify-items: start; text-align: start; }
+main[data-page-type="blog_post"] .prose__chart { background: transparent; padding: 0; }
+@media (min-width: 768px) {
+  /* Footer regions flow in rows; links wrap naturally without assigning item tracks. */
+  .site-footer__grid { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+  .site-footer__grid > div { flex-basis: 100%; padding-bottom: 1.5rem; border-bottom: 1px solid #353535; }
+  .site-footer .site-footer__grid .site-footer__links { display: flex; flex-wrap: wrap; border: 0; }
+}
+@media (min-width: 1024px) {
+  /* Every hero that opens on a photo, one overlay: the full .58 shade (contrast for white small text over a white
+     pixel) only as far as the hero copy column reaches (the content edge plus the column's own max-width), down to .35
+     15% of the photo past it and clear at the far edge, so the photo's subject beside a short title stays bright. */
+  main[data-hero-photo] .page-hero {
+    --hero-copy-end: calc(max(var(--gutter), (100% - var(--container-max)) / 2) + var(--hero-copy-max, 46rem));
+    --hero-overlay: linear-gradient(90deg, rgb(16 16 16 / 0.58) 0%, rgb(16 16 16 / 0.58) var(--hero-copy-end), rgb(16 16 16 / 0.35) calc(var(--hero-copy-end) + 15%), transparent 100%);
+  }
+}
+@media (max-width: 767px) {
+  main[data-page-type="solution"] .block--faq .faq__item h3 { line-height: 1.3; }
+  main[data-page-type="solution"] .faq__item summary { min-height: 44px; }
+  main:is([data-page-type="about"], [data-page-type="general"]) .page-hero .button { min-height: 66px; align-items: center; }
+  main[data-page-type="about"] .page-hero .button { width: 215px; max-width: 100%; justify-content: space-between; }
+  main .block--cta[data-variant="form"] { padding-top: 64px; }
+  main .block:not(.block--gallery):has(+ .block--cta[data-variant="form"]) {
+    padding-bottom: min(calc(var(--section-space) / 2), max(0px, calc(var(--authoring-max-boundary-gap) - 64px)));
+  }
+  main[data-page-type="about"] .block--cta[data-variant="form"] .form-block__form { padding-inline-start: 40px; min-width: 0; }
+  main[data-page-type="contact"] .block--form .form-block__form .button { margin-block-start: 24px; }
+  .blog-hub-hero[data-header="banner"] { padding: 0; min-height: 0; display: grid; }
+  /* The photo fills the whole hero, down to its lower edge, when the title and lead stand taller than the photo's own
+     height (no dark strip under it); otherwise the hero keeps the photo's height. */
+  .blog-hub-hero[data-header="banner"] .blog-hub-hero__backdrop { position: relative; height: 100%; min-height: 0; align-self: stretch; object-fit: cover; grid-area: 1 / 1; }
+  .blog-hub-hero[data-header="banner"] .blog-hub-hero__inner { grid-area: 1 / 1; padding-block: 2rem; }
+}
+
+
+/* Icons retain the reference service tiles after the supported variant switch (home only; card sets elsewhere take
+   the template's swap: pale on white, white on the tint). */
+main[data-page-type="home"] .block--grid[data-pattern="icons"] {
+  --surface-secondary: var(--section-tint);
+}
+
+main[data-page-type="solutions_hub"] .block--grid[data-pattern="icons"] .feature-card {
+  background: var(--surface-secondary);
+  padding: 1.875rem;
+  border: 0;
+  border-bottom: 1px solid #dedede;
+}
+/* Every closing form band (home's too): supporting prose and consent at regular weight through rich text. */
+main .block--cta[data-variant="form"] :is(.cta__text, .form-block__consent),
+main .block--cta[data-variant="form"] :is(.cta__text, .form-block__consent) * {
+  font-weight: 400;
+}
+@media (min-width: 1024px) {
+  .blog-hub-hero[data-header="banner"] {
+    --hero-overlay: linear-gradient(90deg, rgb(16 16 16 / 0.58) 0%, rgb(16 16 16 / 0.58) 70%, rgb(16 16 16 / 0.3) 85%, transparent 100%);
+  }
+}
+@media (max-width: 767px) {
+  /* A card set continued in a second grid keeps the set's one interval at the seam: the preceding block gives half the
+     grid gap, this one the other half plus the 2.5rem the stacked icon cards stand apart. */
+  main:not([data-page-type="solutions_hub"]) .block--grid[data-continues][data-pattern="icons"] {
+    padding-block-start: calc(var(--grid-gap) / 2 + 2.5rem);
+  }
+  /* Stacked circle steps: each title close to its own text (its 0.5rem margin alone), a clearly larger gap before the
+     next step's number, as the stacked cards. */
+  .block--process[data-variant="circles"] .process-step { row-gap: 0; }
+  .block--process[data-variant="circles"] .process-step__marker { margin-block-end: 0.75rem; }
+  .block--process[data-variant="circles"] .process-step + .process-step { margin-block-start: 2.5rem; }
+  /* That 2.5rem is the steps' one interval: the list's own row gap adds nothing on top of it. */
+  .block--process[data-variant="circles"] .process-steps { row-gap: 0; }
+}
+/* Quotes keep their module's one alignment at every width, on every page: under a heading on the content's left edge,
+   mark, quote and attribution start on that edge, with no inset of an undrawn box. */
+body[data-heading-align="start"] main .block--testimonials .testimonial :is(blockquote, blockquote p, figcaption) {
+  margin-inline: 0;
+  padding-inline: 0;
+  text-align: start;
+}
+body[data-heading-align="start"] main .block--testimonials .testimonial blockquote::before {
+  margin-inline: 0;
+}
+/* The one-quote list keeps the template's measure but starts on the heading's edge (not centred in the column). */
+body[data-heading-align="start"] main .block--testimonials .testimonials[data-columns="1"] {
+  margin-inline: 0;
+}
+@media (min-width: 768px) {
+  /* Room above the quote only: the band's own padding closes under the attribution, as it opens over the heading. */
+  body[data-heading-align="start"] main .block--testimonials { --testimonial-padding: 1.5rem 0 0; }
+}
+@media (max-width: 767px) {
+  /* On phones too (every page, the home carousel's slides with them): no inline inset, so mark, quote and attribution
+     start on the heading's edge, as at 1440px. */
+  body[data-heading-align="start"] main .block--testimonials { --testimonial-padding: 0.5rem 0; }
+}
+/* Every dark closing form band: the supporting line and the consent in the muted grey under the white heading
+   (8.7:1 on the dark ground); the consent's privacy link keeps its own link style. */
+main .block--cta[data-variant="form"] :is(.cta__text, .form-block__consent),
+main .block--cta[data-variant="form"] :is(.cta__text, .form-block__consent) :not(a) {
+  color: #b8b8b8;
+}
+
+/* A reading measure lets the template's multicolumn list merge naturally. */
+main[data-page-type="solution"] .block--grid[data-pattern="bullets"] .point-list__items {
+  column-width: 32ch;
+  max-width: 70ch;
+}
+@media (min-width: 768px) {
+  main[data-page-type="general"] .block--related[data-variant="tiles"] .related-tiles { column-gap: 0; }
+}
+/* Reserve navigation clearance inside the photograph, with no separate header band. */
+main[data-page-type="privacy"] .page-hero[data-variant="media-overlay"] .page-hero__inner {
+  padding-block-start: max(clamp(3rem, 7vw, 6rem), calc(var(--header-height) + 1rem));
+}
+main[data-hero-photo] .blog-hub-hero[data-header="banner"] {
+  padding-block-start: 0;
+}
+main[data-hero-photo] .blog-hub-hero[data-header="banner"] .blog-hub-hero__inner {
+  padding-block-start: calc(var(--header-height) + 2rem);
+}
+
+/* Design-gate repair (shots 300a1b6728796e7f): shared by block type and variant. */
+/* The page lead under the hero: the split rows' lead size at every width, and the page's usual section padding. */
+main .block.block--page-lead {
+  --size-lead: calc(var(--size-body) * 1.125);
+  padding-block: calc(var(--section-space) / 2);
+}
+@media (min-width: 1024px) {
+  /* On desktops the body runs larger and the lead's step over it was lost: one more step sets it apart, as on phones. */
+  main .block.block--page-lead { --size-lead: calc(var(--size-body) * 1.25); }
+}
+/* Contact details: the section heading's usual gap above the channels; a row of channels starts on the heading's edge
+   and keeps the list's dark values. */
+main .contact-channels__heading { margin-bottom: 1.5rem !important; }
+body[data-heading-align="start"] .contact-channels[data-variant="row"] { justify-content: flex-start; }
+.contact-channels[data-variant="row"] a.contact-channel__value { color: var(--text-primary); }
+@media (max-width: 767px) {
+  /* Unbordered questions: the summary's own top inset already stands under the heading, so the heading-to-list gap
+     takes only the rest of the usual 1.5rem. */
+  main .block--faq .faq { row-gap: calc(1.5rem - 1.125rem); }
+}
+/* Form closing band: its inline links read as links (underlined, as the consent link), and Message is one short
+   underlined field like the others. */
+main .block--cta[data-variant="form"] a:not(.button) {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+main .block--cta[data-variant="form"] .form-block__field textarea {
+  height: 5.5rem;
+  min-height: 44px;
+  resize: vertical;
+}
+/* The contact form's consent box sized for touch, in the gold accent, its label row the tap target. */
+.block--form .form-block__consent { min-height: 44px; }
+.block--form .form-block__consent input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2rem;
+  accent-color: var(--accent);
+}
+/* Footer contact lines in one muted colour; the accent only on hover and focus. */
+.site-footer .site-footer__contact > :is(a, span) { color: var(--text-inverse-muted); }
+.site-footer .site-footer__contact > a:is(:hover, :focus-visible) { color: var(--link); }
+@media (min-width: 1024px) {
+  /* Footer upper band in two halves: brand and contact lines, the section links beside them; the legal links stay in
+     the strip under the hairline. */
+  .site-footer .site-footer__grid > div { flex: 1 1 0; border-bottom: 0; }
+  .site-footer .site-footer__grid > nav[data-nav-source="header_nav"] { flex: 1 1 0; padding-bottom: 1.5rem; }
+  .site-footer .site-footer__grid > nav[data-nav-source="header_nav"] .site-footer__links { padding-top: 0; }
+  .site-footer .site-footer__grid > nav[data-nav-source="footer_nav"] { flex-basis: 100%; border-top: 1px solid #353535; }
+}
+/* The legal strip (in either footer layout) starts on the brand column's left edge, as the contact lines above it. */
+.site-footer nav[data-nav-source="footer_nav"] .site-footer__links,
+.site-footer .site-footer__legal {
+  justify-content: flex-start;
+  justify-items: start;
+  text-align: start;
+}
+
+/* Design-gate repair (shots 17e8b4d206233d53): shared by block type and variant. */
+/* The dark closing band's supporting copy in the muted grey under its white heading, as the form bands' (8.7:1 on
+   the dark ground). */
+main .block--cta[data-variant="dark"] .cta :is(.cta__text, .cta__text :not(a)) { color: #b8b8b8; }
+/* A photo band's opening line with no heading over it is a label: set as the site's eyebrow, on the band's light ink,
+   on the left edge above the steps. */
+main .block--process[data-variant="photo-cards"] .process:not(:has(> .process__heading)) > .block__lead {
+  font-family: var(--font-eyebrow);
+  font-size: var(--size-eyebrow);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--text-inverse);
+}
+@media (max-width: 767px) {
+  /* Stacked columns: each title keeps close to its own text, and a clearly larger gap opens before the next item. */
+  main .block--grid[data-pattern="columns"] .feature-card { row-gap: 0.375rem; }
+  main .block--grid[data-pattern="columns"] .feature-card + .feature-card { margin-block-start: 1.5rem; }
+  /* Unfilled icon cards stacked the same way: the title close to its text, a clearly larger gap before the next icon
+     (the hub's filled icon cards keep their own inset and the grid gap). */
+  main:not([data-page-type="solutions_hub"]) .block--grid[data-pattern="icons"] .feature-card { row-gap: 0.375rem; }
+  main:not([data-page-type="solutions_hub"]) .block--grid[data-pattern="icons"] .feature-card + .feature-card { margin-block-start: 2.5rem; }
+}
+/* Every form's consent box (the contact form and the dark closing form band) drawn in the fields' ink: a 1px box in the
+   underline colour (#909092 on the dark band), filled with the gold accent and a dark tick when checked. */
+.block--form .form-block__consent input[type="checkbox"],
+.block--cta[data-variant="form"] .form-block__consent input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  margin-inline: 0;
+  border: 1px solid var(--input-border);
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.block--form .form-block__consent input[type="checkbox"]:checked,
+.block--cta[data-variant="form"] .form-block__consent input[type="checkbox"]:checked {
+  background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8' fill='none' stroke='%231c1c1c' stroke-width='2'/%3E%3C/svg%3E") center / 0.875rem no-repeat;
+}
+
+/* Design-gate repair (shots 2caa5b2537e1936c): shared by block type, variant and page type. */
+/* The contact form's privacy link reads as a link: the accent ink (4.6:1 on white and on the tint), underlined. */
+.block--form .form-block__consent a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+/* Contact channels in a row or list: plain values keep the linked values' 44px line, so every item stands at one
+   interval; a long value (the hours) breaks into even lines with no word alone. */
+.contact-channels:is([data-variant="row"], [data-variant="list"]) .contact-channel__value { min-block-size: 44px; }
+.contact-channels[data-variant="row"] .contact-channel__value { text-wrap: pretty; }
+/* Icon lists keep the bullet lists' rhythm between items. */
+main .block--icon-list .icon-list__items { row-gap: 1.5rem; }
+/* The article's introduction (and its contents box) stands as far above the first section as one section stands above
+   the next: the section gap, plus the paragraph gap and the half-leading under the last line a section ends on. */
+main .post-intro { margin-bottom: calc(var(--article-section-gap) + var(--article-paragraph-gap) + (1lh - 1em) / 2); }
+@media (max-width: 767px) {
+  /* About: body copy at a reading leading on phones, so paragraph gaps read clearly larger than line gaps. */
+  main[data-page-type="about"] :is(.block--intro, .block--grid, .block--faq) p,
+  main[data-page-type="about"] .block--intro .text-flow__lead { line-height: 1.65; }
+}
+@media (min-width: 768px) {
+  /* The blog's banner header stands at the site's hero height (as its photo heroes), not only its one-line title's. */
+  main .blog-hub-hero[data-header="banner"] { min-height: var(--hero-min-height); }
+}
+@media (min-width: 1024px) {
+  /* General pages' closing form band: as much room over its heading as under its button (the last section's own
+     bottom padding); the section before it gives up what the boundary budget needs (a photo band before it keeps 0). */
+  main[data-page-type="general"] .block--cta[data-variant="form"] { padding-top: var(--section-space); }
+  main[data-page-type="general"] .block:not(.block--gallery):has(+ .block--cta[data-variant="form"]) {
+    padding-bottom: min(calc(var(--section-space) / 2), max(0px, calc(var(--authoring-max-boundary-gap) - var(--section-space))));
+  }
+  /* The inline closing call that ends a page (contact) closes at its opening padding, not a doubled one. */
+  main .block--cta[data-variant="inline"]:last-child { padding-bottom: calc(var(--section-space) / 2); }
+}
+
+/* Design-gate repair (shots 60371329c5249450): shared by block type and variant. */
+/* Every closing form band, with or without a photo: the supporting line in the muted grey under the white heading
+   (8.7:1 on the dark ground), over the template's has-photo white; its links keep their own style. */
+main .block.block--cta[data-variant="form"] .cta__content :is(.cta__text, .cta__text :not(a)) { color: #b8b8b8; }
+/* The dark closing band's inline links in the gold accent, underlined (about 10:1 on the dark ground), against its
+   muted copy. */
+main .block--cta[data-variant="dark"] .cta .cta__text a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+/* Unframed post cards: no white panel on the section's surface, so the copy on the photo's edge stands on the tint. */
+main .block--posts[data-card] .post-card { background: transparent; }
+@media (min-width: 768px) {
+  /* Chart tables start their row labels on the heading's edge, as the split rows' tables. */
+  main .block--charts .prose__table :is(th, td):first-child { padding-inline-start: 0; }
+}
+@media (max-width: 767px) {
+  /* Stacked circle steps: the 2.5rem between steps is their one interval; the last line of a step keeps no margin. */
+  .block--process[data-variant="circles"] .process-step > :last-child { margin-block-end: 0; }
+}
+
+/* Design-gate repair (shots 4c8c5fec938a3992): shared by block type and variant. */
+@media (min-width: 1024px) {
+  /* A list beside its heading: the heading column stays in view beside the longer list as it scrolls (as a split row's
+     photo does), so no tall empty column opens under the heading. */
+  main .point-list__intro,
+  main .icon-list[data-layout="split"] .icon-list__intro {
+    position: sticky;
+    top: calc(var(--header-height) + 1.5rem);
+    align-self: start;
+  }
+}
+/* A full-width photo band meets the sections on both sides edge to edge (at every width, before any section): no strip
+   of page above or below the photo, so the next heading stands only its own section's padding under it. A band with an
+   action keeps its frame's room for the button's lower half. */
+main .block.block--gallery[data-variant="band"] { padding-block: 0; }
+/* The review line after the last section reads as the top of the footer: the footer's dark ground and muted ink across
+   the page, its text on the content's left edge, its link in the footer's gold (about 10:1), so the dark closing band
+   runs into the dark footer with no white strip between them. */
+main > .page-updated {
+  max-inline-size: none;
+  max-width: none;
+  margin: 0;
+  padding-block: 1.5rem 0;
+  padding-inline: max(var(--gutter), (100% - var(--container-max)) / 2);
+  background: rgb(16, 16, 16);
+  color: rgb(144, 144, 146);
+  --text-muted: rgb(144, 144, 146);
+  --link: rgb(240, 193, 89);
+  --focus-ring: rgb(240, 193, 89);
+}
+main > .page-updated a { color: rgb(240, 193, 89); }
+/* Every closing form band's inline links in the gold accent, underlined (about 10:1 on the dark ground), against its
+   muted copy, as the dark band's. */
+main .block--cta[data-variant="form"] .cta__text a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+@media (max-width: 767px) {
+  /* The caption of a whole step sequence stands apart from the last step by at least the steps' own 2.5rem interval
+     (over the article paragraphs' zero top margin, which the plain caption rule lost to). */
+  main .block--prose .prose__steps > .prose__steps-caption { margin-block-start: 2.5rem; }
+}
+
+/* Design-gate repair (shots 1f9ad94418bd6d4e): shared by block type and the section token. */
+@media (max-width: 767px) {
+  /* Phones: every section opens and closes on 2.75rem (was 2rem), the same above its heading as under its last line,
+     so about 90px stands between one section's last line and the next heading, within the reference's 65-110px. */
+  :root:root { --section-space: 5.5rem; }
+}
+/* The data-practices table: short row labels on one line, the width going to the longer recorded text. */
+@media (min-width: 768px) {
+  main .block--data-practices .table-block td:first-child { white-space: nowrap; }
+}
+/* Its notes: a reading leading, more room between the two notes than between their lines, clear of the table's last
+   rule, with no lone last word. */
+main .block--data-practices .table-block__note {
+  line-height: 1.6;
+  margin-block: 0;
+  max-width: 70ch;
+  text-wrap: pretty;
+}
+main .block--data-practices .table-block__scroll + .table-block__note { margin-block-start: 1.25rem; }
+main .block--data-practices .table-block__note + .table-block__note { margin-block-start: 0.75rem; }
+/* The address in the note reads as a link: the site's link ink (the darkened gold, AA on white and the tint),
+   underlined. */
+main .block--data-practices .table-block__note a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }

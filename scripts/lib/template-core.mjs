@@ -4,9 +4,11 @@
 // copy is detected instead of guessed.
 
 import { createHash } from 'node:crypto';
+import { existsSync } from 'node:fs';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { cp, mkdir, readFile, readdir, rm, stat } from 'node:fs/promises';
-import { relative, resolve } from 'node:path';
+import { cp, mkdir, mkdtemp, readFile, readdir, rm, stat } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, relative, resolve } from 'node:path';
 import { writeJson } from './json-io.mjs';
 
 export const CORE_PATHS = Object.freeze([
@@ -33,6 +35,12 @@ export const CORE_PATHS = Object.freeze([
   'docs/research/CSS_HOOKS.md',
 ]);
 export const CORE_MANIFEST = 'template-core.json';
+
+// The template a workspace syncs its core from (site-run.mjs adds the core step only then): the manifest's source,
+// relative to the workspace, where it still holds the sync script; else null, and the run uses the workspace's own copy.
+export function coreSourceOf(workspaceRoot, manifest) {
+  return manifest?.source && existsSync(resolve(workspaceRoot, manifest.source, 'scripts/sync-template-core.mjs')) ? manifest.source.replaceAll('\\', '/') : null;
+}
 export const CORE_SCHEMA = 'seo-site-template-core-v1';
 
 async function listFiles(root, path) {
@@ -78,17 +86,38 @@ function installPackages(workspaceRoot) {
   if (result.status !== 0) throw new Error(`pnpm install failed in ${workspaceRoot} (exit ${result.status})`);
 }
 
+// The core files of the repository's commit (HEAD) in a folder of their own, through an index of its own: the
+// repository's index and working tree are not touched. { dir, uncommitted: core files changed or added since }.
+async function committedCore(repoRoot) {
+  const temp = await mkdtemp(join(tmpdir(), 'template-core-'));
+  const env = { ...process.env, GIT_INDEX_FILE: join(temp, 'index') };
+  execFileSync('git', ['read-tree', 'HEAD'], { cwd: repoRoot, env });
+  const files = execFileSync('git', ['ls-files', '--', ...CORE_PATHS], { cwd: repoRoot, env, encoding: 'utf8' });
+  execFileSync('git', ['checkout-index', '-f', `--prefix=${join(temp, 'tree')}/`, '--stdin'], { cwd: repoRoot, env, input: files });
+  const status = execFileSync('git', ['status', '--porcelain', '--untracked-files=all', '--', ...CORE_PATHS], { cwd: repoRoot, encoding: 'utf8' });
+  const uncommitted = status.split('\n').filter(Boolean).map((line) => line.slice(3).replace(/^"|"$/g, '').split(' -> ').at(-1));
+  return { dir: join(temp, 'tree'), temp, uncommitted };
+}
+
 // Copies the core from the repository into a workspace (replacing stale core files) and records the manifest; when the
 // packages changed with it, they are installed (a core that imports a new package would not run otherwise: ajv).
-export async function syncTemplateCore({ repoRoot, workspaceRoot, install = installPackages }) {
+// committed: the files of the repository's commit, not its working tree (site-run's core step: hotel-rm's runs 10 and
+// 17 synced another session's half-done edits); a sync by hand while iterating on a rule takes the working tree.
+export async function syncTemplateCore({ repoRoot, workspaceRoot, install = installPackages, committed = false }) {
   const packages = async () => Promise.all(['package.json', 'pnpm-lock.yaml'].map((file) => hashFile(resolve(workspaceRoot, file)).catch(() => null)));
   const before = await packages();
-  for (const path of CORE_PATHS) {
-    const source = resolve(repoRoot, path);
-    if (!(await stat(source).catch(() => null))) continue;
-    const target = resolve(workspaceRoot, path);
-    if ((await stat(source)).isDirectory()) await rm(target, { recursive: true, force: true });
-    await cp(source, target, { recursive: true });
+  const tree = committed ? await committedCore(repoRoot) : null;
+  const from = tree?.dir ?? repoRoot;
+  try {
+    for (const path of CORE_PATHS) {
+      const source = resolve(from, path);
+      if (!(await stat(source).catch(() => null))) continue;
+      const target = resolve(workspaceRoot, path);
+      if ((await stat(source)).isDirectory()) await rm(target, { recursive: true, force: true });
+      await cp(source, target, { recursive: true });
+    }
+  } finally {
+    if (tree) await rm(tree.temp, { recursive: true, force: true });
   }
   // The site repository runs the shared workflows: release, and scheduled blog publishing.
   for (const name of ['release.yml', 'blog-publish.yml']) {
@@ -98,11 +127,13 @@ export async function syncTemplateCore({ repoRoot, workspaceRoot, install = inst
     await cp(workflow, resolve(workspaceRoot, '.github/workflows', name));
   }
   if (JSON.stringify(await packages()) !== JSON.stringify(before)) install(workspaceRoot);
-  return writeCoreManifest({ repoRoot, workspaceRoot });
+  return writeCoreManifest({ repoRoot, workspaceRoot, from: tree ? 'commit' : 'worktree', uncommitted: tree?.uncommitted });
 }
 
-export async function writeCoreManifest({ repoRoot, workspaceRoot }) {
-  const manifest = { schemaVersion: CORE_SCHEMA, source: relative(workspaceRoot, repoRoot).replaceAll('\\', '/'), ...coreVersion(repoRoot), files: await coreHashes(workspaceRoot) };
+// from: whether the files are the commit's or the working tree's; uncommitted: the core files a committed sync left
+// out (changed or added in the repository since its commit).
+export async function writeCoreManifest({ repoRoot, workspaceRoot, from = 'worktree', uncommitted = undefined }) {
+  const manifest = { schemaVersion: CORE_SCHEMA, source: relative(workspaceRoot, repoRoot).replaceAll('\\', '/'), ...coreVersion(repoRoot), from, ...(uncommitted ? { uncommitted } : {}), files: await coreHashes(workspaceRoot) };
   await writeJson(resolve(workspaceRoot, CORE_MANIFEST), manifest);
   return manifest;
 }

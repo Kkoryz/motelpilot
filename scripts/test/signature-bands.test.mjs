@@ -106,3 +106,27 @@ test("the density step measures the benchmark and the reference's home on its ow
   assert.deepEqual(densityTargets({ ...site, densityPages: ['https://other.com/a'] }), ['https://other.com/a', 'home=https://ref.com/']);
   assert.deepEqual(densityTargets({ ...site, densityPageTypes: { about: ['/about/', '/team/'] } }), ['https://ref.com/', 'https://ref.com/services/', 'about=https://ref.com/about/', 'about=https://ref.com/team/']);
 });
+
+test("a band whose reference photo carries a button leads on, to the page the section before it links to; it never cuts a section", async () => {
+  const { bandLink } = await import('../lib/media-slots.mjs');
+  // Concord's home: its full-width photos carry EXPLORE and LEARN MORE (measured buttons).
+  const home = authoredPatterns([{ pattern: 'text' }, { pattern: 'figure', shape: { buttons: 1 } }, { pattern: 'split-column' }, { pattern: 'figure', shape: { buttons: 0 } }]);
+  assert.deepEqual(home.mediaModules, [{ at: 0, type: 'band', action: true }, { at: 1, type: 'band' }]);
+  // Two photo rows in a row are one wall: its video photo has no button, the photo under it does (Concord's 6 and 7).
+  const run = authoredPatterns([{ pattern: 'text' }, { pattern: 'text' }, { pattern: 'figure', shape: { buttons: 0 } }, { pattern: 'figure', shape: { buttons: 1 } }, { pattern: 'text' }]);
+  assert.deepEqual(run.mediaModules, [{ at: 0.33, type: 'band', action: true }]);
+  // The hotel home: cards going on in a second grid (continues); the band stays out of the set.
+  const grid = (id, extra = {}) => ({ id, type: 'featureGrid', heading: extra.continues ? undefined : id, items: [{ heading: 'A', paragraphs: ['see [our services](/services/) and [all of them](/all/)'] }], ...extra });
+  const page = { route: '/', pageType: 'home', blocks: [text('intro'), grid('g1'), grid('g2', { continues: 'g1' }), text('t1'), text('t2'), cta] };
+  const placed = withMediaModules(page, { pageTypes: { home: { mediaModules: [{ at: 0.4, type: 'band', action: true }] } } }, {});
+  const at = placed.findIndex((block) => block.variant === 'band');
+  assert.notEqual(placed[at + 1]?.id, 'g2', `the band cut the card set: ${placed.map((block) => block.id)}`);
+  assert.equal(placed[at].action, true);
+  // Its button: the last link of the section before it, in that section's words; none where that section links nowhere.
+  assert.deepEqual(bandLink([grid('g1'), placed[at]], 1, '/'), { label: 'All of them', href: '/all/' });
+  assert.equal(bandLink([text('t'), placed[at]], 1, '/'), null);
+  // Steps are a list in the section's data: the link's words are the link's, not the list around it.
+  const steps = { id: 'm2', type: 'process', steps: [{ heading: 'One', text: 'Send details.' }, { heading: 'Two', text: 'Agree; [see how our process works](/our-process/).' }] };
+  assert.deepEqual(bandLink([steps, placed[at]], 1, '/'), { label: 'See how our process works', href: '/our-process/' });
+  assert.equal(bandLink([grid('g1'), { ...placed[at], action: undefined }], 1, '/'), null, 'a band without a button stays a photo');
+});

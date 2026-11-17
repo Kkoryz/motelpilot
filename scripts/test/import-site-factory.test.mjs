@@ -142,6 +142,12 @@ test('importer copies every string verbatim and never invents copy', () => {
   for (const value of strings) assert.ok(allowed.has(value), `invented or rewritten copy: ${value.slice(0, 60)}`);
 });
 
+test('the H1\'s subtitle is Site Factory\'s hero_lead; no second identity line is carried (coordinator 2026-11-17)', () => {
+  const [given] = importSiteFactory({ authoringPackage: { schema_version: 'sf/authoring/v1', project: 't', pages: [page({ hero_tagline: 'OEM and ODM swimwear factory in Guangzhou' })] }, pagesPlan: plan }).pages;
+  assert.ok(!('tagline' in given.hero));
+  assert.deepEqual(validateAuthoringPages([given]), []);
+});
+
 test('importer emits SEO fields, JSON-LD, page type and passes the authoring contract', () => {
   const result = importSiteFactory({ authoringPackage: { schema_version: 'sf/authoring/v1', project: 't', pages: [page()] }, pagesPlan: plan });
   const [imported] = result.pages;
@@ -151,6 +157,10 @@ test('importer emits SEO fields, JSON-LD, page type and passes the authoring con
   assert.deepEqual(imported.seo, { title: 'Sample title', description: 'Sample description.', canonical: '/sample-page/' });
   assert.deepEqual(imported.jsonLd, page().structured_data);
   assert.deepEqual(imported.hero, { heading: 'Sample H1', cta: { label: 'Request a Quote', href: '/contact/' } });
+  // The plan's label and primary query ride on the page: its Service's name and type (lib/seo-head.mjs).
+  assert.deepEqual(imported.planned, { label: 'Sample' });
+  const queried = importSiteFactory({ authoringPackage: { schema_version: 'sf/authoring/v1', project: 't', pages: [page()] }, pagesPlan: { ...plan, pages: plan.pages.map((row) => (row.page_id === 'sample-page' ? { ...row, primary_query: 'sample manufacturer' } : row)) } }).pages[0];
+  assert.deepEqual(queried.planned, { label: 'Sample', primaryQuery: 'sample manufacturer' });
   assert.deepEqual(validateAuthoringPages(result.pages), []);
   assert.deepEqual(result.report.pages[0].unplaced, [{ field: 'notes', value: ['topics_not_covered:s2:Example'] }]);
 });
@@ -222,7 +232,7 @@ test('runImport writes the data files and the import report', async (t) => {
   assert.equal(report.schemaVersion, 'seo-site-factory-import-v1');
 });
 
-const SAMPLE = '<local>/site-factory-freeze/2026-09-24-07-sample/underwear';
+const SAMPLE = 'D:/korey_seo/site-factory-freeze/2026-09-24-07-sample/underwear';
 test('frozen Site Factory sample imports cleanly when present', async (t) => {
   try { await access(`${SAMPLE}/authoring_package.json`); } catch { t.skip('frozen sample not available'); return; }
   const authoringPackage = JSON.parse(await readFile(`${SAMPLE}/authoring_package.json`, 'utf8'));
@@ -373,7 +383,7 @@ test('knowledge card sources become one Sources list before the CTA; industry ca
   assert.equal(blocks.at(-2).items[2].publisher, undefined);
   assert.deepEqual(validateAuthoringPages(pages), []);
   assert.ok(!report.pages[0].citedFacts.includes('industry-1'));
-  assert.throws(() => importSiteFactory({ authoringPackage: pkg([page({ knowledge: [{ card_id: 'k3', sources: [{ url: 'a.org', title: 'X' }] }] })]), pagesPlan: plan }), /k3 source 1 needs a title and an http\(s\) url/);
+  assert.throws(() => importSiteFactory({ authoringPackage: pkg([page({ knowledge: [{ card_id: 'k3', sources: [{ url: 'a.org', title: 'X' }] }] })]), pagesPlan: plan }), /k3 source 1 needs an http\(s\) url/);
   const without = importSiteFactory({ authoringPackage: pkg([page()]), pagesPlan: plan });
   assert.ok(!without.pages[0].blocks.some((block) => block.type === 'sources'));
 });
@@ -474,6 +484,15 @@ test('a Site Factory snapshot is frozen from the project\'s stage folders with t
   await write(join(project, 'identity/project.yaml'), '{"site_name": "Strandmill"}\n');
   const withIdentity = await freezeSiteFactory({ project, out });
   assert.equal(await read(join(withIdentity.folder, 'package/identity/project.yaml'), 'utf8'), '{"site_name": "Strandmill"}\n');
+  // Pages the owner leaves out (site.json navOnly) are menu headings in a snapshot of their own; an unknown id stops it.
+  await write(join(project, 'artifacts/04_1_site_tree/tree.json'), JSON.stringify({ pages: [{ id: 'home', name: 'Swimwear', type: 'home', parent: null }, { id: 'products', name: 'Products', type: 'hub', parent: 'home' }, { id: 'bikini', name: 'Bikinis', type: 'product', parent: 'products' }] }));
+  await write(join(project, 'artifacts/06_1_plan/site_plan.json'), JSON.stringify({ routes: { home: { url: '/', page_name: 'Swimwear' }, products: { url: '/products/', page_name: 'Products' }, bikini: { url: '/bikini/', page_name: 'Bikinis' } } }));
+  const built = await freezeSiteFactory({ project, out });
+  const headings = await freezeSiteFactory({ project, out, navOnly: ['products'] });
+  assert.notEqual(headings.folder, built.folder);
+  assert.deepEqual(JSON.parse(await read(join(headings.folder, 'pages.json'), 'utf8')).pages.filter((page) => page.nav_only).map((page) => page.page_id), ['products']);
+  assert.equal(JSON.parse(await read(join(built.folder, 'pages.json'), 'utf8')).pages.some((page) => page.nav_only), false);
+  await assert.rejects(freezeSiteFactory({ project, out, navOnly: ['solutions'] }), /navOnly names solutions/);
 });
 
 test('a fact reaches only the pages that cite it: their input key and output change, every other page stays byte for byte', async () => {
@@ -557,6 +576,54 @@ test('a contact page always has its form and its ways to reach the company; empt
   placeRequiredBlocks(other, [], { planned: { page_type: 'solution' } });
   assert.equal(other.length, 1);
   const contact = withContactStandIns({ email: '', phone: '+44 20 0000 0000', address: '', hours: '', same_as: [], placeholder: true });
-  assert.deepEqual([contact.email, contact.phone, contact.placeholder, contact.standIns], ['hello@example.com', '+44 20 0000 0000', true, ['email', 'address', 'hours']]);
+  assert.deepEqual([contact.email, contact.phone, contact.placeholder, contact.standIns], ['hello@example.com', '+44 20 0000 0000', true, ['email', 'address']]);
+  // No stand-in opening hours (Site Factory integ deb67119, 2026-11-17): hours nobody gave are not shown.
+  assert.equal(contact.hours, '');
+  // Owner 2026-11-17: info@ the site's own domain, and no "to be confirmed" address on the pages (still a stand-in).
+  const own = withContactStandIns({ email: '', phone: '+44 20 0000 0000', address: '', hours: 'Mon-Fri' }, { origin: 'https://www.strandmill.com' });
+  assert.deepEqual([own.email, own.address, own.standIns], ['info@strandmill.com', '', ['email', 'address']]);
+  // A phone nobody gave reads as a real one of the site's country (not 555), the same on every run, and stays a stand-in.
+  const { standInPhone } = await import('../import-site-factory.mjs');
+  const factory = withContactStandIns({ email: '', phone: '', address: 'Guangzhou, Guangdong, China', hours: 'x' }, { origin: 'https://strandmill.com' });
+  assert.match(factory.phone, /^\+86 20 [3-8]\d{3} \d{4}$/);
+  assert.ok(factory.standIns.includes('phone'));
+  assert.equal(standInPhone('strandmill.com', 'Guangzhou, China'), factory.phone);
+  assert.match(standInPhone('rateharbor.com', 'Toronto, Ontario, Canada'), /^\+1 416 [2-9]\d{2} \d{4}$/);
+  assert.doesNotMatch(standInPhone('motelpilot.com', ''), /\b555\b/);
   assert.equal(withContactStandIns({ email: 'a@b.co', phone: '1', address: 'x', hours: 'y' }).placeholder, undefined, 'real details stay as given');
+});
+
+test("the site tree's inquiry page always carries the enquiry form, once, before its closing call; its placeholder too", async () => {
+  const { placeRequiredBlocks } = await import('../lib/page-assembly.mjs');
+  const { blueprintPage, requiredBlocks } = await import('../lib/page-blueprints.mjs');
+  // Strandmill audit 2026-11-17: /request-a-quote/ (site:inquiry, a general page) had no form on three of four sites.
+  const blocks = [{ id: 'overview', type: 'intro', heading: 'H', paragraphs: ['P'] }, { id: 'faq', type: 'faq', items: [] }, { id: 'cta', type: 'cta', cta: { label: 'Prefer email? Contact us', href: '/contact-us/' }, links: [] }];
+  const mapping = [];
+  placeRequiredBlocks(blocks, mapping, { planned: { page_id: 'site:inquiry', page_type: 'general', url: '/request-a-quote/' } });
+  assert.deepEqual(blocks.map((block) => block.type), ['intro', 'faq', 'form', 'cta']);
+  assert.deepEqual(mapping.map((entry) => entry.sectionId), ['required.form']);
+  // A form the page already has (a site slot, Site Factory's own) is not placed twice.
+  placeRequiredBlocks(blocks, mapping, { planned: { page_id: 'site:inquiry', page_type: 'general' } });
+  assert.equal(blocks.filter((block) => block.type === 'form').length, 1);
+  // Only that general page: another general page, or a page of another type with that id, takes nothing.
+  for (const planned of [{ page_id: 'site:faq', page_type: 'general' }, { page_id: 'inquiry', page_type: 'general' }, { page_id: 'site:inquiry', page_type: 'solution' }]) assert.deepEqual(requiredBlocks(planned.page_type, planned.page_id), [], JSON.stringify(planned));
+  // The page before Site Factory writes it: the marked placeholder has the form too.
+  const placeholder = blueprintPage({ page: { page_id: 'site:inquiry', page_type: 'general', label: 'Request a Quote', url: '/request-a-quote/' }, pagesPlan: { pages: [] }, contactRoute: '/contact-us/' });
+  assert.deepEqual(placeholder.blocks.map((block) => block.type), ['intro', 'form', 'cta']);
+});
+
+test('a page whose own cards link every child page gets no second wall of the same pages', async () => {
+  const { placePlanSlots } = await import('../lib/page-assembly.mjs');
+  const pagesPlan = { pages: [{ page_id: 'hub', url: '/services/' }, { page_id: 'a', url: '/a/', label: 'A', parent_page_id: 'hub' }, { page_id: 'b', url: '/b/', label: 'B', parent_page_id: 'hub' }] };
+  const blueprints = { solutions_hub: [{ id: 'children', fill: 'plan', source: 'children:self', items: [2, 12] }] };
+  const planned = { page_id: 'hub', page_type: 'solutions_hub' };
+  const card = (heading, href) => ({ heading, paragraphs: [`Our [${heading} service](${href}).`] });
+  const own = [{ id: 'entries', type: 'featureGrid', heading: 'Services', items: [card('A', '/a/'), card('B', '/b/')] }];
+  const mapping = [];
+  placePlanSlots(own, mapping, { planned, pagesPlan, blueprints });
+  assert.deepEqual(own.map((block) => block.id), ['entries'], 'every child already linked: no wall');
+  assert.match(mapping.at(-1).rule, /links every child page/);
+  const partial = [{ id: 'entries', type: 'featureGrid', heading: 'Services', items: [card('A', '/a/')] }];
+  placePlanSlots(partial, [], { planned, pagesPlan, blueprints });
+  assert.equal(partial.some((block) => block.type === 'gallery'), true, 'a child the copy does not reach keeps the wall');
 });

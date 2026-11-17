@@ -19,15 +19,18 @@
 
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { mkdir, readFile, readdir, rm } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, readdir, rm } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { runMain, usage } from './lib/cli.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
-import { builtPageKey, sharedPageKey } from './lib/page-keys.mjs';
+import { builtPageKey, referencedAssets, sharedPageKey, unhashedHtml } from './lib/page-keys.mjs';
+import { cssRules, pageCss, pageWords as offeredWords } from './lib/css-subset.mjs';
+import { readBuiltPage } from './lib/built-site.mjs';
 import { lineAlignment } from './lib/visual-checks.mjs';
 import { copyWords } from './lib/media-slots.mjs';
 import { moduleSlug } from './lib/style-board.mjs';
 import { captureFolder } from './lib/rules.mjs';
+import { fullPageShot } from './lib/audit-runtime.mjs';
 import { loadSitePages } from './lib/site-pages.mjs';
 
 export const SHOTS_SCHEMA = 'seo-site-design-review-shots-v1';
@@ -39,7 +42,9 @@ export const VIEWPORTS = Object.freeze([
 ]);
 // Open findings of these severities hold the run, when the site can fix them (scope "site": its treatment). A template
 // or content finding is listed for whoever fixes it (the template, Site Factory) and does not hold one site's run.
-export const BLOCKING = Object.freeze(['P0', 'P1']);
+// Only a broken page holds (owner 2026-11-14, Fable's review audit: the gate stood on taste and on template work since
+// 11-05, while a cut-off table passed as "template"); P1 and P2 go to the polish repair and stay in the report.
+export const BLOCKING = Object.freeze(['P0']);
 export const SITE_SCOPE = 'site';
 // The severities and scopes a finding may have (config/agent-steps/design-review.md); a finding without a scope is the site's.
 export const SEVERITIES = Object.freeze(['P0', 'P1', 'P2']);
@@ -53,6 +58,9 @@ export const SCOPES = Object.freeze([SITE_SCOPE, 'template', 'content']);
 export const NEAREST_PAGE_TYPES = Object.freeze({
   products_hub: ['product_manufacturer', 'product_wholesale', 'solution'],
   solutions_hub: ['solution', 'product_manufacturer', 'product_wholesale'],
+  // A city page beside the competitor's market page, else its service page; their hub beside a market page too.
+  place: ['solution', 'about'],
+  places_hub: ['place', 'solution'],
   general: ['about', 'solution', 'product_manufacturer', 'product_wholesale'],
   ordering: ['contact', 'about'],
   privacy: ['about', 'contact'],
@@ -108,8 +116,14 @@ export function standIns(page, { proofStandIn = false } = {}) {
 // one page type sends only that one back for review).
 // ... and under the rules it is judged by now (its instructions, the shared practice, the template's hooks and variants):
 // a review made under other rules is not current either.
-export const reviewCurrent = (page, review) => Boolean(review) && review.shots === page.shots && review.rules === page.rules;
-export const REVIEW_RULES = Object.freeze(['config/agent-steps/design-review.md', 'config/agent-steps/treatment-practice.md', 'docs/research/CSS_HOOKS.md']);
+// A review that holds nothing stays current when only the rules changed (owner 2026-11-14: every edit of the review's
+// instructions sent every page back for review); new shots are always reviewed again.
+// A shot that differs from the shots a review judged by less than REVIEW_PIXEL_SHARE of our page's pixels, with the
+// same measures, keeps that review (page.near, set by prepare: V-2 of Fable's 11-17 plan; owner 2026-11-17, site13's
+// 40-minute run). It is always held to the shots the review saw (its basis, kept in REVIEWED_SHOTS), never to the last
+// near one, so small changes do not add up unseen.
+export const reviewCurrent = (page, review) => Boolean(review) && (review.shots === page.shots || (Boolean(page.near?.shots) && page.near.shots === review.shots)) && (review.rules === page.rules || !openFindings(review.findings ?? []).length);
+export const REVIEW_RULES = Object.freeze(['config/agent-steps/design-review.md', 'config/agent-steps/treatment-practice.md']);
 export async function reviewRules(root) {
   const hash = createHash('sha256');
   for (const path of REVIEW_RULES) hash.update(await readFile(resolve(root, path)).catch(() => 'missing'));
@@ -126,9 +140,31 @@ export async function siteLayoutFacts(root) {
 
 // Findings that hold the run: the site's own P0/P1 without a resolution.
 export const openFindings = (findings = []) => findings.filter((finding) => BLOCKING.includes(finding.severity) && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution);
-// The small findings of the site's own treatment (P2) the run repairs after the gate passes, never holding it
-// (owner 2026-10-30: the small ones are fixed in the run too; site10's gate passed on sixteen).
-export const minorFindings = (findings = []) => findings.filter((finding) => finding.severity === 'P2' && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution);
+// The findings of the site's own treatment that do not hold the gate (P1, P2): the run repairs them after it passes, and
+// what the repair cannot mend stays in the report (owner 2026-10-30: the small ones are fixed in the run too).
+export const minorFindings = (findings = []) => findings.filter((finding) => !BLOCKING.includes(finding.severity) && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution);
+// What the design repair said it cannot do (docs/research/analysis/notes.md, its "Asked against the site rules" and
+// "Template gaps" lists): a finding whose route and block a listed line names carries that answer and holds nothing
+// the next round (Fable's review audit: such findings came back every round and the rounds ran out).
+export const NOTES = 'docs/research/analysis/notes.md';
+const LISTED = /^##\s+(Asked against the site rules|Template gaps)\s*$/;
+export function listedByRepair(notes = '') {
+  const lines = [];
+  let section = null;
+  for (const line of String(notes).split(/\r?\n/)) {
+    if (/^##\s/.test(line)) { section = LISTED.exec(line)?.[1] ?? null; continue; }
+    if (section && /^\s*[-*]\s/.test(line)) lines.push({ section, line });
+  }
+  return lines;
+}
+export function applyListed(findings, listed = []) {
+  const names = (line, block) => new RegExp(`\`${block.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\`|\\bblock ${block.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(line);
+  return findings.map((finding) => {
+    if (finding.resolution || !finding.route || !finding.block) return finding;
+    const hit = listed.find(({ line }) => line.includes(finding.route) && names(line, finding.block));
+    return hit ? { ...finding, resolution: `listed by the design repair under "${hit.section}" (${NOTES})` } : finding;
+  });
+}
 // The treatment's rules written for one block by its id: blocks of a kind no longer look alike once the page changes
 // (site10: the first three proof sections styled by id, a fourth left as the template had it). Small findings too.
 export const blockIdRules = (css = '') => [...new Set([...css.matchAll(/\[data-block-id[~^$*|]?="([^"]+)"\]/g)].map((match) => match[1]))];
@@ -136,12 +172,26 @@ export const blockIdRules = (css = '') => [...new Set([...css.matchAll(/\[data-b
 // The gate over the reviews: { status: 'missing' | 'stale' | 'open' | 'passed', pages, findings }.
 // A review's name: its page's key (a manifest from before keys: the page type).
 export const reviewKey = (page) => page.key ?? page.pageType;
-export function judgeReviews(manifest, reviews) {
+// The owner's decisions that a finding is meant as it is (docs/research/design-waivers.json { waivers: [{ block,
+// review?, issue? (words of the finding), why, by, at }] }): a review run again writes its findings anew, and these keep
+// their answer (Fable's 08-onward review: no finding was ever marked resolved, and a review asked to put back what a
+// repair had rightly taken out). A finding a waiver matches carries its resolution and holds nothing.
+export const WAIVERS = 'docs/research/design-waivers.json';
+export function applyWaivers(findings, waivers = []) {
+  return findings.map((finding) => {
+    const waiver = waivers.find((entry) => entry.block === finding.block && (!entry.review || entry.review === finding.review) && (!entry.issue || String(finding.issue ?? '').toLowerCase().includes(String(entry.issue).toLowerCase())));
+    return waiver && !finding.resolution ? { ...finding, resolution: `waived: ${waiver.why} (${waiver.by}, ${waiver.at})` } : finding;
+  });
+}
+const readWaivers = async (root) => (await readJson(resolve(root, WAIVERS), null))?.waivers ?? [];
+const readListed = async (root) => listedByRepair(await readFile(resolve(root, NOTES), 'utf8').catch(() => ''));
+export function judgeReviews(manifest, reviews, waivers = [], listed = []) {
   const missing = manifest.pages.filter((page) => !reviews[reviewKey(page)]).map(reviewKey);
   const stale = manifest.pages.filter((page) => reviews[reviewKey(page)] && !reviewCurrent(page, reviews[reviewKey(page)])).map(reviewKey);
-  const findings = manifest.pages.flatMap((page) => (reviews[reviewKey(page)]?.findings ?? []).map((finding) => ({ pageType: page.pageType, review: reviewKey(page), route: page.route, ...finding })));
-  const status = missing.length ? 'missing' : stale.length ? 'stale' : openFindings(findings).length ? 'open' : 'passed';
-  return { status, missing, stale, findings };
+  const findings = applyWaivers(manifest.pages.flatMap((page) => (reviews[reviewKey(page)]?.findings ?? []).map((finding) => ({ pageType: page.pageType, review: reviewKey(page), route: page.route, ...finding }))), waivers);
+  const answered = applyListed(findings, listed);
+  const status = missing.length ? 'missing' : stale.length ? 'stale' : openFindings(answered).length ? 'open' : 'passed';
+  return { status, missing, stale, findings: answered };
 }
 
 // A labelled full-page shot of our page: every section (data-authoring-block) gets its block id written on it.
@@ -187,7 +237,11 @@ async function shootPage(browser, url, viewport, sharp) {
     return { id: element.getAttribute('data-block-id') ?? element.getAttribute('data-authoring-block'), type: element.getAttribute('data-authoring-block'), top: Math.round(box.top + scrollY), height: Math.round(box.height), imageShare, ...(align.heading ? { align } : {}) };
   }).filter((block) => block.height > 0), lineAlignment.toString());
   const facts = await page.evaluate(measureFacts);
-  const shot = await page.screenshot({ fullPage: true });
+  // A phone's enquiry bar is fixed to the foot of the screen: a full-page shot pins it over whatever the first screen's
+  // foot holds, which a reader never sees under it (the page is padded for it; Staylumen 2026-11-17: "the fixed enquiry
+  // bar covers the introduction", P0 on five pages). Hidden for the shot, as the contrast shot hides it (lib/contrast.mjs).
+  await hideEnquiryBar(page);
+  const shot = await fullPageShot(page);
   await page.close();
   const { width, height } = await sharp(shot).metadata();
   const label = (block) => `<g><rect x="0" y="${block.top}" width="${Math.min(width, 16 + 9 * (block.id.length + block.type.length + 3))}" height="26" fill="#d6006e"/><text x="8" y="${block.top + 18}" font-family="monospace" font-size="15" fill="#fff">${escapeXml(`${block.id} (${block.type})`)}</text><rect x="0" y="${block.top}" width="${width}" height="2" fill="#d6006e"/></g>`;
@@ -250,6 +304,90 @@ async function pairSegments(sharp, reference, ours, viewport) {
   return segments;
 }
 
+// The share of our side of a review's images (the right half of each side-by-side segment) that may differ from the
+// shots its review judged for the review to stand, and the channel difference that counts a pixel as changed (PNG
+// shots of the same page are pixel-identical; anti-aliasing of a moved glyph differs by more). Set by replaying
+// Strandmill's own history (its site repository, docs/research/design-review, 2026-11-14 to 11-17: 525 pairs of
+// consecutive reviews of other shots): of the 45 pairs within 0.5% that measured the same, no second review changed a
+// P0/P1 of the site (the same shots reviewed twice did, once in 23: the model's own spread); the first such change
+// came at 0.82% (a style-board module). config/thresholds.json.
+export const REVIEW_PIXEL_SHARE = 0.005;
+export const PIXEL_DELTA = 24;
+// Where the shots each review judged are kept (by review key), so a later shot is compared with what was reviewed.
+export const REVIEWED_SHOTS = '.pipeline/cache/reviewed-shots';
+
+// The share of our side's pixels that differ between two lists of side-by-side images (1 when their number or a size
+// differs: a page that grew or shrank is a new page to the review).
+export const hideEnquiryBar = (page) => page.addStyleTag({ content: '[data-enquiry-bar]{visibility:hidden!important}' });
+
+export async function shotDifference(sharp, before, after) {
+  if (before.length !== after.length || !before.length) return 1;
+  let changed = 0;
+  let total = 0;
+  for (const [index, path] of before.entries()) {
+    const [left, right] = await Promise.all([sharp(path).removeAlpha().raw().toBuffer({ resolveWithObject: true }), sharp(after[index]).removeAlpha().raw().toBuffer({ resolveWithObject: true })]);
+    if (left.info.width !== right.info.width || left.info.height !== right.info.height) return 1;
+    const { width, height, channels } = left.info;
+    const from = Math.floor(width / 2);
+    for (let y = 0; y < height; y += 1) {
+      for (let x = from; x < width; x += 1) {
+        const at = (y * width + x) * channels;
+        let delta = 0;
+        for (let channel = 0; channel < channels; channel += 1) delta = Math.max(delta, Math.abs(left.data[at + channel] - right.data[at + channel]));
+        if (delta > PIXEL_DELTA) changed += 1;
+      }
+    }
+    total += (width - from) * height;
+  }
+  return total ? changed / total : 1;
+}
+
+// Whether two shots' measures are the same for a review: the same blocks in the same order, each within 2px of where
+// it was and with the same alignment, and the same facts (H1 lines, fonts, stand-ins).
+export function sameMeasures(left, right) {
+  if (JSON.stringify(left.facts ?? {}) !== JSON.stringify(right.facts ?? {})) return false;
+  const views = new Set([...Object.keys(left.blocks ?? {}), ...Object.keys(right.blocks ?? {})]);
+  for (const view of views) {
+    const [a, b] = [left.blocks?.[view] ?? [], right.blocks?.[view] ?? []];
+    if (a.length !== b.length) return false;
+    for (const [index, block] of a.entries()) {
+      const other = b[index];
+      if (block.id !== other.id || block.type !== other.type || JSON.stringify(block.align ?? null) !== JSON.stringify(other.align ?? null) || block.sample !== other.sample) return false;
+      if (Math.abs((block.top ?? 0) - (other.top ?? 0)) > 2 || Math.abs((block.height ?? 0) - (other.height ?? 0)) > 2 || Math.abs((block.imageShare ?? 0) - (other.imageShare ?? 0)) > 0.02) return false;
+    }
+  }
+  return true;
+}
+
+// The shots a review judged, kept before they are shot again: copied from the manifest entry they are (once per
+// review), with their measures.
+async function keepReviewedShots(root, entry, review) {
+  if (!review || review.shots !== entry?.shots || !entry.images?.every((path) => existsSync(resolve(root, path)))) return;
+  const dir = resolve(root, REVIEWED_SHOTS, reviewKey(entry));
+  if ((await readJson(resolve(dir, 'basis.json'), null))?.shots === review.shots) return;
+  await rm(dir, { recursive: true, force: true });
+  await mkdir(dir, { recursive: true });
+  const images = [];
+  for (const [index, path] of entry.images.entries()) { const name = `${index + 1}.png`; await copyFile(resolve(root, path), resolve(dir, name)); images.push(name); }
+  await writeJson(resolve(dir, 'basis.json'), { shots: review.shots, method: SHOT_METHOD, images, blocks: entry.blocks, facts: entry.facts });
+}
+
+// How the shots are taken: a review of shots taken another way is never kept for a near shot (Staylumen 2026-11-17: the
+// enquiry bar hidden from the shots, the home page's new shot differed by 0.12% and kept the review that found the bar
+// over its introduction). Raised whenever the shooting changes what a reviewer sees.
+export const SHOT_METHOD = 2;
+
+// The review a new shot keeps (V-2): { shots, share } when it is within REVIEW_PIXEL_SHARE of the shots its review
+// judged and measures the same, else null.
+async function nearReviewed(root, sharp, entry, review) {
+  if (!review || review.shots === entry.shots) return null;
+  const dir = resolve(root, REVIEWED_SHOTS, reviewKey(entry));
+  const basis = await readJson(resolve(dir, 'basis.json'), null);
+  if (basis?.shots !== review.shots || basis.method !== SHOT_METHOD || !sameMeasures(basis, entry)) return null;
+  const share = await shotDifference(sharp, basis.images.map((name) => resolve(dir, name)), entry.images.map((path) => resolve(root, path)));
+  return share < REVIEW_PIXEL_SHARE ? { shots: review.shots, share: Math.round(share * 1e6) / 1e6 } : null;
+}
+
 // shoot(browser, url, viewport, sharp) -> { image, blocks }: a test passes its own (no browser is opened then).
 export async function prepareDesignReview({ baseUrl, root = process.cwd(), shoot = null }) {
   const { default: sharp } = await import('sharp');
@@ -279,6 +417,8 @@ export async function prepareDesignReview({ baseUrl, root = process.cwd(), shoot
       const before = previous?.pages?.find((entry) => reviewKey(entry) === page.key && entry.route === page.route && entry.images.every((path) => existsSync(resolve(root, path))));
       // (A manifest from before pixel keys has only `shots`, the built key.)
       if (before && (before.source ?? before.shots) === source) { const kept = { ...before, key: page.key, source, rules }; pages.push(kept); hash.update(kept.shots); continue; }
+      const review = await readJson(resolve(dir, `${page.key}.review.json`), null);
+      await keepReviewedShots(root, previous?.pages?.find((entry) => reviewKey(entry) === page.key && entry.route === page.route), review);
       const own = new RegExp(`^${page.key.replace(/[^\w-]/g, '')}-(?:${VIEWPORTS.map((viewport) => viewport.id).join('|')})-\\d+\\.png$`);
       for (const name of await readdir(dir)) if (own.test(name)) await rm(resolve(dir, name));
       if (!shoot) browser ??= await chromium.launch({ headless: true });
@@ -300,6 +440,8 @@ export async function prepareDesignReview({ baseUrl, root = process.cwd(), shoot
       // reviewed again even when it looks the same (a review of a wrong measure held the gate on a fixed section).
       pixels.update(JSON.stringify(entry.blocks)).update(JSON.stringify(entry.facts));
       entry.shots = pixels.digest('hex').slice(0, 24);
+      const near = await nearReviewed(root, sharp, entry, review);
+      if (near) entry.near = near;
       hash.update(entry.shots);
       pages.push(entry);
     }
@@ -307,7 +449,7 @@ export async function prepareDesignReview({ baseUrl, root = process.cwd(), shoot
     await browser?.close();
   }
   // The style board's shots (prepareStyleBoard) stay as they are.
-  const manifest = { schemaVersion: SHOTS_SCHEMA, id: hash.digest('hex').slice(0, 16), pages, ...(previous?.board ? { board: previous.board } : {}) };
+  const manifest = { schemaVersion: SHOTS_SCHEMA, id: hash.digest('hex').slice(0, 16), pages, ...(previous?.board ? { board: previous.board } : {}), ...(previous?.boardSource ? { boardSource: previous.boardSource } : {}) };
   await writeJson(resolve(dir, 'manifest.json'), manifest);
   return manifest;
 }
@@ -318,27 +460,63 @@ async function shootBoard(browser, url, viewport) {
   const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } });
   await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
   await page.evaluate(async () => { for (const image of document.querySelectorAll('img[loading="lazy"]')) image.loading = 'eager'; await Promise.all([...document.images].map((image) => image.decode().catch(() => null))); });
-  const modules = await page.evaluate(() => {
+  const { modules, mains, labelColour } = await page.evaluate(() => {
     const found = {};
+    const mains = [];
     for (const main of document.querySelectorAll('main[data-board-key]')) {
       const key = main.getAttribute('data-board-key');
       const box = main.getBoundingClientRect();
       const top = Math.round(box.top + scrollY);
+      const bottom = Math.round(box.bottom + scrollY);
+      mains.push({ key, top, bottom });
       const entry = found[key] ?? { top, bottom: top, blocks: [] };
       entry.top = Math.min(entry.top, top);
-      entry.bottom = Math.max(entry.bottom, Math.round(box.bottom + scrollY));
+      entry.bottom = Math.max(entry.bottom, bottom);
       for (const block of main.querySelectorAll('[data-authoring-block]')) {
         const rect = block.getBoundingClientRect();
-        if (rect.height > 0) entry.blocks.push({ id: block.getAttribute('data-block-id'), type: block.getAttribute('data-authoring-block'), sample: main.getAttribute('data-board-sample'), top: Math.round(rect.top + scrollY), height: Math.round(rect.height) });
+        if (rect.height > 0) entry.blocks.push({ id: block.getAttribute('data-block-id'), type: block.getAttribute('data-authoring-block'), sample: main.getAttribute('data-board-sample'), main: mains.length - 1, top: Math.round(rect.top + scrollY), height: Math.round(rect.height) });
       }
       found[key] = entry;
     }
-    return found;
+    const label = document.querySelector('main[data-board-key] > .style-board__label');
+    const colour = label ? getComputedStyle(label).backgroundColor.match(/\d+/g)?.slice(0, 3).map(Number) : null;
+    return { modules: found, mains, labelColour: colour?.length === 3 ? colour : null };
   });
   const facts = await page.evaluate(measureFacts);
-  const image = await page.screenshot({ fullPage: true });
+  const image = await fullPageShot(page);
   await page.close();
-  return { image, modules, facts };
+  return { image, modules, mains, labelColour, facts };
+}
+
+// The rows where the style board's sample labels (one bar of the label colour across the left edge, atop each sample)
+// start in a shot: raw pixels, read down column x. A bar is LABEL_BAR_ROWS rows or more of the colour.
+export const LABEL_BAR_ROWS = 4;
+export function labelBars(raw, { width, height, channels }, colour, x = Math.min(2, width - 1)) {
+  const bars = [];
+  let run = 0;
+  for (let row = 0; row <= height; row += 1) {
+    const at = (row * width + x) * channels;
+    const match = row < height && colour.every((value, channel) => Math.abs(raw[at + channel] - value) <= 16);
+    if (match) run += 1;
+    else { if (run >= LABEL_BAR_ROWS) bars.push(row - run); run = 0; }
+  }
+  return bars;
+}
+
+// The modules' places moved to where the shot drew them (Strandmill's board 2026-11-17: on phones the full-page shot
+// laid the page out shorter than it was measured, 250px by the logos sample, so its crop showed the grey frame and the
+// label of the module above and none of the logos, a P0 four reviews running). Each sample (mains, in page order) starts
+// at its label bar; a sample ends by the next one's bar at the latest; its blocks move with it. Bars that do not match
+// the samples one for one leave the measures as they are.
+export function alignToShot(modules, mains, bars) {
+  if (!mains.length || bars.length !== mains.length) return modules;
+  const offsets = mains.map((main, index) => bars[index] - main.top);
+  const places = mains.map((main, index) => ({ key: main.key, top: bars[index], bottom: Math.min(main.bottom + offsets[index], bars[index + 1] ?? Infinity) }));
+  return Object.fromEntries(Object.entries(modules).map(([key, place]) => {
+    const own = places.filter((item) => item.key === key);
+    if (!own.length) return [key, place];
+    return [key, { ...place, top: Math.min(...own.map((item) => item.top)), bottom: Math.max(...own.map((item) => item.bottom)), blocks: place.blocks.map((block) => (Number.isInteger(block.main) ? { ...block, top: block.top + offsets[block.main] } : block)) }];
+  }));
 }
 
 // What stands in the competitor's place beside a module: its sections' crops (docs/research/pattern-sections, at most
@@ -365,6 +543,54 @@ async function competitorPanel(sharp, root, evidence) {
 // sections it renders (docs/research/design-review/board--<module>-<viewport>-<n>.png). The manifest's board lists
 // one review per module (key board--<module>); its shots are the module's pixels and measures, so a module that looks
 // the same after a repair keeps its review. shoot(browser, url, viewport, sharp) -> { image, modules, facts }.
+// The board is not shot again while its built page is the same (V-7 of Fable's 11-17 plan): its key covers the board
+// page's HTML and the rules of the stylesheet it can use (lib/page-keys.mjs), the modules and the competitor sections
+// beside them, this script and the review's rules; a change to tokens or to a module's rules shoots it again, and only
+// the modules that look different (beyond REVIEW_PIXEL_SHARE of the shots reviewed) go back to the review.
+export async function boardSource(root, board) {
+  const crops = [];
+  for (const module of board?.modules ?? []) for (const section of module.evidence ?? []) {
+    const folder = resolve(root, 'docs/research/pattern-sections', section.pageType);
+    const name = existsSync(folder) ? (await readdir(folder)).find((file) => file.endsWith('.png') && Number.parseInt(file, 10) === section.index) : null;
+    if (name) crops.push(`docs/research/pattern-sections/${section.pageType}/${name}`);
+  }
+  const shared = await sharedPageKey(root, { code: ['scripts/design-review.mjs'], files: [...new Set(crops)].sort() });
+  return builtPageKey(root, board?.route ?? '/style-board/', shared, { modules: board?.modules ?? [], viewports: VIEWPORTS, rules: await reviewRules(root), layout: await siteLayoutFacts(root) });
+}
+
+// Each module's own key on the built board (V-7 at a module's grain): its samples' markup (main[data-board-key]),
+// the rules of the board's stylesheets that markup, the board's frame around it and its scripts can use
+// (lib/css-subset.mjs), its competitor sections, and the key every page shares. A module whose key is the same keeps
+// its crops and its review, whatever the modules above it did: another module's new height moved it down a fraction
+// of a pixel, its text was drawn anew, and its review was asked again (Strandmill 2026-11-17, a team rule changed:
+// four modules below it reviewed again). { [module]: key }, {} where the board page is not built.
+export async function boardModuleKeys(root, board) {
+  const html = await readBuiltPage(root, board?.route ?? '/style-board/');
+  if (!html || !board?.modules?.length) return {};
+  const assets = await Promise.all(referencedAssets(html).map(async (asset) => ({ asset, text: await readFile(resolve(root, 'dist', decodeURIComponent(asset).slice(1)), 'utf8').catch(() => '') })));
+  const sheets = assets.filter(({ asset }) => asset.endsWith('.css')).map(({ text }) => cssRules(text));
+  const scripts = assets.filter(({ asset }) => /\.m?js$/.test(asset)).map(({ text }) => text);
+  const mains = [...html.matchAll(/<main\b[^>]*\bdata-board-key="([^"]*)"[^>]*>[\s\S]*?<\/main>/g)];
+  const frame = mains.reduce((text, match) => text.replace(match[0], ''), html);
+  const keys = {};
+  for (const module of board.modules) {
+    const own = mains.filter((match) => match[1] === module.key).map((match) => match[0]);
+    if (!own.length) continue;
+    const crops = [];
+    for (const section of module.evidence ?? []) {
+      const folder = resolve(root, 'docs/research/pattern-sections', section.pageType);
+      const name = existsSync(folder) ? (await readdir(folder)).find((file) => file.endsWith('.png') && Number.parseInt(file, 10) === section.index) : null;
+      if (name) crops.push(`docs/research/pattern-sections/${section.pageType}/${name}`);
+    }
+    const shared = await sharedPageKey(root, { code: ['scripts/design-review.mjs'], files: [...new Set(crops)].sort() });
+    const offered = offeredWords([...own, frame, ...scripts]);
+    const hash = createHash('sha256').update(shared).update(JSON.stringify(module)).update(unhashedHtml(own.join('\n')));
+    for (const rules of sheets) hash.update(pageCss(rules, offered));
+    keys[module.key] = hash.digest('hex').slice(0, 24);
+  }
+  return keys;
+}
+
 export async function prepareStyleBoard({ baseUrl, root = process.cwd(), shoot = null }) {
   const { default: sharp } = await import('sharp');
   const board = await readJson(resolve(root, 'src/data/style-board.json'), null);
@@ -374,7 +600,17 @@ export async function prepareStyleBoard({ baseUrl, root = process.cwd(), shoot =
   const previous = await readJson(resolve(dir, 'manifest.json'), null);
   const rules = await reviewRules(root);
   const layoutFacts = await siteLayoutFacts(root);
-  for (const name of await readdir(dir)) if (name.startsWith('board--') && name.endsWith('.png')) await rm(resolve(dir, name));
+  // (Null where the board page is not built: shot then.)
+  const source = await boardSource(root, board);
+  if (source && previous?.boardSource === source && (previous.board ?? []).every((entry) => entry.images.every((path) => existsSync(resolve(root, path))))) return { ...previous, unchanged: true };
+  // The shots each module's review judged are kept before the board is shot again (V-2).
+  const reviewOf = async (key) => readJson(resolve(dir, `${key}.review.json`), null);
+  for (const entry of previous?.board ?? []) await keepReviewedShots(root, entry, await reviewOf(entry.key));
+  // A module whose own key is unchanged keeps its entry and its crops (boardModuleKeys); every other is cut anew.
+  const moduleKeys = await boardModuleKeys(root, board);
+  const kept = new Map((previous?.board ?? []).filter((entry) => entry.source && moduleKeys[entry.module] === entry.source && entry.rules === rules && entry.images.every((path) => existsSync(resolve(root, path)))).map((entry) => [entry.key, entry]));
+  const keptImages = new Set([...kept.values()].flatMap((entry) => entry.images.map((path) => path.split('/').pop())));
+  for (const name of await readdir(dir)) if (name.startsWith('board--') && name.endsWith('.png') && !keptImages.has(name)) await rm(resolve(dir, name));
   const entries = new Map();
   let browser = null;
   try {
@@ -384,11 +620,17 @@ export async function prepareStyleBoard({ baseUrl, root = process.cwd(), shoot =
         const shot = await (shoot ?? shootBoard)(browser, new URL(board.route ?? '/style-board/', baseUrl).href, viewport, sharp);
         await sharp(shot.image).toFile(resolve(root, 'docs/research/style-board', `board-${viewport.id}.png`));
         const { width, height } = await sharp(shot.image).metadata();
+        // Each module cut where the shot drew it (alignToShot), not only where the page measured it.
+        if (shot.mains?.length && shot.labelColour) {
+          const { data, info } = await sharp(shot.image).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+          shot.modules = alignToShot(shot.modules, shot.mains, labelBars(data, info, shot.labelColour));
+        }
         for (const module of board.modules) {
           const place = shot.modules[module.key];
           if (!place) continue;
           const key = `board--${moduleSlug(module.key)}`;
-          const entry = entries.get(key) ?? { key, pageType: 'style-board', module: module.key, route: board.route ?? '/style-board/', unbacked: !module.evidence.length, evidence: module.evidence, samples: module.samples.map(({ role, route, blockId, words }) => ({ role, route, blockId, words })), rules, shots: null, images: [], blocks: {}, facts: { ...layoutFacts }, pixels: createHash('sha256') };
+          if (kept.has(key)) continue;
+          const entry = entries.get(key) ?? { key, pageType: 'style-board', module: module.key, route: board.route ?? '/style-board/', unbacked: !module.evidence.length, evidence: module.evidence, samples: module.samples.map(({ role, route, blockId, words }) => ({ role, route, blockId, words })), ...(moduleKeys[module.key] ? { source: moduleKeys[module.key] } : {}), rules, shots: null, images: [], blocks: {}, facts: { ...layoutFacts }, pixels: createHash('sha256') };
           const top = Math.max(0, Math.min(place.top, height - 1));
           const crop = await sharp(shot.image).extract({ left: 0, top, width, height: Math.max(1, Math.min(place.bottom, height) - top) }).png().toBuffer();
           const segments = await pairSegments(sharp, await competitorPanel(sharp, root, module.evidence), crop, viewport);
@@ -398,7 +640,7 @@ export async function prepareStyleBoard({ baseUrl, root = process.cwd(), shoot =
             entry.images.push(`${DIR}/${name}`);
             entry.pixels.update(name).update(segment);
           }
-          entry.blocks[viewport.id] = place.blocks.map((block) => ({ ...block, top: block.top - place.top }));
+          entry.blocks[viewport.id] = place.blocks.map(({ main, ...block }) => ({ ...block, top: block.top - place.top }));
           if (shot.facts) entry.facts[viewport.id] = { fonts: shot.facts.fonts };
           entries.set(key, entry);
         }
@@ -407,10 +649,14 @@ export async function prepareStyleBoard({ baseUrl, root = process.cwd(), shoot =
   } finally {
     await browser?.close();
   }
-  const list = [...entries.values()].map(({ pixels, ...entry }) => ({ ...entry, shots: pixels.update(JSON.stringify(entry.blocks)).update(JSON.stringify(entry.evidence)).digest('hex').slice(0, 24) }));
-  const manifest = { schemaVersion: SHOTS_SCHEMA, id: previous?.id ?? null, pages: previous?.pages ?? [], board: list };
+  const cut = [...entries.values()].map(({ pixels, ...entry }) => ({ ...entry, shots: pixels.update(JSON.stringify(entry.blocks)).update(JSON.stringify(entry.evidence)).digest('hex').slice(0, 24) }));
+  for (const entry of cut) { const near = await nearReviewed(root, sharp, entry, await reviewOf(entry.key)); if (near) entry.near = near; }
+  // In the board's order: the modules cut anew and those kept.
+  const order = (board?.modules ?? []).map((module) => `board--${moduleSlug(module.key)}`);
+  const list = [...cut, ...kept.values()].sort((left, right) => order.indexOf(left.key) - order.indexOf(right.key));
+  const manifest = { schemaVersion: SHOTS_SCHEMA, id: previous?.id ?? null, pages: previous?.pages ?? [], board: list, ...(source ? { boardSource: source } : {}) };
   await writeJson(resolve(dir, 'manifest.json'), manifest);
-  return manifest;
+  return { ...manifest, keptModules: kept.size };
 }
 
 // The design is settled (docs/research/design-settled.json): the style board's and the pages' reviews passed on the
@@ -433,7 +679,7 @@ export async function settleDesign({ root = process.cwd() } = {}) {
 export async function styleBoardGate({ root = process.cwd() } = {}) {
   const manifest = await readJson(resolve(root, DIR, 'manifest.json'), null);
   const board = manifest?.board ?? [];
-  const result = judgeReviews({ pages: board }, await readReviews(root, manifest ?? {}, board));
+  const result = judgeReviews({ pages: board }, await readReviews(root, manifest ?? {}, board), await readWaivers(root), await readListed(root));
   await writeJson(resolve(root, 'docs/research/style-board-review.json'), { schemaVersion: REVIEW_SCHEMA, status: result.status, modules: board.length, unbacked: board.filter((entry) => entry.unbacked).map((entry) => entry.module), findings: result.findings });
   return result;
 }
@@ -451,7 +697,7 @@ export async function readReviews(root, manifest, list = manifest.pages) {
 export async function designReviewGate({ root = process.cwd() } = {}) {
   const manifest = await readJson(resolve(root, DIR, 'manifest.json'), null);
   if (!manifest) throw new Error(`no ${DIR}/manifest.json: run design-review prepare first`);
-  const result = judgeReviews(manifest, await readReviews(root, manifest));
+  const result = judgeReviews(manifest, await readReviews(root, manifest), await readWaivers(root), await readListed(root));
   await writeJson(resolve(root, 'docs/research/design-review.json'), { schemaVersion: REVIEW_SCHEMA, shots: manifest.id, status: result.status, findings: result.findings });
   return result;
 }
@@ -461,10 +707,16 @@ runMain(import.meta.url, async () => {
   if (command === 'prepare' && baseUrl) {
     const manifest = await prepareDesignReview({ baseUrl });
     console.log(`${manifest.pages.length} pages of ${new Set(manifest.pages.map((page) => page.pageType)).size} page types, ${manifest.pages.reduce((sum, page) => sum + page.images.length, 0)} side-by-side images (shots ${manifest.id})`);
+    const near = manifest.pages.filter((page) => page.near);
+    if (near.length) console.log(`within ${REVIEW_PIXEL_SHARE * 100}% of the shots their reviews judged (the reviews stand): ${near.map((page) => `${page.key} ${(page.near.share * 100).toFixed(3)}%`).join(', ')}`);
     return;
   }
   if (command === 'board' && baseUrl) {
     const manifest = await prepareStyleBoard({ baseUrl });
+    if (manifest.unchanged) { console.log(`style board: unchanged (${manifest.board.length} modules, not shot again)`); return; }
+    const near = manifest.board.filter((entry) => entry.near).length;
+    if (manifest.keptModules) console.log(`style board: ${manifest.keptModules} module(s) unchanged (their markup and rules), crops and reviews kept`);
+    if (near) console.log(`style board: ${near} module(s) within ${REVIEW_PIXEL_SHARE * 100}% of the shots reviewed keep their reviews`);
     console.log(`style board: ${manifest.board.length} modules, ${manifest.board.reduce((sum, entry) => sum + entry.images.length, 0)} side-by-side images; no competitor module: ${manifest.board.filter((entry) => entry.unbacked).map((entry) => entry.module).join(', ') || 'none'}`);
     return;
   }

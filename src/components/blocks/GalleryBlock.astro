@@ -5,8 +5,11 @@
 // the photo), caption-panel (the name on a translucent panel inside the photo), product-cards (a card with a details
 // link and the page's enquiry link), band (one photo across the whole page, white space above and below: the reference's
 // full-width photo between its sections).
-import { gridPlan, isBuilt, type GalleryBlock, type Link, type Media } from '../../lib/authoring';
+import { gridPlan, isBuilt, variants, type GalleryBlock, type Link, type Media } from '../../lib/authoring';
 import { galleryShown } from '../../../scripts/lib/gallery.mjs';
+import { cardIcon } from '../../../scripts/lib/card-icons.mjs';
+import { pageCardIcons } from '../../../scripts/lib/media-slots.mjs';
+import lucide from '../../lib/lucide-icons.json';
 import { FIXED_FRAMES, fitRatio, fitsFrames, usualRatio } from '../../../scripts/lib/media-ratio.mjs';
 import Eyebrow from './Eyebrow.astro';
 import MediaFigure from './MediaFigure.astro';
@@ -17,7 +20,12 @@ interface Props { block: GalleryBlock; media?: Media[]; variant?: string; cta?: 
 const { block, media = [], variant = 'grid', cta = null } = Astro.props;
 const module = ['circles', 'label-tiles', 'caption-panel', 'product-cards'].includes(variant) ? variant : null;
 // Cards and links for pages that exist; names of unbuilt pages only when no card has a page (lib/gallery.mjs).
-const shown = galleryShown(block, isBuilt);
+// Page cards with icons (media-slots.mjs pageCardIcons): each card's icon from its name (config/card-icons.json). They
+// cost no photo, so every child page is a card: the hotel hub's thirteenth service stood alone as a text link under
+// twelve cards (the photo wall's count capped the cards).
+const iconTiles = pageCardIcons(block, variants);
+const listed = galleryShown(block, isBuilt);
+const shown = iconTiles ? { ...listed, cards: [...listed.cards, ...listed.links.map((link, at) => ({ item: { caption: link.label, href: link.href }, index: listed.cards.length + at }))], links: [] } : listed;
 const cards = shown.cards.map(({ item, index }) => ({ item, photo: media[index] ?? null }));
 // The grid's frames follow its photos' orientation (lib/media-ratio.mjs).
 const photos = cards.map(({ photo }) => photo).filter((photo): photo is Media => Boolean(photo));
@@ -26,7 +34,13 @@ const gridRatio = fitRatio(usualRatio('gallery'), photos);
 // enough of itself in its place at every width (a square one in a wide place, a wide one in a narrow place, would be
 // cut to a strip); otherwise an equal grid. Linked cards stay equal.
 const mosaic = variant === 'mosaic' && cards.length >= 3 && cards.length % 3 === 0 && !cards.some(({ item }) => item.href) && cards.every(({ photo }, index) => fitsFrames(index % 3 === 0 ? FIXED_FRAMES.mosaicWide : FIXED_FRAMES.mosaicNarrow, photo));
-const grid = gridPlan(cards.length);
+// Icon cards take three to five a row, as many as leave the fewest empty places (thirteen: five, five and three), never
+// a tall wall of two.
+const planned = iconTiles ? gridPlan(cards.length, 5, 3) : gridPlan(cards.length);
+// On tablets too: two columns of thirteen left one card alone (unfilled_row); short icon cards fit the desktop's count.
+const startOf = (index: number) => planned.itemStyle(index)?.match(/--start: (\d+)/)?.[1];
+const grid = iconTiles ? { ...planned, style: `--tracks: ${planned.columns * 2}; --tracks-md: ${planned.columns * 2}`, itemStyle: (index: number) => (startOf(index) ? `--start: ${startOf(index)}; --start-md: ${startOf(index)}` : undefined) } : planned;
+const tileIcon = (caption?: string) => { const name = cardIcon({ heading: caption ?? '' }); return name ? (lucide.icons as Record<string, string>)[name] ?? null : null; };
 const columns = grid.columns;
 // One or two page cards keep a card's size, centred, instead of stretching a photo across the page.
 const sparse = cards.length < 3 && cards.some(({ item }) => item.href) ? cards.length : undefined;
@@ -37,11 +51,16 @@ const spare = !mosaic && !module && cards.length > 2 && cards.length % 2 === 1 &
 ---
 
 {variant === 'band' && !block.heading && cards.length > 0 && !cards.some(({ item }) => item.href || item.caption) ? (
-<section class="block block--gallery" data-authoring-block="gallery" data-block-id={block.id} data-variant="band">
-  {cards[0].photo && <MediaFigure media={cards[0].photo} ratio="var(--band-ratio, 2 / 1)" class="gallery__band" sizes="100vw" />}
+<section class="block block--gallery" id={block.anchor} data-authoring-block="gallery" data-block-id={block.id} data-variant="band">
+  {block.bandLink && cards[0].photo ? (
+    <div class="gallery__band-frame">
+      <MediaFigure media={cards[0].photo} ratio="var(--band-ratio, 2 / 1)" class="gallery__band" sizes="100vw" />
+      <SmartLink href={block.bandLink.href} class="button button--primary gallery__band-action">{block.bandLink.label}</SmartLink>
+    </div>
+  ) : cards[0].photo && <MediaFigure media={cards[0].photo} ratio="var(--band-ratio, 2 / 1)" class="gallery__band" sizes="100vw" />}
 </section>
 ) : (
-<section class="block block--gallery" data-authoring-block="gallery" data-block-id={block.id} data-variant={module ?? (mosaic ? 'mosaic' : 'grid')}>
+<section class="block block--gallery" id={block.anchor} data-authoring-block="gallery" data-block-id={block.id} data-variant={module ?? (mosaic ? 'mosaic' : 'grid')}>
   <div class="container">
     <Eyebrow text={block.eyebrow} />
     {block.heading && <h2 class="gallery__heading">{block.heading}</h2>}
@@ -50,16 +69,17 @@ const spare = !mosaic && !module && cards.length > 2 && cards.length % 2 === 1 &
         {cards.map(({ item, photo }) => (
           <li class="track__item">
             <figure class="gallery__item">
-              {photo && <MediaFigure media={photo} ratio="1 / 1" />}
+          {photo && <MediaFigure media={photo} ratio="1 / 1" />}
               {item.caption && <figcaption>{item.href ? <SmartLink href={item.href} class="gallery__link">{item.caption}</SmartLink> : item.caption}</figcaption>}
             </figure>
           </li>
         ))}
       </Track>
     )}
-    {cards.length > 0 && module !== 'circles' && <div class="gallery" data-layout={mosaic ? 'mosaic' : 'equal-grid'} data-columns={mosaic ? 4 : columns} data-sparse={sparse} style={mosaic ? undefined : grid.style}>
+    {cards.length > 0 && module !== 'circles' && <div class="gallery" data-tiles={iconTiles ? 'icons' : undefined} data-layout={mosaic ? 'mosaic' : 'equal-grid'} data-columns={mosaic ? 4 : columns} data-sparse={sparse} style={mosaic ? undefined : grid.style}>
       {cards.map(({ item, photo }, index) => (
         <figure class="gallery__item" data-explicit-span={mosaic ? 'true' : undefined} data-spare={spare && index === cards.length - 1 ? 'true' : undefined} data-wide={mosaic && index % 3 === 0 ? 'true' : undefined} style={mosaic ? undefined : grid.itemStyle(index)}>
+          {iconTiles && <span class="gallery__icon" aria-hidden="true">{tileIcon(item.caption) && <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false" set:html={tileIcon(item.caption)} />}</span>}
           {photo && <MediaFigure media={photo} ratio={module === 'product-cards' ? '3 / 4' : mosaic ? 'auto' : columns === 1 && !sparse ? '16 / 7' : gridRatio} />}
           {item.caption && <figcaption>{item.href ? <SmartLink href={item.href} class="gallery__link">{item.caption}</SmartLink> : item.caption}</figcaption>}
           {module === 'product-cards' && (item.href || cta) && (

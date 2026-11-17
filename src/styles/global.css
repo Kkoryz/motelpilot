@@ -24,14 +24,7 @@
 /* Design tokens. A reference run replaces these values with the exact observed values from
    docs/research/raw/design-lock.json and font-lock.json; components only read tokens. */
 :root {
-  --surface-primary: #ffffff;
-  --surface-secondary: #f6f3ed;
-  --surface-dark: #171717;
-  --text-primary: #171717;
-  --text-inverse: #ffffff;
-  --text-muted: #5f5f5f;
   --border-color: #e5e5e5;
-  --accent: #235347;
   --accent-contrast: #ffffff;
 
   --font-body: Inter, ui-sans-serif, system-ui, sans-serif;

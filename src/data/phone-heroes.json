@@ -2,7 +2,10 @@
   "frames": {
     "hero": {
       "byPageType": {
-        "home": 1
+        "home": 1,
+        "solution": 1,
+        "about": 1,
+        "contact": 1
       }
     },
     "cta": {
@@ -11,7 +14,18 @@
       }
     }
   },
-  "crops": {},
-  "soft": [],
-  "unfocused": []
+  "crops": {
+    "/media/photos/home-brief-cta-1-960.webp": {
+      "0.51": {
+        "src": "/media/photos/home-brief-cta-1-960-phone-51.webp",
+        "width": 522,
+        "height": 1024
+      }
+    }
+  },
+  "soft": [
+    "/media/photos/home-brief-cta-1-960-phone-51.webp (522px wide, from 1536x1024)"
+  ],
+  "unfocused": [],
+  "overBudget": []
 }

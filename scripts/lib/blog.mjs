@@ -3,6 +3,8 @@
 // /blog/<slug>/ (pageType blog_post) and the hub /blog/, /blog/page/2/ ... (pageType blog_hub, 12 posts a page).
 // Paragraphs may link inline with [label](/route/) (the links a writer placed in the text).
 
+import { personSchema } from './site-people.mjs';
+
 export const BLOG_POST_SCHEMA = 'seo-site-blog-post-v1';
 export const BLOG_ROUTE = '/blog/';
 export const POSTS_PER_PAGE = 12;
@@ -141,17 +143,20 @@ export function postPage(post, blog) {
   };
 }
 
-// The hub: newest first, POSTS_PER_PAGE a page; page 1 is /blog/, then /blog/page/2/ ... (each its own canonical).
+// The hub: the posts marked featured first, then newest first, POSTS_PER_PAGE a page; page 1 is /blog/, then
+// /blog/page/2/ ... (each its own canonical).
 export function hubPages(posts, blog) {
   // A hub with copy of its own (blog.blocks) is a page before any post is written; without, it waits for the posts.
   if (!posts.length && !blog?.blocks?.length) return [];
-  const sorted = [...posts].sort((left, right) => Date.parse(right.datePublished) - Date.parse(left.datePublished));
+  const sorted = [...posts].sort((left, right) => Number(Boolean(right.featured)) - Number(Boolean(left.featured)) || Date.parse(right.datePublished) - Date.parse(left.datePublished));
   const total = Math.max(1, Math.ceil(sorted.length / POSTS_PER_PAGE));
-  // The hub's own blocks on its first page: the post list after them, before the closing call (cta) when there is one.
-  const own = blog?.blocks ?? [];
-  const closing = own.findIndex((block) => block.type === 'cta');
-  const [before, after] = closing < 0 ? [own, []] : [own.slice(0, closing), own.slice(closing)];
+  // The posts come first, right under the heading (owner 2026-11-12: "blog信息太多且页面没有把重要的blog放最上面";
+  // the competitor's news page is its list of posts): the hub's own blocks follow them, the closing call (cta) last.
+  const [before, after] = [[], blog?.blocks ?? []];
   const placeholder = !blog || (sorted.length > 0 && sorted.every((post) => post.status === 'placeholder'));
+  // A hub with no published post is held (noindex, out of the sitemap and the menus: lib/navigation.ts) until its first
+  // post is published: an indexed blog with nothing to read (Strandmill audit 2026-11-17: all four sites' /blog/).
+  const held = !placeholder && !sorted.some((post) => post.status === 'published');
   return Array.from({ length: total }, (_, index) => {
     const number = index + 1;
     const route = number === 1 ? BLOG_ROUTE : `${BLOG_ROUTE}page/${number}/`;
@@ -161,7 +166,7 @@ export function hubPages(posts, blog) {
       id: number === 1 ? 'blog' : `blog-page-${number}`,
       route,
       pageType: 'blog_hub',
-      status: placeholder ? 'placeholder' : 'authored',
+      status: placeholder ? 'placeholder' : held ? 'hold' : 'authored',
       seo: { title: number === 1 ? (blog?.title ?? heading) : `${blog?.title ?? heading} – Page ${number}`, description: blog?.description ?? '[Placeholder] What this blog covers.', canonical: route },
       jsonLd: [],
       hero: { heading: number === 1 ? heading : `${heading} – Page ${number}`, ...(number === 1 && blog?.intro ? { lead: [blog.intro] } : {}) },
@@ -169,6 +174,11 @@ export function hubPages(posts, blog) {
     };
   });
 }
+
+// The routes of the held hub pages (no post published yet): built for review, left out of the header and footer menus
+// (src/lib/navigation.ts) until the first post is published.
+/** @param {any[]} pages @returns {Set<string>} */
+export const heldHubRoutes = (pages) => new Set(pages.filter((page) => page.pageType === 'blog_hub' && page.status === 'hold').map((page) => page.route));
 
 // A release build (pnpm build:release sets SITE_RELEASE=1, as do the steps that check its output): see blogPages.
 export const isReleaseBuild = (env = process.env) => env.SITE_RELEASE === '1';
@@ -186,10 +196,13 @@ export function blogPages(posts = [], blog = null, { release = isReleaseBuild() 
 }
 
 // BlogPosting for a post page (stage 10): the visible headline, dates, author and image; the site's Organization as
-// publisher (and as author unless a real person wrote it).
+// publisher (and as author unless a real person wrote it). A person of the site's team (lib/site-people.mjs
+// withPostAuthors: a role) is the Person their profile states, by its @id, working for the company.
 export function blogPostingSchema(page, { absolute, organization }) {
   const { article } = page;
-  const author = article.author?.type === 'Person' ? { '@type': 'Person', name: article.author.name, url: absolute(article.author.url) } : { '@id': organization };
+  const author = article.author?.type !== 'Person' ? { '@id': organization }
+    : article.author.jobTitle ? personSchema(article.author, { absolute, organization })
+      : { '@type': 'Person', name: article.author.name, url: absolute(article.author.url) };
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',

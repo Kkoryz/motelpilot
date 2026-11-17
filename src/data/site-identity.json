@@ -4,9 +4,9 @@
   "siteName": "MotelPilot",
   "origin": "https://motelpilot.com",
   "logo": {
-    "src": "/logo.png",
-    "width": 2539,
-    "height": 240
+    "src": "/logo-header.webp",
+    "width": 440,
+    "height": 40
   },
   "schemaLogo": {
     "src": "/icon-512.png",
@@ -36,7 +36,19 @@
   "generated": {
     "wordmark": "docs/research/brand/wordmark-2.png",
     "mark": "docs/research/brand/mark.png",
-    "ink": "#171717",
+    "ink": "#111111",
     "replaceable": true
+  },
+  "logoFit": {
+    "source": "docs/research/brand/logo.png",
+    "background": "#1c1c1c",
+    "contrast": 17.04,
+    "inverse": false,
+    "png": {
+      "src": "/logo.png",
+      "width": 440,
+      "height": 40,
+      "sha256": "ab56c5f1beacffb97cdee31e1dee0f21c8590b335cf97d37e9eb51ffd278c5c7"
+    }
   }
 }

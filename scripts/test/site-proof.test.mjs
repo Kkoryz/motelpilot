@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import { validateAuthoringPages } from '../lib/authoring-contract.mjs';
-import { proofBlock, proofSignoffItems, withProofSlots } from '../lib/site-proof.mjs';
+import { pageProofSlots, proofBlock, proofSignoffItems, withProofSlots } from '../lib/site-proof.mjs';
 import { mergeProofItems } from '../proof-signoff.mjs';
 
 const proof = {
@@ -236,6 +236,54 @@ test('a page with its own client case gets no stand-in case studies, and the imp
   placeOwnerSlots(blocks, mapping, { planned: { url: '/p/', page_type: 'solution' }, proof, blueprints: { solution: [{ id: 'caseStudies', block: 'caseStudies', fill: 'owner' }] }, cases: [{ product: 'Bikinis', text: 'T' }] });
   assert.deepEqual(blocks.map((block) => block.id), ['a', 'faq']);
   assert.match(mapping[0].rule, /own client case/);
+  // A package that gives the page no case (cases: []) means none here; one that says nothing of cases gets the stand-ins.
+  const none = [{ id: 'a', type: 'intro' }, { id: 'faq', type: 'faq' }];
+  const noneMapping = [];
+  placeOwnerSlots(none, noneMapping, { planned: { url: '/', page_type: 'solution' }, proof, blueprints: { solution: [{ id: 'caseStudies', block: 'caseStudies', fill: 'owner' }] }, cases: [] });
+  assert.deepEqual(none.map((block) => block.id), ['a', 'faq']);
+  assert.match(noneMapping[0].rule, /gives this page no client case/);
+  const silent = [{ id: 'a', type: 'intro' }, { id: 'faq', type: 'faq' }];
+  placeOwnerSlots(silent, [], { planned: { url: '/', page_type: 'solution' }, proof, blueprints: { solution: [{ id: 'caseStudies', block: 'caseStudies', fill: 'owner' }] }, cases: null });
+  assert.equal(silent.length, 3, 'without cases from the package the stand-ins fill the slot');
+});
+
+test("the case studies page shows the site's case studies, a card each, where Site Factory gives it no case of its own (C9, H-2)", async () => {
+  const { placeOwnerSlots, placeCases } = await import('../lib/page-assembly.mjs');
+  const { blueprintPage } = await import('../lib/page-blueprints.mjs');
+  const { standIns } = await import('../design-review.mjs');
+  assert.deepEqual(pageProofSlots('general', 'site:case_studies_portfolio'), ['caseStudies']);
+  assert.deepEqual(pageProofSlots('general', 'site:faq'), [], 'no other general page');
+  assert.deepEqual(pageProofSlots('about', 'site:case_studies_portfolio'), [], 'a page Site Factory types otherwise keeps its own slots');
+  const cases = [{ product: 'Bikinis', text: 'An anonymised order.' }];
+  const many = { ...proof, standIn: true, caseStudies: [1, 2, 3, 4].map((n) => ({ ...proof.caseStudies[0], title: `Case ${n}`, pages: [`/p${n}/`] })) };
+  const blocks = [{ id: 'overview', type: 'intro', heading: 'H', paragraphs: ['P'] }, { id: 'faq', type: 'faq', items: [] }, { id: 'cta', type: 'cta' }];
+  const mapping = [];
+  const planned = { url: '/case-studies/', page_type: 'general', page_id: 'site:case_studies_portfolio' };
+  // The general blueprint has no owner slot: the tree name adds it. Site Factory's own cases take its place (site13 blind
+  // audit H-2: the stand-in cards and the page's cases told different projects).
+  const own = blocks.map((block) => ({ ...block }));
+  const ownMapping = [];
+  placeOwnerSlots(own, ownMapping, { planned, proof: many, blueprints: { general: [{ id: 'overview', block: 'intro', fill: 'copy' }] }, cases });
+  placeCases(own, ownMapping, { source: { cases }, proof: many });
+  assert.deepEqual(own.map((block) => block.type), ['intro', 'orderCase', 'faq', 'cta']);
+  assert.match(ownMapping.find((entry) => entry.sectionId === 'owner.caseStudies').rule, /own client case takes its place/);
+  placeOwnerSlots(blocks, mapping, { planned, proof: many, blueprints: { general: [{ id: 'overview', block: 'intro', fill: 'copy' }] }, cases: null });
+  assert.deepEqual(blocks.map((block) => block.type), ['intro', 'caseStudies', 'faq', 'cta']);
+  const cards = blocks.find((block) => block.type === 'caseStudies');
+  assert.deepEqual(cards.items.map((item) => item.title), ['Case 1', 'Case 2', 'Case 3'], 'a card each, up to the block\'s three');
+  assert.equal(cards.heading, 'Client results');
+  assert.match(mapping.find((entry) => entry.sectionId === 'owner.caseStudies').rule, /owner's proof/);
+  // Stand-in cases carry the stand-in mark: the owner-* block of a standIn proof, listed for replacing before launch.
+  assert.equal(cards.id, 'owner-caseStudies');
+  assert.ok(standIns({ blocks }, { proofStandIn: true }).includes('stand-in proof (src/data/site-proof.json): owner-caseStudies'));
+  assert.ok(proofSignoffItems(many).some((item) => item.id === 'proof-caseStudies'));
+  // Any other general page gets none; the cases' page is built the same while Site Factory has not written it.
+  const faq = [{ id: 'overview', type: 'intro' }, { id: 'faq', type: 'faq' }];
+  placeOwnerSlots(faq, [], { planned: { url: '/faq/', page_type: 'general', page_id: 'site:faq' }, proof: many, blueprints: { general: [] }, cases: null });
+  assert.deepEqual(faq.map((block) => block.type), ['intro', 'faq']);
+  const placeholder = blueprintPage({ page: { page_id: 'site:case_studies_portfolio', page_type: 'general', url: '/case-studies/', label: 'Case studies' }, pagesPlan: { pages: [] }, contactRoute: '/contact/', proof: many });
+  assert.ok(placeholder.blocks.some((block) => block.type === 'caseStudies'));
+  assert.deepEqual(validateAuthoringPages([{ ...placeholder, blocks: placeholder.blocks.filter((block) => block.type === 'caseStudies') }]), []);
 });
 
 test('a why_us list section becomes short selling points; borrowed points and borrowed steps hold release until confirmed', async () => {
@@ -289,4 +337,67 @@ test('a trust bar item that is a sentence, not a figure, stays off the bar and i
   const facts = new Map([['a', { text: 'About 30,000 pieces a month.', approved: true, confirmed: true }], ['c', { text: 'Samples in runs of 25 to 45 pieces.', approved: true, confirmed: true }]]);
   assert.deepEqual(trustFromPackage(pkg, facts).items.map((item) => item.value), ['30,000 pieces', '25 to 45 pieces']);
   assert.deepEqual(trustBarRefused(pkg), [{ factId: 'b', label: 'Factory', value: 'We manufacture swimwear ourselves; our factory is in Guangzhou.' }]);
+});
+
+test("Site Factory's blocking owner to-do holds release as our own sign-off items do", async () => {
+  const { ownerTodoItems } = await import('../proof-signoff.mjs');
+  const todo = { schema_version: 'sf/handoff-owner-todo/v1', items: [
+    { type: 'supply', text: 'hello@motelpilot.com', blocking: true, field: 'contact.email', ask: 'Provide real contact details', id: 'OT-supply-1' },
+    { type: 'confirm', text: 'Read replacements.md', blocking: false, evidence: 'owner/evidence/replacements.md', id: 'OT-confirm-2' },
+    { type: 'confirm', text: 'Confirm the hard facts', blocking: true, evidence: 'owner/evidence/hard_info.md', id: 'OT-confirm-3' },
+  ] };
+  const items = ownerTodoItems(todo);
+  assert.deepEqual(items.map((item) => item.id), ['sf-OT-supply-1', 'sf-OT-confirm-3'], 'the blocking ones');
+  assert.match(items[0].description, /contact\.email: hello@motelpilot\.com/);
+  assert.match(items[1].description, /owner\/evidence\/hard_info\.md/);
+  assert.deepEqual(ownerTodoItems(null), []);
+  assert.throws(() => ownerTodoItems({ schema_version: 'other' }), /unsupported owner to-do schema/);
+  // Merged into the sign-off: confirmed stays confirmed while the item reads the same; an item SF dropped goes.
+  const signoff = { schemaVersion: 'seo-site-release-signoff-v1', items: [{ ...items[0], status: 'confirmed' }, { id: 'sf-OT-gone', description: 'x', status: 'pending' }, { id: 'own', description: 'kept', status: 'pending' }] };
+  const merged = mergeProofItems(signoff, {}, [], todo);
+  assert.deepEqual(merged.items.filter((item) => item.id.startsWith('sf-')).map((item) => [item.id, item.status]), [['sf-OT-supply-1', 'confirmed'], ['sf-OT-confirm-3', 'pending']]);
+  assert.ok(merged.items.some((item) => item.id === 'own'));
+});
+
+test("the trust bar's unconfirmed figures and Site Factory's items hold release, naming where they show", async () => {
+  const { trustBarItems, ownerTodoItems } = await import('../proof-signoff.mjs');
+  const { CONTENT_CHECKS } = await import('../lib/preflight/content-checks.mjs');
+  const { SITE_CHECKS } = await import('../lib/preflight/site-checks.mjs');
+  const { runChecks } = await import('../preflight.mjs');
+  const trust = trustBarItems({ trustBarUnconfirmed: [{ factId: 'brief:SG18', value: 'since 2016' }, { factId: 'brief:SG18', value: '60 hotels and motels' }] });
+  assert.deepEqual(trust.map((item) => [item.id, item.factId]), [['trust-brief:SG18', 'brief:SG18']]);
+  assert.match(trust[0].description, /since 2016; 60 hotels and motels/);
+  assert.deepEqual(trustBarItems(null), []);
+  const [about] = ownerTodoItems({ schema_version: 'sf/handoff-owner-todo/v1', items: [{ id: 'OT-1', type: 'confirm', blocking: true, page_id: 'about', section_id: 'm2', text: '15, 12 and 14 years' }] });
+  const ctx = { pages: [{ id: 'about', route: '/about-us/' }, { id: 'home', route: '/' }], imported: { pages: [{ route: '/', citedFacts: ['brief:SG18'] }] }, signoff: { items: [...trust, about] } };
+  const pending = runChecks(ctx, CONTENT_CHECKS.filter((check) => check.code === 'owner_signoff_pending')).holds;
+  assert.deepEqual(pending.map((hold) => hold.items), [['/'], ['/about-us/ m2']]);
+  // Stand-in contact details by their form, marked or not.
+  const built = new Map([['/', '<p>Call +1 (416) 555-0142</p>'], ['/about-us/', '<p>Call +1 (416) 555-2042, hello@motelpilot.com</p>']]);
+  const standIn = runChecks({ ...ctx, built }, SITE_CHECKS.filter((check) => check.code === 'contact_details_stand_in')).holds;
+  assert.deepEqual(standIn.map((hold) => hold.items), [['/']]);
+});
+
+test('each site\'s stand-in clients are its own: made from the trade\'s name parts by the site\'s name, kept while made for it', async () => {
+  const { demoProof, standInClients, withFacts } = await import('../scaffold-site-proof.mjs');
+  const { readFile: read } = await import('node:fs/promises');
+  // Owner 2026-11-17: the motel, hotel-rm and Staylumen sites showed the same six clients, plainly made up.
+  const service = JSON.parse(await read(new URL('../../config/demo-proof.service.json', import.meta.url), 'utf8'));
+  const sites = ['MotelPilot', 'RateHarbor', 'Staylumen'].map((seed) => standInClients(service.clientNames, 6, seed));
+  for (const clients of sites) assert.equal(new Set(clients.map((client) => client.name)).size, 6);
+  for (const [index, clients] of sites.entries()) for (const other of sites.slice(index + 1)) assert.ok(clients.filter((client) => other.some((item) => item.name === client.name)).length <= 1, 'two sites share one client at most');
+  assert.deepEqual(standInClients(service.clientNames, 6, 'RateHarbor'), sites[1], 'the same site, the same clients');
+  const apparel = JSON.parse(await read(new URL('../../config/demo-proof.json', import.meta.url), 'utf8'));
+  const facts = new Map();
+  const products = [{ product: 'bikini', route: '/bikini/' }];
+  const made = demoProof({ demo: apparel, facts, products, line: 'swimwear', seed: 'Strandmill' });
+  assert.equal(made.clientsFor, 'Strandmill');
+  assert.ok(made.testimonials.every((item) => made.clients.some((client) => client.name === item.company)));
+  // A stand-in made before (no clientsFor: the trade's fixed six) takes the site's own, its testimonials with them.
+  const old = { ...demoProof({ demo: apparel, facts, products, line: 'swimwear' }), clientsFor: undefined };
+  const next = withFacts(old, made, new Set(['/bikini/']));
+  assert.deepEqual([next.clients, next.clientsFor, next.testimonials], [made.clients, 'Strandmill', made.testimonials]);
+  // Made for this site and edited by hand: kept.
+  const edited = { ...made, clients: [{ name: 'Maré Studio', note: 'Swimwear, Portugal' }, ...made.clients.slice(1)] };
+  assert.equal(withFacts(edited, made, new Set(['/bikini/'])).clients[0].name, 'Maré Studio');
 });

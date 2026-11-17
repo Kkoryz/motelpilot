@@ -5,14 +5,20 @@
 // (docs/research/cross-site.json): pages whose main text is a near-duplicate of a page on another site hold release.
 // Other sites: --against <fingerprint.json | workspace dir> (repeatable) and every *.json in SITE_FINGERPRINTS_DIR
 // (a shared folder where each released site leaves its fingerprint).
-// Usage: node scripts/check-cross-site.mjs [--against <path> ...]
+// --hold: near-duplicates wait for the owner (exit 2: site-run's release step, whose preflight holds on them) instead
+// of failing (exit 1).
+// Usage: node scripts/check-cross-site.mjs [--against <path> ...] [--hold]
 
 import { cliArgs, runMain } from './lib/cli.mjs';
 import { checkCrossSite } from './lib/cross-site.mjs';
 
+// The exit code for a report: 0 with no near-duplicate; else 1, or 2 (waits for the owner) with hold.
+export const crossSiteExit = (report, { hold = false } = {}) => (report.duplicates.length ? (hold ? 2 : 1) : 0);
+
 runMain(import.meta.url, async () => {
-  const report = await checkCrossSite({ against: cliArgs({ against: { type: 'string', multiple: true } }).values.against ?? [] });
+  const { values } = cliArgs({ against: { type: 'string', multiple: true }, hold: { type: 'boolean' } });
+  const report = await checkCrossSite({ against: values.against ?? [] });
   console.log(`${report.host}: compared with ${report.comparedWith.length} site(s), ${report.duplicates.length} near-duplicate page(s)`);
   for (const item of report.duplicates) console.log(`- ${item.route} ~ ${item.host}${item.otherRoute} (${item.similarity})`);
-  if (report.duplicates.length) process.exitCode = 1;
+  process.exitCode = crossSiteExit(report, { hold: values.hold === true });
 });

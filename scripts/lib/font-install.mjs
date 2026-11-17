@@ -4,7 +4,7 @@
 // from the Google Fonts CSS2 API, and the @font-face rules and role tokens generated from that record.
 
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { primaryFamily, resolveFamily } from './font-licenses.mjs';
 
@@ -155,6 +155,7 @@ const WOFF2 = Buffer.from('wOF2');
 export async function downloadFaces({ plan, cacheDir, fetch = globalThis.fetch, subsets = SUBSETS }) {
   const faces = [];
   const requests = {};
+  const synthesized = {};
   let downloads = 0;
   for (const family of plan.families.filter((item) => item.source === 'google-fonts')) {
     const url = googleCssUrl(family);
@@ -170,9 +171,13 @@ export async function downloadFaces({ plan, cacheDir, fetch = globalThis.fetch, 
       throw new Error(`fonts: the faces of "${family.family}" could not be downloaded: ${error.message}. Nothing was installed and no system font is used instead; run the step again when Google Fonts can be reached.`);
     }
     const found = parseFaces(css).filter((face) => subsets.includes(face.subset));
-    for (const style of family.styles) for (const weight of family.weights) {
-      if (!found.some((face) => face.style === style && face.weight === weight && face.subset === subsets[0])) throw new Error(`fonts: Google Fonts answered no ${subsets[0]} face of "${family.family}" ${weight} ${style} (${url})`);
-    }
+    // A weight the family does not have is answered with nothing: the browser synthesizes it from the nearest face, as
+    // on the reference (hometeamluxuryrentals.com loads Marcellus regular only and shows it at 600 and 700). Recorded;
+    // a style with no face at all fails.
+    const has = (style, weight) => found.some((face) => face.style === style && face.weight === weight && face.subset === subsets[0]);
+    for (const style of family.styles) if (!family.weights.some((weight) => has(style, weight))) throw new Error(`fonts: Google Fonts answered no ${subsets[0]} face of "${family.family}" in ${style} (${url})`);
+    const missing = family.weights.filter((weight) => !family.styles.every((style) => has(style, weight)));
+    if (missing.length) synthesized[family.family] = missing;
     for (const face of found) {
       if (!face.url) throw new Error(`fonts: a face of "${family.family}" has no file (${url})`);
       let file;
@@ -186,7 +191,7 @@ export async function downloadFaces({ plan, cacheDir, fetch = globalThis.fetch, 
       faces.push({ ...face, family: family.family, bytes: file.body });
     }
   }
-  return { faces, requests, downloads };
+  return { faces, requests, downloads, synthesized };
 }
 
 export const fontSlug = (family) => family.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -194,7 +199,7 @@ export const fontSlug = (family) => family.toLowerCase().replace(/[^a-z0-9]+/g, 
 // The record the site keeps of its fonts: each role's family and stack, each family's weights, styles and source, and
 // every face with its file (public path), source URL and checksum. Faces in a fixed order (the same fonts give the same
 // record and stylesheet).
-export function installedFonts({ plan, faces, requests }) {
+export function installedFonts({ plan, faces, requests, synthesized = {} }) {
   const order = (face) => [face.family, face.style, String(face.weight).padStart(4, '0'), String(SUBSETS.indexOf(face.subset)).padStart(2, '0')].join('|');
   const records = faces.map((face) => {
     const checksum = sha(face.bytes);
@@ -205,7 +210,7 @@ export function installedFonts({ plan, faces, requests }) {
     source: 'Google Fonts CSS2 API (fonts.googleapis.com/css2), files from fonts.gstatic.com',
     subsets: [...SUBSETS],
     roles: plan.roles,
-    families: plan.families.map((family) => ({ ...family, ...(requests[family.family] ? { request: requests[family.family] } : {}) })),
+    families: plan.families.map((family) => ({ ...family, ...(requests[family.family] ? { request: requests[family.family] } : {}), ...(synthesized[family.family] ? { synthesized: synthesized[family.family] } : {}) })),
     faces: records,
     unused: plan.unused,
   };
@@ -239,4 +244,27 @@ export function withFontsImport(css) {
   if (!after) return `${FONTS_IMPORT}${eol}${css}`;
   const at = after.index + after[0].length;
   return `${css.slice(0, at)}${FONTS_IMPORT}${eol}${css.slice(at)}`;
+}
+
+// The reference's font lock (docs/research/raw/font-lock.json, the home page's capture), a role the home page does not
+// show taken from the competitor's other pages (their own captures' font locks, by page type): Concord's home opens on
+// a video with no title, and its hero role was added to the font lock by hand, lost again with the next capture (motel
+// 2026-11-14). The home page's roles stay first.
+export function withPageRoles(fontLock, pageLocks = []) {
+  const roles = { ...fontLock.roles };
+  for (const [role, value] of Object.entries(roles)) {
+    if (value?.family) continue;
+    const found = pageLocks.map((lock) => lock?.roles?.[role]).find((item) => item?.family);
+    if (found) roles[role] = { ...found, note: 'from the reference pages (the home page shows none)' };
+  }
+  return { ...fontLock, roles };
+}
+const readLock = async (path) => { try { return JSON.parse(await readFile(path, 'utf8')); } catch { return null; } };
+/** @param {string} root @returns {Promise<any>} the font lock with its roles filled from the page types', or null */
+export async function referenceFontLock(root) {
+  const lock = await readLock(join(root, 'docs/research/raw/font-lock.json'));
+  if (!lock) return null;
+  const dir = join(root, 'docs/research/reference-pages');
+  const types = (await readdir(dir).catch(() => [])).sort();
+  return withPageRoles(lock, await Promise.all(types.map((type) => readLock(join(dir, type, 'raw/font-lock.json')))));
 }

@@ -35,14 +35,17 @@ export async function applyImageLibrary({ root = process.cwd() } = {}) {
   const variantsPath = resolve(root, 'src/data/template-variants.json');
   const variants = await readJson(variantsPath);
   // Run scripts write only the keys they derive (here media); every other key is the treatment's or a repair's.
-  const { pools, routePools, heroByRoute, routeCategories, hero } = libraryMedia(plan);
+  const { pools, themePools, routePools, heroByRoute, routeCategories, routeThemes, hero } = libraryMedia(plan);
   variants.components.media = {
     origin: 'library',
     hero,
     heroByRoute,
     pools,
+    // A themed page's shared classes take its theme's set (lib/page-theme.mjs; site13 claude-seo audit 2026-11-17, M-13).
+    ...(themePools ? { themePools } : {}),
     routePools,
     routeCategories,
+    ...(routeThemes ? { routeThemes } : {}),
     // Classes that wait for real photos render as image slots (never filled with another class's photo).
     placeholders: plan.placeholders ?? [],
   };

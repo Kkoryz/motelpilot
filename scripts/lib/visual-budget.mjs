@@ -2,14 +2,19 @@
 // checks): each page's height, picture share and longest picture-less run estimated from its sections before it is
 // built, and photo walls added or taken off until the estimate sits inside the reference's density band
 // (components.densityBands, measure-reference-density.mjs). How tall a module renders and how much of it is picture
-// comes from the block model (config/block-model.default.json, calibrated per site from its layout audit:
-// components.blockModel, calibrate-block-model in break-text-runs.mjs).
+// comes from the block model (config/block-model.default.json, calibrated per site from its grey-frame trial build before
+// any photo is made: components.blockModel, calibrate-plan.mjs).
 
 import defaults from '../../config/block-model.default.json' with { type: 'json' };
+import { tintedSections } from './section-surfaces.mjs';
 
 export const DEFAULT_BLOCK_MODEL = defaults.modules;
 // The estimate aims inside the band, not at its edges: the model is a fit, the audit measures the real page.
 export const BUDGET_MARGIN = Object.freeze({ run: 0.9, visualPct: 3 });
+// The most photo walls a page takes for density: a safety stop, not a design rule. The picture-area band decides how
+// many a page takes (its ceiling keeps a page from becoming photo after photo); a page still outside it after this many
+// is reported as not fitting (lib/layout-plan.mjs feasibility). Owner 2026-11-14 withdrew the cap of three the same
+// day: it held hotel-rm's home at 39% where its walls had brought it to 45% ("照片多少由图片面积区间决定").
 export const MAX_BUDGET_WALLS = 12;
 
 // The model key of a block: its type and the variant it renders with (featureGrid: its pattern).
@@ -23,8 +28,20 @@ export function estimateBlock(block, variant, words, model = DEFAULT_BLOCK_MODEL
   // A variant the model has not seen takes its module's average (type:*), then the module without a variant.
   const fit = (pageType ? model[`${modelKey(block, variant)}@${pageType}`] : null) ?? model[modelKey(block, variant)] ?? model[`${block.type}:*`] ?? model[`${block.type}:`] ?? model['*'] ?? DEFAULT_BLOCK_MODEL['*'];
   const height = Math.max(40, fit.base + fit.perWord * words);
-  const pictured = fit.visual > 0.05;
-  return { height, visual: fit.visual * height, before: pictured ? fit.before * height : height, after: pictured ? fit.after * height : height, pictured };
+  // A card grid of fewer than three cards is no structured block to the measure (lib/density.mjs: three boxed cards
+  // side by side), photo cards apart (motel /our-history/ 2026-11-14: two cards going on, 159px estimated, none measured).
+  const share = block.type === 'featureGrid' && variant !== 'media' && Array.isArray(block.items) && block.items.length < 3 ? 0 : fit.visual;
+  const pictured = share > 0.05;
+  return { height, visual: share * height, before: pictured ? fit.before * height : height, after: pictured ? fit.after * height : height, pictured };
+}
+
+// Two estimates one after the other as one (a block and the charts drawn after it, a hero and its lead set under it):
+// their heights and pictures add up, the text at its top and foot runs on across a part with no picture.
+export function joinEstimates(first, second) {
+  const height = first.height + second.height;
+  const before = first.pictured ? first.before : second.pictured ? first.height + second.before : height;
+  const after = second.pictured ? second.after : first.pictured ? first.after + second.height : height;
+  return { height, visual: first.visual + second.visual, before, after, pictured: first.pictured || second.pictured };
 }
 
 // A page's estimated density from its blocks' estimates in order (the hero first): content height, picture share (%)
@@ -50,9 +67,19 @@ export function pageEstimate(estimates) {
 // the page shows too little; where it shows too much, in this order (owner 2026-11-12: the competitor's own photo
 // bands go last, and never below its count): the walls added here, the photos of photo cards (icon cards instead),
 // photo tiles (links instead), the competitor's other walls, then its bands down to the floor.
-export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, variantOf, wordsOf, wall, isWall, hero = null, pageType = null, floor = 0 }) {
+// apart(before, after): whether a wall may stand between these two blocks (media-slots: never between two proof sections,
+// where a photo has nothing to break up).
+// chartsOf(block): whether the block's data is drawn as charts after it (a closing band's before it), counted as the
+// layout plan and the trial build count them (lib/layout-plan.mjs). The trust bar is not: it is in the
+// plan's estimate only, about a point on a short page, inside BUDGET_MARGIN.
+export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, variantOf, wordsOf, wall, isWall, hero = null, chartsOf = () => false, pageType = null, floor = 0, apart = () => true }) {
   const target = { run: bands.longestTextOnlyPx.max * BUDGET_MARGIN.run, min: bands.visualAreaPct.min + BUDGET_MARGIN.visualPct, max: bands.visualAreaPct.max - BUDGET_MARGIN.visualPct };
-  const estimates = () => blocks.map((block) => estimateBlock(block, variantOf(block), wordsOf(block), model, pageType));
+  const charts = () => estimateBlock({ type: 'charts' }, '', 0, model, pageType);
+  const estimates = () => blocks.map((block) => {
+    const own = estimateBlock(block, variantOf(block), wordsOf(block), model, pageType);
+    if (!chartsOf(block)) return own;
+    return block.type === 'cta' ? joinEstimates(charts(), own) : joinEstimates(own, charts());
+  });
   const top = hero ? estimateBlock(hero.block, hero.variant, hero.words, model, pageType) : null;
   const measure = () => pageEstimate([...(top ? [top] : []), ...estimates()]);
   const closing = () => { const at = blocks.findIndex((block) => block.type === 'cta' || block.type === 'form'); return at < 0 ? blocks.length : at; };
@@ -74,13 +101,18 @@ export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, v
     return found;
   };
   // Where a wall may go in a run: between two of its blocks, else at its edge (next to a pictured block), never next to
-  // another wall; the place that splits the run's height most evenly.
-  const place = (run) => {
+  // another wall; the place that splits the run's height most evenly. Not inside a section going on in a block of its
+  // own (continues): the wall would cut it in two. Across (a run too long for the band that has no other place): where
+  // such a section changes module (its cards go on as a list), never between two grids of one card set.
+  const place = (run, across = false) => {
     const list = estimates();
     const candidates = [];
     for (let at = run.start; at <= run.end; at += 1) {
       if (at === 0 || at > closing()) continue;
       if (isWall(blocks[at - 1]) || (blocks[at] && isWall(blocks[at]))) continue;
+      if (!apart(blocks[at - 1], blocks[at])) continue;
+      const inside = blocks[at]?.continues != null && [blocks[at - 1]?.id, blocks[at - 1]?.continues].includes(blocks[at].continues);
+      if (inside && !(across && blocks[at].type !== blocks[at - 1]?.type)) continue;
       candidates.push(at);
     }
     const above = (at) => list.slice(run.start, at).reduce((sum, item) => sum + item.height, 0);
@@ -90,10 +122,15 @@ export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, v
   for (; added < MAX_BUDGET_WALLS; added += 1) {
     const now = measure();
     const longest = runs().sort((left, right) => right.height - left.height);
-    // A run too long is split (one inside a single section cannot be); a page short of pictures gets one in its longest run.
-    const needed = (now.longestRun > target.run ? longest.find((run) => run.end - run.start >= 2 && run.height > target.run) : null) ?? (now.visualPct < target.min ? longest[0] : null);
-    if (!needed) break;
-    const at = place(needed);
+    // A run too long is split; a page short of pictures gets one in its longest run that takes one. Each run is tried in
+    // turn, longest first (hotel-rm's home, 2026-11-14: its longest run had no place and the planner stopped there, the
+    // page at 10% pictures for a band of 38-68%); a run too long for the band takes one across a section's change of
+    // module when it has no other place.
+    const tooLong = now.longestRun > target.run ? longest.filter((run) => run.height > target.run) : [];
+    const short = now.visualPct < target.min ? longest : [];
+    let at;
+    for (const run of tooLong) if ((at = place(run) ?? place(run, true)) !== undefined) break;
+    if (at === undefined) for (const run of short) if ((at = place(run)) !== undefined) break;
     if (at === undefined) break;
     blocks.splice(at, 0, wall(`media-module-budget-${added + 1}`));
   }
@@ -113,24 +150,109 @@ export function planVisualBudget(blocks, { bands, model = DEFAULT_BLOCK_MODEL, v
   if (over()) for (const [index, block] of blocks.entries()) if (block.type === 'relatedPages' && variantOf(block) === 'tiles') blocks[index] = { ...block, variant: 'links', planned: true };
   takeOff((block) => block.competitor && !block.signature);
   takeOff((block) => block.signature, () => blocks.filter((block) => isWall(block) && block.signature).length > floor);
-  return varyItemRows(blocks, variantOf);
+  return blocks;
 }
 
 // Two sections of the same shape never stand together (owner 2026-11-12: "图标得穿插 元素堆一起是不是不好看", "同类型模块
 // 堆在一起这个得在最开始就避免": the hotel home ran three rows of three short items, icon cards, icon cards and steps, one
 // under the other). A row of short items is a card grid (any but the list), steps (any but the list) or figures; where
 // two meet, the card grid of the pair sets its points out as a list beside its heading (bullets, the competitor's
-// service lists), the later one first. Planned with the page, before anything is built or photographed.
+// service lists), the later one first. Planned with the page, before anything is built or photographed: on every page of
+// every site (lib/media-slots.mjs withMediaModules), not only where a density band plans photo walls (Fable's 08-onward
+// plan: it ran inside the visual budget, so a site without a band and the pages without walls never had it).
 const itemRow = (block, variant) => (block.type === 'featureGrid' && variant !== 'bullets') || (block.type === 'process' && variant !== 'list') || block.type === 'stats';
 export function varyItemRows(blocks, variantOf) {
-  const toList = (index) => { blocks[index] = { ...blocks[index], variant: 'bullets', planned: true }; };
+  // A list on the page (an icon list, or a grid already set out as a list): a grid made a list beside two of them is the
+  // third list in a row the layout audit fails (repeated_module; Staylumen and Strandmill 2026-11-17: a grid made a list
+  // between two of Site Factory's icon lists). Such a grid stays cards.
+  // As the page shows it: a grid the reference's pattern sets out as a list (media-slots.mjs designedVariant) is one.
+  const listLike = (at) => at >= 0 && at < blocks.length && (blocks[at].type === 'iconList' || (blocks[at].type === 'featureGrid' && (blocks[at].variant === 'bullets' || variantOf(blocks[at]) === 'bullets')));
+  // The run of lists a block from first to last (one section, its grids together) would stand in as one list.
+  const listRun = (at, last = at) => { let run = 1; for (let k = at - 1; listLike(k); k -= 1) run += 1; for (let k = last + 1; listLike(k); k += 1) run += 1; return run; };
+  const toList = (index) => { if (listRun(index) > 2) return false; blocks[index] = { ...blocks[index], variant: 'bullets', planned: true }; return true; };
+  // Only a grid with its own heading becomes a list (the list sits beside it); a section split in two (continues) is one
+  // section, never a pair: its second half became a headless list, two points stacked down an empty column.
+  // Nor does a grid other blocks go on from: its first grid alone as a list left a list over three rows of cards (the
+  // hotel hub's thirteen entry cards in grids of four).
+  const listable = (at) => blocks[at].type === 'featureGrid' && Boolean(blocks[at].heading) && blocks[at].continues == null && !blocks.some((item) => item.continues === blocks[at].id);
   for (let index = 1; index < blocks.length; index += 1) {
     const [before, block] = [blocks[index - 1], blocks[index]];
+    if (block.continues === before.id || before.continues === block.id) continue;
     if (!itemRow(before, variantOf(before)) || !itemRow(block, variantOf(block))) continue;
-    if (block.type === 'featureGrid') toList(index);
-    else if (before.type === 'featureGrid' && !(index >= 2 && blocks[index - 2].type === 'featureGrid' && variantOf(blocks[index - 2]) === 'bullets')) toList(index - 1);
+    if (listable(index) && toList(index)) continue;
+    if (listable(index - 1) && !(index >= 2 && blocks[index - 2].type === 'featureGrid' && variantOf(blocks[index - 2]) === 'bullets') && toList(index - 1)) continue;
+    // Neither grid could become a list without making three lists in a row: the pair stays cards.
+    if ([index, index - 1].some((at) => listable(at)) && [index, index - 1].every((at) => !listable(at) || listRun(at) > 2)) continue;
+    // Neither grid can be a list (one goes on from another, or has no heading of its own): the pair's steps are
+    // (hotel-rm's pricing page, motel's process page, 2026-11-14: a grid going on from another over a row of steps).
+    else if ([index, index - 1].some((at) => blocks[at].type === 'process')) { const at = blocks[index].type === 'process' ? index : index - 1; blocks[at] = { ...blocks[at], variant: 'list', planned: true }; }
+    // No steps either: two card sets in grids of their own (Strandmill 2026-11-14, four pages: m4, m4-2 then m5, m5-2).
+    // A whole set becomes one list beside its heading, all its cards in it, the later set first.
+    else {
+      const start = [index, setStart(blocks, index - 1)].find((at) => joinable(blocks, at));
+      // Counted with the set as the one list it becomes, from its first grid to its last (Staylumen 2026-11-17:
+      // /airbnb-booking-management/'s three grids joined into a list before two icon lists, counted from its first alone).
+      const grids = start == null ? [] : blocks.filter((item, at) => at > start && item.continues === blocks[start].id);
+      if (start != null && listRun(start, start + grids.length) <= 2) {
+        blocks.splice(start, grids.length + 1, { ...blocks[start], items: [blocks[start], ...grids].flatMap((item) => item.items ?? []), variant: 'bullets', planned: true });
+      }
+    }
+  }
+  // A grid the reference's pattern alone sets out as a list (its own variant cards) that is then the third list in a
+  // row keeps its cards (keepCards, read by designedVariant; Staylumen 2026-11-17: /airbnb-booking-management/'s first
+  // grid shown as a list before two icon lists).
+  for (let at = 0; at < blocks.length; at += 1) {
+    const block = blocks[at];
+    if (block.type === 'featureGrid' && block.variant !== 'bullets' && !block.keepCards && variantOf(block) === 'bullets' && listRun(at) > 2) blocks[at] = { ...block, keepCards: true };
   }
   return blocks;
+}
+
+// The most cards a set joined into one list holds; a longer set stays cards (the hotel hub's thirteen entry cards).
+export const JOINED_LIST_MAX = 8;
+// The first grid of the card set the block at `at` belongs to.
+const setStart = (blocks, at) => (blocks[at].continues == null ? at : blocks.findIndex((item) => item.id === blocks[at].continues));
+// A card set the template can set out as one list: a grid with its own heading and the grids right after it that go on
+// from it, all cards, JOINED_LIST_MAX at most.
+function joinable(blocks, start) {
+  const first = blocks[start];
+  if (!first || first.type !== 'featureGrid' || !first.heading || first.continues != null) return false;
+  let end = start + 1;
+  while (blocks[end]?.continues === first.id) end += 1;
+  const grids = blocks.slice(start, end);
+  return !blocks.some((item, at) => (at < start || at >= end) && item.continues === first.id) && grids.every((item) => item.type === 'featureGrid') && grids.reduce((sum, item) => sum + (item.items?.length ?? 0), 0) <= JOINED_LIST_MAX;
+}
+
+// Two split rows of the tinted variant one under the other run as one grey band (hotel-rm's digital marketing page,
+// 2026-11-14): the later is a plain split row, planned with the page (lib/media-slots.mjs withMediaModules) and on its
+// variant (resolveVariant: planned).
+export function varySurfaces(blocks, variantOf) {
+  for (let index = 1; index < blocks.length; index += 1) {
+    const [before, block] = [blocks[index - 1], blocks[index]];
+    if (before.type === 'splitMedia' && block.type === 'splitMedia' && variantOf(before) === 'tinted' && variantOf(block) === 'tinted') blocks[index] = { ...block, variant: 'single', planned: true };
+  }
+  // An even run of plain sections between two tinted split rows cannot alternate without one end meeting a band on its
+  // own grey (aloha's /quality-control/ 2026-11-17: a band, a split row and a list, a band): the band the run opens
+  // after is a plain split row too, and the run takes it in.
+  const band = (block) => block.type === 'splitMedia' && block.continues == null && variantOf(block) === 'tinted';
+  for (let round = 0; round < blocks.length; round += 1) {
+    const tinted = tintedSections(blocks, variantOf);
+    const at = blocks.findIndex((block, index) => band(block) && blocks[index + 1] && blocks[index + 1].continues !== block.id && tinted.has(blocks[index + 1].id));
+    if (at < 0) break;
+    blocks[at] = { ...blocks[at], variant: 'single', planned: true };
+  }
+  return blocks;
+}
+
+// Whether a fitted model differs from the one in use enough to plan again: a module 15% taller or shorter at its usual
+// length, or its picture share 0.1 apart.
+export function modelMoved(previous = DEFAULT_BLOCK_MODEL, next = DEFAULT_BLOCK_MODEL) {
+  return Object.entries(next).some(([key, fit]) => {
+    const was = previous[key];
+    if (!was) return true;
+    const at = (model) => model.base + model.perWord * 120;
+    return Math.abs(at(fit) - at(was)) > 0.15 * at(was) || Math.abs(fit.visual - was.visual) > 0.1;
+  });
 }
 
 // A block model fitted from a built site's measured blocks (the layout audit's desktop block metrics): per model key a

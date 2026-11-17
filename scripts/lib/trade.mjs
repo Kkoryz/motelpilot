@@ -30,5 +30,7 @@ export function tradeConfigPath(name, trade = DEFAULT_TRADE) {
 export async function imageBriefs(root = process.cwd()) {
   const { trade, siteKind, imageSubjects } = await siteTrade(root);
   const briefs = await readJson(tradeConfigPath('image-briefs', trade));
-  return { ...briefs, trade, ...(siteKind ? { siteKind } : {}), ...(imageSubjects ? { subjects: { ...briefs.subjects, ...imageSubjects } } : {}) };
+  // tradeSubjects: the trade's own, for a class whose site subjects are all of another class (image-plan.mjs: a service
+  // site's generic scenes).
+  return { ...briefs, trade, tradeSubjects: briefs.subjects, ...(siteKind ? { siteKind } : {}), ...(imageSubjects ? { subjects: { ...briefs.subjects, ...imageSubjects } } : {}) };
 }

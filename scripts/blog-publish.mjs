@@ -1,17 +1,19 @@
 #!/usr/bin/env node
 
-// After launch: publishes reviewed articles from the queue, a few at a time. A package in content/blog-queue/approved
-// (seo-site-blog-post-v1, with review.by and review.at from the person who checked it) is checked (lib/blog-gates.mjs);
+// After launch: publishes reviewed articles from the queue, a few at a time, on the days site.json blogPublish names
+// (lib/blog-schedule.mjs). A package in content/blog-queue/approved (seo-site-blog-post-v1, with review.by and
+// review.at: a GEO article's AI review, lib/blog-review.mjs, put it there) is checked again (lib/blog-gates.mjs);
 // one that passes joins src/data/blog-posts.json with today's publication date and moves to content/blog-queue/published,
 // one that fails stays, with its report in content/blog-queue/report.json. An update of a published post (same slug)
 // keeps its publication date and moves dateModified only when the article's content changed. The placeholder posts
 // leave with the first real one. Then the normal release (build, preflight, deploy, IndexNow) ships it.
-// Usage: node scripts/blog-publish.mjs [--limit 1]
+// Usage: node scripts/blog-publish.mjs [--scheduled] [--limit N] [--now <ISO date>]
 
 import { createHash } from 'node:crypto';
 import { mkdir, readdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { blogGates } from './lib/blog-gates.mjs';
+import { blogSchedule, dueToday } from './lib/blog-schedule.mjs';
 import { cliArgs, runMain } from './lib/cli.mjs';
 import { companyFacts } from './lib/facts.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
@@ -19,7 +21,8 @@ import { loadSitePages } from './lib/site-pages.mjs';
 
 const contentHash = (post) => createHash('sha256').update(JSON.stringify({ ...post, datePublished: null, dateModified: null, review: null })).digest('hex');
 
-export async function publishQueued({ root = process.cwd(), limit = 1, now = new Date() } = {}) {
+// only: the slugs to publish (the blog flow's run publishing what it just wrote); the others wait for their day.
+export async function publishQueued({ root = process.cwd(), limit = 1, now = new Date(), only = null } = {}) {
   const queue = resolve(root, 'content/blog-queue');
   await mkdir(resolve(queue, 'approved'), { recursive: true });
   await mkdir(resolve(queue, 'published'), { recursive: true });
@@ -30,7 +33,7 @@ export async function publishQueued({ root = process.cwd(), limit = 1, now = new
   const placeholders = current.filter((post) => post.status === 'placeholder');
   const publishedPost = (slug) => posts.find((item) => item.slug === slug && item.status === 'published');
   const facts = await companyFacts(root);
-  const files = (await readdir(resolve(queue, 'approved'))).filter((file) => file.endsWith('.json')).sort();
+  const files = (await readdir(resolve(queue, 'approved'))).filter((file) => file.endsWith('.json') && (!only || only.includes(file.slice(0, -'.json'.length)))).sort();
   const report = [];
   let published = 0;
   for (const file of files) {
@@ -55,9 +58,19 @@ export async function publishQueued({ root = process.cwd(), limit = 1, now = new
   return { published, report };
 }
 
+// A run of the schedule (site.json blogPublish, lib/blog-schedule.mjs): on a publishing day, as many articles as the
+// site publishes a day; on another day nothing. A run by hand (not scheduled) publishes now, the day's number unless
+// a limit is given.
+export async function publishDue({ root = process.cwd(), now = new Date(), scheduled = false, limit = null } = {}) {
+  const schedule = blogSchedule(await readJson(resolve(root, 'site.json'), {}));
+  if (scheduled && !dueToday(schedule, now)) return { published: 0, report: [], skipped: `not a publishing day (${schedule.days === 'daily' ? 'daily' : schedule.days.join(', ')})` };
+  return publishQueued({ root, now, limit: limit ?? schedule.perDay });
+}
+
 runMain(import.meta.url, async () => {
-  const { limit } = cliArgs({ limit: { type: 'string' } }).values;
-  const { published, report } = await publishQueued({ limit: limit === undefined ? 1 : Number(limit) });
+  const { limit, scheduled, now } = cliArgs({ limit: { type: 'string' }, scheduled: { type: 'boolean' }, now: { type: 'string' } }).values;
+  const { published, report, skipped } = await publishDue({ scheduled: Boolean(scheduled), limit: limit ? Number(limit) : null, ...(now ? { now: new Date(now) } : {}) });
+  if (skipped) console.log(skipped);
   for (const item of report) console.log(`${item.slug}: ${item.failures.length ? `held (${item.failures.join('; ')})` : 'published'}${item.warnings.length ? ` — warnings: ${item.warnings.join('; ')}` : ''}`);
   console.log(`${published} article(s) published`);
 });

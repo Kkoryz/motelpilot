@@ -8,7 +8,7 @@ import { runMain, usage } from './lib/cli.mjs';
 import { loadSitePages } from './lib/site-pages.mjs';
 import { PATTERN_DECISIONS } from './lib/pattern-map.mjs';
 import { unlicensedRoles } from './lib/font-licenses.mjs';
-import { FONTS_CSS, FONTS_IMPORT, INSTALLED_FONTS, INSTALLED_FONTS_SCHEMA, ROLE_TOKENS, fontsCss, hasFontFaces } from './lib/font-install.mjs';
+import { FONTS_CSS, FONTS_IMPORT, INSTALLED_FONTS, INSTALLED_FONTS_SCHEMA, ROLE_TOKENS, fontsCss, hasFontFaces, referenceFontLock } from './lib/font-install.mjs';
 import { CORE_MANIFEST, coreDrift } from './lib/template-core.mjs';
 import { identityErrors } from './lib/brand-kit.mjs';
 import { readJson } from './lib/json-io.mjs';
@@ -211,7 +211,8 @@ export async function validateTemplate(root = process.cwd()) {
         const fontLockPath = resolve(root, 'docs/research/raw/font-lock.json');
         if (await exists(fontLockPath)) {
           try {
-            const lock = await readJson(fontLockPath);
+            // Roles the home page does not show come from the page types' captures (lib/font-install.mjs).
+            const lock = await referenceFontLock(root);
             if (lock.schemaVersion !== 'seo-site-font-lock-v1') errors.push('font-lock.json schemaVersion is invalid');
             for (const role of ['body', 'hero', 'display', 'subheading', 'navigation']) {
               if (!lock.roles?.[role]?.family) errors.push(`font-lock.json is missing role: ${role}`);

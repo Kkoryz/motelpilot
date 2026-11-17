@@ -3,7 +3,7 @@
 // placed verbatim, never rewritten; the mapping records which block each section went to.
 
 import { BLUEPRINTS, slotDesign } from './page-blueprints.mjs';
-import { SECTION_WORDS } from './rules.mjs';
+import { CARD_GRID, SECTION_WORDS } from './rules.mjs';
 import { sectionBlocks } from './visual-checks.mjs';
 
 // Deterministic length band: a section at or above this word count needs a full-width long-form row.
@@ -87,12 +87,23 @@ export function pageBlockIds(blocks) {
   return named.map((block) => (renamed.has(block.continues) ? { ...block, continues: renamed.get(block.continues) } : block));
 }
 
+// A section's visuals as a block carries them: { visuals } its data visuals, which the template draws
+// (lib/visual-data.mjs), and { photoCandidates } its photo visuals, candidates only: what the photos of the block's own
+// positions show (plan-photo-briefs.mjs), never a photo position more (Site Factory 07_2 include_photos, Fable 11-11 C:
+// 08 takes photo candidates once its importer stops turning a photo into an image row; owner 2026-11-17). Each is left
+// out when empty.
+export function splitVisuals(visuals = []) {
+  const data = visuals.filter((visual) => visual?.type !== 'photo');
+  const photos = visuals.filter((visual) => visual?.type === 'photo');
+  return { ...(data.length ? { visuals: data } : {}), ...(photos.length ? { photoCandidates: photos } : {}) };
+}
+
 export const textBlock = (type, item) => ({ id: item.section_id, type, sourceSectionIds: [item.section_id], heading: item.heading, paragraphs: paragraphsOf(item.body), wordCount: wordCount(item.body) });
 
 // The closing band: its heading and text from the cta section (closing), its button from page.cta; the page's links go
 // to the related pages block (placeRelated), not the band.
 export function closingBlock(page, closing) {
-  if (page.cta) return { id: 'cta', type: 'cta', sourceSectionIds: closing?.sourceSectionIds ?? [], ...(closing ? { heading: closing.heading, paragraphs: closing.paragraphs } : {}), ...(closing?.visuals?.length ? { visuals: closing.visuals } : {}), cta: { label: page.cta.label, href: page.cta.target_url }, links: [] };
+  if (page.cta) return { id: 'cta', type: 'cta', sourceSectionIds: closing?.sourceSectionIds ?? [], ...(closing ? { heading: closing.heading, paragraphs: closing.paragraphs } : {}), ...splitVisuals(closing?.visuals ?? []), cta: { label: page.cta.label, href: page.cta.target_url }, links: [] };
   if (closing) throw new Error(`${page.page_id}: a closing section cannot be placed without a page cta`);
   return null;
 }
@@ -135,7 +146,16 @@ function chunkRun(run) {
 }
 
 // Card slots: consecutive sections of one slot share a grid of at most 4 equal cards (5 → 3+2, 7 → 4+3).
-export function chunkCards(items) {
+// max: the most cards to a row (rules.mjs cardGridMax). Long cards, three to a row, come in grids of three, a last one
+// left over making the last two grids two and two (Strandmill 2026-11-14: grids of four in a set three columns wide
+// left one card under three).
+export function chunkCards(items, max = CARD_GRID.max) {
+  if (max < 4) {
+    const chunks = [];
+    for (let index = 0; index < items.length; index += max) chunks.push(items.slice(index, index + max));
+    if (chunks.length > 1 && chunks.at(-1).length === 1) { const last = [...chunks.pop(), ...chunks.pop()]; chunks.push(last.slice(0, Math.ceil(last.length / 2)), last.slice(Math.ceil(last.length / 2))); }
+    return chunks;
+  }
   const size = items.length <= 4 ? items.length : items.length % 4 === 0 || items.length % 4 === 3 ? 4 : 3;
   const chunks = [];
   for (let index = 0; index < items.length; index += size) chunks.push(items.slice(index, index + size));

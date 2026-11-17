@@ -14,40 +14,41 @@
   },
   "factory": [
     {
+      "value": ",",
+      "label": "clients served",
+      "fromCopy": "/accounting/"
+    },
+    {
       "value": "25",
       "label": "people on the team",
       "factId": "owner:team-size"
-    },
-    {
-      "value": "40",
-      "label": "clients served"
     }
   ],
   "certifications": [],
   "clients": [
     {
-      "name": "Pine Hollow Holdings",
-      "note": "Ohio, USA"
-    },
-    {
-      "name": "Redstone Family Partners",
-      "note": "Texas, USA"
-    },
-    {
-      "name": "Bayline Properties",
-      "note": "Florida, USA"
-    },
-    {
-      "name": "Northgate Owners Group",
+      "name": "Rosewood Hospitality",
       "note": "Minnesota, USA"
     },
     {
-      "name": "Copper Mesa Ventures",
-      "note": "Arizona, USA"
+      "name": "Redstone Hotel Group",
+      "note": "Oregon, USA"
     },
     {
-      "name": "Harbor Lane Partners",
-      "note": "Oregon, USA"
+      "name": "Maple Crest Holdings",
+      "note": "Michigan, USA"
+    },
+    {
+      "name": "Blue Heron Properties",
+      "note": "Colorado, USA"
+    },
+    {
+      "name": "Kestrel Hotel Holdings",
+      "note": "North Carolina, USA"
+    },
+    {
+      "name": "Highfield Family Partners",
+      "note": "Wisconsin, USA"
     }
   ],
   "testimonials": [],
@@ -271,8 +272,8 @@
     {
       "client": "First-time owner",
       "market": "Minneapolis, USA",
-      "title": "Receivership for a family-owned business",
-      "summary": "Receivership set up with the owners over a planned handover, with the results reported to them every week.",
+      "title": "Asset management for a family-owned business",
+      "summary": "Asset management set up with the owners over a planned handover, with the results reported to them every week.",
       "results": [
         {
           "value": "6 weeks",
@@ -287,16 +288,16 @@
           "label": "owner meetings a month"
         }
       ],
-      "href": "/receivership/",
+      "href": "/asset-management/",
       "pages": [
-        "/receivership/"
+        "/asset-management/"
       ]
     },
     {
       "client": "Managing partner of an owner group",
       "market": "Phoenix, USA",
-      "title": "Asset management for an owner with two sites",
-      "summary": "Asset management brought both sites under one way of working and one report.",
+      "title": "Accounting for an owner with two sites",
+      "summary": "Accounting brought both sites under one way of working and one report.",
       "results": [
         {
           "value": "2",
@@ -311,16 +312,16 @@
           "label": "to a settled routine"
         }
       ],
-      "href": "/asset-management/",
+      "href": "/accounting/",
       "pages": [
-        "/asset-management/"
+        "/accounting/"
       ]
     },
     {
       "client": "Second-generation owner",
       "market": "Portland, USA",
-      "title": "Accounting for a first-time owner",
-      "summary": "Accounting started in the owner's first month, with the routines and reports set up from day one.",
+      "title": "Ota optimization for a first-time owner",
+      "summary": "Ota optimization started in the owner's first month, with the routines and reports set up from day one.",
       "results": [
         {
           "value": "1st",
@@ -333,30 +334,6 @@
         {
           "value": "1",
           "label": "weekly report"
-        }
-      ],
-      "href": "/accounting/",
-      "pages": [
-        "/accounting/"
-      ]
-    },
-    {
-      "client": "Family business owner",
-      "market": "Columbus, USA",
-      "title": "Ota optimization for a family-owned business",
-      "summary": "Ota optimization set up with the owners over a planned handover, with the results reported to them every week.",
-      "results": [
-        {
-          "value": "6 weeks",
-          "label": "handover"
-        },
-        {
-          "value": "1",
-          "label": "weekly report"
-        },
-        {
-          "value": "2",
-          "label": "owner meetings a month"
         }
       ],
       "href": "/ota-optimization/",
@@ -373,5 +350,42 @@
     ],
     "rows": []
   },
-  "trade": "service"
+  "trade": "service",
+  "clientsFor": "MotelPilot",
+  "team": [
+    {
+      "name": "Ethan Ashby",
+      "role": "Founder",
+      "years": 18,
+      "bio": "Runs the company and agrees the scope of the work with each new owner.",
+      "reviews": [
+        "place",
+        "location"
+      ]
+    },
+    {
+      "name": "Brandon Vance",
+      "role": "Revenue manager",
+      "years": 12,
+      "bio": "Sets the rates and watches the booking pace for the properties we work for.",
+      "blogAuthor": true,
+      "reviews": [
+        "solution",
+        "service",
+        "product_manufacturer",
+        "product_wholesale"
+      ]
+    },
+    {
+      "name": "Grant Yates",
+      "role": "Account lead",
+      "years": 9,
+      "bio": "The owner's day-to-day contact: the weekly report, questions and changes to the plan."
+    }
+  ],
+  "privacy": {
+    "source": "site-factory",
+    "contact": "hello@motelpilot.com",
+    "placeholder": true
+  }
 }

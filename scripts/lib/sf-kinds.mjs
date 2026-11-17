@@ -6,7 +6,8 @@
 import BLOCK_KINDS from '../../config/block-kinds.json' with { type: 'json' };
 import { CARDINALITY } from './authoring-contract.mjs';
 import { markdownTable } from './markdown-table.mjs';
-import { chunkCards, closingBlock, leadOf, listBlock, listItems, paragraphsOf, parseFaq, textBlock } from './sf-sections.mjs';
+import { cardGridMax } from './rules.mjs';
+import { chunkCards, closingBlock, leadOf, listBlock, listItems, paragraphsOf, parseFaq, splitVisuals, textBlock } from './sf-sections.mjs';
 import { normalizeFact, verifyCited } from './sf-structured.mjs';
 
 export { BLOCK_KINDS };
@@ -165,7 +166,10 @@ export function planKindBlocks(page, { styles = new Map(), table = BLOCK_KINDS }
         // Cards come in equal grids of at most four (5 -> 3+2 ...); the first grid carries the heading and the lead, the
         // others go on from it (continues), so the audit counts the section once (lib/visual-checks.mjs sectionBlocks).
         const items = listItems(page, section).map(({ heading, text, placeholder }) => ({ heading, paragraphs: paragraphsOf(text), ...(placeholder ? { placeholder: true } : {}) }));
-        chunkCards(items).forEach((chunk, index) => {
+        // The set's widest row (its first section and every one going on from it): long cards anywhere, three to a row.
+        const root = goesOn ?? section.section_id;
+        const setWords = Math.max(0, ...page.sections.filter((other) => other.section_id === root || other.continuation_of === root).flatMap((other) => (other.items?.length ? listItems(page, other) : [])).map((item) => paragraphsOf(item.text).join(' ').split(/\s+/).filter(Boolean).length));
+        chunkCards(items, cardGridMax(setWords)).forEach((chunk, index) => {
           const block = { id: index ? `${section.section_id}-${index + 1}` : section.section_id, type: 'featureGrid', sourceSectionIds: [section.section_id], ...(index ? { continues: section.section_id } : { heading: section.heading, ...leadOf(section) }), items: chunk, ...design };
           blocks.push(block);
         });
@@ -241,9 +245,9 @@ export function planKindBlocks(page, { styles = new Map(), table = BLOCK_KINDS }
       default:
         throw new Error(`${page.page_id}: section ${section.section_id}: no renderer for component ${component}`);
     }
-    // What the section asks to show (its visuals: a photo's subject and setting, or data) goes with its first block;
-    // the template decides where and how (lib/media-slots.mjs, lib/visual-data.mjs).
-    if (section.visuals?.length && blocks[blockStart]) blocks[blockStart] = { ...blocks[blockStart], visuals: section.visuals };
+    // What the section asks to show goes with its first block: its data visuals, which the template draws, and its
+    // photo visuals as candidates of the block's own photo positions only (lib/sf-sections.mjs splitVisuals).
+    if (section.visuals?.length && blocks[blockStart]) blocks[blockStart] = { ...blocks[blockStart], ...splitVisuals(section.visuals) };
     if (goesOn == null) firsts.set(section.section_id, { kind: section.kind, blockId: blocks[blockStart]?.id ?? null });
     else {
       for (let index = blockStart; index < blocks.length; index += 1) {

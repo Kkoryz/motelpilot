@@ -5,20 +5,17 @@
 // Factory's trust_bar, each word for word from an approved fact) and the founding year, after the best competitor
 // pages ("SINCE 2014 · 70+ COUNTRIES · 100 PIECE MOQ"), and under them the certificates the approved fact names (no
 // numbers). Nothing renders while there is nothing to show.
-import { NO_BAND_PAGE_TYPES, SITE_BAND_PAGE_TYPES } from '../../../scripts/lib/page-figures.mjs';
-import { trustBarItems } from '../../../scripts/lib/site-trust.mjs';
+import { trustBarContent } from '../../../scripts/lib/site-trust.mjs';
 import { pageFigures, siteTrust } from '../../lib/authoring';
 
 interface Props { page?: { route: string; pageType: string } }
 const { page } = Astro.props;
 
-const own = page && pageFigures && !SITE_BAND_PAGE_TYPES.includes(page.pageType) ? (NO_BAND_PAGE_TYPES.includes(page.pageType) ? [] : pageFigures[page.route] ?? []) : null;
-const items = own ?? trustBarItems(siteTrust);
-const certifications = own ? [] : siteTrust?.certifications ?? [];
+const { own, items, certifications } = trustBarContent(page, pageFigures, siteTrust);
 ---
 
 {(items.length > 0 || certifications.length > 0) && (
-  <aside class="trust-bar" aria-label={own ? 'Key figures' : 'The company in figures'} data-authoring-block="trustBar" data-boundary-anchor="box">
+  <aside class="trust-bar" aria-label={own ? 'Key figures' : 'The company in figures'} data-authoring-block="trustBar" data-block-id="trust-bar" data-boundary-anchor="box">
     {items.length > 0 && (
       <ul class="container trust-bar__items">
         {items.map((item) => (

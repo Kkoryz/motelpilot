@@ -1,26 +1,14 @@
 {
   "/services/": [
     {
-      "value": "6 to 8 weeks",
-      "label": "Management handover preparation"
-    },
-    {
-      "value": "3 to 6 months",
-      "label": "Pre-opening preparation"
-    },
-    {
-      "value": "2 hours",
-      "label": "Reservation resync after restoration"
-    },
-    {
-      "value": "24 hours",
-      "label": "Dashboard update interval"
+      "value": "2 business hours",
+      "label": "Post-outage reservation re-sync"
     }
   ],
   "/business-development/": [
     {
       "value": "6 months",
-      "label": "Exclusive mandate duration"
+      "label": "Exclusive mandate term"
     },
     {
       "value": "10 business days",
@@ -32,43 +20,43 @@
     },
     {
       "value": "30-minute",
-      "label": "First consultation duration"
+      "label": "Free first call"
     }
   ],
   "/digital-marketing/": [
     {
-      "value": "up to 4 metasearch channels",
+      "value": "4 metasearch channels",
       "label": "Included metasearch channels"
     },
     {
       "value": "30-day",
-      "label": "Initial performance review"
+      "label": "First results review"
     },
     {
-      "value": "5th business day",
-      "label": "Monthly reporting deadline"
+      "value": "2 business days",
+      "label": "Serious complaint reply"
     },
     {
       "value": "1 business day",
-      "label": "Serious complaint escalation"
+      "label": "Complaint escalation time"
     }
   ],
   "/human-resources/": [
     {
       "value": "14 to 21 days",
-      "label": "Hourly role recruitment"
+      "label": "Hourly role fill time"
     },
     {
       "value": "30 to 45 days",
-      "label": "Management role recruitment"
+      "label": "Management role fill time"
     },
     {
-      "value": "2 hours",
-      "label": "Urgent incident response"
+      "value": "90 days",
+      "label": "Free replacement period"
     },
     {
-      "value": "15 business days",
-      "label": "Compliance findings delivery"
+      "value": "30 days",
+      "label": "Full HR setup"
     }
   ],
   "/operations-management/": [
@@ -77,62 +65,70 @@
       "label": "Business plan delivery"
     },
     {
-      "value": "12-month",
-      "label": "Budget horizon"
+      "value": "6 to 8 weeks",
+      "label": "Switch lead time"
     },
     {
-      "value": "5-year",
-      "label": "Capital plan horizon"
+      "value": "60 days",
+      "label": "Renewal paperwork prepared"
     },
     {
-      "value": "2 consecutive quarters",
-      "label": "Missed targets exit trigger"
+      "value": "12 months",
+      "label": "Records for assessment"
     }
   ],
   "/revenue-management/": [
     {
-      "value": "2 hours",
+      "value": "within 2 hours",
       "label": "Urgent request response"
     },
     {
-      "value": "no more than 12 properties",
-      "label": "Portfolio per manager"
+      "value": "no more than 12",
+      "label": "Properties per manager"
     },
     {
       "value": "up to 10 similar properties",
-      "label": "Competitor comparison coverage"
+      "label": "Daily competitor comparison"
+    },
+    {
+      "value": "up to 6 channels",
+      "label": "Complete plan channels"
     }
   ],
   "/information-technology/": [
     {
       "value": "6 to 10 weeks",
-      "label": "Planning to handover"
+      "label": "Project to handover"
     },
     {
       "value": "4 hours",
-      "label": "Maximum offline time"
-    },
-    {
-      "value": "90 days",
-      "label": "Access review interval"
+      "label": "Maximum switchover downtime"
     },
     {
       "value": "20 test reservations",
       "label": "Minimum reservation tests"
+    },
+    {
+      "value": "50 reservations",
+      "label": "Line-by-line migration checks"
     }
   ],
   "/commercial-strategy/": [
     {
       "value": "24 months",
-      "label": "Forecasting history required"
+      "label": "Forecast history used"
+    },
+    {
+      "value": "200 rooms",
+      "label": "Individual quote threshold"
     },
     {
       "value": "30-minute",
-      "label": "Initial consultation"
+      "label": "Free consultation call"
     },
     {
       "value": "30 days",
-      "label": "Advertising performance review"
+      "label": "Hotel Ads first review"
     }
   ],
   "/project-management/": [
@@ -149,72 +145,54 @@
       "label": "New-build timeline"
     },
     {
-      "value": "3 business days",
-      "label": "Change-order review"
+      "value": "10 to 200 rooms",
+      "label": "Typical property size"
     }
   ],
   "/development/": [
     {
-      "value": "2 compliant alternatives",
-      "label": "Minimum compliant alternatives"
+      "value": "3 to 6 months",
+      "label": "Pre-opening programme"
     },
     {
       "value": "2 to 4 hours a week",
-      "label": "Owner time commitment"
-    },
-    {
-      "value": "3 to 6 months",
-      "label": "Pre-opening programme duration"
+      "label": "Owner time required"
     },
     {
       "value": "10 business days",
-      "label": "Approval application preparation"
-    }
-  ],
-  "/receivership/": [
-    {
-      "value": "24 hours",
-      "label": "Local support arrival"
+      "label": "Approval applications prepared"
     },
     {
-      "value": "72 hours",
-      "label": "Initial checks and report"
-    },
-    {
-      "value": "7 days",
-      "label": "Interim manager recruitment"
-    },
-    {
-      "value": "13-week",
-      "label": "Cash flow forecast"
+      "value": "5 business days",
+      "label": "Drawing review comments"
     }
   ],
   "/asset-management/": [
     {
       "value": "4 to 6 weeks",
-      "label": "Initial review turnaround"
+      "label": "Performance review duration"
     },
     {
-      "value": "13-week",
-      "label": "Cash flow forecast"
+      "value": "24 months",
+      "label": "P&L history required"
+    },
+    {
+      "value": "60 motels and hotels",
+      "label": "Properties currently managed"
     },
     {
       "value": "90-day",
-      "label": "Operator transition"
-    },
-    {
-      "value": "10 business days",
-      "label": "Cash model delivery"
+      "label": "Operator transition plan"
     }
   ],
   "/accounting/": [
     {
-      "value": "8 hotels",
-      "label": "Maximum per accountant"
-    },
-    {
       "value": "30 business days",
       "label": "Backlog cleanup target"
+    },
+    {
+      "value": "8 properties",
+      "label": "Maximum per accountant"
     },
     {
       "value": "5%",
@@ -222,69 +200,89 @@
     },
     {
       "value": "10 business days",
-      "label": "Month-end P&L delivery"
+      "label": "Monthly P&L delivery"
     }
   ],
   "/ota-optimization/": [
     {
-      "value": "100%",
-      "label": "Booking.com content score"
-    },
-    {
       "value": "2 to 4 weeks",
-      "label": "Search ranking improvement"
+      "label": "Typical ranking climb"
     },
     {
-      "value": "6 channels",
-      "label": "Complete plan coverage"
+      "value": "100%",
+      "label": "Target content score"
     },
     {
-      "value": "2 hours",
+      "value": "2 business hours",
       "label": "Exposed inventory closure"
+    },
+    {
+      "value": "20 rooms",
+      "label": "Smallest room band"
     }
   ],
   "/contact-us/": [
     {
-      "value": "2 hours",
-      "label": "Urgent support response"
-    },
-    {
-      "value": "8:00 to 18:00",
-      "label": "Weekday contact hours"
+      "value": "9:00 a.m. to 5:00 p.m.",
+      "label": "Office hours (Eastern)"
     }
   ],
-  "/case-studies/": [],
+  "/case-studies/": [
+    {
+      "value": "12 months",
+      "label": "Pre-signing results comparison"
+    }
+  ],
   "/capabilities/": [],
   "/our-process/": [
     {
       "value": "2 to 3 business days",
-      "label": "Quick services completion"
-    },
-    {
-      "value": "1–2 business days",
-      "label": "PriceLabs work completion"
+      "label": "Quick services turnaround"
     },
     {
       "value": "1–3 business days",
       "label": "Scope and access setup"
     },
     {
+      "value": "1–2 business days",
+      "label": "PriceLabs work"
+    },
+    {
       "value": "30 minutes",
-      "label": "Reporting platform demo"
+      "label": "Reporting demo length"
     }
   ],
   "/our-history/": [
     {
+      "value": "2016",
+      "label": "Year founded"
+    },
+    {
+      "value": "60 motels and hotels",
+      "label": "Properties managed today"
+    },
+    {
       "value": "25-person",
-      "label": "Team in 2024"
+      "label": "Team size (2024)"
+    },
+    {
+      "value": "2017",
+      "label": "First OTA clients"
     }
   ],
   "/resources/": [],
-  "/careers/": [],
   "/request-a-quote/": [
     {
+      "value": "more than 200 rooms",
+      "label": "Custom quote threshold"
+    },
+    {
       "value": "30-minute",
-      "label": "Consultation duration"
+      "label": "Free consultation length"
+    },
+    {
+      "value": "30 days",
+      "label": "Cancellation notice period"
     }
   ]
 }

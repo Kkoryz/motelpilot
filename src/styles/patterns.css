@@ -45,6 +45,7 @@
 .site-footer__bottom { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid rgb(255 255 255 / 0.15); font-size: 0.875rem; }
 .site-footer__bottom-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem; }
 .site-footer__legal { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0; padding: 0; list-style: none; }
+.site-footer__grid > .site-footer__copyright { grid-column: 1 / -1; margin: 1rem 0 0; font-size: 0.875rem; }
 
 /* Split variants */
 .split__media-set { display: grid; gap: var(--grid-gap); }
@@ -74,6 +75,20 @@
 /* Two columns only where the list asks for them (IconListBlock.astro: an even count of short items); every list took
    two at 768px and up before, an odd or long one too (the hotel site's split list read as three columns). */
 @media (min-width: 768px) { .icon-list__items[data-columns="2"] { grid-template-columns: 1fr 1fr; } }
+/* An odd count's last item keeps the others' width, centred under them, as every equal grid's short last row is
+   (gridPlan; unfilled_row passes a centred row). It ran the whole row before, a width matching neither column (2026-11-15,
+   Fable's ruling on hotel-rm's and motel's repeated findings). */
+@media (min-width: 768px) { .icon-list__items[data-columns="2"] > .icon-list__item:last-child:nth-child(odd):not(:first-child) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 1rem); } }
+/* Beside its introduction a one-column list keeps one column (about half the container); where the site's treatment
+   sets the introduction above it, the list has the full width and its items go two to a row where two of 24rem fit
+   (hotel-rm 2026-11-14: three lists of six to eight short items ran one column across the page); an odd count's last
+   item keeps the others' width, centred, where two go to a row (the list as wide as two items of 24rem and the gap:
+   a container query, the list itself the container), and is the one column otherwise. */
+@media (min-width: 768px) {
+  .icon-list[data-layout="split"] .icon-list__items[data-columns="1"] { grid-template-columns: repeat(auto-fill, minmax(min(100%, max(24rem, calc((100% - 4rem) / 2))), 1fr)); container: icon-list-items / inline-size; }
+  .icon-list[data-layout="split"] .icon-list__items[data-columns="1"] > .icon-list__item:last-child:nth-child(odd):not(:first-child) { grid-column: 1 / -1; }
+}
+@container icon-list-items (min-width: 50rem) { .icon-list__item:last-child:nth-child(odd):not(:first-child) { justify-self: center; width: calc(50% - 1rem); } }
 .icon-list__item { display: grid; grid-template-columns: auto 1fr; gap: 0.75rem; align-items: start; }
 .icon-list__icon { color: var(--accent); margin-top: 0.15rem; }
 /* Side by side, the headings of a row share one track and their texts start level (a two-line heading no longer
@@ -229,6 +244,24 @@
 .testimonial__photo { grid-row: 1 / span 3; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
 .testimonial__meta { font-family: var(--font-ui); font-size: 0.8125rem; color: var(--text-muted, var(--text-primary)); }
 
+/* The people behind the company (TeamBlock.astro): a card each, name, role and what they do; no photo. */
+.team { display: grid; gap: var(--grid-gap); grid-template-columns: 1fr; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 768px) {
+  .team[data-columns="2"] { grid-template-columns: 1fr 1fr; }
+  .team[data-columns="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.team-card { display: flex; flex-direction: column; gap: 0.5rem; padding: clamp(1.25rem, 3vw, 2rem); background: var(--surface-secondary); border-radius: var(--radius-card); scroll-margin-top: 6rem; }
+.team-card__name { margin: 0; font-size: 1.125rem; }
+.team-card__role { margin: 0; font-family: var(--font-ui); font-size: 0.875rem; font-weight: 600; color: var(--text-muted); }
+.team-card__bio { margin: 0; }
+/* A post's author (BlogPostView.astro): their card after the article's text, linked to their profile. */
+.post-author-card { display: grid; gap: 0.35rem; margin-block: 2.5rem; padding: 1.25rem; background: var(--surface-secondary); border-radius: var(--radius-card); }
+.post-author-card p { margin: 0; }
+.post-author-card__name { font-weight: 700; }
+.post-author-card__role { font-family: var(--font-ui); font-size: 0.875rem; color: var(--text-muted); }
+/* When a content page last changed (PageView.astro), under its last section. */
+.page-updated { margin-block: 1.5rem; font-family: var(--font-ui); font-size: 0.875rem; color: var(--text-muted); }
+
 /* Track (Track.astro): a sliding row with previous/next buttons and a dot per item. Without its script, or when every
    item fits, the controls hide and the row is a plain row (scrollable by hand). */
 .track { display: grid; gap: 1.25rem; }
@@ -267,6 +300,9 @@ a.contact-channel__value { display: inline-block; min-block-size: 44px; padding-
 @media (min-width: 900px) { .form-block { grid-template-columns: 5fr 7fr; align-items: start; } }
 /* An intro of a heading alone does not fill a column: the heading sits above the form, both centred. */
 @media (min-width: 900px) { .form-block:has(.form-block__intro > h2:only-child) { grid-template-columns: minmax(0, 46rem); justify-content: center; } }
+/* On a site whose headings start on the content's left edge, the column does too (MotelPilot 2026-11-17: the quote
+   page's "Send an enquiry" started at 352px, every other heading at 165px; heading_off_axis). */
+@media (min-width: 900px) { body[data-heading-align="start"] .form-block:has(.form-block__intro > h2:only-child) { justify-content: start; } }
 .form-block__intro { display: grid; gap: 1rem; }
 /* form media: the photo under the intro, at --form-media-ratio. */
 .form-block__media { margin-top: 0.5rem; }
@@ -276,7 +312,16 @@ a.contact-channel__value { display: inline-block; min-block-size: 44px; padding-
   .form-block__field--wide, .form-block__form .button { grid-column: 1 / -1; }
 }
 .form-block__field { display: grid; gap: 0.35rem; font-weight: 600; }
-.form-block__field input, .form-block__field textarea { width: 100%; padding: 0.6rem 0.75rem; border: 1px solid var(--input-border, var(--border-color)); border-radius: var(--radius-input, 3px); background: var(--surface-primary); font: inherit; }
+.form-block__field :is(input, textarea, select) { width: 100%; padding: 0.6rem 0.75rem; border: 1px solid var(--input-border, var(--border-color)); border-radius: var(--radius-input, 3px); background: var(--surface-primary); font: inherit; font-size: max(1rem, 1em); color: inherit; }
+/* Modern Web Guidance (forms.md): an error shows once the visitor has touched the field (:user-invalid, not :invalid),
+   by a heavier border and its message, never by colour alone; what each field is for sits under it. */
+.form-block__field :is(input, textarea, select):user-invalid { border-color: var(--input-invalid, var(--accent)); box-shadow: inset 0 0 0 1px var(--input-invalid, var(--accent)); }
+.form-block__hint, .form-block__error { font-size: 0.875rem; font-weight: 400; }
+.form-block__hint { color: var(--text-muted); }
+.form-block__error { color: var(--input-invalid, var(--text-primary)); }
+.form-block__error::before { content: "! "; font-weight: 700; }
+.form-block__note, .form-block__status { margin: 0; font-size: 0.875rem; }
+.form-block__status:empty { display: none; }
 .form-block__trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .form-block__consent { display: flex; gap: 0.6rem; align-items: flex-start; font-weight: 400; }
 .form-block__consent input { margin-top: 0.25rem; }
@@ -323,6 +368,13 @@ a.contact-channel__value { display: inline-block; min-block-size: 44px; padding-
   [data-layout="equal-grid"][style*="--tracks:"] > * { grid-column: span 2; }
   [data-layout="equal-grid"][style*="--tracks:"] > [style*="--start:"] { grid-column: var(--start) / span 2; }
 }
+/* Tablets: the grid's own tablet plan (block-layout.mjs gridPlan --tracks-md, --start-md), its short last row centred too
+   (MotelPilot 2026-11-17: a set of five cards in three columns left its last two to the left at 768px). */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .feature-grid[data-layout="equal-grid"][style*="--tracks-md:"] { grid-template-columns: repeat(var(--tracks-md), minmax(0, 1fr)); }
+  .feature-grid[data-layout="equal-grid"][style*="--tracks-md:"] > * { grid-column: span 2; }
+  .feature-grid[data-layout="equal-grid"][style*="--tracks-md:"] > [style*="--start-md:"] { grid-column: var(--start-md) / span 2; }
+}
 /* Two-column phones and tablets: an odd last figure spans the row instead of standing alone; an odd last photo keeps
    the others' size, centred (a photo across the row would outweigh the rest). */
 @media (max-width: 1023px) {
@@ -365,6 +417,17 @@ a.contact-channel__value { display: inline-block; min-block-size: 44px; padding-
 .gallery__link { font-family: var(--font-subheading); font-weight: 600; color: var(--heading-color, var(--text-primary)); text-decoration: none; }
 .gallery__link:hover { color: var(--accent); }
 .gallery__item figcaption { text-align: center; }
+/* Page cards with icons (GalleryBlock.astro data-tiles="icons"): the service's icon over its name, on a panel. */
+.gallery[data-tiles="icons"] .gallery__item { display: grid; align-content: start; gap: 0.9rem; margin: 0; padding: clamp(1.25rem, 2.5vw, 1.75rem); border-radius: var(--radius-card); background: var(--surface-secondary); }
+.gallery[data-tiles="icons"] .gallery__item figcaption { text-align: start; font-family: var(--font-subheading, var(--font-display)); font-weight: 600; }
+.gallery[data-tiles="icons"] .gallery__icon { display: block; width: 2.5rem; height: 2.5rem; color: var(--accent-text, var(--accent)); }
+.gallery[data-tiles="icons"] .gallery__icon svg { display: block; width: 100%; height: 100%; stroke-width: 1.5; }
+/* Tablets keep the desktop's count of icon cards (GalleryBlock.astro --tracks-md), a short last row centred. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gallery[data-tiles="icons"][style*="--tracks-md:"] { grid-template-columns: repeat(var(--tracks-md), minmax(0, 1fr)); }
+  .gallery[data-tiles="icons"][style*="--tracks-md:"] > * { grid-column: span 2; }
+  .gallery[data-tiles="icons"][style*="--tracks-md:"] > [style*="--start-md:"] { grid-column: var(--start-md) / span 2; }
+}
 /* Closing band copy (cta slot): heading and text take the full row above the buttons. */
 .cta__heading, .cta__text { flex-basis: 100%; }
 [data-variant="band"] .cta__content, [data-variant="dark"] .cta__content, [data-variant="image-band"] .cta__content { position: relative; z-index: 1; }
@@ -376,9 +439,17 @@ a.contact-channel__value { display: inline-block; min-block-size: 44px; padding-
    type come from the site's tokens. */
 .blog-hub-hero { position: relative; overflow: hidden; padding-block: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 3vw, 2.5rem); }
 .blog-hub-hero__inner { position: relative; display: grid; gap: 2rem; align-items: center; }
-.blog-hub-hero h1 { font-family: var(--font-hero, var(--font-display)); font-size: var(--size-hero, clamp(2.25rem, 5vw, 4rem)); line-height: 1.1; }
+/* A title sized to its own words measures its column (container queries), so the column has a width of its own rather
+   than its content's: a column shrunk to its content measured nothing and the title vanished (RateHarbor 2026-11-18). */
+.blog-hub-hero__copy[data-heading-fit] { width: 100%; max-width: var(--hero-copy-max, 46rem); }
+/* Sized to its own words as a page title is ([data-heading-fit]: two lines on a desktop, four on a phone; RateHarbor
+   2026-11-18: "RateHarbor Blog: Upcoming Hotel and Airbnb Pricing Articles" took five lines on a phone). */
+.blog-hub-hero h1 { font-family: var(--font-hero, var(--font-display)); font-size: min(var(--size-hero, clamp(2.25rem, 5vw, 4rem)), var(--heading-fit, var(--size-hero, clamp(2.25rem, 5vw, 4rem)))); line-height: 1.1; }
 .blog-hub-hero__lead { max-width: 44rem; margin-top: 1rem; font-size: 1.0625rem; }
 .blog-hub-hero[data-header="plain"] .blog-hub-hero__copy { text-align: center; justify-self: center; }
+/* On a site whose section headings start on the content's left edge, so does the hub's own copy: its lead runs five
+   lines on a phone, too many to read centred (hotel-rm 2026-11-14, centred_running_text). */
+body[data-heading-align="start"] .blog-hub-hero[data-header="plain"] .blog-hub-hero__copy { text-align: start; justify-self: start; }
 .blog-hub-hero[data-header="hero"] { background: var(--surface-secondary); }
 @media (min-width: 900px) { .blog-hub-hero[data-header="hero"] .blog-hub-hero__inner { grid-template-columns: 1.1fr 1fr; } }
 .blog-hub-hero[data-header="hero"] .blog-hub-hero__media { box-shadow: 0 18px 40px rgb(0 0 0 / 0.12); }
@@ -436,12 +507,17 @@ a.contact-channel__value { display: inline-block; min-block-size: 44px; padding-
 .pagination__list a, .pagination__list span { display: inline-grid; place-items: center; min-width: 2.5rem; min-height: 2.5rem; padding: 0 0.75rem; border: 1px solid var(--border-color); color: var(--text-primary); text-decoration: none; }
 .pagination__list [aria-current="page"] { background: var(--surface-dark); color: var(--text-inverse); border-color: var(--surface-dark); }
 
-.post-header { position: relative; padding-block: clamp(2rem, 5vw, 3.5rem); }
-.post-header__inner { display: grid; gap: 0.75rem; }
+/* The title and its byline open the post, its photo under them (site11 2026-11-17: the photo over the title put three
+   posts' titles at y=880 on a 1366x768 desktop, h1_below_fold; capping the photo to the screen cut it to 42% of
+   itself, heavy_crop): the title is in the first screen and the photo shows as before. */
+.post-header { position: relative; display: flex; flex-direction: column; padding-block: clamp(2rem, 5vw, 3.5rem); }
+.post-header__inner { display: grid; gap: 0.75rem; order: -1; }
 /* --heading-fit: the title sized to its words (template.css [data-heading-fit]); this scale stays the ceiling. */
 .post-header__title { margin: 0; font-family: var(--font-display); font-size: min(clamp(1.75rem, 3.6vw, 2.75rem), var(--heading-fit, 2.75rem)); line-height: 1.2; }
+/* The title fitted to its words stays a step above the article's headings (.prose__heading's size), as a page hero stays above its sections (template.css .page-hero__copy): fitted down to the headings' size it read as one of them (motel's posts, 2026-11-14). */
+.post-header__inner[data-heading-fit] { --fit-above: calc(clamp(1.375rem, 2.4vw, 1.75rem) * var(--fit-above-step, 1.125)); }
 .post-header__meta, .post-header__category { display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; margin: 0; font-family: var(--font-ui); font-size: 0.875rem; color: var(--text-muted); }
-.post-header__image { margin: 0 0 clamp(1.5rem, 4vw, 2.5rem); max-height: 600px; overflow: hidden; }
+.post-header__image { margin: clamp(1.5rem, 4vw, 2.5rem) 0 0; max-height: 600px; overflow: hidden; }
 .post-header__image img { width: 100%; height: 100%; max-height: 600px; object-fit: cover; }
 .post-body { display: grid; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; padding-bottom: var(--section-space, 4rem); }
 /* The article takes its track's width (a centred layout otherwise sizes it to its widest table, past the screen);
@@ -472,7 +548,9 @@ main[data-authoring-page] .block--prose p { margin: 0 0 var(--article-paragraph-
 .prose__steps > .block--process { padding-block: 0; }
 .prose__steps-caption { margin: 0.75rem 0 0; font-size: 0.875rem; line-height: 1.5; color: var(--text-muted, var(--text-primary)); }
 /* Charts an article's writer gave as data (ArticleChart.astro), in the site's colours. */
-.prose__chart { padding: clamp(1.25rem, 3vw, 2rem); background: var(--surface-secondary); }
+/* --table-ground: the covers of a table that scrolls sideways (below) are the ground it sits on (Staylumen 2026-11-17: the
+   page's light grey covered a black chart's right-hand column and its empty corner cell). */
+.prose__chart { --table-ground: var(--surface-secondary); padding: clamp(1.25rem, 3vw, 2rem); background: var(--surface-secondary); }
 .prose__chart ul, .prose__chart ol { margin: 0; padding: 0; list-style: none; }
 .chart-bars, .chart-timeline { display: grid; gap: 0.9rem; font-size: 0.9375rem; }
 /* Every row's track the same width, so bars and dates line up across rows. */
@@ -510,7 +588,9 @@ main[data-authoring-page] .block--prose p { margin: 0 0 var(--article-paragraph-
 /* In a half-width column a row's label takes its own line, so the bar keeps its length. */
 .split__charts :is(.chart-bars__row, .chart-timeline__row) { grid-template-columns: 1fr 7.5rem; }
 .split__charts :is(.chart-bars__label, .chart-timeline__label) { grid-column: 1 / -1; }
-.block--charts { padding-block: 0 var(--section-space, 4rem); }
+/* A section's charts go on under its text (no space above) and own half the gap below, as every block does: a whole
+   section space added to the next block's half ran 185px on hotel-rm's pricing page (boundary_gap, 176 at most). */
+.block--charts { padding-block: 0 calc(var(--section-space, 4rem) / 2); }
 .chart-comparison tbody th { text-align: left; font-weight: 700; background: var(--surface-secondary); }
 @media (max-width: 599px) {
   .chart-bars__row, .chart-timeline__row { grid-template-columns: 1fr 7.5rem; }
@@ -518,6 +598,32 @@ main[data-authoring-page] .block--prose p { margin: 0 0 var(--article-paragraph-
 }
 .prose__list { display: grid; gap: 0.75rem; margin: 0 0 var(--article-paragraph-gap, 1.75rem); padding-left: 1.4rem; line-height: var(--article-line-height, 1.8); }
 .prose__table { overflow-x: auto; margin: 2.5rem 0; }
+/* A table wider than its column shows that it scrolls (Fable's review audit, 2026-11-14: the article tables' right-hand
+   columns were cut off on phones with nothing to say more was there): a shade on the side that hides columns, gone at
+   either end (the covers scroll with the table, the shades stay with the box); focusable, so a keyboard scrolls it. */
+:is(.prose__table, .table-block__scroll)[data-scroll="sideways"] {
+  background:
+    linear-gradient(to right, var(--table-ground, var(--surface-primary)), var(--table-ground, var(--surface-primary)) 30%, transparent) left center / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, var(--table-ground, var(--surface-primary)), var(--table-ground, var(--surface-primary)) 30%, transparent) right center / 2.5rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgb(0 0 0 / 0.2), transparent) left center / 0.9rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgb(0 0 0 / 0.2), transparent) right center / 0.9rem 100% no-repeat scroll;
+}
+:is(.prose__table, .table-block__scroll)[data-scroll="sideways"]:focus-visible { outline: 2px solid var(--focus-ring, var(--accent)); outline-offset: 2px; }
+/* Tables on phones (2026-11-15, Fable's ruling on swimwear's, hotel-rm's and motel's tables): a two-column table (a
+   label and its description) stacks, the description under its label at the full width, not squeezed beside a label
+   column of 40%; a wider table still scrolls (its columns are read across), its first column pinned while it does and
+   its cells tighter, so more of it fits. */
+@media (max-width: 599px) {
+  :is(.prose__table, .table-block__scroll)[data-columns="2"] { overflow: visible; background: none; }
+  :is(.prose__table, .table-block__scroll)[data-columns="2"] :is(table, tbody, tr, th, td) { display: block; }
+  :is(.prose__table, .table-block__scroll)[data-columns="2"] thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  :is(.prose__table, .table-block__scroll)[data-columns="2"] tr { padding-block: 0.75rem; border-bottom: 1px solid var(--border-table, var(--border-color)); }
+  :is(.prose__table, .table-block__scroll)[data-columns="2"] td { padding: 0; border: 0; text-align: left; }
+  :is(.prose__table, .table-block__scroll)[data-columns="2"] td:first-child { margin-bottom: 0.25rem; font-weight: 600; }
+  :is(.prose__table, .table-block__scroll):not([data-columns="2"]) :is(th, td) { padding: 0.5rem 0.6rem; font-size: 0.875rem; }
+  :is(.prose__table, .table-block__scroll):not([data-columns="2"]) :is(th, td):first-child { position: sticky; left: 0; z-index: 1; background: var(--sticky-surface, var(--surface-primary)); }
+  .prose__table:not([data-columns="2"]) th:first-child { background: var(--surface-secondary); }
+}
 /* The section's own bottom space follows its last picture or table (no double gap before the next heading). */
 .block--prose > :is(.prose__figure, .prose__table):last-child { margin-bottom: 0; }
 .prose__table table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
@@ -605,14 +711,14 @@ main[data-post-layout="sidebar-end"] .post-header__title { padding: 0.9rem 1.25r
 
 /* FAQ variants (competitor FAQ modules). */
 .block--faq[data-variant="bars"] .faq__item { border: 0; border-radius: 0; background: var(--surface-secondary); }
-.block--faq[data-variant="bars"] .faq__item h3 { font-weight: 700; }
+.block--faq[data-variant="bars"] .faq__question { font-weight: 700; }
 .block--faq[data-variant="cards"] .faq__items, .block--faq[data-variant="dark-cards"] .faq__items { grid-template-columns: 1fr; gap: var(--grid-gap); }
 @media (min-width: 768px) { .block--faq[data-variant="cards"] .faq__items { grid-template-columns: repeat(3, minmax(0, 1fr)); } .block--faq[data-variant="dark-cards"] .faq__items { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .block--faq[data-variant="cards"] summary { cursor: default; pointer-events: none; }
 .block--faq[data-variant="cards"] summary::after { display: none; }
 /* Dark cards fold like the accordion (the first open): the card's own ink for the question, the answer and the mark. */
 .block--faq[data-variant="dark-cards"] .faq__item { border: 0; background: var(--surface-dark); --heading-color: var(--text-inverse); }
-.block--faq[data-variant="dark-cards"] .faq__item :is(h3, p) { color: var(--text-inverse); }
+.block--faq[data-variant="dark-cards"] .faq__item :is(.faq__question, p) { color: var(--text-inverse); }
 .block--faq[data-variant="dark-cards"] summary::after { color: var(--text-inverse); }
 
 /* Table variants (competitor comparison modules). */
@@ -622,10 +728,10 @@ td[data-mark="yes"] .table-block__mark { color: var(--accent-text, var(--accent)
 td[data-mark="no"] .table-block__mark { color: var(--text-muted); }
 .table-cards { display: grid; gap: var(--grid-gap); margin: 0; padding: 0; list-style: none; grid-template-columns: 1fr; }
 @media (min-width: 768px) { .table-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-/* Tablets: an odd last card (a lone one too) takes the row; wider screens centre it (gridPlan). */
-/* An odd last card takes the whole row at every two-column width: on both reading edges, and the row is full
-   (centred it broke the edges; in the first column alone it left the row half empty, unfilled_row). */
-@media (min-width: 768px) { .table-cards > :last-child:nth-child(odd):not(:first-child) { grid-column: 1 / -1; } }
+/* An odd last card keeps the others' width, centred under them, as every equal grid's short last row is: on tablets
+   here, on wider screens by gridPlan's --start (TableBlock.astro). It ran the whole row before, a width matching neither
+   column (2026-11-15, Fable's ruling on hotel-rm's and motel's repeated findings; unfilled_row passes a centred row). */
+@media (min-width: 768px) and (max-width: 1023px) { .table-cards > :last-child:nth-child(odd):not(:first-child) { grid-column: 1 / -1; justify-self: center; width: calc(50% - var(--grid-gap) / 2); } }
 .table-card { padding: 1.5rem 1.75rem; border-radius: var(--radius-card); background: var(--surface-dark); color: var(--text-inverse); --heading-color: var(--text-inverse); }
 .table-card__title { margin: 0 0 0.75rem; color: var(--text-inverse); font-size: 1.0625rem; }
 .table-card__rows { margin: 0; }
@@ -703,6 +809,9 @@ td[data-mark="no"] .table-block__mark { color: var(--text-muted); }
 
 /* Hero with the enquiry form beside the copy. */
 @media (min-width: 900px) { .page-hero[data-hero-form] .page-hero__inner { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } }
+/* A title too long for its column beside the form keeps to its two lines across the hero, the form under the copy
+   (scripts/lib/heading-fit.mjs titleNeedsRow; Staylumen's Scottsdale page, 2026-11-16). */
+@media (min-width: 900px) { .page-hero[data-hero-form][data-title-row] .page-hero__inner { grid-template-columns: minmax(0, 1fr); } .page-hero[data-hero-form][data-title-row] .page-hero__form { width: 100%; max-width: 40rem; } }
 /* Where the form drops under the copy, the photo would be stretched behind both (a 1000px-tall sliver of a wide photo):
    it becomes a banner above them in its own shape (its phone crop where there is one), and the copy and the form follow
    on the hero's dark ground, with no shade over a photo they no longer sit on. */
@@ -783,7 +892,9 @@ main[data-page-type="privacy"] .block--intro :is(h2, h3, p, li) { text-align: le
 .order-routes__option { padding-block: 1rem; border-bottom: 1px solid var(--border-color); }
 .order-routes__option-name { margin: 0 0 0.3rem !important; font-size: 1rem; font-weight: 700; }
 .order-routes__option p { margin: 0; font-size: 0.9375rem; }
-.trust-bar { border-block: 1px solid var(--border-color); background: var(--surface-secondary); }
+/* The trust bar's surface is the alternation's (lib/section-surfaces.mjs TRUST_BAR): tinted when it opens the first run,
+   as it always looked, the page's own surface when the run counts back from a band. */
+.trust-bar { border-block: 1px solid var(--border-color); background: var(--surface-primary); }
 .trust-bar__items { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0; margin: 0 auto; padding-block: 1rem; list-style: none; text-align: center; color: var(--text-primary); }
 .trust-bar__item { display: grid; align-content: start; gap: 0.2rem; padding: 0.25rem 1rem; }
 .trust-bar__item + .trust-bar__item { border-left: 1px solid var(--border-color); }
@@ -812,6 +923,12 @@ main[data-page-type="privacy"] .block--intro :is(h2, h3, p, li) { text-align: le
 /* Photo band (gallery band): one photo across the whole page, white space above and below (the reference's figure). */
 .block--gallery[data-variant="band"] .gallery__band { width: 100%; margin: 0; border-radius: 0; }
 @media (max-width: 767px) { .block--gallery[data-variant="band"] { --band-ratio: 4 / 3; } }
+/* A band that leads on (bandLink): its button on the photo's lower edge, half on the photo, at the content's end edge
+   (the reference's EXPLORE on its full-width photo). */
+.gallery__band-frame { position: relative; padding-bottom: 1.5rem; }
+/* Its words are the link's, as long as the copy has them: one running onto two lines on a phone keeps them close. */
+.gallery__band-action { position: absolute; bottom: 0; inset-inline-end: max(var(--gutter), (100% - var(--container-max)) / 2); z-index: 1; }
+@media (max-width: 767px) { .gallery__band-action { inset-inline: var(--gutter); line-height: 1.25; text-align: start; } }
 
 
 /* Related pages as photo tiles (relatedPages tiles): the reference's photographic page tiles, the page's name in white
@@ -826,8 +943,24 @@ main[data-page-type="privacy"] .block--intro :is(h2, h3, p, li) { text-align: le
 
 /* Section headings on one axis where the reference sets them on the content's left edge (data-heading-align start,
    measured from its pages): the proof modules' headings and leads, and a text section, start there too instead of the
-   template's centred defaults (owner 2026-11-12: headings left, centred and indented on one page looked off). */
-body[data-heading-align="start"] :is(.stats__heading, .logos__heading, .testimonials__heading, .table-block__heading, .certifications__heading, .cases__heading, .styles__heading, .order-case__heading, .pricing__heading, .swatches__heading, .related__heading) { text-align: start; }
+   template's centred defaults (owner 2026-11-12: headings left, centred and indented on one page looked off). Card grids
+   and steps too (Strandmill 2026-11-14: their centred headings over flush cards failed mixed_text_alignment on 20 pages). */
+body[data-heading-align="start"] :is(.feature-grid__heading, .process__heading, .stats__heading, .logos__heading, .testimonials__heading, .table-block__heading, .certifications__heading, .cases__heading, .styles__heading, .order-case__heading, .pricing__heading, .swatches__heading, .related__heading) { text-align: start; }
 body[data-heading-align="start"] { --lead-inline: 0; --lead-align: start; }
 body[data-heading-align="start"] .table-block__lead { margin-inline: 0; text-align: start; }
 body[data-heading-align="start"] .block--intro[data-variant="text"] .text-block { margin-inline: 0; }
+
+/* On a phone every site sets its copy on the content's left edge, headings with it, whatever the desktop centres:
+   a centred lead or paragraph runs four and five lines in a 358px column, too many to read centred (Staylumen
+   2026-11-16, seven centred_running_text: the home lead and section leads; owner: "适配手机版即可设计得合理"). The
+   hero's and the banner's copy go with it. Short centred items (cards, figures, marks, captions) keep their alignment. */
+@media (max-width: 767px) {
+  body { --lead-inline: 0; --lead-align: start; --hero-align: start; }
+  body .page-hero { --hero-align: start; }
+  body .page-hero[data-variant="media-banner"] { --banner-align: start; }
+  body :is(.feature-grid__heading, .process__heading, .stats__heading, .logos__heading, .testimonials__heading, .table-block__heading, .certifications__heading, .cases__heading, .styles__heading, .order-case__heading, .pricing__heading, .swatches__heading, .related__heading, .gallery__heading, .order-routes__heading) { text-align: start; }
+  body .table-block__lead { margin-inline: 0; text-align: start; }
+  body .block--intro[data-variant="text"] .text-block { margin-inline: 0; }
+  body .block--band[data-variant="center"] .band__copy { margin-inline: 0; justify-items: start; text-align: start; }
+  body .blog-hub-hero:is([data-header="plain"], [data-header="banner"]) :is(.blog-hub-hero__copy, .blog-hub-hero__inner) { justify-self: start; justify-items: start; text-align: start; }
+}

@@ -1,14 +1,8 @@
 {
-  "email": "hello@example.com",
-  "phone": "+1 555 0100",
-  "address": "Office address to be confirmed",
-  "hours": "Monday to Friday, 8:00 to 18:00",
+  "email": "hello@motelpilot.com",
+  "phone": "+1 (416) 555-0142",
+  "address": "Toronto, Ontario, Canada",
+  "hours": "Monday to Friday, 9:00 a.m. to 5:00 p.m. Eastern Time",
   "same_as": [],
-  "placeholder": true,
-  "standIns": [
-    "email",
-    "phone",
-    "address",
-    "hours"
-  ]
+  "placeholder": true
 }

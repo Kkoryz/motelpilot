@@ -15,19 +15,19 @@ import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { cliArgs, runMain } from './lib/cli.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
-import { FONTS_CSS, FONTS_DIR, INSTALLED_FONTS, downloadFaces, fontPlan, fontsCss, installedFonts, stripFontFaces, withFontsImport } from './lib/font-install.mjs';
+import { FONTS_CSS, FONTS_DIR, INSTALLED_FONTS, downloadFaces, fontPlan, fontsCss, installedFonts, referenceFontLock, stripFontFaces, withFontsImport } from './lib/font-install.mjs';
 
 const FONT_FILE = /\.(woff2?|ttf|otf)$/i;
 
 export async function installFonts({ root = process.cwd(), fetch = globalThis.fetch, cacheDir = process.env.FONT_CACHE_DIR || resolve(root, '.pipeline/cache/fonts') } = {}) {
   const fontRoles = await readJson(resolve(root, 'docs/research/analysis/font-roles.json'), null);
   if (!fontRoles) throw new Error('fonts: docs/research/analysis/font-roles.json is missing (the analysis step writes it)');
-  const fontLock = await readJson(resolve(root, 'docs/research/raw/font-lock.json'), null);
+  const fontLock = await referenceFontLock(root);
   if (!fontLock) throw new Error('fonts: docs/research/raw/font-lock.json is missing (the capture step writes it)');
   const plan = fontPlan({ fontRoles, fontLock });
   // Everything is downloaded before anything is written: a failure leaves the site's fonts as they were.
-  const { faces, requests, downloads } = await downloadFaces({ plan, cacheDir, fetch });
-  const lock = installedFonts({ plan, faces, requests });
+  const { faces, requests, downloads, synthesized } = await downloadFaces({ plan, cacheDir, fetch });
+  const lock = installedFonts({ plan, faces, requests, synthesized });
 
   const dir = resolve(root, FONTS_DIR);
   await mkdir(dir, { recursive: true });
@@ -50,7 +50,7 @@ export async function installFonts({ root = process.cwd(), fetch = globalThis.fe
 
   return {
     roles: Object.fromEntries(Object.entries(lock.roles).map(([role, item]) => [role, item.substituteFor ? `${item.family} (for ${item.substituteFor})` : item.family])),
-    families: lock.families.map((family) => `${family.family} ${family.weights.join('/')}${family.styles.includes('italic') ? ' +italic' : ''} (${family.source})`),
+    families: lock.families.map((family) => `${family.family} ${family.weights.join('/')}${family.styles.includes('italic') ? ' +italic' : ''} (${family.source})${family.synthesized ? `, ${family.synthesized.join('/')} synthesized by the browser` : ''}`),
     files: files.size,
     downloads,
     removed,

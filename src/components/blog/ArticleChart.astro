@@ -84,7 +84,7 @@ const comparison = chart.kind === 'comparison' ? chart : null;
     </div>
   )}
   {comparison && (
-    <div class="prose__table chart-comparison" data-scroll="sideways">
+    <div class="prose__table chart-comparison" data-scroll="sideways" role="region" tabindex="0" aria-label={chart.alt}>
       <table aria-label={chart.alt}>
         <thead><tr><td></td>{comparison.options.map((option) => <th scope="col">{option}</th>)}</tr></thead>
         <tbody>{comparison.rows.map((row) => <tr><th scope="row">{row.label}</th>{row.values.map((value) => <td>{value}</td>)}</tr>)}</tbody>

@@ -12,7 +12,7 @@ import { resolve } from 'node:path';
 import { blogGates } from './lib/blog-gates.mjs';
 import { cliArgs, runMain, usage } from './lib/cli.mjs';
 import { companyFacts } from './lib/facts.mjs';
-import { runCodex } from './lib/codex-exec.mjs';
+import { runJudge } from './lib/judge-exec.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { loadSitePages } from './lib/site-pages.mjs';
 
@@ -52,7 +52,7 @@ export function draftPrompt({ question, facts, pages, siteName, file }) {
   ].join('\n');
 }
 
-export async function draftArticle({ root = process.cwd(), questionsPath, clusterId = null, run = runCodex }) {
+export async function draftArticle({ root = process.cwd(), questionsPath, clusterId = null, run = runJudge }) {
   const map = await readJson(resolve(questionsPath));
   const queue = resolve(root, 'content/blog-queue');
   await mkdir(resolve(queue, 'drafts'), { recursive: true });

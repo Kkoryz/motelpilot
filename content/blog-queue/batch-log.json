@@ -1,0 +1,76 @@
+[
+  {
+    "at": "2026-11-17T20:14:16.723Z",
+    "count": 1,
+    "publish": true,
+    "written": [
+      {
+        "topic": "what is hotel revenue management",
+        "run": "D:/korey_seo/geo-blog-v2-1118/runs/motelpilot-what-is-hotel-revenue-management",
+        "passed": false,
+        "held": [
+          "q6-m4",
+          "q7-m2"
+        ],
+        "words": 4501,
+        "paidUsd": 0.028,
+        "seconds": 3204.9,
+        "slug": "what-is-hotel-revenue-management",
+        "queue": "drafts",
+        "reviewFailures": [
+          "picture: V1 does not fit its section (judge: unjudged)",
+          "picture: V3 does not fit its section (judge: unjudged)",
+          "blog flow final check: held; A/B not right: q6-m4, q7-m2"
+        ]
+      }
+    ],
+    "topics": {
+      "topics_file": "D:\\korey_seo\\scratch_offload\\blog_v2_1118\\motelpilot\\topics.json",
+      "routes": [
+        "bucket",
+        "ai"
+      ],
+      "candidates": {
+        "ai": 216
+      },
+      "topics": 8,
+      "qualified": 7,
+      "writable": 6,
+      "paid_usd": 0.1306,
+      "spend": {
+        "volumes": {
+          "ai": {
+            "searches": 216,
+            "quote_usd": 0.0316,
+            "bought": true,
+            "requested": 216,
+            "measured": 216,
+            "failed": 0,
+            "spent_usd": 0.0316
+          },
+          "google": {
+            "searches": 9,
+            "quote_usd": 0.09,
+            "bought": true,
+            "requested": 9,
+            "measured": 9,
+            "failed": 0,
+            "skipped_not_measurable": [],
+            "same_form_not_bought": [],
+            "spent_usd": 0.09
+          }
+        },
+        "serper": {
+          "searches": 9,
+          "missing": 9,
+          "quote_usd": 0.009,
+          "bought": 9,
+          "spent_usd": 0.009
+        }
+      }
+    },
+    "skipped": {},
+    "waiting": null,
+    "by": "geo-blogs"
+  }
+]

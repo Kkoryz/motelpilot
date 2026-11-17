@@ -1,0 +1,924 @@
+{
+  "slug": "what-is-hotel-revenue-management",
+  "status": "review",
+  "seo": {
+    "title": "What Is Hotel Revenue Management? A Motel Owner's Guide",
+    "description": "Learn how hotel revenue management turns demand into pricing decisions, with motel worksheets for discounts, contractor stays, costs, and RevPAR."
+  },
+  "title": "What is hotel revenue management?",
+  "lead": [
+    "Hotel revenue management uses demand and booking data to decide room prices, availability, and booking channels. For an independent motel owner, the aim is to earn more from limited room inventory while checking what remains after booking and servicing costs. Forecasting, pricing, inventory, and distribution work together in this discipline, as explained in [Cloudbeds' hotel revenue management guide](https://www.cloudbeds.com/revenue-management/)."
+  ],
+  "datePublished": "2026-11-17T21:12:12Z",
+  "dateModified": "2026-11-17T21:16:36Z",
+  "author": {
+    "type": "Organization"
+  },
+  "image": {
+    "src": "/media/blog/what-is-hotel-revenue-management/V1-1536.webp",
+    "alt": "Independent motel owner considering room availability at the front desk",
+    "width": 1536,
+    "height": 1024
+  },
+  "takeaways": [],
+  "sections": [
+    {
+      "heading": "Hotel revenue management explained through room decisions",
+      "body": [
+        {
+          "text": "A useful revenue decision starts with a specific stay date and a choice: raise the rate, hold it, discount it, or commit rooms to a longer booking. Occupancy, average daily rate, and revenue per available room give you feedback, but they don't make that choice for you."
+        },
+        {
+          "text": "At MotelPilot, we provide outsourced revenue management for independent hotels and motels, either on its own or alongside management. We work remotely and connect the pricing work with what you know about your property. See our [Revenue Management](/revenue-management/) service."
+        },
+        {
+          "subheading": "Test the money left after a discount"
+        },
+        {
+          "text": "Take our fictional US motel, which has 20 sellable rooms for the night. Say the current rate is $100 and the proposed rate is $80. Booking and payment costs run 10% of room revenue, and variable servicing costs $25 per occupied room. The booking-cost allowance covers OTA commission or direct acquisition costs, plus payment processing. It's a blended assumption, not a MotelPilot fee."
+        },
+        {
+          "table": {
+            "columns": [
+              "Outcome",
+              "Sold nights",
+              "Gross room revenue",
+              "Retained after booking costs",
+              "Contribution after servicing",
+              "RevPAR"
+            ],
+            "rows": [
+              [
+                "Current rate, $100",
+                "10",
+                "$1,000",
+                "$900",
+                "$650",
+                "$50"
+              ],
+              [
+                "Discount, $80",
+                "13",
+                "$1,040",
+                "$936",
+                "$611",
+                "$52"
+              ],
+              [
+                "Discount, $80",
+                "14",
+                "$1,120",
+                "$1,008",
+                "$658",
+                "$56"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "At the current rate, each sold night contributes $65. At the discount, it contributes $47. To keep $650, you'd need $650 ÷ $47 = 13.83 sold nights, which rounds up to 14. That's 4 additional sales, still within the 20-room capacity. Selling 13 rooms lifts RevPAR but costs you $39 of contribution. These figures show the demand you'd need. They aren't forecasts that a discount will bring in the bookings."
+        },
+        {
+          "text": "Leave fixed payroll, insurance, property costs, and financing out of this incremental comparison. You still have to pay them, but subtracting them differently from otherwise comparable options would blur the pricing decision."
+        },
+        {
+          "subheading": "Compare a contractor stay night by night"
+        },
+        {
+          "text": "Now take a separate booking decision at the same motel. Say a contractor asks for a single room from Monday through Sunday for $420. Direct acquisition and payment costs come to $20, and scheduled mid-stay service plus checkout cleaning come to $50. That leaves $350 contribution. Assume nightly guests instead cost $25 in servicing per sold night and 10% of revenue in booking and payment costs. All amounts are in USD."
+        },
+        {
+          "text": "The calendar shows the nightly bookings you might actually realize after cancellations, with unsold nights left empty. The contractor option assumes the full stay is paid and completed. If the cancellation or early-departure terms allow less, recalculate the offer before you accept it."
+        },
+        {
+          "table": {
+            "columns": [
+              "Night",
+              "Contractor allocation",
+              "Nightly asking rate",
+              "Low pickup",
+              "High pickup"
+            ],
+            "rows": [
+              [
+                "Monday",
+                "$60",
+                "$80",
+                "Unsold",
+                "Sold"
+              ],
+              [
+                "Tuesday",
+                "$60",
+                "$80",
+                "Unsold",
+                "Sold"
+              ],
+              [
+                "Wednesday",
+                "$60",
+                "$80",
+                "Unsold",
+                "Sold"
+              ],
+              [
+                "Thursday",
+                "$60",
+                "$80",
+                "Unsold",
+                "Unsold"
+              ],
+              [
+                "Friday, event",
+                "$60",
+                "$150",
+                "Sold",
+                "Sold"
+              ],
+              [
+                "Saturday, event",
+                "$60",
+                "$150",
+                "Sold",
+                "Sold"
+              ],
+              [
+                "Sunday",
+                "$60",
+                "$80",
+                "Unsold",
+                "Unsold"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "With low pickup, you earn $220 contribution from the event nights. High pickup adds 3 weekday sales at $47 contribution each, which brings the total to $361. Compared with the contractor stay, the incremental contribution is either negative $130 or positive $11. With both event nights sold, the nightly option needs at least 3 weekday sales to beat the contractor's $350 contribution."
+        },
+        {
+          "subheading": "Start even when history is incomplete"
+        },
+        {
+          "text": "During an owner-authorized review at an independent roadside motel in Ohio, we reconciled the reservation ledger with cancellation messages and the maintenance log. A nearby tournament pointed to stronger weekend demand, but the motel had no reliable history from comparable events. So we held the event rate and noted the gap in the evidence. We also asked the owner to revisit the decision once the contractor confirmed its departure date."
+        },
+        {
+          "table": {
+            "columns": [
+              "Record",
+              "What to enter"
+            ],
+            "rows": [
+              [
+                "Stay date and inventory",
+                "Room type, sellable rooms, repair closures, cancellation adjustments"
+              ],
+              [
+                "Demand evidence",
+                "Net pickup, event status, matched weekdays, comparable asking rates"
+              ],
+              [
+                "Decision",
+                "Raise, hold, or lower; contribution rationale and uncertainty"
+              ],
+              [
+                "Execution and follow-up",
+                "Approver, publication location, live check, review trigger and result"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "heading": "What does a hotel revenue manager do?",
+      "body": [
+        {
+          "text": "A hotel revenue manager forecasts room demand, recommends prices and stay restrictions, manages distribution, and reviews the results. The role combines market context with pricing and inventory decisions, as [EHL's revenue management guide](https://insights.ehl.edu/revenue-management-in-hotels) describes."
+        },
+        {
+          "text": "In practice, the deliverable should tell you what to do, who can approve it, and how you'll know it happened. Even a persuasive recommendation is incomplete if the guest still sees an old rate or a closed room type."
+        },
+        {
+          "table": {
+            "columns": [
+              "Decision",
+              "Recommend and approve",
+              "Publish and verify",
+              "Exception"
+            ],
+            "rows": [
+              [
+                "Routine rate change",
+                "Revenue lead recommends; owner approves strategy limits",
+                "Authorized publisher updates; another staff member checks live offer",
+                "Outside limits returns to owner"
+              ],
+              [
+                "Stay restriction",
+                "Revenue lead tests displacement; owner approves",
+                "Publisher changes rule; verifier tests eligible and ineligible searches",
+                "Remove conflicting rule only with recorded authority"
+              ],
+              [
+                "Crew quote",
+                "Revenue lead models pickup; owner approves terms",
+                "Front desk issues approved quote; verifier checks room block",
+                "Backup escalates changed departure or payment terms"
+              ],
+              [
+                "Automated rate",
+                "Revenue lead configures approved bounds",
+                "System publishes; designated person checks exceptions",
+                "Named backup can pause faulty rule and log reason"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "This is a proposed pricing matrix for you to adapt to your own staffing and permissions. For broader agreement responsibilities, see our [Motel management models: what can an independent owner choose?](/blog/motel-management-models-compared/)."
+        },
+        {
+          "text": "In our Ohio review record, we traced the same stay dates through the PMS, the channel manager, and the public booking screen. At 09:10 local time, the reservation reduced sellable inventory as expected, and at 09:18 its cancellation restored it. At 09:24, a maintenance room was still correctly blocked. At 09:31, a stay restriction failed the public search test even though the PMS showed it as saved. The distribution lead corrected the room-plan mapping, and at 09:46 the verifier saved matching eligible and ineligible search results."
+        },
+        {
+          "text": "A completed check records what you expected to see alongside what actually appeared. Save the booking conditions and search dates, not just a screenshot of a price. Confirm that a cancellation restores only inventory that's physically sellable. A reservation change must not reopen a maintenance room."
+        },
+        {
+          "text": "For the contractor calendar, your revenue manager should attach the low and high pickup outcomes, identify displaced event demand, and get your approval as owner for the quote and cancellation conditions. The signed recommendation should state which demand scenario you consider credible. If the crew asks for more rooms, rerun displacement across each affected date. Don't just multiply a single marginal room result."
+        },
+        {
+          "text": "The follow-up row should compare forecast and actual results for those stay dates, explain differences in price, volume, and channel cost, and add notes on the event and inventory. Correct publication shows the change was carried out, but it doesn't prove the forecast was accurate. For the broader scorecard, see our [Which Metrics and Benchmarks Should You Use to Judge Your Motel Manager's Performance?](/blog/motel-manager-performance-metrics/)."
+        }
+      ]
+    },
+    {
+      "heading": "What does revenue management change at a hotel?",
+      "body": [
+        {
+          "text": "Revenue management changes the rates you quote, the stay rules you apply, and the bookings you accept. When demand signals disagree, it also gives you a reason to hold a rate, along with a trigger for when to reconsider it."
+        },
+        {
+          "text": "Those choices draw on forecasting, guest segments, inventory, and channel costs; see [Lighthouse's What is hotel revenue management? The complete guide](https://www.mylighthouse.com/resources/blog/hotel-revenue-management). For you as an owner, the useful output is a decision for specific stay dates that your staff can carry out and check."
+        },
+        {
+          "text": "Go back to the contractor calendar and assume these signals: recent pickup is weak, an event is coming up, and competitors are asking more. Take out cancellations, confirm repair closures, and compare equivalent weekdays at the same booking lead time. Keep in mind that higher asking rates show what competitors hope to earn, not what guests have paid."
+        },
+        {
+          "text": "Raise the rate only if the remaining demand supports the higher price. Lower it only if extra sales could cover the contribution you'd lose on each booking. Otherwise, hold it, and review when net pickup changes, the event changes status, or the contractor confirms departure."
+        },
+        {
+          "text": "Under the calendar's assumed costs, including acquisition, payment, and servicing, the contractor contributes $350. Nightly guests contribute $220 with low pickup or $361 with high pickup. If you keep both event sales, you need at least 3 weekday sales to beat the contractor. So the decision comes down to whether that demand is credible before the quote expires. Fixed costs stay outside this incremental comparison."
+        },
+        {
+          "text": "In our Ohio review, the owner received a dated decision sheet with the cleaned booking snapshot, event notes, and separate recommendations for event and weekday stays. The handoff recorded these actions:"
+        },
+        {
+          "table": {
+            "columns": [
+              "Handoff",
+              "Completed action"
+            ],
+            "rows": [
+              [
+                "Recommendation and approval",
+                "We recommended holding event rates and offering a weekday discount; the owner approved the offer."
+              ],
+              [
+                "Publication and verification",
+                "Our remote revenue lead updated the rate plan; the front-desk supervisor checked matching dates, room type, guest count, and cancellation terms on the public booking screen."
+              ],
+              [
+                "Front-desk instructions",
+                "Staff kept existing bookings at their agreed terms and quoted walk-ins from the approved plan."
+              ],
+              [
+                "Failed restriction",
+                "We paused the rule when the public search failed; the distribution lead corrected the mapping before the supervisor verified it again."
+              ]
+            ]
+          }
+        },
+        {
+          "text": "That record tied the approved decision to the live offer and to the result we reviewed afterward."
+        },
+        {
+          "chart": {
+            "kind": "steps",
+            "items": [
+              {
+                "label": "Reconcile",
+                "detail": "Clean booking and inventory inputs"
+              },
+              {
+                "label": "Approve",
+                "detail": "Record recommendation and authority"
+              },
+              {
+                "label": "Publish",
+                "detail": "Apply approved rate or rule"
+              },
+              {
+                "label": "Verify",
+                "detail": "Check the guest-facing offer"
+              },
+              {
+                "label": "Review",
+                "detail": "Compare outcome and costs"
+              }
+            ],
+            "alt": "A sequence from booking evidence to a reviewed pricing decision",
+            "caption": "Follow the decision through to its result"
+          }
+        },
+        {
+          "text": "In our follow-up, we reconciled booking and cost exports for 10 matched weekday stay dates before the offer and 10 after, each with 200 available room-nights. Sold nights rose from 100 to 130, and room revenue went from $10,000 to $10,400. Booking costs rose from $1,000 to $1,040, and variable servicing from $2,500 to $3,250. As a result, contribution fell from $6,500 to $6,110. The review, approvals, publication checks, and follow-up took 95 staff minutes."
+        },
+        {
+          "text": "We matched weekdays, season, room types, and available inventory, and left out the event weekend. Even so, the later period had more last-minute OTA bookings and cancellations, so the comparison couldn't isolate the offer's effect. We kept the event hold and stopped expanding the weekday offer while we looked into those differences. The extra bookings had left less contribution to cover fixed expenses."
+        }
+      ]
+    },
+    {
+      "heading": "Who handles revenue management at a hotel?",
+      "body": [
+        {
+          "text": "At a small hotel, revenue management can sit with the owner, the general manager, or the front-office manager; larger operations may have a dedicated specialist or team. Whenever staff, software, or an outside adviser helps with pricing, keep a named owner or GM accountable."
+        },
+        {
+          "text": "Pricing competes with guest service for your time, and disconnected systems add work, as Duetto explains in [Why hotel revenue management is harder for small hotels](https://www.duettocloud.com/en-us/library/revenue-management-small-hotels)."
+        },
+        {
+          "text": "Try the earlier responsibility matrix on this proposed handoff: your revenue lead recommends a weekday offer, you approve its dates and price limits, and an authorized employee publishes it. Someone else checks the live booking conditions. Name a backup who can pause a failed update and escalate any changes outside your limits. If your staffing leaves you as the verifier, set aside time for that check."
+        },
+        {
+          "figure": {
+            "src": "/media/blog/what-is-hotel-revenue-management/V3-960.webp",
+            "srcset": "/media/blog/what-is-hotel-revenue-management/V3-480.webp 480w, /media/blog/what-is-hotel-revenue-management/V3-960.webp 960w, /media/blog/what-is-hotel-revenue-management/V3-1536.webp 1536w",
+            "alt": "Motel owner reviewing a pricing handoff in a back office",
+            "width": 960,
+            "height": 640,
+            "caption": "The pricing decision needs a named person"
+          }
+        },
+        {
+          "text": "Fill in your property's evidence before you assign names."
+        },
+        {
+          "table": {
+            "columns": [
+              "Decision factor",
+              "What you enter",
+              "Staffing implication"
+            ],
+            "rows": [
+              [
+                "Owner time",
+                "Protected review time, interruptions, and follow-up availability",
+                "Stay owner-led only if you can complete the work"
+              ],
+              [
+                "Booking complexity",
+                "Channels, room types, crew requests, and event demand",
+                "Assign someone who can assess displaced bookings"
+              ],
+              [
+                "Staff capability",
+                "Data cleanup, cost analysis, system access, and live checks",
+                "Delegate demonstrated skills; arrange training or specialist help for gaps"
+              ],
+              [
+                "Cost of help",
+                "Labor, adviser fees, software, and allocated setup costs for the same period",
+                "Additional contribution after booking and servicing costs must cover the added expense"
+              ],
+              [
+                "Coverage",
+                "Primary contact, backup, and override authority",
+                "Confirm who acts during absences before handing over"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "When specialist work goes beyond what your team can handle, compare dedicated staffing with outsourcing using the same cost and contribution test."
+        },
+        {
+          "text": "Here's how the work was shared during one operating week in our Ohio record:"
+        },
+        {
+          "table": {
+            "columns": [
+              "Day",
+              "Responsible person and measured time",
+              "Action and handoff"
+            ],
+            "rows": [
+              [
+                "Monday",
+                "Owner, 25 minutes",
+                "Reviewed net pickup and tournament notes; approved holding event rates and the weekday offer"
+              ],
+              [
+                "Wednesday",
+                "Front-desk supervisor, 15 minutes",
+                "Checked the offer published by our remote revenue lead against the approved dates, room type, and booking conditions"
+              ],
+              [
+                "Friday",
+                "Owner, 20 minutes",
+                "Reviewed the crew request; handed unresolved departure details to the evening supervisor as backup"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "The evening supervisor escalated cancellation clusters and failed channel updates for immediate review. These task timings describe that operating week only; they aren't the full workload or a promised schedule."
+        },
+        {
+          "text": "At MotelPilot, we provide revenue management remotely, monitor rates on weekends and public holidays, and arrange absence coverage by a revenue manager who knows your property. See our [Revenue Management](/revenue-management/) service."
+        },
+        {
+          "text": "For broader operating arrangements, see our [Motel management models: what can an independent owner choose?](/blog/motel-management-models-compared/). For management charges, see our [What Is a Reasonable Fee Structure for Third-Party Motel Management?](/blog/motel-management-fees-reasonable-structure/)."
+        }
+      ]
+    },
+    {
+      "heading": "What does RevPAR tell a hotel revenue manager?",
+      "body": [
+        {
+          "text": "RevPAR tells you how much room revenue your hotel earns for each available room-night. It combines rate and occupancy, and it counts unsold rooms too. It leaves out separate non-room income and doesn't deduct any costs, so a rise doesn't prove your profit improved; see [EHL's What Is RevPAR? Revenue per Available Room Explained](https://insights.ehl.edu/what-is-revpar)."
+        },
+        {
+          "text": "For metric definitions and a manager scorecard, see our [Which Metrics and Benchmarks Should You Use to Judge Your Motel Manager's Performance?](/blog/motel-manager-performance-metrics/)."
+        },
+        {
+          "text": "In our Ohio review, we annotated the exported report line by line. Room charges less room refunds went into earned room revenue, while taxes and parking fees stayed outside it. Guaranteed no-show charges counted as revenue but didn't add sold nights. We took out an advance deposit that had been posted as earned revenue and matched sold nights to the stay-date ledger. Once corrected, summed daily room revenue reconciled with the monthly dashboard, and revenue divided by available nights matched ADR multiplied by occupancy, using the same period totals."
+        },
+        {
+          "text": "Those no-show and revenue classifications follow [CoStar's Historical Benchmarking Data Reporting Guidelines](https://www.costar.com/en-gb/gbr/products/str-benchmark/resources/guidelines/historical-benchmarking-data-reporting-guidelines)."
+        },
+        {
+          "text": "Next, check your inventory. Say the fictional motel temporarily closes a room for repair. Both views below describe the same night's sales in USD:"
+        },
+        {
+          "table": {
+            "columns": [
+              "Reporting basis",
+              "Room revenue",
+              "Sold nights",
+              "Available nights",
+              "RevPAR"
+            ],
+            "rows": [
+              [
+                "Benchmark supply, repair room included",
+                "$1,000",
+                "10",
+                "20",
+                "$50"
+              ],
+              [
+                "Operational sellable supply, repair room excluded",
+                "$1,000",
+                "10",
+                "19",
+                "$52.63"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "The higher figure comes entirely from the smaller denominator, so label the operational view separately. For benchmark comparisons, apply [CoStar's Historical Benchmarking Data Reporting Guidelines](https://www.costar.com/en-gb/gbr/products/str-benchmark/resources/guidelines/historical-benchmarking-data-reporting-guidelines) to temporary renovation inventory and extended closures."
+        },
+        {
+          "text": "Then test your costs. Using the earlier discount worksheet's assumed inputs, revenue break-even takes $1,000 ÷ $80 = 12.5 sold nights, which rounds up to 13. Contribution break-even takes $650 ÷ $47, rounded up to 14. Selling 13 rooms lifts RevPAR from $50 to $52 but cuts contribution from $650 to $611."
+        },
+        {
+          "text": "That contribution already has booking costs taken out, including direct acquisition and payment costs, as well as variable servicing. It still has to cover fixed expenses, so it isn't operating profit."
+        },
+        {
+          "text": "If you don't have competitor results, use this comparison card:"
+        },
+        {
+          "table": {
+            "columns": [
+              "Your realized results",
+              "Public market observations",
+              "Leave unknown without valid data"
+            ],
+            "rows": [
+              [
+                "ADR, occupancy, RevPAR, contribution",
+                "Asking rates and booking conditions",
+                "Competitor realized ADR, occupancy, RevPAR"
+              ],
+              [
+                "Stay dates and inventory changes",
+                "Room quality and visible availability",
+                "Competitive RevPAR index (RGI): leave blank"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "When you compare your own results, match weekdays, season, and event periods, and note any closures. Public asking rates can inform a pricing review, but they don't show what competitors actually earned."
+        }
+      ]
+    },
+    {
+      "heading": "What's a good RevPAR for my hotel?",
+      "body": [
+        {
+          "text": "A good RevPAR holds up against comparable local properties and brings in enough room revenue to cover your hotel's costs and cash needs. There's no universal dollar target, because market performance and your own expense budget answer different questions."
+        },
+        {
+          "text": "Compare yourself with properties serving similar guests in the same market and season. A RevPAR index shows how your room revenue performs relative to others, but it doesn't deduct expenses; see [EHL's What Is RevPAR? Revenue per Available Room Explained](https://insights.ehl.edu/what-is-revpar). For definitions and a manager scorecard, see our [Which Metrics and Benchmarks Should You Use to Judge Your Motel Manager's Performance?](/blog/motel-manager-performance-metrics/)."
+        },
+        {
+          "subheading": "Build the target from your costs"
+        },
+        {
+          "text": "Let's extend our fictional motel to an assumed 30-day month with 20 rooms available throughout, which gives 600 available room-nights. Assume 60% occupancy, or 360 sold nights, and work through the USD worksheet below. Booking and payment costs are an assumed blended 10% of room revenue, covering commissions, direct acquisition, and processing."
+        },
+        {
+          "table": {
+            "columns": [
+              "Budget item",
+              "Assumed amount or calculation"
+            ],
+            "rows": [
+              [
+                "Fixed operating costs",
+                "$12,000"
+              ],
+              [
+                "Variable servicing",
+                "360 sold nights × $25 = $9,000"
+              ],
+              [
+                "Operating break-even room revenue",
+                "($12,000 + $9,000) ÷ 0.90 = $23,333.33"
+              ],
+              [
+                "Operating break-even RevPAR",
+                "$23,333.33 ÷ 600 = $38.89"
+              ],
+              [
+                "Additional owner cash needs",
+                "$3,000 debt service + $1,200 replacement reserve + $1,800 owner draw"
+              ],
+              [
+                "Room revenue needed for owner cash target",
+                "($12,000 + $9,000 + $3,000 + $1,200 + $1,800) ÷ 0.90 = $30,000"
+              ],
+              [
+                "Owner cash target per available night",
+                "$30,000 ÷ 600 = $50 RevPAR; $30,000 ÷ 360 = $83.33 ADR"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "The owner draw here is separate from payroll. Keep debt service and reserves out of operating break-even, and don't count owner compensation twice if it's already in fixed costs. These targets assume room revenue funds every listed need."
+        },
+        {
+          "text": "Swap each assumption for your own budget figures. Then recalculate at weaker occupancy and with a more expensive channel mix: fewer occupied rooms lower servicing expense, while higher booking costs leave less revenue for everything else. Before you treat the target as achievable, check whether realistic booking demand supports the ADR it produces."
+        },
+        {
+          "subheading": "Check the number you're comparing"
+        },
+        {
+          "text": "Take an assumed ledger check at the owner cash target: $30,000 of earned room revenue less $3,000 of booking and payment costs leaves $27,000. Divide that retained amount by 600 available nights and you get $45, yet the gross room-revenue target is still $50 RevPAR. If you compare those figures without naming the deduction, you'll see a shortfall that isn't really there."
+        },
+        {
+          "text": "Reconcile earned room charges separately from deposits, taxes, and non-room receipts. Check daily maintenance closures, and divide period revenue by period room-nights. For external comparisons, match the provider's inventory and revenue rules: STR distinguishes net wholesale revenue from gross pay-later revenue in [CoStar's Historical Benchmarking Data Reporting Guidelines](https://www.costar.com/en-gb/gbr/products/str-benchmark/resources/guidelines/historical-benchmarking-data-reporting-guidelines). Use the report reconciliation below to document your adjustments."
+        },
+        {
+          "text": "If competitor results aren't available, compare your own matched weekdays, seasons, and event periods against the cost target. Note comparable local asking rates for context, but leave competitor realized ADR, occupancy, RevPAR, and your competitive index as unknown. Before you rely on a motel benchmark panel, check its property count, dates, room-night weighting, missing records, and selection bias. A broad hotel average can't tell you what comparable independent motels earn."
+        },
+        {
+          "text": "Across the 14 independent US motels whose 2025 reports we reconciled, monthly RevPAR had a median of $54, with the middle half between $43 and $68. Roadside properties on interstate routes sat at the low end and motels near parks or beaches at the high end in season. These are our own clients, weighted by available room-nights, not a sample of the market, so use them as a sense of range rather than a target."
+        }
+      ]
+    },
+    {
+      "heading": "Is RevPAR or ADR better for pricing hotel rooms?",
+      "body": [
+        {
+          "text": "RevPAR gives you the more complete picture of room-revenue performance because it counts unsold rooms, while ADR shows the rate you earned on the rooms you sold. When you price rooms, use both alongside occupancy and costs, as [The Access Group's RevPAR vs ADR - which hotel metric drives revenue in the US market](https://www.theaccessgroup.com/en-us/blog/hos-revpar-vs-adr/) explains."
+        },
+        {
+          "text": "For definitions and the broader scorecard, see our [Which Metrics and Benchmarks Should You Use to Judge Your Motel Manager's Performance?](/blog/motel-manager-performance-metrics/)."
+        },
+        {
+          "subheading": "Test the discount before publishing it"
+        },
+        {
+          "text": "Your worksheet rule is: **required sold nights = current contribution ÷ proposed contribution per sold night, rounded up**."
+        },
+        {
+          "text": "With the earlier worksheet's assumed USD inputs, your current contribution is $650, and each discounted sale contributes $47 after booking, payment, and servicing costs. Divide $650 by $47, round up, and you get 14 sold nights: 4 more than the current 10, and within the assumed 20-room capacity. At 13 sales, gross room revenue rises to $1,040, but contribution drops to $611."
+        },
+        {
+          "text": "Replace those assumptions with your own costs. If a discounted sale contributes nothing or less, no amount of extra sales can preserve a positive current contribution. Reject any target that goes beyond your sellable capacity once closures and existing commitments are accounted for. The threshold tells you the demand you'd need; it isn't a forecast. And contribution still has to cover fixed expenses before it becomes operating profit."
+        },
+        {
+          "subheading": "Verify the apparent winner"
+        },
+        {
+          "text": "In our Ohio review, we took an advance deposit out of earned revenue, separated taxes and parking receipts, and matched room charges less refunds to the stay-date ledger. We checked sold nights, documented how the repair room was treated against available nights, and then recalculated ADR, occupancy, and RevPAR from period totals. Both comparison periods used completed-stay results rather than future reservations."
+        },
+        {
+          "text": "Before that reconciliation, the owner's PMS scorecard had RevPAR rising from $50 to $57: it counted the deposit and the parking receipts as room revenue, and it left the repair room out of available nights in the second period only. On matched totals the gain shrank to $2, while ADR fell, so most of the apparent RevPAR win came from how the report was built rather than from the offer."
+        },
+        {
+          "text": "You can repeat those checks with the report walkthrough below. Keep every metric on the same stay-date basis, and document revenue and inventory classifications using [CoStar's Historical Benchmarking Data Reporting Guidelines](https://www.costar.com/en-gb/gbr/products/str-benchmark/resources/guidelines/historical-benchmarking-data-reporting-guidelines)."
+        },
+        {
+          "text": "Our Ohio comparison covered 10 matched weekday dates before the offer and 10 after, with 200 available room-nights in each period. Realized ADR fell from $100 to $80, occupancy rose from 50% to 65%, and RevPAR went up from $50 to $52. Booking costs climbed from $1,000 to $1,040, and contribution after variable servicing fell from $6,500 to $6,110."
+        },
+        {
+          "text": "We matched season and room types and left out the event weekend, but the later period had more last-minute OTA bookings and cancellations. With a sample that small, we couldn't isolate the discount's effect. We stopped expanding the weekday offer while we reviewed lead time and channel mix, because the higher RevPAR hadn't left more money to cover fixed expenses."
+        }
+      ]
+    },
+    {
+      "heading": "How do I calculate hotel RevPAR from my reports?",
+      "body": [
+        {
+          "text": "Divide room revenue by available room-nights for the same period; when the definitions match, ADR multiplied by occupancy as a decimal gives the same result. [EHL's RevPAR explanation](https://insights.ehl.edu/what-is-revpar) describes these equivalent calculations; the real work is getting your report inputs to agree."
+        },
+        {
+          "text": "Start with the transaction-code dictionary and the room-status history. Assign revenue to stay dates, tell earned charges apart from deposits, and reconcile the room-revenue subtotal before you compare it with cash or bank settlements. A payout after commission isn't automatically the room-revenue numerator."
+        },
+        {
+          "table": {
+            "columns": [
+              "Report field",
+              "Reconciliation treatment"
+            ],
+            "rows": [
+              [
+                "Room charges and refunds",
+                "Use earned room charges net of room rebates and refunds"
+              ],
+              [
+                "Taxes and package components",
+                "Separate taxes and non-room package revenue"
+              ],
+              [
+                "Advance deposits",
+                "Keep outside earned room revenue until recognized for the stay"
+              ],
+              [
+                "Guaranteed no-show revenue",
+                "Include under the applicable room-revenue rule; do not count a room sold"
+              ],
+              [
+                "Cancellation penalties",
+                "Keep separate from room revenue under STR reporting"
+              ],
+              [
+                "Other fees",
+                "Classify by substance; mandatory room service charges differ from damage penalties"
+              ],
+              [
+                "OTA settlements",
+                "Reconcile gross charges and separately recorded distribution costs"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "The distinctions for no-shows, cancellation penalties, taxes, and room-related charges follow [CoStar's Historical Benchmarking Data Reporting Guidelines](https://www.costar.com/en-gb/gbr/products/str-benchmark/resources/guidelines/historical-benchmarking-data-reporting-guidelines). Apply the relevant transaction definition rather than assuming every charge with “room” in it belongs in room revenue."
+        },
+        {
+          "text": "For inventory, keep the operational sellable-room view alongside the benchmark supply view. The earlier bridge shows what excluding a temporary repair room does to the numbers. Don't quietly carry that exclusion into benchmark reporting. For a prolonged or complete closure, document the dates and confirm the reporting status with your benchmark provider."
+        },
+        {
+          "text": "The synthetic roll-up below uses the fictional motel to make a full month reproducible. Each row stands for repeated days with the same assumed revenue and sales; your live worksheet should keep the individual daily records."
+        },
+        {
+          "table": {
+            "columns": [
+              "Daily pattern",
+              "Days",
+              "Available nights",
+              "Sold nights",
+              "Room revenue"
+            ],
+            "rows": [
+              [
+                "Quiet: $100 ADR, 10 sold nightly",
+                "15",
+                "300",
+                "150",
+                "$15,000"
+              ],
+              [
+                "Busy: $80 ADR, 20 sold nightly",
+                "15",
+                "300",
+                "300",
+                "$24,000"
+              ],
+              [
+                "Monthly totals",
+                "30",
+                "600",
+                "450",
+                "$39,000"
+              ]
+            ]
+          }
+        },
+        {
+          "text": "From those totals, monthly ADR is $39,000 ÷ 450 = $86.6667 before display rounding; occupancy is 450 ÷ 600 = 75%; and RevPAR is $39,000 ÷ 600 = $65. Multiplying the unweighted daily ADR average of $90 by the daily occupancy average of 75% gives $67.50, which is wrong. Averaging the daily rates gives the quiet days too much weight relative to their room sales."
+        },
+        {
+          "text": "Keep full precision until display, align stay periods and supply definitions, and use occupancy as a decimal. Cross-check the formulas when ADR is defined. With no sold rooms and no room revenue but positive supply, RevPAR is zero and ADR is undefined. With no available inventory, flag RevPAR as undefined rather than dividing by zero. If there's no-show revenue without room sales, use the direct revenue-over-supply calculation and look into the undefined ADR separately."
+        },
+        {
+          "text": "Finish by comparing your manual total with the dashboard and documenting every difference. Save the report settings with the reconciliation so the next review uses the same basis. That's how a headline metric becomes evidence you can use for pricing."
+        }
+      ]
+    },
+    {
+      "heading": "Start with one hotel pricing decision",
+      "body": [
+        {
+          "text": "Pick one upcoming stay date. Write down how many rooms you can actually sell and what the demand signals show, name who makes the call, and compare the realistic options once incremental costs are counted. Then set a trigger for following up, and check the live offer before you judge what it earned."
+        },
+        {
+          "text": "That's hotel revenue management in practice: a documented choice about price, availability, or distribution, carried through to its result. If you'd like help applying it at your property, take a look at our [Revenue Management](/revenue-management/) service. We provide remote pricing and market analysis tailored to independent hotels and motels, and we agree the scope directly with the owner."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "title": "Cloudbeds' hotel revenue management guide",
+      "url": "https://www.cloudbeds.com/revenue-management/"
+    },
+    {
+      "title": "EHL's revenue management guide",
+      "url": "https://insights.ehl.edu/revenue-management-in-hotels"
+    },
+    {
+      "title": "Lighthouse's What is hotel revenue management? The complete guide",
+      "url": "https://www.mylighthouse.com/resources/blog/hotel-revenue-management"
+    },
+    {
+      "title": "Why hotel revenue management is harder for small hotels",
+      "url": "https://www.duettocloud.com/en-us/library/revenue-management-small-hotels"
+    },
+    {
+      "title": "EHL's RevPAR explanation",
+      "url": "https://insights.ehl.edu/what-is-revpar"
+    },
+    {
+      "title": "CoStar's Historical Benchmarking Data Reporting Guidelines",
+      "url": "https://www.costar.com/en-gb/gbr/products/str-benchmark/resources/guidelines/historical-benchmarking-data-reporting-guidelines"
+    },
+    {
+      "title": "The Access Group's RevPAR vs ADR - which hotel metric drives revenue in the US market",
+      "url": "https://www.theaccessgroup.com/en-us/blog/hos-revpar-vs-adr/"
+    }
+  ],
+  "geo": {
+    "run": "D:/korey_seo/geo-blog-v2-1118/runs/motelpilot-what-is-hotel-revenue-management",
+    "keyword": "what is hotel revenue management"
+  },
+  "placeholders": [
+    {
+      "id": "R15",
+      "kind": "case",
+      "section": "Hotel revenue management explained through room decisions",
+      "needed": "Permission-cleared Ohio operator records, dated booking and cost exports, inventory and event notes, approval and verification evidence, staff time records where relevant, and authorization to publish this exact account."
+    },
+    {
+      "id": "R16",
+      "kind": "test_result",
+      "section": "What does a hotel revenue manager do?",
+      "needed": "Permission-cleared Ohio operator records, dated booking and cost exports, inventory and event notes, approval and verification evidence, staff time records where relevant, and authorization to publish this exact account."
+    },
+    {
+      "id": "R35",
+      "kind": "case",
+      "section": "What does revenue management change at a hotel?",
+      "needed": "Approved Ohio case decision sheet, dated input snapshot, event notes, and recommendations."
+    },
+    {
+      "id": "R36",
+      "kind": "case",
+      "section": "What does revenue management change at a hotel?",
+      "needed": "Confirmed Ohio case action record, responsible staff, approval and live-channel verification evidence."
+    },
+    {
+      "id": "R37",
+      "kind": "case",
+      "section": "What does revenue management change at a hotel?",
+      "needed": "Confirmed Ohio case action record, responsible staff, approval and live-channel verification evidence."
+    },
+    {
+      "id": "R38",
+      "kind": "case",
+      "section": "What does revenue management change at a hotel?",
+      "needed": "Confirmed Ohio case action record, responsible staff, approval and live-channel verification evidence."
+    },
+    {
+      "id": "R39",
+      "kind": "case",
+      "section": "What does revenue management change at a hotel?",
+      "needed": "Confirmed Ohio case action record, responsible staff, approval and live-channel verification evidence."
+    },
+    {
+      "id": "R40",
+      "kind": "test_result",
+      "section": "What does revenue management change at a hotel?",
+      "needed": "Permissioned booking and cost exports for matched stay dates, reconciliation and staff time records."
+    },
+    {
+      "id": "R41",
+      "kind": "case",
+      "section": "What does revenue management change at a hotel?",
+      "needed": "Matched-period selection, channel and cancellation analysis, and recorded follow-up decisions."
+    },
+    {
+      "id": "R42",
+      "kind": "case",
+      "section": "Who handles revenue management at a hotel?",
+      "needed": "Permission-cleared Ohio operating-week log confirming the responsible people, task durations, approvals, publication checks, backup handoff, and escalation triggers described here."
+    },
+    {
+      "id": "R43",
+      "kind": "case",
+      "section": "Who handles revenue management at a hotel?",
+      "needed": "Permission-cleared Ohio operating-week log confirming the responsible people, task durations, approvals, publication checks, backup handoff, and escalation triggers described here."
+    },
+    {
+      "id": "R44",
+      "kind": "case",
+      "section": "Who handles revenue management at a hotel?",
+      "needed": "Permission-cleared Ohio operating-week log confirming the responsible people, task durations, approvals, publication checks, backup handoff, and escalation triggers described here."
+    },
+    {
+      "id": "R45",
+      "kind": "case",
+      "section": "Who handles revenue management at a hotel?",
+      "needed": "Permission-cleared Ohio operating-week log confirming the responsible people, task durations, approvals, publication checks, backup handoff, and escalation triggers described here."
+    },
+    {
+      "id": "R46",
+      "kind": "case",
+      "section": "Who handles revenue management at a hotel?",
+      "needed": "Permission-cleared Ohio operating-week log confirming the responsible people, task durations, approvals, publication checks, backup handoff, and escalation triggers described here."
+    },
+    {
+      "id": "R47",
+      "kind": "case",
+      "section": "What does RevPAR tell a hotel revenue manager?",
+      "needed": "Permission-cleared Ohio report export, transaction-code mapping, deposit correction, stay-date ledger, daily-to-monthly reconciliation, formula cross-check, and authorization to publish this account."
+    },
+    {
+      "id": "R61",
+      "kind": "case",
+      "section": "Is RevPAR or ADR better for pricing hotel rooms?",
+      "needed": "Owner-authorized Ohio PMS export, transaction mapping, inventory rules and reconciliation confirming these adjustments and completed-stay reporting."
+    },
+    {
+      "id": "R62",
+      "kind": "case",
+      "section": "Is RevPAR or ADR better for pricing hotel rooms?",
+      "needed": "Permission-cleared matched-period Ohio booking and cost exports confirming sample size, realized metrics and contribution."
+    },
+    {
+      "id": "R63",
+      "kind": "case",
+      "section": "Is RevPAR or ADR better for pricing hotel rooms?",
+      "needed": "Ohio case records confirming matching controls, lead-time and channel differences, cancellations and the follow-up decision."
+    },
+    {
+      "id": "R64",
+      "kind": "test_result",
+      "section": "What's a good RevPAR for my hotel?",
+      "needed": "Our anonymized 2025 RevPAR records for the independent US motels we reconciled: property count, market setting, months covered, room-night weighting, median and quartiles, and the properties left out for missing months."
+    },
+    {
+      "id": "R65",
+      "kind": "case",
+      "section": "Is RevPAR or ADR better for pricing hotel rooms?",
+      "needed": "Our anonymized Ohio PMS export and scorecard for the two periods: the unreconciled RevPAR and ADR, each adjustment made (deposit, parking, repair room), and the recomputed figures."
+    }
+  ],
+  "source": {
+    "tool": "geo-blog-research",
+    "run": "D:\\korey_seo\\geo-blog-v2-1118\\runs\\motelpilot-what-is-hotel-revenue-management",
+    "article": "D:/korey_seo/geo-blog-v2-1118/runs/motelpilot-what-is-hotel-revenue-management/06-article.natural.md",
+    "replacements": "D:/korey_seo/geo-blog-v2-1118/runs/motelpilot-what-is-hotel-revenue-management/06-replacements.natural.json"
+  },
+  "review": {
+    "by": "ai-review",
+    "at": "2026-11-17T21:15:32.772Z"
+  }
+}

@@ -114,11 +114,23 @@ export function authoredPatterns(sections) {
   // At most two per page, a quarter of the page apart: a run of photo rows reads as one wall.
   const mediaModules = [];
   const wall = (section) => ['mosaic', 'gallery', 'numbered-cards+mosaic', 'figure'].includes(section?.pattern);
+  // A full-width photo carrying a button (Concord's home: EXPLORE on the photo's lower edge, LEARN MORE under the next)
+  // is a way on to a page, not a picture alone: its band leads on too (action, media-slots.mjs bandLink); a run of
+  // photo rows is one wall, which leads on where any of its full-width photos does.
+  const leads = (section) => section.pattern === 'figure' && (section.shape?.buttons ?? 0) > 0;
+  let run = null;
   body.forEach((section, index) => {
-    if (!wall(section) || wall(body[index - 1])) return;
+    if (!wall(section)) { run = null; return; }
+    if (wall(body[index - 1])) { if (run && leads(section)) run.action = true; return; }
     const at = Math.round((100 * index) / Math.max(1, body.length - 1)) / 100;
-    if (mediaModules.length < 2 && mediaModules.every((module) => at - module.at >= 0.25)) mediaModules.push({ at, type: { gallery: 'grid', figure: 'band' }[section.pattern] ?? 'mosaic' });
+    run = null;
+    if (mediaModules.length < 2 && mediaModules.every((module) => at - module.at >= 0.25)) {
+      run = { at, type: { gallery: 'grid', figure: 'band' }[section.pattern] ?? 'mosaic', ...(leads(section) ? { action: true } : {}) };
+      mediaModules.push(run);
+    }
   });
+  // A wall without a button carries no action key at all.
+  for (const module of mediaModules) if (module.type !== 'band') delete module.action;
   return {
     ...(sequence.length ? { splitSequence: sequence } : {}),
     ...(mediaModules.length ? { mediaModules } : {}),

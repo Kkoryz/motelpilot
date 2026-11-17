@@ -53,11 +53,6 @@
           "children": []
         },
         {
-          "label": "Receivership",
-          "route": "/receivership/",
-          "children": []
-        },
-        {
           "label": "Asset Management",
           "route": "/asset-management/",
           "children": []
@@ -114,11 +109,6 @@
     {
       "label": "Resources",
       "route": "/resources/",
-      "children": []
-    },
-    {
-      "label": "Careers",
-      "route": "/careers/",
       "children": []
     },
     {

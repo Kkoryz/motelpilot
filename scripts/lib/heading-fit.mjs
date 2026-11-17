@@ -15,6 +15,10 @@ export const HERO_FIT = Object.freeze({ desktop: { lines: 2, minPx: 36 }, phone:
 // A blog post's title keeps the floor its own scale already has (patterns.css .post-header__title, 1.75rem); on a phone
 // the hero's 24px, the size of the article's own largest headings there (an 86-character question took six lines at
 // 28px).
+// A split hero's title has half the row (the copy beside the photo, the competitor's column ratio in the site's sheet):
+// on a desktop it may take one more line, as a phone's narrow column takes four (aloha 2026-11-17: long titles over a
+// competitor's large section headings ran to three lines in a 648px column whatever the grid).
+export const SPLIT_HERO_FIT = Object.freeze({ desktop: { lines: 3, minPx: 36 }, phone: { lines: 4, minPx: 24 } });
 export const POST_TITLE_FIT = Object.freeze({ desktop: { lines: 2, minPx: 28 }, phone: { lines: 4, minPx: 24 } });
 // Section headings: past three lines the audit warns (scripts/audit-authoring-layout.mjs section_heading_lines).
 export const SECTION_HEADING_MAX_LINES = 3;
@@ -26,9 +30,10 @@ export const WRAP_MARGIN = 1.05;
 // Average character widths (em, spaces included) where the competitor's own title could not be measured, by kind of
 // family and case. Conservative: at the wide end of common faces, so a title is a little small rather than one line
 // too long. Measured for reference: Josefin Sans bold caps 0.60-0.66, Georgia mixed case 0.50-0.53, Inter/Helvetica
-// mixed case 0.52-0.56.
+// mixed case 0.52-0.56, Montserrat bold mixed case 0.595 (Staylumen 2026-11-17: its solution titles in Montserrat 700,
+// fitted at 0.57 to two lines, took three: "Airbnb Booking Management" ran 15.6em where 14.96 was allowed).
 export const DEFAULT_CHAR_EM = Object.freeze({
-  sans: { upper: 0.68, mixed: 0.57 },
+  sans: { upper: 0.68, mixed: 0.6 },
   serif: { upper: 0.7, mixed: 0.55 },
   mono: { upper: 0.62, mixed: 0.62 },
 });
@@ -75,16 +80,10 @@ export const wrapEmFor = (heroText = null) => charEmFor(heroText) * (heroText?.t
 
 const words = (text) => String(text ?? '').trim().split(/\s+/).filter(Boolean);
 
-// Whether a page's lead stays on its hero photo: while it is about as long as the competitor's (heroText.leadWords,
-// measured at capture) or a short line; a longer one opens the page under the hero instead, word for word (owner
-// 2026-11-12: "副标题是不是太长 你看看竞品的": Concord's mastheads carry their title alone, ours a 20-word paragraph).
-export const HERO_LEAD_SLACK = 8;
-/** @param {string[]} [lead] @param {{ leadWords?: number } | null} [heroText] */
-export function heroLeadShown(lead = [], heroText = null) {
-  const competitor = heroText?.leadWords;
-  if (typeof competitor !== 'number') return true;
-  return lead.reduce((sum, paragraph) => sum + words(paragraph).length, 0) <= Math.max(competitor * 1.5, competitor + HERO_LEAD_SLACK);
-}
+// A hero's lead is never moved off it by the competitor's lead length (the rule that did, HERO_LEAD_SLACK, is gone:
+// site13 claude-seo audit 2026-11-17, M-10, the home lead with the main keyword fell out of the first screen; owner:
+// claude-seo over the competitor's look). PageHero.astro sets it under the title on every page; the layout audit
+// reports one too long for the first screen (hero_lead_long, lib/visual-checks.mjs foldProblems).
 
 // The lines a title wraps to when a line holds `capacity` characters (greedy, as browsers wrap: a word longer than a
 // line takes a line of its own).
@@ -137,6 +136,17 @@ export function predictLines(text, { columnPx, sizePx, charEm }) {
   return wrapLines(text, Math.floor(columnPx / (sizePx * charEm))).length;
 }
 
+// A hero with the enquiry form beside its copy (PageHero.astro media-form; patterns.css: 7fr and 5fr of the 1152px
+// container, a 2.5rem gap) leaves the title about 650px, and the column cannot widen past the form. A title that runs
+// over the desktop's two lines there even at the floor takes the hero's whole row and the form goes under the copy
+// (Staylumen's Scottsdale page, 2026-11-16: 68 characters, three lines beside the form).
+export const FORM_HERO_TITLE_PX = Math.round(((1152 - 40) * 7) / 12);
+/** @param {string} text @param {{ charEm: number, columnPx?: number }} options */
+export function titleNeedsRow(text, { charEm, columnPx = FORM_HERO_TITLE_PX }) {
+  if (!words(text).length) return false;
+  return predictLines(text, { columnPx, sizePx: HERO_FIT.desktop.minPx, charEm }) > HERO_FIT.desktop.lines;
+}
+
 // The custom properties a fitted title's box carries (template.css [data-heading-fit]): the line width in ems at the
 // desktop and the phone limit, and the floors. The stylesheet does the division by the box's width.
 /** @typedef {{ desktop: { lines: number, minPx: number }, phone: { lines: number, minPx: number } }} FitRule */
@@ -168,7 +178,8 @@ export function headingLineIssues(result, { article = false } = {}) {
   const base = { desktop: HERO_FIT.desktop.lines, mobile: HERO_FIT.phone.lines }[result.viewport];
   if (!base || !result.headingLines) return { failures, warnings };
   const limit = base + (article ? ARTICLE_EXTRA_LINES : 0);
-  for (const heading of result.headingLines.h1 ?? []) if (heading.lines > limit) failures.push({ ...at, issue: 'h1_lines', value: heading.text, lines: heading.lines, maximum: limit });
+  const allowed = (heading) => (heading.split && result.viewport === 'desktop' ? Math.max(limit, SPLIT_HERO_FIT.desktop.lines) : limit);
+  for (const heading of result.headingLines.h1 ?? []) if (heading.lines > allowed(heading)) failures.push({ ...at, issue: 'h1_lines', value: heading.text, lines: heading.lines, maximum: allowed(heading) });
   // The page title is the largest heading on the page: one smaller than a section heading reads upside down
   // (heading_scale_inverted; the hero floor in template.css keeps it a step above). Desktop and phone, as the lines.
   const title = (result.headingLines.h1 ?? [])[0];
@@ -197,6 +208,6 @@ export function measureHeadingLines() {
     const style = getComputedStyle(element);
     return box.width > 0 && box.height > 0 && style.visibility !== 'hidden' && style.display !== 'none' && !(element.parentElement?.closest('details:not([open])') && !element.closest('summary'));
   };
-  const read = (selector) => [...document.querySelectorAll(selector)].filter((element) => element.textContent.trim() && shown(element)).map((element) => ({ text: element.textContent.trim().replace(/\s+/g, ' ').slice(0, 80), lines: lines(element), fontPx: Number.parseFloat(getComputedStyle(element).fontSize) || 0 }));
+  const read = (selector) => [...document.querySelectorAll(selector)].filter((element) => element.textContent.trim() && shown(element)).map((element) => ({ text: element.textContent.trim().replace(/\s+/g, ' ').slice(0, 80), lines: lines(element), fontPx: Number.parseFloat(getComputedStyle(element).fontSize) || 0, ...(element.closest('.page-hero[data-variant="media-split"]') ? { split: true } : {}) }));
   return { h1: read('main h1'), sections: read('main h2') };
 }

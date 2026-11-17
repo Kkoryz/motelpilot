@@ -78,6 +78,13 @@ export function restoreFrom(root, commit, writes) {
   return changed;
 }
 
+// The files that differ between a commit and HEAD, repository paths with forward slashes (none without the commit).
+export function changedSince(root, commit) {
+  if (!commit) return [];
+  const result = git(root, 'diff', '--name-only', commit, 'HEAD');
+  return result.status === 0 ? result.stdout.split('\n').map((line) => line.trim()).filter(Boolean) : [];
+}
+
 // Commits everything that changed (nothing when nothing did). Returns the new commit's short id, or null. A failed
 // add throws: unseen, it reads as nothing to commit (site10's stale index.lock).
 export function commitSite(root, message) {

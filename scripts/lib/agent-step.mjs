@@ -7,7 +7,9 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { runCodex, usageLimit } from './codex-exec.mjs';
+import { usageLimit } from './codex-exec.mjs';
+// The site's agent (lib/judge-exec.mjs: Claude by default, Codex where site.json says so).
+import { runJudge } from './judge-exec.mjs';
 import { writeJson } from './json-io.mjs';
 
 // A judgment run reads many crops and may build the site: longer than an image run.
@@ -44,7 +46,7 @@ export const AGENT_UNAVAILABLE = 75;
 // step's log, in run order. A step with `reply` ((values, json) -> { path, data }) gets its answer as the run's final
 // message, which this writes as UTF-8 JSON: the agent writes no file (writing JSON from a Windows shell cost runs
 // several turns and broke non-ASCII text).
-export async function runAgentStep({ step, root, log, codex = runCodex, concurrency = AGENT_CONCURRENCY }) {
+export async function runAgentStep({ step, root, log, codex = runJudge, concurrency = AGENT_CONCURRENCY }) {
   const instructions = await readFile(resolve(root, 'config/agent-steps', `${step.prompt}.md`), 'utf8');
   const runs = step.runs ? await step.runs(root) : [{ values: {}, images: [] }];
   const results = new Array(runs.length);
