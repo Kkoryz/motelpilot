@@ -37,6 +37,7 @@
     "apply:image-library": "node scripts/apply-image-library.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
     "preflight": "node scripts/preflight.mjs",
+    "check:prelaunch": "node scripts/prelaunch.mjs",
     "signoff": "node scripts/signoff.mjs",
     "proof:signoff": "node scripts/proof-signoff.mjs",
     "company": "node scripts/scaffold-site-company.mjs",

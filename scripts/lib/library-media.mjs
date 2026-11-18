@@ -14,7 +14,8 @@ export function libraryMedia(plan, usable = (entry) => entry.status === 'generat
   const phoneSource = (entry) => { const phone = phones.get(entry.id); return phone ? { sources: [{ media: PHONE_MEDIA, src: phone.web.src, srcset: phone.web.srcset, width: phone.web.width, height: phone.web.height }] } : {}; };
   const media = (entry) => ({ src: entry.web.src, srcset: entry.web.srcset, width: entry.web.width, height: entry.web.height, alt: entry.alt, category: entry.category, ...(entry.topic ? { topic: entry.topic } : {}), ...(entry.intent ? { intent: entry.intent.key } : {}), ...phoneSource(entry) });
   const byCategory = {};
-  for (const entry of plan.entries.filter((item) => usable(item) && !item.phoneOf)) {
+  // A page's own opening photo (an ask: serviceHeroes) is that page's alone, never a turn of the site-wide heroes.
+  for (const entry of plan.entries.filter((item) => usable(item) && !item.phoneOf && !(item.kind === 'hero' && item.intent?.id === SERVICE_HERO))) {
     const pools = (byCategory[entry.category] ||= {});
     (pools[entry.kind] ||= []).push(media(entry));
   }

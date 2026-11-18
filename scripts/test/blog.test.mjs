@@ -129,6 +129,60 @@ test('publish gates: reviewed, linked to the site, figures from facts or a sourc
   assert.equal(validatePost({ ...post(), dateModified: '2026-08-01' }).length, 1);
 });
 
+test('publish gate: an article whose main search is a page\'s primary or secondary, or a published article\'s, is held (owner 2026-11-18)', () => {
+  const searches = [
+    { route: '/leggings-manufacturer/', role: 'primary', query: 'leggings manufacturer' },
+    { route: '/leggings-manufacturer/', role: 'secondary', query: 'custom leggings manufacturers' },
+    { route: '/blog/older/', role: 'primary', query: 'moq for sportswear' },
+  ];
+  const gate = (keyword, cannibal) => blogGates(post({ geo: { run: 'r', keyword } }), { facts, pages: sitePages, searches, ...(cannibal ? { cannibal } : {}) });
+  assert.match(gate('Leggings Manufacturers').failures.join('\n'), /main search "Leggings Manufacturers" is taken: the same search as \/leggings-manufacturer\/'s primary "leggings manufacturer"/);
+  assert.match(gate('manufacturer of custom leggings').failures.join('\n'), /secondary "custom leggings manufacturers"/, 'any word order, plural, function words aside');
+  assert.match(gate('MOQ for sportswear').failures.join('\n'), /\/blog\/older\/'s primary/);
+  assert.deepEqual(gate('leggings fabric weight').failures, [], 'a search no page or article has');
+  assert.deepEqual(gate('leggings manufacturer', 'report').failures, [], '"report": a warning');
+  assert.match(gate('leggings manufacturer', 'report').warnings.join('\n'), /is taken/);
+  assert.deepEqual(gate('leggings manufacturer', 'off').failures, []);
+  // The same article published again (an update) is not its own clash; no searches given, no gate.
+  assert.deepEqual(blogGates(post({ geo: { run: 'r', keyword: 'moq for sportswear' } }), { facts, pages: sitePages, searches: [{ route: '/blog/moq-for-custom-sportswear/', role: 'primary', query: 'moq for sportswear' }] }).failures, []);
+  assert.deepEqual(blogGates(post({ geo: { run: 'r', keyword: 'leggings manufacturer' } }), { facts, pages: sitePages }).failures, []);
+  assert.match(blogGates(post({ geo: { run: 'r' } }), { facts, pages: sitePages, searches }).warnings.join(), /no main search recorded/, 'an article without one is said to be unchecked');
+});
+
+test('the queue holds an article whose main search is taken, with its reason, and publishes the rest; site.json switches it', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'blog-cannibal-'));
+  await mkdir(join(root, 'src/data'), { recursive: true });
+  await mkdir(join(root, 'content/blog-queue/approved'), { recursive: true });
+  await writeFile(join(root, 'src/data/authoring-pages.json'), JSON.stringify(sitePages.map((item) => ({ ...item, id: item.route, jsonLd: [], blocks: [{ id: 'i', type: 'intro', heading: 'H', paragraphs: ['P'] }] }))));
+  // The Site Factory snapshot, committed under inputs/ and named by another machine's path (the publishing workflow's
+  // checkout): found inside the site.
+  await mkdir(join(root, 'inputs/freeze/s07-x'), { recursive: true });
+  await writeFile(join(root, 'inputs/freeze/s07-x/pages.json'), JSON.stringify({ pages: [{ page_id: 'leg', url: '/leggings-manufacturer/', primary_query: 'leggings manufacturer' }] }));
+  await writeFile(join(root, 'inputs/freeze/s07-x/keywords.json'), JSON.stringify({ pages: [{ id: 'leg', primary: { query: 'leggings manufacturer' }, secondaries: [{ query: 'wholesale leggings supplier' }] }] }));
+  await writeFile(join(root, 'site.json'), JSON.stringify({ siteFactory: 'C:/elsewhere/site/inputs/freeze/s07-x' }));
+  const queued = { 'a-taken': ['wholesale leggings suppliers', 'cotton fleece hoodies dyed indigo'], 'b-free': ['how to start a sportswear brand', 'nylon swim shorts printed coral'], 'c-twin': ['How to start a sportswear brand', 'merino base layers knitted grey'] };
+  for (const [slug, [keyword, topic]] of Object.entries(queued)) {
+    const [a, b, c, d, e] = topic.split(' ');
+    await writeFile(join(root, `content/blog-queue/approved/${slug}.json`), JSON.stringify(post({
+      slug, geo: { run: slug, keyword }, title: `How are ${a} ${b} ${c} made?`, seo: { title: `${a} ${b} ${c} guide`, description: `${post().seo.description} ${topic}` },
+      lead: [`${a} ${b} ${c} start as ${e} ${d} samples: see [samples](/solutions/samples/).`],
+      sections: [{ heading: `Which ${a} works?`, paragraphs: [`The ${a} ${c} line at [leggings](/leggings-manufacturer/) shows ${d} ${e}.`] }, { heading: `Can ${b} vary?`, paragraphs: [`${b} ${c} vary by ${e}, as [wholesale](/wholesale-leggings/) lists.`] }],
+      datePublished: undefined, dateModified: undefined,
+    })));
+  }
+  const { published, report } = await publishQueued({ root, limit: 5, now: new Date('2026-11-18T10:00:00Z') });
+  assert.equal(published, 1, JSON.stringify(report));
+  assert.match(report.find((item) => item.slug === 'a-taken').failures.join(), /\/leggings-manufacturer\/'s secondary "wholesale leggings supplier"/);
+  assert.match(report.find((item) => item.slug === 'c-twin').failures.join(), /\/blog\/b-free\/'s primary/, 'an article published earlier in the same run counts');
+  assert.deepEqual((await readdir(join(root, 'content/blog-queue/approved'))).sort(), ['a-taken.json', 'c-twin.json']);
+  assert.match(JSON.stringify(JSON.parse(await readFile(join(root, 'content/blog-queue/report.json'), 'utf8')).report), /is taken/);
+  // "report": published with a warning.
+  await writeFile(join(root, 'site.json'), JSON.stringify({ siteFactory: 'C:/elsewhere/site/inputs/freeze/s07-x', blogPublish: { cannibal: 'report' } }));
+  const reported = await publishQueued({ root, limit: 5, now: new Date('2026-11-18T11:00:00Z') });
+  assert.equal(reported.published, 2);
+  assert.match(reported.report.map((item) => item.warnings.join()).join(), /is taken/);
+});
+
 test('the queue publishes a reviewed article that passes and holds one that fails', async () => {
   const root = await mkdtemp(join(tmpdir(), 'blog-'));
   await mkdir(join(root, 'src/data'), { recursive: true });

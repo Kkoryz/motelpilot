@@ -112,6 +112,10 @@ export function allocateSite({ pages, components, sitePhotos = [], isBuilt = () 
     // linked: the category of the page a card links to. intent: the photo the section asks for (Site Factory's visual:
     // what it shows, where), made for this position alone (image-plan.mjs) and found by its key.
     const take = (kind, topic, blockId, linked = null, frames = null, intent = null) => {
+      // A position the site names a photo for (site.json pagePhotos[route][block id]: a photo wall the budget added has no
+      // section visual of its own) asks for that photo, as a section's visual does.
+      const named = !intent && typeof media.pagePhotos?.[page.route]?.[blockId] === 'string' ? media.pagePhotos[page.route][blockId] : null;
+      if (named) intent = { id: `page-photo-${blockId}`, type: 'photo', content: named, setting: null, caption: null, purpose: 'the photo the site names for this position', section: topic ?? null };
       if (intent && !placeholders.has(kind)) {
         const key = intentKey(page.route, intent.id);
         const own = library.find((photo) => photo.intent === key);

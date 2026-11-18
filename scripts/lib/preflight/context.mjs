@@ -46,6 +46,7 @@ export async function loadContext(root) {
     proof: await data('src/data/site-proof.json'),
     redirects: await data('src/data/redirects.json', []),
     crossSite: await data('docs/research/cross-site.json'),
+    prelaunch: await data('docs/research/prelaunch/summary.json'),
     // Whether these sources are the audited and reviewed ones (lib/verified-build.mjs).
     verification: await verifiedNow(root),
     // The site's latest claude-seo audit (scripts/claude-seo-audit.mjs: its findings and their checks) and the key of

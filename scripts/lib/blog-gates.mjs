@@ -1,9 +1,11 @@
 // Checks a blog post must pass before it is published (docs/research/BLOG_METHOD.md, section E). Failures block;
 // warnings are reported to the writer. Only what can be judged from the package, the site and the company facts is
-// checked here; topic selection (search results, cannibalisation by query) happens before writing.
+// checked here; topic selection (search results, cannibalisation by query) happens before writing, and the main search
+// is held once more against the site's searches when the caller passes them (the publish gate).
 
 import { NEAR_DUPLICATE, minhash, similarity, shingles, textWords } from './content-fingerprint.mjs';
 import { inlineLinks, plainText, postWords, sectionTexts, validatePost } from './blog.mjs';
+import { cannibalHits, searchIndex } from './search-key.mjs';
 
 const TITLE_MAX = 60;
 const DESCRIPTION = [70, 160];
@@ -32,11 +34,23 @@ export function termOverlap(left, right) {
 const numbersIn = (text) => [...plainText(text).matchAll(/\d+(?:[.,]\d+)?/g)].map((match) => match[0].replace(',', '.'));
 
 // facts: Map fact_id -> { text, approved } (the approved company facts); pages: the site's built pages.
-export function blogGates(post, { facts = new Map(), pages = [], today = new Date() } = {}) {
+// searches: the site's searches [{ route, role, query }] (lib/site-keywords.mjs: the pages' primaries and secondaries,
+// the published articles' main searches), or null; cannibal: what a taken main search does (site.json
+// blogPublish.cannibal, lib/prelaunch/config.mjs blogCannibalMode): "block" holds the article, "report" warns, "off".
+export function blogGates(post, { facts = new Map(), pages = [], today = new Date(), searches = null, cannibal = 'block' } = {}) {
   const failures = [];
   const warnings = [];
   failures.push(...validatePost(post, post?.slug ?? 'post'));
   if (failures.length) return { failures, warnings };
+  // The second cannibalisation check, before publishing (owner 2026-11-18; the first is the blog pick's, in Site
+  // Factory): the article's main search (geo.keyword) is no page's primary or secondary and no published article's
+  // main search, by the pick's own rule (lib/search-key.mjs cannibalHits).
+  const keyword = post.geo?.keyword?.trim();
+  if (searches && keyword && cannibal !== 'off') {
+    for (const hit of cannibalHits({ route: `/blog/${post.slug}/`, query: keyword }, searchIndex(searches))) {
+      (cannibal === 'block' ? failures : warnings).push(`main search "${keyword}" is taken: the same search as ${hit.route}'s ${hit.role} "${hit.query}" (cannibalisation)`);
+    }
+  } else if (searches && cannibal !== 'off') warnings.push('no main search recorded (geo.keyword): not held against the site\'s searches');
   if (post.status !== 'published') failures.push('status must be published');
   // The review: a GEO article's AI review (lib/blog-review.mjs, by "ai-review"), or a person's for an article written
   // by hand.

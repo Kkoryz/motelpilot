@@ -2,7 +2,9 @@
 
 // After launch: publishes reviewed articles from the queue, a few at a time, on the days site.json blogPublish names
 // (lib/blog-schedule.mjs). A package in content/blog-queue/approved (seo-site-blog-post-v1, with review.by and
-// review.at: a GEO article's AI review, lib/blog-review.mjs, put it there) is checked again (lib/blog-gates.mjs);
+// review.at: a GEO article's AI review, lib/blog-review.mjs, put it there) is checked again (lib/blog-gates.mjs; its
+// main search held against the pages' primaries and secondaries and the published articles' main searches, site.json
+// blogPublish.cannibal: "block" by default, "report" or false);
 // one that passes joins src/data/blog-posts.json with today's publication date and moves to content/blog-queue/published,
 // one that fails stays, with its report in content/blog-queue/report.json. An update of a published post (same slug)
 // keeps its publication date and moves dateModified only when the article's content changed. The placeholder posts
@@ -17,6 +19,8 @@ import { blogSchedule, dueToday } from './lib/blog-schedule.mjs';
 import { cliArgs, runMain } from './lib/cli.mjs';
 import { companyFacts } from './lib/facts.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
+import { blogCannibalMode } from './lib/prelaunch/config.mjs';
+import { pageSearches, postSearches } from './lib/site-keywords.mjs';
 import { loadSitePages } from './lib/site-pages.mjs';
 
 const contentHash = (post) => createHash('sha256').update(JSON.stringify({ ...post, datePublished: null, dateModified: null, review: null })).digest('hex');
@@ -33,6 +37,11 @@ export async function publishQueued({ root = process.cwd(), limit = 1, now = new
   const placeholders = current.filter((post) => post.status === 'placeholder');
   const publishedPost = (slug) => posts.find((item) => item.slug === slug && item.status === 'published');
   const facts = await companyFacts(root);
+  // The cannibalisation gate (site.json blogPublish.cannibal, "block" by default): the pages' searches from the Site
+  // Factory snapshot, the published articles' as they stand when each one is checked (one published earlier in this
+  // run included).
+  const cannibal = blogCannibalMode(await readJson(resolve(root, 'site.json'), {}));
+  const { source, searches: pageKeywords } = cannibal === 'off' ? { source: null, searches: [] } : await pageSearches(root);
   const files = (await readdir(resolve(queue, 'approved'))).filter((file) => file.endsWith('.json') && (!only || only.includes(file.slice(0, -'.json'.length)))).sort();
   const report = [];
   let published = 0;
@@ -44,7 +53,9 @@ export async function publishQueued({ root = process.cwd(), limit = 1, now = new
     post.datePublished = before?.datePublished ?? stamp;
     post.dateModified = before && contentHash(before) === contentHash(post) ? before.dateModified : stamp;
     const pages = (await loadSitePages(root)).filter((page) => page.status !== 'placeholder');
-    const { failures, warnings } = blogGates(post, { facts, pages, today: new Date(now.getTime() + 1000) });
+    const searches = [...pageKeywords, ...postSearches(posts.filter((item) => item.status === 'published'))];
+    const { failures, warnings } = blogGates(post, { facts, pages, today: new Date(now.getTime() + 1000), searches, cannibal });
+    if (cannibal !== 'off' && !source) warnings.push('no Site Factory keywords (site.json siteFactory): the main search was held against the published articles only');
     report.push({ file, slug: post.slug, failures, warnings });
     if (failures.length) continue;
     posts = [...posts.filter((item) => item.slug !== post.slug), post];

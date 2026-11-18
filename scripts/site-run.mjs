@@ -270,6 +270,12 @@ export function steps(site, { coreSource = null } = {}) {
     // repair then read as "no failures". The agent repairs only the failures of the site's stylesheet (SITE_CSS_ISSUES);
     // any other stops the run with its report.
     { id: 'audits', kind: 'preview', inputs: ['dist', 'docs/research/analysis/section-modules.json', 'docs/research/raw/reference-density.json', 'docs/research/analysis/design-lock.json', 'code:scripts/audit-authoring-layout.mjs', 'code:scripts/audit-navigation-shell.mjs'], repair: { prompt: 'repair-audits', writes: WRITES.repair, problems: auditProblems, agentFixes: siteCssProblem, report: 'docs/research/authoring-layout-audit.json', rebuild: [pnpm('build')], restart: (site.images ?? 'generate') === 'generate' ? 'images' : 'audits', restartFor: (changed) => (changed.includes('src/data/template-variants.json') ? null : 'audits') }, run: [node('audit-navigation-shell.mjs', `http://127.0.0.1:${site.port}/`), node('audit-authoring-layout.mjs', `http://127.0.0.1:${site.port}/`)], keepGoing: true },
+    // The prelaunch checks after the audits (owner 2026-11-18, scripts/prelaunch.mjs): links, cannibalisation,
+    // near-duplicate pages, the owner's materials list, technical checks, the site-wide conflict check's place; each
+    // switched in site.json prelaunch, reports by default, no model call (a second or two, so every run). Here it only
+    // reports (--no-hold): a check set to "block" holds the release, not the run before the design review; the release
+    // step runs them again on the release build, before the preflight, which holds on a blocked summary.
+    { id: 'prelaunch', kind: 'auto', always: true, inputs: [], run: [node('prelaunch.mjs', '--no-hold')] },
     // The design proofread against the competitor, section by section (design-review.mjs): new shots whenever the
     // build changes, a review of the longest and the shortest page of each page type on them (a page type the
     // competitor lacks beside its nearest), and a gate that waits while a P0/P1 finding is open.
@@ -298,7 +304,7 @@ export function steps(site, { coreSource = null } = {}) {
     { id: 'geo-blogs', kind: 'auto', models: true, always: true, inputs: [], run: [node('geo-blogs.mjs')], waitsOnExit: 'the GEO blog posts: the GEO module (site.json geoBlog.dir or GEO_BLOG_DIR), a sign-in, or a quote over the owner\'s limit' },
     // The release build replaces dist (without the reference placeholders), so the preflight judges what would ship;
     // the development build is made again afterwards, or the site's preview would show broken images.
-    { id: 'release', kind: 'auto', certify: true, raw: true, inputs: ['src', 'public', 'docs/research/image-plan.json'], run: [node('build-release.mjs'), node('build-nginx-config.mjs'), node('sf-report.mjs'), node('check-cross-site.mjs', '--hold'), node('handoff.mjs'), node('preflight.mjs'), pnpm('build')], keepGoing: true, waitsOnExit: 'the owner: the launch preflight holds (docs/research/launch-preflight.json)' },
+    { id: 'release', kind: 'auto', certify: true, raw: true, inputs: ['src', 'public', 'docs/research/image-plan.json'], run: [node('build-release.mjs'), node('build-nginx-config.mjs'), node('sf-report.mjs'), node('check-cross-site.mjs', '--hold'), node('handoff.mjs'), node('prelaunch.mjs'), node('preflight.mjs'), pnpm('build')], keepGoing: true, waitsOnExit: 'the owner: the launch preflight holds (docs/research/launch-preflight.json)' },
   ];
 }
 

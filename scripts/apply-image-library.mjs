@@ -46,6 +46,8 @@ export async function applyImageLibrary({ root = process.cwd() } = {}) {
     routePools,
     routeCategories,
     ...(routeThemes ? { routeThemes } : {}),
+    // The positions the site names a photo for (site.json pagePhotos), so the renderer takes the photo made for each.
+    ...(plan.pagePhotos ? { pagePhotos: plan.pagePhotos } : {}),
     // Classes that wait for real photos render as image slots (never filled with another class's photo).
     placeholders: plan.placeholders ?? [],
   };

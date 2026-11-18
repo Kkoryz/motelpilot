@@ -222,3 +222,27 @@ test('an item nobody wears is planned as itself, never a model wearing it (aloha
   const items = subjects(plan(['packaging']));
   assert.ok(items.length && items.every((subject) => !/model|wearing/.test(subject)), items.join(' | '));
 });
+
+test('a service trade\'s photos keep its own subjects though nothing on its pages is worn (RateHarbor 2026-11-18)', () => {
+  const pages = [page('/ota-optimization/', 'solution', [split('a')]), page('/', 'home')];
+  const own = 'a revenue analyst reviewing a pricing dashboard on a monitor, the figures out of focus';
+  const serviceBriefs = { ...service, placeholderKinds: [], subjects: { ...service.subjects, lifestyle: [own], product: [own], hero: [`${own}, with some open space on one side for a headline`] } };
+  const plan = planLibrary({ pages, components, line: 'hotel-rm', briefs: serviceBriefs, styleRefs, ownRoutes: new Set(['/ota-optimization/']), notWorn: ['ota optimization', 'general'] });
+  const subjects = plan.entries.filter((entry) => ['hero', 'product', 'lifestyle'].includes(entry.kind)).map((entry) => entry.subject);
+  assert.ok(subjects.length && subjects.every((subject) => subject.startsWith('a revenue analyst')), subjects.join(' | '));
+});
+
+test('a page the site names photos for opens on its own hero and takes its own photo in a named position (coordinator 2026-11-18)', () => {
+  const about = { route: '/about-us/', pageType: 'about', status: 'authored', hero: { heading: 'About us' }, blocks: [split('a')] };
+  const pages = [about, page('/', 'home')];
+  const named = { '/about-us/': { hero: 'a bright swimwear sample room with finished suits on rails and a pattern table, with some open space on one side for a headline', a: 'pattern makers checking a swimsuit sample on a dress form' } };
+  const plan = planLibrary({ pages, components, line: 'swimwear', briefs: { ...briefs, pagePhotos: named }, styleRefs });
+  const hero = plan.entries.find((entry) => entry.intent?.route === '/about-us/' && entry.kind === 'hero');
+  assert.equal(hero?.subject, named['/about-us/'].hero);
+  assert.ok(plan.entries.some((entry) => entry.intent?.route === '/about-us/' && entry.subject === named['/about-us/'].a), plan.entries.filter((entry) => entry.intent).map((entry) => entry.id).join(', '));
+  assert.deepEqual(plan.pagePhotos, named);
+  const made = { ...plan, entries: plan.entries.map((entry) => ({ ...entry, status: 'generated', web: { src: `/media/photos/${entry.id}-960.webp`, srcset: '', width: 960, height: 640 }, alt: entry.id })) };
+  const media = libraryMedia(made);
+  assert.equal(media.heroByRoute['/about-us/'].src, `/media/photos/${hero.id}-960.webp`);
+  assert.ok(!(media.hero?.src ?? '').includes(hero.id), 'not a turn of the site-wide heroes');
+});

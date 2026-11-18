@@ -186,7 +186,7 @@ test('the release step judges the release build, then makes the development buil
   assert.equal(release.keepGoing, true);
   // The comparison with the owner's other sites and the handoff are made by the step itself, before the preflight that
   // reads them (Fable's 11-14 plan, item 11: the preflight held until a person ran check:cross-site by hand).
-  assert.deepEqual(release.run.map((command) => (command[0] === 'node' ? command.slice(1).join(' ') : command.at(-1))), ['scripts/build-release.mjs', 'scripts/build-nginx-config.mjs', 'scripts/sf-report.mjs', 'scripts/check-cross-site.mjs --hold', 'scripts/handoff.mjs', 'scripts/preflight.mjs', 'build']);
+  assert.deepEqual(release.run.map((command) => (command[0] === 'node' ? command.slice(1).join(' ') : command.at(-1))), ['scripts/build-release.mjs', 'scripts/build-nginx-config.mjs', 'scripts/sf-report.mjs', 'scripts/check-cross-site.mjs --hold', 'scripts/handoff.mjs', 'scripts/prelaunch.mjs', 'scripts/preflight.mjs', 'build']);
 });
 
 test("a page nearly the same as one on the owner's other sites holds the release for the owner, it does not fail it", async () => {

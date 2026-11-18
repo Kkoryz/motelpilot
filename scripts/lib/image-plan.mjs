@@ -55,8 +55,16 @@ const SERVICE_PAGE_TYPES = new Set(['solution', 'place']);
 export function serviceHeroes(pages, components, briefs, ownRoutes = null, line = '') {
   const template = briefs.serviceSubjects?.hero;
   const heroes = new Map();
+  // A page's own opening photo the site names (site.json pagePhotos[route].hero, any page type; coordinator 2026-11-18:
+  // the about, FAQ and case study pages opened on the line's model, a quote page on aloha shirts worn), made as its ask.
+  for (const page of pages) {
+    const content = briefs.pagePhotos?.[page.route]?.hero;
+    if (!content || page.status === 'placeholder' || !pageMediaDemand(page, components).hero) continue;
+    heroes.set(page.route, { category: pageCategory(page, briefs, ownRoutes), intent: { key: intentKey(page.route, SERVICE_HERO), route: page.route, id: SERVICE_HERO, content, setting: null, caption: page.hero?.heading ?? null, purpose: "the page's opening photo, under or beside its title: it shows what the page is about", section: page.hero?.heading ?? null } });
+  }
   if (!template) return heroes;
   for (const page of pages) {
+    if (heroes.has(page.route)) continue;
     if (!SERVICE_PAGE_TYPES.has(page.pageType) || ownRoutes?.has(page.route) || page.status === 'placeholder' || !pageMediaDemand(page, components).hero) continue;
     const category = pageCategory(page, briefs, new Set([page.route]));
     if (category === GENERAL) continue;
@@ -106,7 +114,7 @@ const sameIntent = (left, right) => JSON.stringify(left ?? null) === JSON.string
 export function photoDemand({ pages, components, briefs, ownRoutes = null, nav = null, line = null }) {
   const routes = Object.fromEntries(pages.map((page) => [page.route, pageCategory(page, briefs, ownRoutes)]));
   const built = new Set(pages.map((page) => page.route));
-  const probe = allocateSite({ pages, components: { ...components, media: { placeholders: briefs.placeholderKinds ?? [], routeCategories: routes, routeThemes: routeThemes(pages, routes, briefs, nav, line) } }, isBuilt: (href) => !href.startsWith('/') || built.has(href) });
+  const probe = allocateSite({ pages, components: { ...components, media: { placeholders: briefs.placeholderKinds ?? [], routeCategories: routes, routeThemes: routeThemes(pages, routes, briefs, nav, line), ...(briefs.pagePhotos ? { pagePhotos: briefs.pagePhotos } : {}) } }, isBuilt: (href) => !href.startsWith('/') || built.has(href) });
   return probe.unfilled.map(({ route, status, blockId, kind, category, topic, intent = null }) => ({ route, status, blockId, kind, category, topic, intent }));
 }
 
@@ -244,7 +252,9 @@ export function planLibrary({ pages, components, line, lineName = null, briefs, 
       const scenePool = pool.length < kindTotals[kind] ? [...pool, ...extra] : pool;
       // An item nobody wears is planned as itself, never "a model wearing packaging" (aloha 2026-11-18, claude-seo audit 3
       // M-17: the packaging page's lifestyle photos, planned so, came out as boxes and bags in a pool and on grass).
-      const itemOnly = new Set(notWorn).has(category) && PERSON_KINDS.includes(kind) && kind !== 'portrait' && briefs.itemSubjects;
+      // A service trade's photos are its work and its deliverables already (classSubjects): nobody wears anything there, and
+      // its own subjects stand (RateHarbor 2026-11-18: every photo had become "the handover pack of a finished job").
+      const itemOnly = briefs.photoClasses?.default !== 'service' && new Set(notWorn).has(category) && PERSON_KINDS.includes(kind) && kind !== 'portrait' && briefs.itemSubjects;
       const subjects = itemOnly ? briefs.itemSubjects[kind] ?? briefs.itemSubjects.product : classSubjects(kind);
       // A product under a children's menu item is one for children whatever its own name (page-theme.mjs).
       const productOnly = PERSON_KINDS.includes(kind) && (forChildren(category, briefs) || theme?.id === CHILDREN_THEME);
@@ -398,7 +408,7 @@ export function planLibrary({ pages, components, line, lineName = null, briefs, 
   // Each photo's class, decided here before any photo is made (lib/photo-class.mjs): what the text check, the samples
   // and the handoff's 必须实拍替换 list read.
   const classed = entries.map((entry) => ({ ...entry, photoClass: photoClassOf(entry, briefs) }));
-  return { schemaVersion: IMAGE_PLAN_SCHEMA, line, ...(briefs.trade && briefs.trade !== 'apparel' ? { trade: briefs.trade } : {}), siteKind: briefs.siteKind, productOnlySubjects: briefs.productOnlySubjects, variety: attributes, routes, ...(Object.keys(themes).length ? { themes } : {}), placeholders, entries: [...classed, ...retired] };
+  return { schemaVersion: IMAGE_PLAN_SCHEMA, line, ...(briefs.trade && briefs.trade !== 'apparel' ? { trade: briefs.trade } : {}), siteKind: briefs.siteKind, productOnlySubjects: briefs.productOnlySubjects, variety: attributes, routes, ...(Object.keys(themes).length ? { themes } : {}), ...(briefs.pagePhotos ? { pagePhotos: briefs.pagePhotos } : {}), placeholders, entries: [...classed, ...retired] };
 }
 
 // Statuses of a photo sent back to generation.

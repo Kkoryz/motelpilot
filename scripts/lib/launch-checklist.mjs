@@ -54,6 +54,7 @@ export const HOLDS = {
   nginx_csp_stale: ['template', '重新生成 Nginx 配置（pnpm build:nginx-config）并把安全头片段装到服务器：这一版的内联脚本不在内容安全策略（CSP）里，上线后会被浏览器拦下'],
   claude_seo_audit_missing: ['template', '发布构建还没跑 claude-seo 全盘审计（site-run 的 claude-seo-audit 步骤），或审计的不是这一版发布构建和服务器配置'],
   claude_seo_audit_blocking: ['template', 'claude-seo 审计里代码核对和模型复核都成立的 Critical / High 问题：逐条处理（问题清单 findings.json、报告和行动计划在 docs/research/seo-audit-N/）'],
+  prelaunch_blocked: ['template', '上线前验收里设成"卡发布"的项目有问题：按 docs/research/prelaunch/summary.md 逐项处理，或在 site.json 的 prelaunch 里把它改回 "report"'],
   contact_path_missing: ['owner', '联系页上还没有邮箱、电话或 WhatsApp，也没有接好的询盘表单：提供联系方式或接好表单'],
 };
 

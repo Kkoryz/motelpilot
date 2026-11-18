@@ -16,6 +16,9 @@ export const RELEASE_CHECKS = [
   // a doorway or scaled content (Google spam policies). A check that has not run holds, like any other gate.
   { code: 'cross_site_not_checked', level: 'hold', run: (ctx) => !ctx.crossSite && { detail: 'not compared with the owner\'s other sites yet (pnpm check:cross-site)' } },
   { code: 'cross_site_duplicate', level: 'hold', run: (ctx) => ctx.crossSite && found(`pages nearly the same as a page on another of the owner's sites (similarity >= ${ctx.crossSite.threshold})`, ctx.crossSite.duplicates.map((item) => `${item.route} ~ ${item.host}${item.otherRoute} (${item.similarity})`)) },
+  // The prelaunch checks (scripts/prelaunch.mjs, docs/research/prelaunch/summary.json): only a check site.json
+  // prelaunch sets to "block" holds, with its issues; a report-only check never does, nor a summary not written yet.
+  { code: 'prelaunch_blocked', level: 'hold', run: (ctx) => ctx.prelaunch?.status === 'blocked' && found('prelaunch checks set to "block" have issues (docs/research/prelaunch/summary.md)', ctx.prelaunch.checks.filter((check) => check.status === 'blocked').map((check) => `${check.check}: ${check.issues} issue(s), ${check.report}`)) },
   // The server config this release is served by: the live release symlink, and no config for another host.
   { code: 'nginx_config_missing', level: 'hold', run: (ctx) => ctx.nginx && !ctx.nginx.own && { detail: `no deploy/nginx/${nginxHost(ctx)}.conf (run pnpm build:nginx-config)` } },
   { code: 'nginx_root_not_live_release', level: 'hold', run: (ctx) => ctx.nginx?.own && !/^\s*root \S+\/current;/m.test(ctx.nginx.own) && { detail: `deploy/nginx/${nginxHost(ctx)}.conf does not serve <deploy_path>/current (run pnpm build:nginx-config)` } },
