@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { createHash } from 'node:crypto';
 import test from 'node:test';
 
 import { blogBatch } from '../blog-batch.mjs';
 import { runV2 } from '../geo-blogs.mjs';
-import { flowHeld } from '../import-geo-article.mjs';
+import { flowFinal, flowHeld } from '../import-geo-article.mjs';
 import { BATCH_LOG, PROFILE_V2, batchDue, blogSiteProfile, isV2, writePosts, writeSchedule } from '../lib/blog-v2.mjs';
 
 const v2 = (work) => ({ siteFactory: 'D:/sf', project: 'D:/w/project', cache: 'D:/w/cache.sqlite3', work, geoDir: 'D:/geo-v2', claudeBin: 'C:/claude.exe' });
@@ -144,4 +145,32 @@ test('the site run\'s geo-blogs step writes what the site lacks of geoBlog.count
   assert.deepEqual(counts, [[2, true], [1, true]]);
   assert.equal(JSON.parse(await readFile(join(root, BATCH_LOG), 'utf8')).length, 2);
   assert.equal(await runV2(root, { ...site, geoBlog: { ...site.geoBlog, v2: { ...site.geoBlog.v2, siteFactory: join(root, 'none') } } }, { write }), 2);
+});
+
+test('a hand fix\'s recheck made of the article as it is now stands for the flow\'s final check; an older one does not', async () => {
+  const run = await mkdtemp(join(tmpdir(), 'blog-final-'));
+  const article = join(run, '06-article.natural.md');
+  await writeFile(article, '# A\n\n## B\n\nText.\n');
+  await writeFile(join(run, 'pipeline-report.json'), JSON.stringify({ final: { passed: false, held: [], gates: { figures: [] }, conflicts: { against_site: { R21: ['s1'] }, internal: [] } } }));
+  const at = (path, iso) => utimes(path, new Date(iso), new Date(iso));
+  await at(article, '2026-11-18T05:00:00Z');
+  assert.deepEqual(await flowFinal(run, article).then((found) => found.by), 'pipeline-report.json');
+  // a recheck written before the article's last edit is of another text
+  const recheck = join(run, 'handfix_1118.json');
+  await writeFile(recheck, JSON.stringify({ figures: [], sources: [], competitors: {}, replacements: [], links: {}, conflicts: { against_site: {}, internal: [] }, items: {}, passed: true }));
+  await at(recheck, '2026-11-18T04:59:00Z');
+  assert.match(flowHeld({ final: (await flowFinal(run, article)).final })[0], /conflicts: R21/);
+  await at(recheck, '2026-11-18T05:01:00Z');
+  const fixed = await flowFinal(run, article);
+  assert.equal(fixed.by, 'handfix_1118.json');
+  assert.deepEqual(flowHeld({ final: fixed.final }), []);
+  // an article hash decides over the time; a newer failing recheck wins over an older passing one
+  await writeFile(join(run, 'handfix_1119.json'), JSON.stringify({ article_sha256: 'other', passed: false, conflicts: {}, items: {} }));
+  assert.equal((await flowFinal(run, article)).by, 'handfix_1118.json');
+  const sha = createHash('sha256').update(await readFile(article)).digest('hex');
+  await writeFile(join(run, 'handfix_1120.json'), JSON.stringify({ article_sha256: sha, passed: false, conflicts: { against_site: {}, internal: [] }, items: { 'q2-m1': { result: 'wrong' } }, links: { s3: ['/x/'] } }));
+  await at(join(run, 'handfix_1120.json'), '2026-11-18T05:02:00Z');
+  const held = await flowFinal(run, article);
+  assert.equal(held.by, 'handfix_1120.json');
+  assert.equal(flowHeld({ final: held.final })[0], 'blog flow final check: held; A/B not right: q2-m1; gates: links');
 });

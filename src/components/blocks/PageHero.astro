@@ -1,7 +1,8 @@
 ---
 // The page's hero. media-form (after a reference hero with an enquiry form) is the photo hero with the enquiry form
 // beside the copy (not on the contact page, which carries its own form).
-import { SPLIT_HERO_FIT, headingFitStyle, titleNeedsRow, wrapEmFor } from '../../../scripts/lib/heading-fit.mjs';
+import { SPLIT_HERO_FIT, headingFitStyle, titleMetrics, titleNeedsRow } from '../../../scripts/lib/heading-fit.mjs';
+import treatmentCss from '../../styles/reference.css?raw';
 import { leadFormBlock } from '../../../scripts/lib/lead-form.mjs';
 import { contactChannels } from '../../../scripts/lib/site-contact.mjs';
 import { heroSizes } from '../../../scripts/lib/web-image.mjs';
@@ -27,6 +28,8 @@ const form = chosen === 'media-form' && page.pageType !== 'contact' && !formId ?
 const quickContact = page.pageType === 'contact' ? contactChannels({ contact: siteContact, chat: siteRuntime?.chat || null }).filter((channel: { href?: string }) => channel.href) : [];
 const channelName: Record<string, string> = { email: 'Email', phone: 'Phone', whatsapp: '' };
 const formHeading = formId ? (page.blocks.find((block) => block.id === formId) as FormBlock | undefined)?.heading ?? null : null;
+// The hero's call leads away from the page's own form (another page than this one).
+const awayFromForm = Boolean(formId && formHeading && page.pageType !== 'contact' && page.hero.cta && page.hero.cta.href !== page.route && !page.hero.cta.href.startsWith('#'));
 // A form hero is the photo hero with the form beside the copy.
 const variant = chosen === 'media-form' ? 'media-overlay' : chosen;
 // The banner photo's shape, and its phone photo's (art direction), for the banner's height floor and cap (template.css).
@@ -34,10 +37,13 @@ const ratio = (width?: number, height?: number) => (width && height ? Math.round
 // The title's size from its own words (scripts/lib/heading-fit.mjs; template.css [data-heading-fit]): at most two lines
 // on a desktop and four on a phone, the competitor's title size the ceiling.
 // A split hero's title has half the row: one more line on a desktop (SPLIT_HERO_FIT).
-const fitStyle = headingFitStyle(page.hero.heading, { charEm: wrapEmFor(variants.heroText), ...(variant === 'media-split' ? { fit: SPLIT_HERO_FIT } : {}) });
+// In the face the site's treatment sets this page type's title in, by its real widths where the template knows the face
+// (heading-fit.mjs titleMetrics), else on the competitor's average.
+const titleEm = titleMetrics({ css: treatmentCss, pageType: page.pageType, heroText: variants.heroText });
+const fitStyle = headingFitStyle(page.hero.heading, { charEm: titleEm, ...(variant === 'media-split' ? { fit: SPLIT_HERO_FIT } : {}) });
 // A title too long for its column beside the form (two lines at the floor) takes the hero's whole row, the form under
 // the copy (patterns.css [data-title-row]).
-const titleRow = Boolean(form) && titleNeedsRow(page.hero.heading, { charEm: wrapEmFor(variants.heroText) });
+const titleRow = Boolean(form) && titleNeedsRow(page.hero.heading, { charEm: titleEm });
 const bannerRatios = (photo: Media) => [ratio(photo.width, photo.height) && `--hero-photo-ratio: ${ratio(photo.width, photo.height)}`, photo.sources?.[0] && ratio(photo.sources[0].width, photo.sources[0].height) && `--hero-phone-ratio: ${ratio(photo.sources[0].width, photo.sources[0].height)}`].filter(Boolean).join('; ') || undefined;
 ---
 
@@ -50,7 +56,9 @@ const bannerRatios = (photo: Media) => [ratio(photo.width, photo.height) && `--h
   data-hero-form={form ? 'true' : undefined}
   data-title-row={titleRow ? '' : undefined}
 >
-  {media && variant === 'media-overlay' && <Picture media={media} class="page-hero__backdrop" sizes={heroSizes()} alt="" loading="eager" fetchpriority="high" />}
+  {/* The photo under the copy is the page's main photo, and its alt says what it shows (aloha audit 2026-11-18 L-1: an
+      empty alt on every overlay hero, the LCP image, its og:image:alt described). */}
+  {media && variant === 'media-overlay' && <Picture media={media} class="page-hero__backdrop" sizes={heroSizes()} loading="eager" fetchpriority="high" />}
   {media && variant === 'media-banner' && (
     <figure class="page-hero__banner" style={bannerRatios(media)} data-phone-photo={media.sources?.length ? '' : undefined}>
       <Picture media={media} sizes={heroSizes()} loading="eager" fetchpriority="high" />
@@ -66,9 +74,13 @@ const bannerRatios = (photo: Media) => [ratio(photo.width, photo.height) && `--h
           owner: where copying the competitor and claude-seo disagree, claude-seo wins). A lead too long for the first
           screen is reported to Site Factory (layout audit hero_lead_long), never moved. */}
       {page.hero.lead?.map((paragraph) => <p class="page-hero__lead"><InlineText text={paragraph} /></p>)}
+      {/* On a page that holds the enquiry form, a call leading away from it is not the first one: the form, by its own
+          heading, is (aloha audit 2026-11-18 M-15: the quote page's only button, "Prefer email? Contact us", sent the
+          visitors there to ask a quote away). */}
       {(page.hero.cta || page.hero.secondaryCta) && (
         <div class="page-hero__actions">
-          {page.hero.cta && <SmartLink href={href(page.hero.cta.href)} class="button button--primary">{page.hero.cta.label}</SmartLink>}
+          {awayFromForm && formHeading && <a href={`#${formId}`} class="button button--primary">{formHeading}</a>}
+          {page.hero.cta && <SmartLink href={href(page.hero.cta.href)} class={awayFromForm ? 'button button--secondary' : 'button button--primary'}>{page.hero.cta.label}</SmartLink>}
           {page.hero.secondaryCta && <SmartLink href={href(page.hero.secondaryCta.href)} class="button button--secondary">{page.hero.secondaryCta.label}</SmartLink>}
         </div>
       )}

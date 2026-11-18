@@ -71,8 +71,9 @@ const pnpm = (...args) => (process.platform === 'win32' ? [process.env.ComSpec ?
 // What the layout plan reads (plan-layout.mjs planSite): the pages, the site's choices and model, the trust bar's figures
 // (each page's estimate counts its bar), the heading measures of the last audit: its results only (the report's port
 // and its count of pages reused change every run, and planned, calibrated and shot the style board again each time:
-// owner 2026-11-17, site13's 40-minute run).
-const PLAN_INPUTS = Object.freeze(['src/data/authoring-pages.json', 'src/data/placeholder-pages.json', 'src/data/blog-posts.json', 'src/data/photo-briefs.json', 'src/data/template-variants.json', 'src/data/phone-heroes.json', 'src/data/page-figures.json', 'src/data/site-trust.json', 'site.json#trade', 'docs/research/authoring-layout-audit.json#results', 'code:scripts/plan-layout.mjs']);
+// owner 2026-11-17, site13's 40-minute run). The treatment's stylesheet sets the hero title's face, whose real widths
+// fit the title (heading-fit.mjs titleMetrics, 2026-11-18).
+const PLAN_INPUTS = Object.freeze(['src/data/authoring-pages.json', 'src/data/placeholder-pages.json', 'src/data/blog-posts.json', 'src/data/photo-briefs.json', 'src/data/template-variants.json', 'src/data/phone-heroes.json', 'src/data/page-figures.json', 'src/data/site-trust.json', 'site.json#trade', 'docs/research/authoring-layout-audit.json#results', 'src/styles/reference.css', 'code:scripts/plan-layout.mjs']);
 
 export function steps(site, { coreSource = null } = {}) {
   const snap = site.siteFactory;
@@ -236,7 +237,7 @@ export function steps(site, { coreSource = null } = {}) {
       // the next look; on a service site a generic scene becomes the online-service class) and checked with the rest
       // (site14 2026-11-17: five scenes it sent back were queued with their old subjects, unchecked, and held the
       // library for a "scene" sample; text-check.md counted only the one photo planned before the review).
-      { id: 'images', kind: 'codex', inputs: ['plan:photo-slots', 'src/data/site-media.json', 'src/data/site-nav.json', 'site.json#line,trade', 'docs/research/image-plan.json', 'docs/research/photo-text-waivers.json', ...new Set([...briefInputs, ...tradeInputs]), 'config/photo-text-check.json', 'code:scripts/plan-images.mjs', 'code:scripts/check-photo-text.mjs', 'code:scripts/lib/photo-class.mjs'], run: [node('plan-images.mjs', '--line', site.line), node('analyze-image-types.mjs'), node('analyze-image-style.mjs'), node('generate-images.mjs', '--samples'), node('judge-image-fit.mjs', '--samples'), node('generate-images.mjs'), node('score-image-style.mjs'), node('review-image-library.mjs'), node('plan-images.mjs', '--line', site.line), node('generate-images.mjs', '--samples'), node('judge-image-fit.mjs', '--samples'), node('generate-images.mjs'), node('score-image-style.mjs'), node('render-web-images.mjs', '--over-budget'), node('apply-image-library.mjs'), node('check-photo-text.mjs', '--gate')], waitsOnExit: 'a person: the go-ahead to make again more photos already made than a run makes at once (docs/research/images/remake-hold.md lists each and why), a sample photo the image-fit judge found off its page, which holds the rest of the library (docs/research/images/samples.md), or a photo whose subject does not match its page\'s H1 and copy (docs/research/images/text-check.md; docs/research/photo-text-waivers.json accepts one as it is)' },
+      { id: 'images', kind: 'codex', inputs: ['plan:photo-slots', 'src/data/site-media.json', 'src/data/site-nav.json', 'site.json#line,trade', 'docs/research/image-plan.json', 'docs/research/image-slots.json', 'docs/research/photo-text-waivers.json', ...new Set([...briefInputs, ...tradeInputs]), 'config/photo-text-check.json', 'code:scripts/plan-images.mjs', 'code:scripts/check-photo-text.mjs', 'code:scripts/lib/photo-class.mjs'], run: [node('plan-images.mjs', '--line', site.line), node('analyze-image-types.mjs'), node('analyze-image-style.mjs'), node('generate-images.mjs', '--samples'), node('judge-image-fit.mjs', '--samples'), node('generate-images.mjs'), node('score-image-style.mjs'), node('review-image-library.mjs'), node('plan-images.mjs', '--line', site.line), node('generate-images.mjs', '--samples'), node('judge-image-fit.mjs', '--samples'), node('generate-images.mjs'), node('score-image-style.mjs'), node('render-web-images.mjs', '--over-budget'), node('apply-image-library.mjs'), node('check-photo-text.mjs', '--gate')], waitsOnExit: 'a person: the go-ahead to make again more photos already made than a run makes at once (docs/research/images/remake-hold.md lists each and why), a sample photo the image-fit judge found off its page, which holds the rest of the library (docs/research/images/samples.md), or a photo whose subject does not match its page\'s H1 and copy (docs/research/images/text-check.md; docs/research/photo-text-waivers.json accepts one as it is)' },
     // The subject of every photo, named once by a vision judge (lib/photo-focus.mjs): frames that cut a photo centre on
     // it, and the phone crops of photos too wide for the competitor's phone frames (the sections' 390px shapes in the
     // pattern inventory, matched to our blocks through the section modules) are cut round it.
@@ -250,11 +251,11 @@ export function steps(site, { coreSource = null } = {}) {
     { id: 'blog', kind: 'auto', inputs: ['src/data/template-variants.json', 'src/data/authoring-pages.json', 'src/data/placeholder-pages.json', 'code:scripts/scaffold-blog.mjs'], run: [node('scaffold-blog.mjs', '--remove')] },
     // The template's own checks (its tests, the template contract, the types) run when its code changes, not after
     // every repair of the site's stylesheet or copy (each rebuild ran them all again, 40-75s; Fable's review 11-14).
-    { id: 'template-check', kind: 'auto', raw: true, inputs: ['scripts', 'src/components', 'src/layouts', 'src/lib', 'src/pages', 'src/hooks', 'src/types', 'src/styles/template.css', 'src/styles/patterns.css'], run: [pnpm('test'), pnpm('validate:template'), pnpm('typecheck')] },
+    { id: 'template-check', kind: 'auto', raw: true, inputs: ['scripts', 'src/components', 'src/layouts', 'src/lib', 'src/pages', 'src/hooks', 'src/types', 'src/styles/template.css', 'src/styles/patterns.css'], run: [Object.assign(pnpm('test'), { ownModels: true }), pnpm('validate:template'), pnpm('typecheck')] },
     // What undoes a template decision goes from the site's stylesheet before every build (strip-protected.mjs); the
     // header logo is fitted again to the header the treatment and its repairs have coloured since the brand step
     // (fit-header-logo.mjs, four-site audit 2026-11-17).
-    { id: 'build', kind: 'auto', raw: true, inputs: ['src', 'public', 'scripts'], run: [node('strip-protected.mjs'), node('fit-header-logo.mjs'), pnpm('build'), pnpm('audit:seo')] },
+    { id: 'build', kind: 'auto', raw: true, inputs: ['src', 'public', 'scripts'], run: [node('strip-protected.mjs'), node('fit-header-logo.mjs'), pnpm('build'), pnpm('audit:seo'), node('check-image-slots.mjs')] },
     // Whether each photo of the site's own library shows its page's subject (judge-image-fit.mjs, one judgment per photo
     // and page subject, kept by content); the competitor's placeholder photos never ship and are not judged.
     ...(generate ? [{ id: 'image-fit', kind: 'codex', inputs: ['dist', 'config/agent-steps/image-fit.md', 'code:scripts/judge-image-fit.mjs'], run: [node('judge-image-fit.mjs')] }] : []),
@@ -654,9 +655,12 @@ export async function upgradeLegacyHashes(root, state, list) {
   return changed;
 }
 
+// The template's own tests call their stand-in models (ownModels): an iteration run's refusal is not theirs (Strandmill
+// 2026-11-18: every model test failed under --iterate, template-check with them).
 const runOnce = (command, root, log) => new Promise((done) => {
   const [program, ...args] = command;
-  const child = spawn(program, args, { cwd: root });
+  const env = command.ownModels ? Object.fromEntries(Object.entries(process.env).filter(([name]) => name !== NO_MODELS)) : process.env;
+  const child = spawn(program, args, { cwd: root, env });
   const chunks = [];
   child.stdout.on('data', (chunk) => chunks.push(chunk));
   child.stderr.on('data', (chunk) => chunks.push(chunk));

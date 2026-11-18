@@ -19,6 +19,7 @@
 // on its subject. A crop is held to its photo's desktop file by weight (encodeWithin); one that cannot be is not made.
 // Usage: node scripts/derive-phone-heroes.mjs
 
+import { FRAMED_HEROES } from './lib/layout-plan.mjs';
 import { existsSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, extname, join, resolve } from 'node:path';
@@ -76,9 +77,12 @@ export const PHONE_FRAMES = Object.freeze({
 // show a strip on a phone (lib/plan-assertions.mjs phone_hero_strip).
 export const DEFAULT_HERO_PHONE_RATIO = 0.8;
 
-export function phoneFrames(inventory, sectionModules = []) {
+// siteTypes: the site's own page types; one the competitor has no page of (a general page whose hero the template lays
+// out as a split: aloha 2026-11-18, /our-process/) takes the same median frame.
+export function phoneFrames(inventory, sectionModules = [], siteTypes = []) {
   const frames = Object.fromEntries(Object.keys(PHONE_FRAMES).map((frame) => [frame, { byPageType: {} }]));
   const heroless = [];
+  const competitorTypes = new Set((inventory?.pages ?? []).map((page) => page.pageType));
   for (const page of inventory?.pages ?? []) {
     const named = sectionModules.filter((item) => item.pageType === page.pageType);
     for (const [frame, rule] of Object.entries(PHONE_FRAMES)) {
@@ -91,7 +95,7 @@ export function phoneFrames(inventory, sectionModules = []) {
   }
   const measured = Object.values(frames.hero.byPageType).sort((a, b) => a - b);
   const median = measured.length ? measured[Math.floor((measured.length - 1) / 2)] : DEFAULT_HERO_PHONE_RATIO;
-  for (const pageType of heroless) frames.hero.byPageType[pageType] ??= median;
+  for (const pageType of [...heroless, ...(competitorTypes.size ? siteTypes.filter((type) => !competitorTypes.has(type)) : [])]) frames.hero.byPageType[pageType] ??= median;
   return frames;
 }
 
@@ -151,7 +155,7 @@ export async function derivePhoneHeroes({ root = process.cwd() } = {}) {
   const components = (await readJson(resolve(root, 'src/data/template-variants.json'))).components;
   const sitePhotos = (await readJson(resolve(root, 'src/data/site-media.json'), { photos: [] })).photos ?? [];
   const pages = await loadSitePages(root);
-  const frames = phoneFrames(await readJson(resolve(root, 'docs/research/pattern-inventory.json'), null), await readJson(resolve(root, 'docs/research/analysis/section-modules.json'), []));
+  const frames = phoneFrames(await readJson(resolve(root, 'docs/research/pattern-inventory.json'), null), await readJson(resolve(root, 'docs/research/analysis/section-modules.json'), []), [...new Set(pages.map((page) => page.pageType))].filter((type) => FRAMED_HEROES.has(components.heroByPageType?.[type] ?? components.hero)));
   const crops = {};
   const soft = [];
   const unfocused = [];

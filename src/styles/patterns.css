@@ -547,6 +547,14 @@ main[data-authoring-page] .block--prose p { margin: 0 0 var(--article-paragraph-
 .prose__steps { margin: var(--article-figure-gap, 3rem) 0; }
 .prose__steps > .block--process { padding-block: 0; }
 .prose__steps-caption { margin: 0.75rem 0 0; font-size: 0.875rem; line-height: 1.5; color: var(--text-muted, var(--text-primary)); }
+/* An article's column is narrower than a page's: steps of more than three columns take their tablet plan on a desktop
+   too, three a row at most (Strandmill's /blog/what-is-a-tech-pack/ 2026-11-18: five steps of 110 px each, the longer
+   titles ran into the next step). */
+@media (min-width: 1024px) {
+  .prose__steps .process-steps:is([data-columns="4"], [data-columns="5"], [data-columns="6"])[style*="--tracks-md:"] { grid-template-columns: repeat(var(--tracks-md), minmax(0, 1fr)); }
+  .prose__steps .process-steps:is([data-columns="4"], [data-columns="5"], [data-columns="6"])[style*="--tracks-md:"] > * { grid-column: span 2; }
+  .prose__steps .process-steps:is([data-columns="4"], [data-columns="5"], [data-columns="6"])[style*="--tracks-md:"] > [style*="--start-md:"] { grid-column: var(--start-md) / span 2; }
+}
 /* Charts an article's writer gave as data (ArticleChart.astro), in the site's colours. */
 /* --table-ground: the covers of a table that scrolls sideways (below) are the ground it sits on (Staylumen 2026-11-17: the
    page's light grey covered a black chart's right-hand column and its empty corner cell). */

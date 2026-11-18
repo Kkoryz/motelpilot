@@ -209,7 +209,9 @@ export function measurePage() {
   });
   // Controls a finger has to hit (links and buttons on their own; a link inside running text is exempt, as WCAG has it,
   // and so is a box whose label can be tapped instead). A control inside a closed menu or fold cannot be hit yet.
-  const folded = (element) => Boolean(element.parentElement?.closest('details:not([open])')) && !element.closest('summary');
+  // A closed fold's own summary can be hit; a summary of a fold nested in a closed menu cannot (site14 2026-11-18: the
+  // closed phone menu's 'Locations' toggle, laid out 4px wide in the hidden panel, failed tap_target).
+  const folded = (element) => { for (let fold = element.parentElement?.closest('details:not([open])'); fold; fold = fold.parentElement?.closest('details:not([open])')) { const own = fold.querySelector(':scope > summary'); if (!own || !own.contains(element)) return true; } return false; };
   const labelled = (element) => element.tagName === 'INPUT' && /checkbox|radio/.test(element.type) && Boolean(element.closest('label') || (element.id && document.querySelector(`label[for="${element.id}"]`)));
   const targets = [...document.querySelectorAll('a[href], button, summary, input:not([type="hidden"]), select, textarea')].filter((element) => visible(element) && !folded(element) && !labelled(element) && !(element.tagName === 'A' && element.closest('p, dd, td, blockquote'))).map((element) => {
     const box = element.getBoundingClientRect();
@@ -279,8 +281,9 @@ export function measurePage() {
     const sticky = photos.some((item) => getComputedStyle(item).position === 'sticky');
     return [{ block: row.closest('[data-block-id]')?.getAttribute('data-block-id') ?? null, media: { top: Math.round(media.top), bottom: Math.round(media.bottom) }, copy: { top: Math.round(text.top), bottom: Math.round(text.bottom) }, sticky }];
   });
-  // Each section's buttons and the text right above them (actionsDetached).
-  const actions = [...main.querySelectorAll('[data-authoring-block] .button')].filter((button) => button.getBoundingClientRect().width > 0 && !button.closest('form, nav, .track__controls, .related-tile, .gallery__item, .feature-card, .case, article')).flatMap((button) => {
+  // Each section's buttons and the text right above them (actionsDetached). A row of buttons is measured by its first:
+  // the one beside it sits where the row puts it (aloha's quote page, 2026-11-18: the form's call, then "Prefer email?").
+  const actions = [...main.querySelectorAll('[data-authoring-block] .button')].filter((button) => button.getBoundingClientRect().width > 0 && !button.previousElementSibling?.classList.contains('button') && !button.closest('form, nav, .track__controls, .related-tile, .gallery__item, .feature-card, .case, article')).flatMap((button) => {
     const section = button.closest('[data-authoring-block]');
     const box = button.getBoundingClientRect();
     const above = [...section.querySelectorAll('h1, h2, h3, p, li')].filter((item) => !item.contains(button) && item.getBoundingClientRect().height > 0 && item.getBoundingClientRect().bottom <= box.top + 2 && item.getBoundingClientRect().right > box.left - 400 && item.getBoundingClientRect().left < box.right + 400);

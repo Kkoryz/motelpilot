@@ -50,3 +50,10 @@ test('font_synthesized: a bold drawn from a regular face, an italic with no ital
   // A face that failed to load does not count.
   assert.equal(fontProblems({ used: [text('Josefin Sans', 700)], faces: [face('Josefin Sans', '400'), face('Josefin Sans', '700', 'normal', 'error')] })[0].issue, 'font_synthesized');
 });
+
+test('the first screen\'s font files are preloaded: the basic Latin file of each family, at most two (RateHarbor M-3, 2026-11-18)', async () => {
+  const { fontPreloads } = await import('../../src/lib/font-preload.ts');
+  const face = (family, file, range) => `@font-face { font-family: "${family}"; font-weight: 400; font-display: swap; src: url("${file}") format("woff2"); unicode-range: ${range}; }`;
+  const css = [face('A', '/fonts/a-latin.woff2', 'U+0000-00FF'), face('A', '/fonts/a-latin-ext.woff2', 'U+0100-02BA'), face('A', '/fonts/a-latin.woff2', 'U+0000-00FF'), face('B', '/fonts/b-latin.woff2', 'U+0000-00FF'), face('C', '/fonts/c-latin.woff2', 'U+0000-00FF')].join('\n');
+  assert.deepEqual(fontPreloads(css), ['/fonts/a-latin.woff2', '/fonts/b-latin.woff2']);
+});

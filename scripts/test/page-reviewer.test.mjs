@@ -67,3 +67,10 @@ test('a stand-in team names who reviews what from its trade; one made before tak
     for (const type of reviewed) assert.ok(REVIEWED_PAGE_TYPES.includes(type), `${file}: ${type}`);
   }
 });
+
+test('a page whose address names a person\'s job is theirs: the quality control page by the quality control lead (aloha L-13, 2026-11-18)', () => {
+  const crew = [{ name: 'Wenjie Peng', role: 'Founder', reviews: ['solution'] }, { name: 'Huimin Tang', role: 'Head of development', reviews: ['product_manufacturer'] }, { name: 'Siyu Chen', role: 'Quality control lead' }];
+  const people = sitePeople([{ ...about, blocks: [{ id: 'owner-team', type: 'team', items: teamItems(crew) }] }]);
+  const page = (route, pageType) => ({ ...product, route, pageType });
+  assert.deepEqual(['/quality-control/', '/product-development/', '/shipping/', '/bikini-manufacturer/'].map((route, index) => pageReviewer(page(route, index === 3 ? 'product_manufacturer' : 'solution'), people).name), ['Siyu Chen', 'Huimin Tang', 'Wenjie Peng', 'Huimin Tang']);
+});

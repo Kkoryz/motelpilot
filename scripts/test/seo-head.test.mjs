@@ -117,3 +117,11 @@ test('the Organization states the company contact details, stand-ins included, w
   assert.equal(thin.telephone, undefined);
   assert.equal(thin.address, undefined);
 });
+
+test('a page\'s own Service is described by the page\'s summary, not its first sentence (aloha L-7, RateHarbor L-1, 2026-11-18)', async () => {
+  const { pageSchemas } = await import('../lib/seo-head.mjs');
+  const page = { route: '/printing/', pageType: 'solution', status: 'authored', seo: { title: 'Printing', description: 'Custom printing for swimwear brands, sampled before bulk.', canonical: '/printing/' }, hero: { heading: 'Printing' }, blocks: [],
+    jsonLd: [{ '@context': 'https://schema.org', '@type': 'Service', name: 'Printing', description: 'Orders start at 50 pieces per style in each colour.' }] };
+  const service = pageSchemas({ page, identity: { origin: 'https://example.com', siteName: 'Ex', schemaLogo: { src: '/l.png' } }, nav: {} }).find((item) => item['@type'] === 'Service');
+  assert.equal(service.description, 'Custom printing for swimwear brands, sampled before bulk.');
+});

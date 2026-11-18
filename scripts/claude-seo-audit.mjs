@@ -52,14 +52,28 @@ export const rulesUrl = (env = process.env) => env.GOOGLE_RULES_URL || GOOGLE_RU
 // the library; the audit then says so in what it did not cover.
 export const rulesTool = (url = rulesUrl()) => `Bash(curl -s -m 60 -X POST ${url}:*)`;
 export const withRulesTool = (spawnRun = spawnClaude, url = rulesUrl()) => (run) => spawnRun({ ...run, args: [...run.args, rulesTool(url)] });
-export const auditJudge = (options) => runJudge(options, { claude: (claudeOptions) => runClaude({ ...claudeOptions, spawnRun: withRulesTool() }) });
+export const auditJudge = (options) => runJudge(options, { claude: (claudeOptions) => runClaude({ ...claudeOptions, spawnRun: withRulesTool(), earlierJson: true }) });
 
 // Whether the rules library answers: one retrieval (local and free).
+// Whether a retrieval reply holds rules: the MCP container answers with a result while its search backends are down,
+// the error in the result's text (aloha 2026-11-18: "[Errno -2] Name or service not known" to every auditor, the probe
+// having passed); only chunks of text are the library answering. The body is JSON or one SSE data line.
+export function retrievedRules(body) {
+  const line = String(body ?? '').split(/\r?\n/).map((text) => text.replace(/^data:\s*/, '')).find((text) => text.trim().startsWith('{'));
+  try {
+    const text = JSON.parse(line).result?.content?.[0]?.text ?? '';
+    const chunks = JSON.parse(text).chunks;
+    return Array.isArray(chunks) && chunks.length ? { ok: true } : { ok: false, detail: `no rules retrieved: ${text.slice(0, 160)}` };
+  } catch {
+    return { ok: false, detail: `no rules retrieved: ${String(body ?? '').slice(0, 160)}` };
+  }
+}
+
 export async function probeRules(url = rulesUrl()) {
   try {
     const response = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'ragflow_retrieval', arguments: { question: 'canonical URL', dataset_ids: [GOOGLE_RULES.datasetId], page_size: 1 } } }), signal: AbortSignal.timeout(20000) });
     const body = await response.text();
-    return response.ok && body.includes('"result"') ? { ok: true } : { ok: false, detail: `${response.status} ${body.slice(0, 200)}` };
+    return response.ok ? retrievedRules(body) : { ok: false, detail: `${response.status} ${body.slice(0, 200)}` };
   } catch (error) {
     return { ok: false, detail: error.message };
   }
@@ -168,7 +182,9 @@ export async function claudeSeoAudit({ root = process.cwd(), judge = auditJudge,
   // The auditors count too (owner 2026-11-17): another number of them or another model is another audit.
   const instructions = instructionsKey([fillPrompt(await readFile(prompt('claude-seo-audit'), 'utf8'), keyValues), await readFile(prompt('claude-seo-verify'), 'utf8'), ...methodTexts, JSON.stringify(auditors.map(({ id, model }) => ({ id, model })))]);
   const last = await latestAudit(root);
-  if (last && last.data.release?.key === release.key && last.data.instructions === instructions) return { reused: last };
+  // An audit made before its rules were seen retrieved (rules.retrieved) stands for nothing: its auditors may have read
+  // no rule (aloha 2026-11-18: all three, the library's backends down behind an answering probe).
+  if (last && last.data.release?.key === release.key && last.data.instructions === instructions && last.data.rules?.retrieved === true) return { reused: last };
 
   // 2. The audit folder.
   const probed = await probe();
@@ -236,7 +252,7 @@ export async function claudeSeoAudit({ root = process.cwd(), judge = auditJudge,
   const data = {
     schemaVersion: AUDIT_SCHEMA, complete: true, date, site: about.origin, dir: auditDir,
     release, instructions, sources: await sourceHash(root),
-    rules: { name: GOOGLE_RULES.name, snapshot: GOOGLE_RULES.snapshot },
+    rules: { name: GOOGLE_RULES.name, snapshot: GOOGLE_RULES.snapshot, retrieved: true },
     tools: { playwright: measured.playwright, focus: measured.focus, desktop: '1366×768', phone: '390×844、DPR 3、150 ms RTT、1.6 Mbps、4 倍 CPU 降速' },
     scope: { pages: pages.length, server: serverFiles },
     summary: { health_score: median(finished.map((run) => run.health_score)), score_note: 'heuristic (claude-seo seo-audit weights); the median of the auditors\' scores; the launch gate never reads it', business_type: reply.business_type, weighted: reply.weighted, checklists: reply.checklists, auditors: audited },

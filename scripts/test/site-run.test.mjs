@@ -1063,3 +1063,9 @@ test('a second design repair that breaks the passing layout audit is undone too 
   assert.equal((await readFile(join(root, 'src/styles/reference.css'), 'utf8')).trim(), 'v0', 'both design repairs are undone');
   assert.equal(result.summary.filter((item) => item.step === 'audits-repair' && /back to the state with the fewest problems/.test(item.status)).length, 2);
 });
+
+test('the template\'s own tests run with their stand-in models in an iteration run too (Strandmill 2026-11-18)', () => {
+  const check = steps(site).find((step) => step.id === 'template-check');
+  assert.equal(check.run[0].ownModels, true);
+  assert.ok(check.run.slice(1).every((command) => !command.ownModels));
+});

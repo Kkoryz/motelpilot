@@ -121,7 +121,10 @@ export function dataPractices({ form, resourceForm = null, runtime = null, priva
   const standIn = privacy?.standIn === true;
   const stated = [...new Set(emailsIn(copy))];
   const own = privacy?.contact ?? contactEmail ?? null;
-  const contact = standIn && stated.length === 1 ? stated[0] : own;
+  // A stand-in contact gives way too where the copy already says how to reach the company about one's details without
+  // an address ("To see, correct or delete your information, email our team."): one way in, not two (aloha claude-seo
+  // audit 2026-11-18, L-10: the copy's "email our team" and the stand-in's privacy@ stood on one page).
+  const contact = standIn && stated.length === 1 ? stated[0] : standIn && !stated.length && rightsRoutesIn(copy).length ? null : own;
   const retention = standIn && retentionsIn(copy).length ? null : privacy?.retention ?? null;
   return { rows, items, retention, contact };
 }
@@ -132,6 +135,10 @@ export function dataPractices({ form, resourceForm = null, runtime = null, priva
 /** @param {{ blocks?: any[] }[]} pages */
 export const siteForms = (pages = []) => ({ form: siteEnquiryForm('form', pages), resourceForm: pages.some((page) => (page.blocks ?? []).some(isResourceForm)) ? resourceFormBlock('resource-request') : null });
 
+// The sentences of a text that tell a person how to see, correct or delete what is held about them and whom to ask.
+const RIGHTS = /\b(?:see|access|correct|delete|erase|remove)\b/i;
+const ROUTE = /\b(?:email|e-mail|write|contact|message|ask)\b/i;
+export const rightsRoutesIn = (text) => String(text ?? '').split(/(?<=[.!?])\s+|\n+/).filter((sentence) => RIGHTS.test(sentence) && ROUTE.test(sentence));
 // The addresses a text names (lower case).
 export const emailsIn = (text) => [...String(text ?? '').matchAll(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g)].map((match) => match[0].replace(/\.$/, '').toLowerCase());
 // The periods a text states for keeping what it holds: "24 months", "as long as order records require", "until you ask us

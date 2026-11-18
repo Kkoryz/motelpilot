@@ -401,3 +401,11 @@ test('each site\'s stand-in clients are its own: made from the trade\'s name par
   const edited = { ...made, clients: [{ name: 'Maré Studio', note: 'Swimwear, Portugal' }, ...made.clients.slice(1)] };
   assert.equal(withFacts(edited, made, new Set(['/bikini/'])).clients[0].name, 'Maré Studio');
 });
+
+test('a stand-in team kept with the site\'s own clients takes its roles\' page types from the trade\'s config (aloha L-13, 2026-11-18)', async () => {
+  const { withFacts } = await import('../scaffold-site-proof.mjs');
+  const made = { factory: [], team: [{ name: 'A', role: 'Founder', reviews: ['solution'] }, { name: 'B', role: 'Head of development', reviews: ['product_manufacturer'] }], clients: [{ name: 'X', note: 'Swimwear, UK' }] };
+  const existing = { standIn: true, factory: [], clientsFor: 'site', clients: [{ name: 'Own', note: 'Resort, US' }], team: [{ name: 'Wenjie', role: 'Founder', reviews: ['service'] }, { name: 'Huimin', role: 'Head of development', reviews: ['product_manufacturer', 'solution'] }] };
+  const team = withFacts(existing, made).team;
+  assert.deepEqual(team.map((person) => [person.role, person.reviews]), [['Founder', ['solution']], ['Head of development', ['product_manufacturer']]]);
+});

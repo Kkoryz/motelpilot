@@ -15,7 +15,7 @@ import { mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { TEXT_WAIVERS, checkPlanText, writeTextCheck } from './check-photo-text.mjs';
 import { cliArgs, runMain } from './lib/cli.mjs';
-import { ownPhotoRoutes, photoDemand, planLibrary } from './lib/image-plan.mjs';
+import { libraryGaps, ownPhotoRoutes, photoDemand, planLibrary } from './lib/image-plan.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 import { loadSitePages } from './lib/site-pages.mjs';
 import { styleReferences } from './lib/style-references.mjs';
@@ -31,8 +31,10 @@ export async function imageDemand(root = process.cwd()) {
   const own = new Set(((await readJson(resolve(root, 'src/data/site-media.json'), null))?.photos ?? []).map((photo) => photo.class));
   const pages = await loadSitePages(root);
   const ownRoutes = ownPhotoRoutes(pages, await readJson(resolve(root, 'docs/research/image-fit.json'), null), briefs, previous);
+  const sitePhotos = (await readJson(resolve(root, 'src/data/site-media.json'), null))?.photos ?? [];
   return {
-    demand: photoDemand({ pages, components: variants.components, briefs: { ...briefs, placeholderKinds: (briefs.placeholderKinds ?? []).filter((kind) => own.has(kind)) }, ownRoutes, nav: await readJson(resolve(root, 'src/data/site-nav.json'), null) }),
+    demand: photoDemand({ pages, components: variants.components, briefs: { ...briefs, placeholderKinds: (briefs.placeholderKinds ?? []).filter((kind) => own.has(kind)) }, ownRoutes, nav: await readJson(resolve(root, 'src/data/site-nav.json'), null), line: previous?.line ?? null }),
+    gaps: libraryGaps({ pages, components: variants.components, briefs, sitePhotos }),
     styleRefs: await styleReferences(root, variants.components),
   };
 }
@@ -53,12 +55,14 @@ export async function planImages({ line = null, changeLine = false, changeTrade 
   // them, owner 2026-10-25), never an empty frame.
   const own = new Set(((await readJson(resolve(root, 'src/data/site-media.json'), null))?.photos ?? []).map((photo) => photo.class));
   const pages = await loadSitePages(root);
+  const sitePhotos = (await readJson(resolve(root, 'src/data/site-media.json'), null))?.photos ?? [];
   // The words the photos' subjects name the line by (site.json lineLabel): the line itself is the plan's key, and a
   // service site's is a code (site12 "hotel-rm", site14 "str-cohost", 2026-11-17: "a printed hotel-rm worksheet",
   // judged off its page); a label changes the wording only, so no photo already made is made again.
   const lineName = (await readJson(resolve(root, 'site.json'), null))?.lineLabel ?? null;
   const plan = planLibrary({
     pages,
+    gaps: libraryGaps({ pages, components: variants.components, briefs, sitePhotos }),
     ownRoutes: ownPhotoRoutes(pages, await readJson(resolve(root, 'docs/research/image-fit.json'), null), briefs, previous),
     components: variants.components,
     line,
@@ -69,6 +73,8 @@ export async function planImages({ line = null, changeLine = false, changeTrade 
     // The menu items above each page name its theme (lib/page-theme.mjs) where its category does not.
     nav: await readJson(resolve(root, 'src/data/site-nav.json'), null),
     replaceScenes,
+    // The categories nobody wears (analyze-image-types.mjs, read before the second planning of the images step).
+    notWorn: Object.entries((await readJson(resolve(root, 'docs/research/image-types.json'), null))?.products?.worn ?? {}).filter(([, worn]) => worn === false).map(([category]) => category),
   });
   // Every photo still to be made checked against its page's H1 and copy before any is made (check-photo-text.mjs;
   // owner 2026-11-17): one that does not match is held out of the queue and reported.

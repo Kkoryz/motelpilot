@@ -10,7 +10,7 @@
 
 import { cardGridColumns, cardSet, cardSetColumns, cardTitleLevel, iconListLayout, longestCardWords } from './block-layout.mjs';
 import { DENSITY_EXEMPT_PAGE_TYPES, DENSITY_FLOOR_EXEMPT_PAGE_TYPES, bandFor } from './density.mjs';
-import { HERO_FIT, SPLIT_HERO_FIT, fitHeading, wrapEmFor, wrapLines } from './heading-fit.mjs';
+import { HERO_FIT, SPLIT_HERO_FIT, fitHeading, titleMetrics, wrapLines } from './heading-fit.mjs';
 import { PROOF_BLOCKS, blockWords, copyWords, drawsCharts, heroShowsPhoto, renderedWords, mediaSlots, modelVariant, resolveVariant, signatureFloor, splitsSection, withMediaModules } from './media-slots.mjs';
 import { TRUST_BAR, tintedSections } from './section-surfaces.mjs';
 import { PAGE_TOC, pageToc } from './page-toc.mjs';
@@ -109,7 +109,7 @@ export const PHONE_STEP_PX = 270;
 export const PHONE_STEPS_BASE_PX = 160;
 // A hero whose photo is not laid full-bleed under its title (a banner, a split) keeps its photo's own shape on a phone
 // unless its phone frame (src/data/phone-heroes.json) is taller (lib/plan-assertions.mjs phone_hero_strip).
-const FRAMED_HEROES = new Set(['media-banner', 'media-split']);
+export const FRAMED_HEROES = new Set(['media-banner', 'media-split']);
 // The content's width at 1440 (--container-max 72rem) and on a 390px phone (1.25rem gutters).
 export const TITLE_COLUMNS = Object.freeze({ desktop: 1152, phone: 350 });
 
@@ -120,7 +120,7 @@ export const TITLE_COLUMNS = Object.freeze({ desktop: 1152, phone: 350 });
  */
 // trustBar: whether the page shows its trust bar under the hero (lib/site-trust.mjs trustBarContent: planSite reads
 // the figures); the page's estimate counts it and the charts drawn after a section, as the trial build measures them.
-export function planPage(page, components, { isBuilt = () => true, headingModel = null, charEm = 0.6, pageTypes = new Map(), phoneHeroes = null, maxWalls = MAX_BUDGET_WALLS, trustBar = false } = {}) {
+export function planPage(page, components, { isBuilt = () => true, headingModel = null, charEm = 0.6, pageTypes = new Map(), phoneHeroes = null, maxWalls = MAX_BUDGET_WALLS, trustBar = false, treatmentCss = '' } = {}) {
   const options = { isBuilt };
   const blocks = withMediaModules(page, components, options);
   const model = components.blockModel ? { ...DEFAULT_BLOCK_MODEL, ...components.blockModel } : DEFAULT_BLOCK_MODEL;
@@ -160,7 +160,8 @@ export function planPage(page, components, { isBuilt = () => true, headingModel 
   });
   const heroShown = (page.pageType !== 'privacy' || Boolean(components.heroByPageType?.privacy)) && heroShowsPhoto(heroVariant);
   const heroEstimate = page.hero ? estimateBlock({ type: 'hero' }, heroShown ? heroVariant : 'plain', renderedWords(page.hero), model, page.pageType) : null;
-  const titleEm = wrapEmFor(components.heroText);
+  // The title in the face the treatment sets it in (src/styles/reference.css), as PageHero.astro fits it.
+  const titleEm = titleMetrics({ css: treatmentCss, pageType: page.pageType, heroText: components.heroText });
   const heroFit = heroShown && heroVariant === 'media-split' ? SPLIT_HERO_FIT : HERO_FIT;
   const fit = (width) => fitHeading(page.hero.heading, { columnPx: TITLE_COLUMNS[width], capPx: 999, minPx: heroFit[width].minPx, maxLines: heroFit[width].lines, charEm: titleEm });
   const title = page.hero?.heading ? { desktop: fit('desktop'), phone: fit('phone') } : null;

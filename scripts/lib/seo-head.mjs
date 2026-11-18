@@ -187,7 +187,10 @@ function withServiceArea(item, page, identity, company, trail, single) {
   if (item['@type'] !== 'Service') return item;
   const areaServed = item.areaServed ?? serviceArea(page, company, trail);
   // The page's one Service gets its @id (the page's #service): the page node names it as its main entity.
-  return { ...(single ? { '@id': `${absoluteUrl(identity, page.seo.canonical)}#service` } : {}), ...item, provider: item.provider ?? { '@id': organizationId(identity) }, ...(areaServed?.length ? { areaServed } : {}) };
+  // Its description is the page's summary (its meta description), as the Service 08 writes has it: Site Factory's is the
+  // page's first sentence, about the order terms more often than the service (aloha L-7, RateHarbor L-1, audits 2026-11-17/18).
+  const description = page.seo?.description || item.description;
+  return { ...(single ? { '@id': `${absoluteUrl(identity, page.seo.canonical)}#service` } : {}), ...item, ...(description ? { description } : {}), provider: item.provider ?? { '@id': organizationId(identity) }, ...(areaServed?.length ? { areaServed } : {}) };
 }
 
 /** @param {{ page: any, identity: any, nav: any, builtRoutes?: Set<string> | null, contact?: any, company?: any, dates?: Record<string, { hash: string, modified: string }> | null, team?: { route: string, people: any[] } | null }} input @returns {Record<string, unknown>[]} */

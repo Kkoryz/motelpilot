@@ -12,7 +12,7 @@ export const PAGE_FIGURES_SCHEMA = 'seo-site-page-figures-v1';
 export const FIGURES_MAX = 4;
 // A page with none of its own shows this many of the common ones.
 export const FIGURES_COMMON_ONLY = 3;
-export const FIGURE_LABEL_WORDS = 4;
+export const FIGURE_LABEL_WORDS = 6;
 // The page types that keep the site-wide band (founding year, certificates), and those with no band.
 export const SITE_BAND_PAGE_TYPES = Object.freeze(['home', 'about']);
 export const NO_BAND_PAGE_TYPES = Object.freeze(['privacy']);

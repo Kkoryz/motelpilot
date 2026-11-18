@@ -200,7 +200,7 @@ test('a photo the library review flags stays in use and is reported; --send-back
   assert.deepEqual([flagged.sentBack, flagged.rejected.map((item) => item.id)], [false, ['b']]);
   const kept = JSON.parse(await readFile(planFile, 'utf8')).entries.find((item) => item.id === 'b');
   assert.equal(kept.status, 'generated');
-  assert.match(kept.libraryReview.flagged, /looks like photo 1: same worker/);
+  assert.match(kept.libraryReview.flagged, /looks like photo 1 on the same page: same worker/);
   await writeFile(planFile, JSON.stringify({ entries: [entry('a'), entry('b')] }));
   await reviewLibrary({ root, judge, sendBack: true });
   assert.equal(JSON.parse(await readFile(planFile, 'utf8')).entries.find((item) => item.id === 'b').status, 'rejected-review');

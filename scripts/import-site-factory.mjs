@@ -6,7 +6,8 @@
 // from pages.json labels and links, never with new copy.
 
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, rm } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { mkdir, readdir, readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { assertAuthoringPages } from './lib/authoring-contract.mjs';
 import { plainText } from './lib/blog.mjs';
@@ -186,7 +187,7 @@ export function importSiteFactory({ authoringPackage: given, pagesPlan, only = n
     placeStyleGrid(blocks, mapping, { source, planned });
     placeCases(blocks, mapping, { source, proof, heading: wording?.caseHeading });
     placeSources(blocks, mapping, source);
-    const related = placeRelated(blocks, { planned, pagesPlan, built, links: source.links || [], variant: relatedVariant, heading: wording?.relatedHeading });
+    const related = placeRelated(blocks, { planned, pagesPlan, built, links: source.links || [], variant: relatedVariant, heading: wording?.relatedHeading, pagesHeading: wording?.relatedPagesHeading });
     if (related.fromPage + related.added) mapping.push({ sectionId: 'links', blockType: 'relatedPages', rule: `related pages: ${related.fromPage} page links (${related.inCopy} already in the copy), ${related.added} from the site plan` });
     assertSectionsUsedOnce(source, mapping);
     // A package whose every section names its slot is laid out in the blueprint's order.
@@ -312,8 +313,11 @@ export async function runImport({ packagePath, pagesPlanPath, only = null, struc
   const trustPath = resolve(root, 'src/data/site-trust.json');
   if (result.trust) await writeJson(trustPath, result.trust);
   else await rm(trustPath, { force: true });
-  // The sitemap's lastmod moves only for pages whose content this import changed.
-  await recordPageDates({ root });
+  // The sitemap's lastmod moves only for pages whose content this import changed. A site with replacement lists has its
+  // dates recorded once they are applied (apply-replacements.mjs, right after the import): recorded here on the copy
+  // as imported, every replaced page would read as changed today on every import.
+  const lists = resolve(root, 'content/replacements');
+  if (!(existsSync(lists) && (await readdir(lists)).some((name) => name.endsWith('.json') && name !== 'skipped.json'))) await recordPageDates({ root });
   return result;
 }
 

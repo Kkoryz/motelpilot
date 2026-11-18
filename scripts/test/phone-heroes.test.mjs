@@ -235,3 +235,10 @@ test("a competitor page whose hero is no section of the capture (baliswim's vide
   const measured = { pages: [...inventory.pages, { pageType: 'home', sections: [section(1, 'hero:media-overlay', { width: 390, height: 717 })] }] };
   assert.deepEqual(phoneFrames(measured, [...modules, { pageType: 'home', index: 1, module: 'hero:media-overlay' }]).hero.byPageType, { solution: 0.54, about: 0.54, home: 0.54 });
 });
+
+test("a page type of the site the competitor has no page of takes the median hero frame too (aloha 2026-11-18: /our-process/, a general page with a split hero)", () => {
+  const inventory = { pages: [{ pageType: 'home', sections: [section(1, 'hero:media-overlay', { width: 390, height: 717 })] }] };
+  const modules = [{ pageType: 'home', index: 1, module: 'hero:media-overlay' }];
+  assert.deepEqual(phoneFrames(inventory, modules, ['home', 'general']).hero.byPageType, { home: 0.54, general: 0.54 });
+  assert.deepEqual(phoneFrames(inventory, modules).hero.byPageType, { home: 0.54 }, 'without the site\'s types, the competitor\'s only');
+});

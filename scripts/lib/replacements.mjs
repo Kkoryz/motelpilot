@@ -61,6 +61,17 @@ function unquoted(item) {
 export const APPLIED_MIN_CHARS = 12;
 const holds = (value, text) => JSON.stringify(value).includes(JSON.stringify(text).slice(1, -1));
 
+// A site-level field Site Factory names by section with no page (its "trust_bar"): read as the page at this address
+// (apply-replacements.mjs), only a value that is the old text whole is replaced, never the old text inside a sentence
+// (aloha 2026-11-17: the trust bar's "350 independent" is "350", the copy's "more than 350 independent labels" stays).
+export const SITE_FIELDS = Object.freeze({ trust_bar: '#trust_bar' });
+function replaceWhole(value, old, next, count) {
+  if (typeof value === 'string') { if (value !== old) return value; count.occurrences += 1; count.strings += 1; return next; }
+  if (Array.isArray(value)) return value.map((item) => replaceWhole(item, old, next, count));
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, replaceWhole(item, old, next, count)]));
+  return value;
+}
+
 // The pages with each list's items applied: { pages, results: [{ list, n, url, status, content, structuredData }] }.
 // status: replaced (the old sentence found and replaced), applied (only the new one there: replaced before), missing
 // (neither: by hand), no-page (no built page at that address). The structured data (jsonLd) is replaced with the copy.
@@ -69,10 +80,35 @@ export function applyReplacements(pages, lists) {
   const results = [];
   for (const { name, items } of lists) {
     for (const item of items) {
-      const index = current.findIndex((page) => page.route === item.url);
-      const at = { list: name, n: item.n ?? null, url: item.url, section: item.section ?? null };
+      const siteField = SITE_FIELDS[item.section] && !current.some((page) => page.route === item.url) ? SITE_FIELDS[item.section] : null;
+      const index = current.findIndex((page) => page.route === (siteField ?? item.url));
+      const at = { list: name, n: item.n ?? null, url: item.url, section: item.section ?? null, ...(siteField ? { route: siteField } : {}) };
       if (index < 0) { results.push({ ...at, status: 'no-page' }); continue; }
+      if (siteField) {
+        const count = { strings: 0, occurrences: 0 };
+        const next = replaceWhole(current[index], item.old, item.new, count);
+        if (count.occurrences) { current = current.map((other, k) => (k === index ? next : other)); results.push({ ...at, status: 'replaced', content: count.occurrences, structuredData: 0 }); }
+        else results.push({ ...at, status: JSON.stringify(current[index]).includes(JSON.stringify(item.new)) ? 'applied' : 'missing' });
+        continue;
+      }
       const page = current[index];
+      // A section taken out: an empty new whose old is the whole heading of the page's block of that section (the blog
+      // hubs, 2026-11-18: swim_1118a #6, aloha_1118a #7, "a hub carries the article cards, an intro and one CTA"), with
+      // the blocks going on from it; or a visual taken out of a section ("<section>.visuals", its id as old: aloha_1118a #6).
+      // A data visual's item as "<label>: <detail>" in a section's visuals (Strandmill swim_1118b #37, 2026-11-18: the
+      // quality sequence's "Random checks: Random checks on finished goods"), its label and detail kept apart.
+      const edited = item.new.trim() ? visualItemEdit(page, item) : null;
+      if (edited) {
+        if (edited.page) { current = current.map((other, k) => (k === index ? edited.page : other)); results.push({ ...at, status: 'replaced', form: 'visual item', content: 1, structuredData: 0 }); }
+        else results.push({ ...at, status: 'applied', form: 'visual item' });
+        continue;
+      }
+      const cut = !item.new.trim() ? removedPart(page, item) : null;
+      if (cut) {
+        if (cut.page) { current = current.map((other, k) => (k === index ? cut.page : other)); results.push({ ...at, status: 'replaced', form: cut.form, content: 1, structuredData: 0 }); }
+        else results.push({ ...at, status: 'applied', form: cut.form });
+        continue;
+      }
       // A new sentence that holds the old one, already in the page: replaced before (again it would grow every run).
       if (item.new.includes(item.old) && holds(page, item.new)) { results.push({ ...at, status: 'applied' }); continue; }
       const { jsonLd, ...copy } = page;
@@ -124,6 +160,53 @@ export function applyReplacements(pages, lists) {
   }
   // A card set left with fewer cards than a set holds (cards removed, now or by an earlier pass) is settled.
   return { pages: current.map(settleCardSets), results };
+}
+
+// A section's data visual item written "<label>: <detail>" (the section "<id>.visuals"): { page } with the item's label
+// and detail replaced, { page: null } when the new one is there already, null when the item is not of that kind.
+function visualItemEdit(page, item) {
+  const section = String(item.section ?? '');
+  if (!section.endsWith('.visuals')) return null;
+  const split = (text) => { const at = String(text).indexOf(': '); return at > 0 ? [String(text).slice(0, at).trim(), String(text).slice(at + 2).trim()] : null; };
+  const [old, next] = [split(item.old), split(item.new)];
+  if (!old || !next) return null;
+  const id = section.slice(0, -'.visuals'.length);
+  const blocks = Array.isArray(page.blocks) ? page.blocks : [];
+  const ofSection = (block) => block.id === id || (block.sourceSectionIds ?? []).includes(id);
+  const detail = (entry) => entry.detail ?? entry.value ?? entry.text;
+  const is = (entry, [label, text]) => entry && entry.label === label && detail(entry) === text;
+  // A comparison's items are an object ({ options, rows }), not a list of label/detail entries: none of them.
+  const items = (visual) => (Array.isArray(visual?.data?.items) ? visual.data.items : []);
+  const owners = blocks.filter((block) => ofSection(block) && (block.visuals ?? []).some((visual) => items(visual).some((entry) => is(entry, old) || is(entry, next))));
+  if (!owners.length) return null;
+  if (!owners.some((block) => block.visuals.some((visual) => items(visual).some((entry) => is(entry, old))))) return { page: null };
+  const key = (entry) => ('detail' in entry ? 'detail' : 'value' in entry ? 'value' : 'text');
+  const edit = (visual) => (items(visual).some((entry) => is(entry, old)) ? { ...visual, data: { ...visual.data, items: items(visual).map((entry) => (is(entry, old) ? { ...entry, label: next[0], [key(entry)]: next[1] } : entry)) } } : visual);
+  return { page: { ...page, blocks: blocks.map((block) => (owners.includes(block) ? { ...block, visuals: block.visuals.map(edit) } : block)) } };
+}
+
+// What an empty new takes out whole: a section's block (its heading the old) and the blocks going on from it, or a
+// visual of a section (section "<id>.visuals", the visual's id the old). { form, page } (page null: already out), or null
+// when the item is not of that kind (a sentence cut, cards removed: the replacements as before).
+function removedPart(page, item) {
+  const blocks = Array.isArray(page.blocks) ? page.blocks : [];
+  const section = String(item.section ?? '');
+  const ofSection = (block, id) => block.id === id || (block.sourceSectionIds ?? []).includes(id);
+  if (section.endsWith('.visuals')) {
+    const id = section.slice(0, -'.visuals'.length);
+    const owners = blocks.filter((block) => ofSection(block, id));
+    if (!owners.length) return null;
+    const holding = owners.filter((block) => (block.visuals ?? []).some((visual) => visual.id === item.old.trim()));
+    if (!holding.length) return { form: 'visual removed', page: null };
+    return { form: 'visual removed', page: { ...page, blocks: blocks.map((block) => (holding.includes(block) ? { ...block, visuals: block.visuals.filter((visual) => visual.id !== item.old.trim()) } : block)) } };
+  }
+  const heading = item.old.trim();
+  const target = blocks.find((block) => ofSection(block, section) && String(block.heading ?? '').trim() === heading);
+  // Not there (taken out before, or a sentence cut whose old is no heading): the replacements as before.
+  if (!target) return null;
+  const gone = new Set([target.id]);
+  for (let grew = true; grew;) { grew = false; for (const block of blocks) if (block.continues && gone.has(block.continues) && !gone.has(block.id)) { gone.add(block.id); grew = true; } }
+  return { form: 'section removed', page: { ...page, blocks: blocks.filter((block) => !gone.has(block.id)) } };
 }
 
 // A card grid needs two cards (the authoring contract: 2 to 4 a grid). Cards removed by a list (Strandmill fix2 #55,

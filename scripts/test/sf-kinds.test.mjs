@@ -227,3 +227,15 @@ test('long cards (three to a row at most) come in grids of three, a set\'s parts
   const short = planKindBlocks(kindPage([sections[0], { ...sections[2], items: items(7, 'Option') }, sections.at(-1)])).blocks.filter((block) => block.type === 'featureGrid');
   assert.deepEqual(short.map((block) => block.items.length), [4, 3]);
 });
+
+test("rows the writer went on with after a blank line, no header and as many cells, are the same table's rows; a different table or text stays apart (aloha 2026-11-18 H-7)", async () => {
+  const { markdownTable } = await import('../lib/markdown-table.mjs');
+  const body = ['Compare flat measurements.', '', '| Item | Detail |', '|---|---|', "| Men's sizes | XS to 3XL |", '', "| Men's inseams | 5, 7 and 9 inch |", "| Kids' inseams | 4 to 6 inch |", '', '| Custom inseams | 3 to 11 inches |', '', 'Charts come with your quote.'].join('\n');
+  const parsed = markdownTable(body);
+  assert.deepEqual(parsed.rows.map((row) => row[0]), ["Men's sizes", "Men's inseams", "Kids' inseams", 'Custom inseams']);
+  assert.deepEqual(parsed.after, ['Charts come with your quote.']);
+  // A second table with its own header, or rows of another width, are not taken in.
+  const two = markdownTable(['| A | B |', '|---|---|', '| 1 | 2 |', '', '| C | D |', '|---|---|', '| 3 | 4 |'].join('\n'));
+  assert.equal(two.rows.length, 1);
+  assert.equal(markdownTable(['| A | B |', '|---|---|', '| 1 | 2 |', '', '| x | y | z |'].join('\n')).rows.length, 1);
+});

@@ -128,6 +128,11 @@ export async function generateImages({ root = process.cwd(), limit = Infinity, c
   // read from too (charts and boards among them).
   const referenceHashes = [];
   for (const path of new Set([...style.kinds[SITE_STYLE].refs, ...(imageTypes?.refs ?? [])])) referenceHashes.push({ path, hash: await hashImage(sharp, path) });
+  // A photo recorded made whose master is gone (a run stopped while it was being made again: aloha 2026-11-17, three
+  // photos) is made again: nothing can render, review or crop it.
+  const gone = plan.entries.filter((entry) => entry.status === 'generated' && entry.master && !existsSync(resolve(root, entry.master)));
+  for (const entry of gone) { entry.status = 'planned'; delete entry.master; }
+  if (gone.length) await writeJson(planPath, plan);
   // A service site's generic scene is never made (lib/photo-class.mjs): one sent back by the library review after the
   // plan was made keeps its old scene subject until plan-images plans it again as the online-service class, which the
   // images step does before it makes the send-backs (site-run.mjs; site14 2026-11-17: five such scenes were queued as

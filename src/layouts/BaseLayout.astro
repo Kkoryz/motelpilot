@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { fontPreloads } from '../lib/font-preload';
 import { absoluteJsonLd, absoluteUrl, pageSchemas, robotsDirective, serializeJsonLd, socialMeta, withheldCompanyDetails } from '../../scripts/lib/seo-head.mjs';
 import ChatLauncher from '../components/site/ChatLauncher.astro';
 import EnquiryBar from '../components/site/EnquiryBar.astro';
@@ -40,6 +41,7 @@ const social = page ? socialMeta({ page, identity: siteIdentity, image: shareIma
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {fontPreloads().map((file) => <link rel="preload" href={file} as="font" type="font/woff2" crossorigin />)}
     {canonicalHref && <link rel="canonical" href={canonicalHref} />}
     {robots && <meta name="robots" content={robots} />}
     {social.map((tag) => (tag.attribute === 'property' ? <meta property={tag.key} content={tag.content} /> : <meta name={tag.key} content={tag.content} />))}

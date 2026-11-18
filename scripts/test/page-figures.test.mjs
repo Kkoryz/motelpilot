@@ -25,7 +25,7 @@ test("a page's band: figures its text states word for word, its own before the t
     { value: '100–500 pieces', label: 'Stock hardware MOQ' },
     { value: '10 to 15 days', label: 'Sample time' },
     { value: '4 weeks', label: 'Worked out' },
-    { value: '35 to 40 days', label: 'Bulk production time for orders' },
+    { value: '35 to 40 days', label: 'Bulk production time for all repeat orders' },
   ], text, siteTexts);
   assert.deepEqual(picked.map((figure) => figure.value), ['3-7 days', '100–500 pieces', '50 pieces', '10 to 15 days'], 'not in the text, or a long label: dropped; a dash variant still matches');
   assert.deepEqual(pickFigures([{ value: '50 pieces', label: 'MOQ' }, { value: '10 to 15 days', label: 'Sample' }, { value: '35 to 40 days', label: 'Bulk' }, { value: '50 pieces', label: 'MOQ again' }], pageText(pages[1]), siteTexts).map((figure) => figure.label), ['MOQ', 'Sample', 'Bulk'], 'with none of its own, three of the common ones');

@@ -11,7 +11,7 @@ import { imagePrompt } from '../lib/image-prompt.mjs';
 import { libraryMedia } from '../lib/library-media.mjs';
 import { allocateSite } from '../lib/media-allocation.mjs';
 import { markFirstViewportImage } from '../lib/media-slots.mjs';
-import { fitsTheme, pageTheme, routeThemes } from '../lib/page-theme.mjs';
+import { fitsTheme, pageTheme, routeThemes, themeById } from '../lib/page-theme.mjs';
 import { firstImageOnScreen, offscreenEagerProblems } from '../lib/seo-site-checks.mjs';
 
 // site13 claude-seo audit 2026-11-17, M-13 (photos off their page's theme), site12's I-1 (service pages of scenes and
@@ -199,4 +199,26 @@ test('render-web-images --over-budget encodes again only the published files ove
     const width = Number(srcset.match(/a-1536\.webp (\d+)w/)[1]);
     assert.ok(width < 1536 && width === (await sharp(join(root, 'public/media/photos/a-1536.webp')).metadata()).width, srcset);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a product family that is not the line\'s takes a factory set of its own; the line\'s families and pages under no menu item keep the line\'s (aloha M-17, 2026-11-18)', () => {
+  const familyNav = { header: [{ label: 'Products', route: null, children: [
+    { label: 'Big & Tall Aloha Shirts', route: '/big-and-tall-aloha-shirt-manufacturer/', children: [{ label: 'Tall Shirts', route: '/tall-shirt-manufacturer/', children: [] }] },
+    { label: 'Swimwear', route: '/swimwear-manufacturer/', children: [{ label: 'Bikinis', route: '/bikini-manufacturer/', children: [] }] },
+  ] }, { label: 'Sarongs', route: '/sarong-manufacturer/', children: [] }] };
+  const routes = { '/big-and-tall-aloha-shirt-manufacturer/': 'big and tall aloha shirt', '/tall-shirt-manufacturer/': 'tall shirt', '/swimwear-manufacturer/': 'swimwear', '/bikini-manufacturer/': 'bikini', '/sarong-manufacturer/': 'sarong', '/': 'general' };
+  const pages = Object.keys(routes).map((route) => page(route, route === '/' ? 'home' : 'product_manufacturer'));
+  assert.deepEqual(routeThemes(pages, routes, briefs, familyNav, 'aloha shirts'), { '/swimwear-manufacturer/': 'family-swimwear', '/bikini-manufacturer/': 'family-swimwear' });
+  assert.deepEqual(routeThemes(pages, routes, briefs, familyNav), {}, 'without the line no family is told');
+  const theme = themeById('family-resort-dresses', briefs);
+  assert.deepEqual([theme.product, theme.words], ['resort dresses', ['resort dresses']]);
+});
+
+test('an item nobody wears is planned as itself, never a model wearing it (aloha M-17, 2026-11-18)', () => {
+  const pages = [page('/packaging/', 'solution', [split('a'), { id: 'g', type: 'gallery', heading: 'Packs', items: [{ title: 'Boxes' }, { title: 'Bags' }] }]), page('/', 'home')];
+  const plan = (notWorn) => planLibrary({ pages, components, line: 'aloha shirts', briefs, styleRefs, ownRoutes: new Set(['/packaging/']), notWorn });
+  const subjects = (made) => made.entries.filter((entry) => entry.category === 'packaging' && ['hero', 'product', 'lifestyle'].includes(entry.kind)).map((entry) => entry.subject);
+  assert.ok(subjects(plan([])).some((subject) => /model wearing packaging/.test(subject)), 'the fixture plans person photos of the category');
+  const items = subjects(plan(['packaging']));
+  assert.ok(items.length && items.every((subject) => !/model|wearing/.test(subject)), items.join(' | '));
 });

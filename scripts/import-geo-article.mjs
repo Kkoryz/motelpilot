@@ -17,7 +17,7 @@
 
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { mkdir, readFile, rm } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, stat } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { blogGates } from './lib/blog-gates.mjs';
@@ -69,6 +69,35 @@ export function flowHeld(report) {
   const gates = Object.entries(final.gates ?? {}).filter(([, found]) => (Array.isArray(found) ? found.length : Object.keys(found ?? {}).length)).map(([name]) => name);
   const conflicts = [...Object.keys(final.conflicts?.against_site ?? {}), ...(final.conflicts?.internal ?? []).flat()];
   return [`blog flow final check: held${final.held?.length ? `; A/B not right: ${final.held.join(', ')}` : ''}${gates.length ? `; gates: ${gates.join(', ')}` : ''}${conflicts.length ? `; conflicts: ${conflicts.join(', ')}` : ''}`];
+}
+
+// The final check that stands for the article as it is now: the newest hand-fix recheck in the run (handfix_*.json:
+// passed, conflicts, the gates, items), when it was made of this article - its article_sha256 the article's, or, without
+// one, written no earlier than the article (owner: a hand fix after every step, rechecked; 2026-11-18, RateHarbor's
+// recheck passed while the import still read the flow's held final) - else pipeline-report.json's final. Returns
+// { by: the file it came from, or null; final: in pipeline-report's shape }.
+const GATES = ['figures', 'sources', 'competitors', 'replacements', 'links'];
+export async function flowFinal(source, articlePath) {
+  const articleText = await readFile(articlePath);
+  const articleTime = (await stat(articlePath)).mtimeMs;
+  const articleSha = sha(articleText);
+  const checks = [];
+  for (const name of (await readdir(source)).filter((file) => /^handfix_.*\.json$/.test(file))) {
+    const path = resolve(source, name);
+    const check = await readJson(path, null);
+    if (!check || typeof check.passed !== 'boolean') continue;
+    const time = (await stat(path)).mtimeMs;
+    const ofThis = check.article_sha256 ? check.article_sha256 === articleSha : time >= articleTime;
+    if (ofThis) checks.push({ name, time, check });
+  }
+  const newest = checks.sort((a, b) => b.time - a.time)[0];
+  if (newest) {
+    const { check } = newest;
+    const items = Object.entries(check.items ?? {}).filter(([, item]) => (item?.result ?? item) !== 'right').map(([id]) => id);
+    return { by: newest.name, final: { passed: check.passed, held: items, gates: Object.fromEntries(GATES.filter((key) => key in check).map((key) => [key, check[key]])), conflicts: check.conflicts ?? {} } };
+  }
+  const report = await readJson(resolve(source, 'pipeline-report.json'), null);
+  return { by: report?.final ? 'pipeline-report.json' : null, final: report?.final ?? null };
 }
 
 // routes: links the writer placed for routes this site names otherwise, { "/writer/route/": "/site/route/" }.
@@ -207,10 +236,12 @@ export async function importGeoArticle({ root = process.cwd(), runDir, only = nu
   // reasons with it.
   const pictures = wanted.filter((visual) => current[visual.id]).map((visual) => ({ id: visual.id, fit: made[visual.id].fit, ...(made[visual.id].lookAlike ? { lookAlike: made[visual.id].lookAlike } : {}) }));
   const absent = Object.values(current).flatMap((web) => [web.src, web.wide?.src]).filter(Boolean).filter((src) => !existsSync(resolve(root, 'public', src.slice(1))));
+  // The final check of the blog flow, or the hand fix's recheck made after it (flowFinal), named in the report.
+  const finalCheck = await flowFinal(source, files.article);
   const reviewFailures = [
     ...reviewArticle({ post, pages, pending: replaced.pending, pictures, missing, seoMissing: [...seoMissing, ...(article.fields.slug ? [] : ['slug'])], broken: [...replaced.broken, ...absent.map((src) => `the picture file ${src} is missing`)] }),
     ...checks.filter((item) => !item.startsWith('link to a page that does not exist')).map((item) => `publish check: ${item}`),
-    ...flowHeld(await readJson(resolve(source, 'pipeline-report.json'), null)),
+    ...flowHeld({ final: finalCheck.final }),
   ];
   const review = { by: REVIEWER, at: now.toISOString(), passed: !reviewFailures.length, failures: reviewFailures, placeholders: reviewPlaceholders(replaced.pending) };
   const pack = { ...post, placeholders: replaced.pending, source: { tool: 'geo-blog-research', run: source, article: files.article, replacements: files.replacements } };
@@ -222,7 +253,7 @@ export async function importGeoArticle({ root = process.cwd(), runDir, only = nu
     await writeJson(queuePath('drafts', slug), { ...pack, aiReview: review });
     await rm(queuePath('approved', slug), { force: true });
   }
-  const report = { schemaVersion: GEO_ARTICLE_SCHEMA, run: source, files, slug, route: `/blog/${slug}/`, datePublished: post.datePublished, importedAt: new Date().toISOString(), published: isPublished, review, missing, seoMissing, pictures: pictureDensity(article, visuals, pictureTarget((await readJson(resolve(root, 'src/data/article-rhythm.json'), null))?.wordsPerPicture)), failures, misfits, standIns, checks: { failures: checks, warnings }, visuals: made };
+  const report = { schemaVersion: GEO_ARTICLE_SCHEMA, run: source, files, finalCheck: finalCheck.by, slug, route: `/blog/${slug}/`, datePublished: post.datePublished, importedAt: new Date().toISOString(), published: isPublished, review, missing, seoMissing, pictures: pictureDensity(article, visuals, pictureTarget((await readJson(resolve(root, 'src/data/article-rhythm.json'), null))?.wordsPerPicture)), failures, misfits, standIns, checks: { failures: checks, warnings }, visuals: made };
   await writeJson(recordPath, report);
   return report;
 }
@@ -234,6 +265,7 @@ runMain(import.meta.url, async () => {
   const report = await importGeoArticle({ runDir: positionals[0], only: listOption(values.visuals), routes });
   console.log(`${report.route}: ${report.published ? 'a published post of this slug exists: the package was updated, the page was not' : 'built (noindex until it is published)'}; read ${report.files.article}`);
   console.log(report.review.passed ? 'AI review passed: queued in content/blog-queue/approved for its publishing day' : `AI review held it in content/blog-queue/drafts:\n${report.review.failures.map((item) => `  - ${item}`).join('\n')}`);
+  if (report.finalCheck) console.log(`final check read from ${report.finalCheck}`);
   if (report.review.placeholders.length) console.log(`${report.review.placeholders.length} placeholder(s) of our own claims kept for their real values (reported, not held)`);
   if (report.missing.length) console.log(`visuals not made yet (left out of the page): ${report.missing.join(', ')}`);
   if (report.seoMissing.length) console.log(`frontmatter without ${report.seoMissing.join(', ')}: the H1 and the opening stand in`);

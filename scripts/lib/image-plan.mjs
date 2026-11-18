@@ -103,21 +103,27 @@ const sameIntent = (left, right) => JSON.stringify(left ?? null) === JSON.string
 // block model only where it moves a wall) makes no photo again.
 // nav (site-nav.json): the menu items above each page, which name its theme (lib/page-theme.mjs) when its category
 // does not; a themed page's factory and process positions ask for its theme's photos.
-export function photoDemand({ pages, components, briefs, ownRoutes = null, nav = null }) {
+export function photoDemand({ pages, components, briefs, ownRoutes = null, nav = null, line = null }) {
   const routes = Object.fromEntries(pages.map((page) => [page.route, pageCategory(page, briefs, ownRoutes)]));
   const built = new Set(pages.map((page) => page.route));
-  const probe = allocateSite({ pages, components: { ...components, media: { placeholders: briefs.placeholderKinds ?? [], routeCategories: routes, routeThemes: routeThemes(pages, routes, briefs, nav) } }, isBuilt: (href) => !href.startsWith('/') || built.has(href) });
+  const probe = allocateSite({ pages, components: { ...components, media: { placeholders: briefs.placeholderKinds ?? [], routeCategories: routes, routeThemes: routeThemes(pages, routes, briefs, nav, line) } }, isBuilt: (href) => !href.startsWith('/') || built.has(href) });
   return probe.unfilled.map(({ route, status, blockId, kind, category, topic, intent = null }) => ({ route, status, blockId, kind, category, topic, intent }));
 }
 
 // The plan: library entries with subjects, sizes and style references, and each route's category. Classes listed in
 // briefs.placeholderKinds are not generated (they stay image slots until real photos are supplied).
 // ownRoutes: the service pages that get photos of their own (ownPhotoRoutes).
-export function planLibrary({ pages, components, line, lineName = null, briefs, styleRefs, previous = null, ownRoutes = null, nav = null, replaceScenes = false }) {
+// gaps: the positions the site's own library leaves empty as the renderer lays the pages out with it (libraryGaps): a
+// page lays out more photo walls when some of its positions show no photo, so the demand probed on an empty library
+// can fall short of what the built page asks (aloha 2026-11-18: the one-piece page rendered three lifestyle walls for
+// the two photos planned).
+// notWorn: the categories whose photos show an item nobody wears (docs/research/image-types.json products.worn false:
+// packaging, buttons, labels): their photos of a person's class are planned from briefs.itemSubjects, the item itself.
+export function planLibrary({ pages, components, line, lineName = null, briefs, styleRefs, previous = null, ownRoutes = null, nav = null, replaceScenes = false, gaps = [], notWorn = [] }) {
   const routes = Object.fromEntries(pages.map((page) => [page.route, pageCategory(page, briefs, ownRoutes)]));
   // Each page's theme (lib/page-theme.mjs), and so each category's: its first page's (a manufacturer and a wholesale
   // page of one product sit under the same menu item).
-  const themes = routeThemes(pages, routes, briefs, nav);
+  const themes = routeThemes(pages, routes, briefs, nav, line);
   const categoryTheme = new Map();
   for (const page of pages) if (themes[page.route] && !categoryTheme.has(routes[page.route])) categoryTheme.set(routes[page.route], themeById(themes[page.route], briefs));
   categoryTheme.delete(GENERAL);
@@ -125,11 +131,11 @@ export function planLibrary({ pages, components, line, lineName = null, briefs, 
   // What a category's photos name as their product: the line's for the site-wide set, a theme's set the line as the
   // theme has it ("men's swimwear"), a category the name its theme gives it ("men's boardshorts").
   const named = lineName || line;
-  const nameOf = (category) => (category === GENERAL ? named : isThemeCategory(category) ? themedName(named, categoryTheme.get(category)) : themedName(category, categoryTheme.get(category)));
+  const nameOf = (category) => (category === GENERAL ? named : isThemeCategory(category) ? categoryTheme.get(category)?.product ?? themedName(named, categoryTheme.get(category)) : themedName(category, categoryTheme.get(category)));
   // A service page's own opening photo (serviceHeroes); the page no longer takes a turn of the site-wide heroes.
   const serviceHero = serviceHeroes(pages, components, briefs, ownRoutes, named);
   // Every image position the site asks for (photoDemand).
-  const probe = { unfilled: photoDemand({ pages, components, briefs, ownRoutes, nav }) };
+  const probe = { unfilled: photoDemand({ pages, components, briefs, ownRoutes, nav, line }) };
   const demand = {};
   const topics = {};
   const perPage = new Map();
@@ -147,7 +153,10 @@ export function planLibrary({ pages, components, line, lineName = null, briefs, 
       const list = ((topics[request.category] ||= {})[request.kind] ||= new Map());
       const key = [...topicWords(request.topic)].sort().join(' ');
       if (key && !list.has(key)) list.set(key, request.topic);
-      continue;
+      // A topic beyond the class's topic photos (briefs.topicCaps: the first ones get one) takes a plain photo, which
+      // the page then needs besides its plain positions (aloha 2026-11-18: the swimwear page asked 20 product photos,
+      // 16 were made and its wall of four stayed grey).
+      if (key && [...list.keys()].indexOf(key) < briefs.topicCaps[request.kind]) continue;
     }
     const counter = `${request.route}|${request.category}|${request.kind}`;
     perPage.set(counter, (perPage.get(counter) ?? 0) + 1);
@@ -185,6 +194,14 @@ export function planLibrary({ pages, components, line, lineName = null, briefs, 
   // owner 2026-11-12: no slot stays empty, a stand-in is made). Heroes are one a page: the general pages take turns.
   // The site-wide heroes are enough for each to open HERO_MAX_PAGES pages at most (A-10): the pages beyond the cap's
   // share ask for heroes of their own.
+  // The positions the library leaves empty on a built page ask for photos besides the ones made.
+  const gapsOnPage = new Map();
+  for (const gap of gaps) { const key = `${gap.route}|${gap.category}|${gap.kind}`; gapsOnPage.set(key, (gapsOnPage.get(key) ?? 0) + 1); }
+  for (const [key, count] of gapsOnPage) {
+    const [, category, kind] = key.split('|');
+    demand[category] ||= Object.fromEntries([...MEDIA_KINDS, 'hero'].map((name) => [name, 0]));
+    if (kind in demand[category]) demand[category][kind] = Math.max(demand[category][kind], made(category, kind) + count);
+  }
   const cap = (category, kind) => {
     const given = (category === GENERAL ? briefs.generalCaps?.[kind] : undefined) ?? briefs.caps[kind];
     if (kind === 'hero') return category === GENERAL ? Math.max(given, Math.ceil(demand[category].hero / HERO_MAX_PAGES)) : given;
@@ -225,7 +242,10 @@ export function planLibrary({ pages, components, line, lineName = null, briefs, 
       const borrowable = kind === 'process' ? allRefs.filter((ref) => isProductionScene(ref, briefs.productionSceneWords)) : PERSON_KINDS.includes(kind) ? staged(allRefs) : allRefs;
       const extra = borrowable.filter((ref) => !pool.some((own) => own.path === ref.path));
       const scenePool = pool.length < kindTotals[kind] ? [...pool, ...extra] : pool;
-      const subjects = classSubjects(kind);
+      // An item nobody wears is planned as itself, never "a model wearing packaging" (aloha 2026-11-18, claude-seo audit 3
+      // M-17: the packaging page's lifestyle photos, planned so, came out as boxes and bags in a pool and on grass).
+      const itemOnly = new Set(notWorn).has(category) && PERSON_KINDS.includes(kind) && kind !== 'portrait' && briefs.itemSubjects;
+      const subjects = itemOnly ? briefs.itemSubjects[kind] ?? briefs.itemSubjects.product : classSubjects(kind);
       // A product under a children's menu item is one for children whatever its own name (page-theme.mjs).
       const productOnly = PERSON_KINDS.includes(kind) && (forChildren(category, briefs) || theme?.id === CHILDREN_THEME);
       // Who wears it and where, as the page's theme says (M-13): a photo of a model on a themed page.
@@ -389,4 +409,13 @@ export const REJECTED_STATUSES = Object.freeze(['rejected-duplicate', 'rejected-
 export function rotateVariety(entry, variety = {}) {
   const next = (list, value, step) => (list?.length && value ? list[(list.indexOf(value) + step) % list.length] : value);
   return { ...entry, colour: next(variety.garmentColours, entry.colour, 1), casting: next(variety.casting, entry.casting, 1), shotShift: (entry.shotShift ?? 0) + SHOT_JUMP, workerShift: (entry.workerShift ?? 0) + 1 };
+}
+
+// The positions the site's own library (components.media as applied) leaves empty when the pages are laid out with it:
+// plain photos only (not a section's own photo, a portrait, nor a class left to the site's own photos).
+export function libraryGaps({ pages, components, briefs, sitePhotos = [] }) {
+  if (!components.media?.pools && !components.media?.routePools) return [];
+  const built = new Set(pages.map((page) => page.route));
+  const { unfilled } = allocateSite({ pages, components, sitePhotos, isBuilt: (href) => !href.startsWith('/') || built.has(href) });
+  return unfilled.filter((item) => !item.intent && !(briefs.placeholderKinds ?? []).includes(item.kind) && MEDIA_KINDS.includes(item.kind)).map(({ route, kind, category }) => ({ route, kind, category }));
 }

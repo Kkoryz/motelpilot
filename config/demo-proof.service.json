@@ -30,7 +30,7 @@
     {
       "value": "25",
       "label": "people on the team",
-      "measure": "([\\d,]+) (?:staff|people|employees|team members)\\b"
+      "measure": "([\\d,]+) (?:staff|people|employees|team members)\\b(?![^.,;]{0,30}\\baddress)"
     }
   ],
   "history": [

@@ -9,8 +9,8 @@
   "lead": [
     "Hotel revenue management uses demand and booking data to decide room prices, availability, and booking channels. For an independent motel owner, the aim is to earn more from limited room inventory while checking what remains after booking and servicing costs. Forecasting, pricing, inventory, and distribution work together in this discipline, as explained in [Cloudbeds' hotel revenue management guide](https://www.cloudbeds.com/revenue-management/)."
   ],
-  "datePublished": "2026-11-17T21:12:12Z",
-  "dateModified": "2026-11-17T21:16:36Z",
+  "datePublished": "2026-11-17T21:16:49Z",
+  "dateModified": "2026-11-17T21:24:34Z",
   "author": {
     "type": "Organization"
   },
@@ -919,6 +919,6 @@
   },
   "review": {
     "by": "ai-review",
-    "at": "2026-11-17T21:15:32.772Z"
+    "at": "2026-11-17T21:24:34.000Z"
   }
 }

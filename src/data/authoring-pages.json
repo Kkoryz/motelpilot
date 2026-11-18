@@ -276,7 +276,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "About Us",
@@ -297,14 +297,6 @@
           {
             "label": "Resources",
             "href": "/resources/"
-          },
-          {
-            "label": "Privacy Policy",
-            "href": "/privacy-policy/"
-          },
-          {
-            "label": "Terms and Conditions",
-            "href": "/terms-and-conditions/"
           },
           {
             "label": "Request a Quote",
@@ -9008,7 +9000,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Capabilities",
@@ -9233,7 +9225,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Case Studies",
@@ -9481,7 +9473,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Case Studies",
@@ -9701,7 +9693,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Case Studies",
@@ -9972,7 +9964,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Case Studies",
@@ -10257,18 +10249,6 @@
         }
       },
       {
-        "id": "related",
-        "type": "relatedPages",
-        "heading": "Related services",
-        "links": [
-          {
-            "label": "Terms and Conditions",
-            "href": "/terms-and-conditions/"
-          }
-        ],
-        "variant": "tiles"
-      },
-      {
         "id": "cta",
         "type": "cta",
         "sourceSectionIds": [
@@ -10496,18 +10476,6 @@
         ]
       },
       {
-        "id": "related",
-        "type": "relatedPages",
-        "heading": "Related services",
-        "links": [
-          {
-            "label": "Privacy Policy",
-            "href": "/privacy-policy/"
-          }
-        ],
-        "variant": "tiles"
-      },
-      {
         "id": "cta",
         "type": "cta",
         "sourceSectionIds": [
@@ -10686,7 +10654,7 @@
       {
         "id": "related",
         "type": "relatedPages",
-        "heading": "Related services",
+        "heading": "Related pages",
         "links": [
           {
             "label": "Case Studies",

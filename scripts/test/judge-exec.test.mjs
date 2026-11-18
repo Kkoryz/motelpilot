@@ -75,3 +75,14 @@ test("a Claude run uses the judge directories in turn, never the owner's, and no
   const none = await runClaude({ root, prompt: 'p', lastMessage: join(root, 'c.md'), env: { SITE_CLAUDE_CONFIG_DIRS: JSON.stringify([first]) }, spawnRun });
   assert.ok(none.code !== 0 && usageLimit(none.stderr));
 });
+
+test("a judge whose answer is JSON gets it from an earlier message when its final one is a note (aloha 2026-11-18: two auditors closed on a note)", async () => {
+  const { replyOf, claudeArgs } = await import('../lib/claude-exec.mjs');
+  const said = (text) => JSON.stringify({ type: 'assistant', message: { content: [{ type: 'text', text }] } });
+  const result = (text) => JSON.stringify({ type: 'result', result: text, is_error: false, usage: {} });
+  const stdout = [said('Reading the pages.'), said('```json\n{"findings": []}\n```'), said('Waiting on the last reader.'), result('The final JSON is my previous reply.')].join('\n');
+  assert.match(replyOf(stdout, { earlierJson: true }).text, /"findings"/);
+  assert.equal(replyOf(stdout).text, 'The final JSON is my previous reply.', 'other judges keep their final message');
+  assert.equal(replyOf([said('{"a": 1}'), result('{"b": 2}')].join('\n'), { earlierJson: true }).text, '{"b": 2}', 'a final JSON stands');
+  assert.deepEqual(claudeArgs({ stream: true }).slice(claudeArgs({ stream: true }).indexOf('--output-format'), claudeArgs({ stream: true }).indexOf('--output-format') + 3), ['--output-format', 'stream-json', '--verbose']);
+});

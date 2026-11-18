@@ -105,20 +105,29 @@ const param = (name: string) => (tool?.params[name] ? { toolparamdescription: to
     form.addEventListener('focusout', (event) => { if (isControl(event.target) && event.target.value) { touched.add(event.target); mark(event.target); } });
     form.addEventListener('input', (event) => { if (isControl(event.target) && touched.has(event.target)) mark(event.target); });
     // A connected form is sent in place so its result can be announced; without the script it posts as a plain form.
-    // The button is disabled only after a successful send (no second copy), never to hold back validation.
+    // The button is disabled only after a successful send (no second copy), never to hold back validation. While a send
+    // is under way the form is busy: a second submit does nothing, and a failed send can be tried again (RateHarbor
+    // claude-seo audit 2026-11-17, L-3: a slow network let one person or agent post twice).
     form.addEventListener('submit', async (event) => {
       if (!['ready', 'connected'].includes(form.dataset.formStatus ?? '') || !form.action) return;
       event.preventDefault();
+      if (form.getAttribute('aria-busy') === 'true') return;
       const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      form.setAttribute('aria-busy', 'true');
+      if (button) button.disabled = true;
       say(form.dataset.messageSending);
+      let sent = false;
       try {
         const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (!response.ok) throw new Error(String(response.status));
         say(form.dataset.messageSent);
         form.reset();
-        if (button) button.disabled = true;
+        sent = true;
       } catch {
         say(form.dataset.messageFailed);
+      } finally {
+        form.removeAttribute('aria-busy');
+        if (button) button.disabled = sent;
       }
     });
   }

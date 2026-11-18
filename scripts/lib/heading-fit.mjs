@@ -11,6 +11,9 @@
 // Desktop titles: two lines, at least 36px. Phone titles: four lines, at least 24px. Below 24px a phone title is barely
 // above the lead (17-18px) and under the section headings a phone shows (24-28px), so it stops reading as the title;
 // 24px still fits four lines of a 60-character title in a 360px column (15 characters a line at 0.68em).
+import { cssItems, splitSelectors } from './css-subset.mjs';
+import { TITLE_GLYPHS } from './title-glyphs.mjs';
+
 export const HERO_FIT = Object.freeze({ desktop: { lines: 2, minPx: 36 }, phone: { lines: 4, minPx: 24 } });
 // A blog post's title keeps the floor its own scale already has (patterns.css .post-header__title, 1.75rem); on a phone
 // the hero's 24px, the size of the article's own largest headings there (an 86-character question took six lines at
@@ -113,7 +116,112 @@ export function lineCapacity(text, maxLines) {
 
 // The title's line width in ems at its line limit (capacity x average width x margin): the column's width divided by
 // it is the largest size that keeps the title within its lines.
-export const lineEms = (text, maxLines, charEm) => lineCapacity(text, maxLines) * charEm * WRAP_MARGIN;
+export const lineEms = (text, maxLines, charEm) => (isGlyphs(charEm) ? lineWidthEms(text, maxLines, charEm) : lineCapacity(text, maxLines) * charEm) * WRAP_MARGIN;
+
+// A title in a face the template knows the real widths of (lib/title-glyphs.mjs) wraps by them, not by an average:
+// a line of wide letters ("Airbnb Management", 0.64em a letter in Montserrat 700) runs past what a count of its
+// characters at the 0.6em average allows, and Staylumen's Nashville title took five phone lines where the fit planned
+// four (2026-11-18). charEm, wherever the fit takes it, is then these glyphs instead of a number.
+/** @typedef {{ family: string, weight: number, widths: Record<string, number>, upper?: boolean }} TitleGlyphs */
+/** @param {unknown} value @returns {value is TitleGlyphs} */
+export const isGlyphs = (value) => Boolean(value) && typeof value === 'object' && typeof (/** @type {any} */ (value)).widths === 'object';
+// The face's widths at the nearest weight it has; null for a face the template does not know (the average then).
+/** @param {string} family @param {number} [weight] @param {{ upper?: boolean }} [options] @returns {TitleGlyphs | null} */
+export function titleGlyphs(family, weight = 700, { upper = false } = {}) {
+  const name = firstFamily(family);
+  const faces = /** @type {Record<string, Record<string, Record<string, number>>>} */ (TITLE_GLYPHS)[name.toLowerCase()];
+  if (!faces) return null;
+  const nearest = Object.keys(faces).map(Number).reduce((best, each) => (Math.abs(each - weight) < Math.abs(best - weight) ? each : best));
+  return { family: name, weight: nearest, widths: faces[nearest], upper };
+}
+// A text's width in ems in the face (a character it has no width for counts as its "n").
+/** @param {string} text @param {TitleGlyphs} glyphs */
+export function textEms(text, glyphs) {
+  const fallback = glyphs.widths.n ?? 0.6;
+  let sum = 0;
+  for (const char of glyphs.upper ? String(text).toUpperCase() : String(text)) sum += glyphs.widths[char] ?? fallback;
+  return sum;
+}
+// The lines a title wraps to in a line widthEms wide (greedy, at the spaces, as wrapLines).
+/** @param {string} text @param {number} widthEms @param {TitleGlyphs} glyphs */
+export function wrapLinesEm(text, widthEms, glyphs) {
+  const space = textEms(' ', glyphs);
+  /** @type {string[]} */
+  const lines = [];
+  let width = 0;
+  for (const word of words(text)) {
+    const own = textEms(word, glyphs);
+    if (lines.length && width + space + own <= widthEms) { lines[lines.length - 1] += ' ' + word; width += space + own; }
+    else { lines.push(word); width = own; }
+  }
+  return lines;
+}
+// The narrowest line (ems, to a thousandth) at which the title wraps to at most maxLines lines.
+/** @param {string} text @param {number} maxLines @param {TitleGlyphs} glyphs */
+export function lineWidthEms(text, maxLines, glyphs) {
+  const parts = words(text);
+  if (!parts.length) return 0;
+  let low = Math.max(...parts.map((word) => textEms(word, glyphs)));
+  let high = textEms(parts.join(' '), glyphs);
+  if (wrapLinesEm(text, low, glyphs).length <= maxLines) return Math.ceil(low * 1000) / 1000;
+  while (high - low > 0.001) {
+    const middle = (low + high) / 2;
+    if (wrapLinesEm(text, middle, glyphs).length <= maxLines) high = middle; else low = middle;
+  }
+  return Math.ceil(high * 1000) / 1000;
+}
+
+// The face a page type's hero title is set in, from the site's treatment (src/styles/reference.css): the --font-hero
+// and --weight-heading its rules give the hero (.page-hero, or the root's tokens), a rule naming the page type over
+// one that names none, a later rule over an earlier; a var() of a root token is read through. Top-level rules only (a
+// media query's are left out). { family, weight }, null where the sheet says nothing.
+/** @param {string} css @param {string} pageType @returns {{ family: string | null, weight: number | null }} */
+export function heroFontFromCss(css, pageType) {
+  /** @type {Record<string, { value: string, rank: number } | null>} */
+  const found = { '--font-hero': null, '--weight-heading': null };
+  /** @type {Record<string, string>} */
+  const root = {};
+  for (const { prelude, body } of cssItems(String(css ?? ''))) {
+    if (!body || prelude.startsWith('@') || body.includes('{')) continue;
+    const declarations = [...body.matchAll(/(--[\w-]+)\s*:\s*([^;]+)/g)].map((match) => [match[1], match[2].trim()]);
+    for (const selector of splitSelectors(prelude)) {
+      const isRoot = /^(:root|html|body)(:root)*$/.test(selector.replace(/\s+/g, ''));
+      if (isRoot) for (const [name, value] of declarations) root[name] = value;
+      // The hero itself: the selector ends at .page-hero (its own attributes and states allowed), not at a part in it.
+      const hero = /\.page-hero(?:\[[^\]]*\]|:[\w-]+(?:\([^)]*\))?)*$/.test(selector);
+      if (!(isRoot || hero) || /:not\([^)]*data-page-type/.test(selector)) continue;
+      const types = [...selector.matchAll(/data-page-type\s*=\s*["']?([\w-]+)/g)].map((match) => match[1]);
+      if (types.length && !types.includes(pageType)) continue;
+      const rank = types.length ? 2 : hero ? 1 : 0;
+      for (const [name, value] of declarations) {
+        const held = found[name];
+        if (name in found && (!held || rank >= held.rank)) found[name] = { value, rank };
+      }
+    }
+  }
+  /** @param {string | null} value */
+  const read = (value) => {
+    let text = value;
+    for (let depth = 0; depth < 3 && text; depth += 1) {
+      const ref = /^var\(\s*(--[\w-]+)\s*(?:,\s*([^)]*))?\)$/.exec(text);
+      if (!ref) break;
+      text = root[ref[1]] ?? ref[2] ?? null;
+    }
+    return text;
+  };
+  const family = read(found['--font-hero']?.value ?? null);
+  const weight = Number.parseInt(read(found['--weight-heading']?.value ?? null) ?? '', 10);
+  return { family: family ? firstFamily(family) : null, weight: Number.isFinite(weight) ? weight : null };
+}
+// What a page type's hero title is fitted with: the real widths of the face the treatment sets it in, when the
+// template knows that face (at the treatment's weight, else 700, the widest it has), else the competitor's average
+// (wrapEmFor).
+/** @param {{ css?: string, pageType: string, heroText?: any }} options @returns {number | TitleGlyphs} */
+export function titleMetrics({ css = '', pageType, heroText = null }) {
+  const font = heroFontFromCss(css, pageType);
+  const glyphs = font.family ? titleGlyphs(font.family, font.weight ?? 700, { upper: heroText?.textTransform === 'uppercase' }) : null;
+  return glyphs ?? wrapEmFor(heroText);
+}
 
 const round = (value, places = 3) => Math.round(value * 10 ** places) / 10 ** places;
 
@@ -133,6 +241,7 @@ export function fitHeading(text, { columnPx, containerPx = columnPx, capPx, minP
 
 // The lines the model says a title takes at sizePx in columnPx (without the margin: the plain average).
 export function predictLines(text, { columnPx, sizePx, charEm }) {
+  if (isGlyphs(charEm)) return wrapLinesEm(text, columnPx / sizePx, charEm).length;
   return wrapLines(text, Math.floor(columnPx / (sizePx * charEm))).length;
 }
 
@@ -141,7 +250,7 @@ export function predictLines(text, { columnPx, sizePx, charEm }) {
 // over the desktop's two lines there even at the floor takes the hero's whole row and the form goes under the copy
 // (Staylumen's Scottsdale page, 2026-11-16: 68 characters, three lines beside the form).
 export const FORM_HERO_TITLE_PX = Math.round(((1152 - 40) * 7) / 12);
-/** @param {string} text @param {{ charEm: number, columnPx?: number }} options */
+/** @param {string} text @param {{ charEm: number | TitleGlyphs, columnPx?: number }} options */
 export function titleNeedsRow(text, { charEm, columnPx = FORM_HERO_TITLE_PX }) {
   if (!words(text).length) return false;
   return predictLines(text, { columnPx, sizePx: HERO_FIT.desktop.minPx, charEm }) > HERO_FIT.desktop.lines;
@@ -150,7 +259,7 @@ export function titleNeedsRow(text, { charEm, columnPx = FORM_HERO_TITLE_PX }) {
 // The custom properties a fitted title's box carries (template.css [data-heading-fit]): the line width in ems at the
 // desktop and the phone limit, and the floors. The stylesheet does the division by the box's width.
 /** @typedef {{ desktop: { lines: number, minPx: number }, phone: { lines: number, minPx: number } }} FitRule */
-/** @param {string} text @param {{ charEm: number, fit?: FitRule }} options */
+/** @param {string} text @param {{ charEm: number | TitleGlyphs, fit?: FitRule }} options */
 export function headingFitVars(text, { charEm, fit = HERO_FIT }) {
   if (!words(text).length) return null;
   return {
@@ -160,7 +269,7 @@ export function headingFitVars(text, { charEm, fit = HERO_FIT }) {
     '--fit-min-phone': `${fit.phone.minPx}px`,
   };
 }
-/** @param {string} text @param {{ charEm: number, fit?: FitRule }} options @returns {string | undefined} */
+/** @param {string} text @param {{ charEm: number | TitleGlyphs, fit?: FitRule }} options @returns {string | undefined} */
 export const headingFitStyle = (text, options) => {
   const vars = headingFitVars(text, options);
   return vars ? Object.entries(vars).map(([name, value]) => `${name}: ${value}`).join('; ') : undefined;

@@ -432,6 +432,22 @@ test('the related pages block holds the page\'s links its copy does not carry, t
   assert.deepEqual(validateAuthoringPages([{ id: 'p', route: '/p/', pageType: 'solution', status: 'authored', seo: { title: 'T', description: 'D', canonical: '/p/' }, jsonLd: [], hero: { heading: 'H' }, blocks: [more[0]] }]), []);
 });
 
+test('a related block of pages that are not all offers is named for pages, and the legal pages are left to the footer (claude-seo audits 2026-11-17/18)', () => {
+  const pagesPlan = { header_nav: [], pages: [
+    { page_id: 'home', page_type: 'home', label: 'Home', url: '/', parent_page_id: null },
+    { page_id: 'cases', page_type: 'general', label: 'Case Studies', url: '/case-studies/', parent_page_id: 'home' },
+    { page_id: 'privacy', page_type: 'privacy', label: 'Privacy Policy', url: '/privacy-policy/', parent_page_id: 'home' },
+    { page_id: 'bikini', page_type: 'product_manufacturer', label: 'Bikini', url: '/bikini/', parent_page_id: 'products' },
+    { page_id: 'about', page_type: 'about', label: 'About', url: '/about/', parent_page_id: 'home' },
+  ] };
+  const built = new Set(pagesPlan.pages.map((page) => page.url));
+  const block = (links) => { const blocks = [{ id: 'cta', type: 'cta', cta: { label: 'Contact', href: '/contact/' }, links: [] }]; placeRelated(blocks, { planned: pagesPlan.pages[4], pagesPlan, built, links, heading: 'Related products and services', pagesHeading: 'Related pages' }); return blocks.find((item) => item.type === 'relatedPages'); };
+  const mixed = block([{ url: '/case-studies/', anchor_text: 'Case studies' }, { url: '/privacy-policy/', anchor_text: 'Privacy Policy' }]);
+  assert.deepEqual([mixed.heading, mixed.links.map((link) => link.href)], ['Related pages', ['/case-studies/']]);
+  assert.equal(block([{ url: '/bikini/', anchor_text: 'Bikinis' }]).heading, 'Related products and services');
+  assert.equal(block([{ url: '/privacy-policy/', anchor_text: 'Privacy Policy' }]), undefined);
+});
+
 test('the blog hub page Site Factory writes becomes the blog hub\'s copy, not a second page at /blog/', () => {
   const blogPlan = { ...plan, pages: [...plan.pages, { page_id: 'blog', page_type: 'blog_hub', label: 'Blog', url: '/blog/' }] };
   const hub = { page_id: 'blog', url: '/blog/', title: 'Swimwear production guides', meta_description: 'Guides for brands.', h1: 'Guides for swimwear brands', hero_lead: 'What to know before you order.', release_status: 'ready_for_template', sections: [{ section_id: 'b1', slot: 'intro', heading: 'About the guides', body: 'We write about fabrics and fit.' }] };

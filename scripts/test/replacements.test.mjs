@@ -201,15 +201,20 @@ test('a blog post is the page at /blog/<slug>/ for the lists, written back as it
   await mkdir(join(root, 'src/data'), { recursive: true });
   await mkdir(join(root, 'content/replacements'), { recursive: true });
   await writeFile(join(root, 'src/data/authoring-pages.json'), JSON.stringify([page()]));
-  const posts = [{ slug: 'fees', status: 'review', title: 'Fees', sections: [{ heading: 'H', paragraphs: ['We work with owners in the United States; learn more.'] }] }, { slug: 'other', status: 'review', sections: [] }];
+  // Posts as the blog takes them (lib/blog.mjs): the lists are applied, then the pages' dates recorded on every page.
+  const post = (slug, paragraph) => ({ slug, status: 'review', title: slug, seo: { title: slug, description: `${slug} in short.` }, lead: [`${slug} answered first.`], datePublished: '2026-11-18', dateModified: '2026-11-18', author: { type: 'Organization', name: 'Co' }, sections: [{ heading: 'H', paragraphs: [paragraph] }] });
+  const posts = [post('fees', 'We work with owners in the United States; learn more.'), post('other', 'Another post.')];
   await writeFile(join(root, 'src/data/blog-posts.json'), JSON.stringify(posts));
   await writeFile(join(root, 'content/replacements/03.json'), JSON.stringify([{ n: 1, url: '/blog/fees/', old: 'owners in the United States; learn', new: 'owners in countries including the United States and Canada; learn' }]));
   assert.equal((await runReplacements({ root })).replaced, 1);
   const after = JSON.parse(await readFile(join(root, 'src/data/blog-posts.json'), 'utf8'));
   assert.equal(after[0].sections[0].paragraphs[0], 'We work with owners in countries including the United States and Canada; learn more.');
-  assert.deepEqual(Object.keys(after[0]), ['slug', 'status', 'title', 'sections']);
+  assert.deepEqual(Object.keys(after[0]), Object.keys(posts[0]));
   assert.deepEqual(after[1], posts[1]);
   assert.equal((await runReplacements({ root })).applied, 1, 'applied once only');
+  // Every page's date is recorded on its content as replaced (aloha audit 2026-11-18 L-5: one lastmod of 46 in the sitemap).
+  const dates = JSON.parse(await readFile(join(root, 'src/data/page-dates.json'), 'utf8'));
+  assert.ok(['/blog/fees/', '/blog/other/', page().route].every((route) => dates[route]), Object.keys(dates).join(', '));
 });
 
 test('an FAQ entry written as its question and answer over a blank line replaces the question and the answer kept apart, in the FAQPage too (Strandmill fix3 #12 2026-11-18)', () => {
@@ -240,4 +245,49 @@ test('card sets left too thin by removed cards are settled: an empty grid goes, 
   assert.deepEqual(settled.blocks.map((block) => `${block.id}:${block.type}:${block.items?.length ?? block.paragraphs.length}`), ['a:featureGrid:4', 'm8:featureGrid:3', 'solo:intro:1']);
   assert.deepEqual(settled.blocks[2], { id: 'solo', type: 'intro', heading: 'Safety', paragraphs: ['Tested text.'] });
   assert.deepEqual(settleCardSets(settled), settled, 'settled once');
+});
+
+test("the trust bar, Site Factory's site-level field (section trust_bar, no page), has its value replaced whole, never the words in a sentence (aloha 2026-11-17)", () => {
+  const trust = { route: '#trust_bar', items: [{ value: '350 independent', label: 'Independent labels', note: 'We produce for more than 350 independent labels.' }] };
+  const lists = [{ name: 'fix.json', items: [{ n: 1, url: '?', section: 'trust_bar', old: '350 independent', new: '350' }] }];
+  const { pages, results } = applyReplacements([trust], lists);
+  assert.deepEqual([results[0].status, pages[0].items[0].value, pages[0].items[0].note], ['replaced', '350', 'We produce for more than 350 independent labels.']);
+  assert.equal(applyReplacements(pages, lists).results[0].status, 'applied');
+});
+
+test('an empty new whose old is a section\'s heading takes the section out, with the blocks going on from it; a visual of a section goes by its id (blog hubs 2026-11-18)', () => {
+  const page = { route: '/blog/', blocks: [
+    { id: 'overview', type: 'intro', sourceSectionIds: ['overview'], heading: 'Intro', paragraphs: ['Guides.'], visuals: [{ id: 'overview_production_time', type: 'data' }, { id: 'keep', type: 'data' }] },
+    { id: 'table-1', type: 'table', sourceSectionIds: ['overview_2'], heading: 'Certifications, Fabrics and Design', columns: ['A'], rows: [['b']] },
+    { id: 'table-1-2', type: 'table', continues: 'table-1', columns: ['A'], rows: [['c']] },
+    { id: 'cta', type: 'cta', sourceSectionIds: ['cta'], heading: 'Talk to us', cta: { label: 'Contact', href: '/contact/' } },
+  ] };
+  const items = [
+    { n: 6, url: '/blog/', section: 'overview_2', old: 'Certifications, Fabrics and Design', new: '' },
+    { n: 7, url: '/blog/', section: 'overview.visuals', old: 'overview_production_time', new: '' },
+  ];
+  const first = applyReplacements([page], [{ name: 'hub', items }]);
+  assert.deepEqual(first.results.map((item) => [item.status, item.form]), [['replaced', 'section removed'], ['replaced', 'visual removed']]);
+  assert.deepEqual(first.pages[0].blocks.map((block) => block.id), ['overview', 'cta']);
+  assert.deepEqual(first.pages[0].blocks[0].visuals.map((visual) => visual.id), ['keep']);
+  const second = applyReplacements(first.pages, [{ name: 'hub', items }]);
+  assert.deepEqual(second.results.map((item) => item.status), ['applied', 'applied']);
+  assert.deepEqual(second.pages, first.pages);
+  // An empty new whose old is a sentence, not a heading, still cuts the sentence.
+  const cut = applyReplacements([page], [{ name: 'x', items: [{ n: 1, url: '/blog/', section: 'overview', old: 'Guides.', new: '' }] }]);
+  assert.deepEqual(cut.pages[0].blocks[0].paragraphs, ['']);
+});
+
+test('a data visual item written "<label>: <detail>" in a section\'s visuals has its label and detail replaced (Strandmill swim_1118b #37)', () => {
+  const page = { route: '/kids/', blocks: [{ id: 'iconList-1', type: 'iconList', sourceSectionIds: ['overview_2_2'], items: [], visuals: [{ id: 'q', type: 'data', data: { shape: 'sequence', items: [{ label: 'Cutting', detail: 'Cut pieces are checked' }, { label: 'Random checks', detail: 'Random checks on finished goods' }] } }] }] };
+  const items = [{ n: 37, url: '/kids/', section: 'overview_2_2.visuals', old: 'Random checks: Random checks on finished goods', new: 'Random in-line checks: Random checks during production' }];
+  const first = applyReplacements([page], [{ name: 'b', items }]);
+  assert.deepEqual([first.results[0].status, first.results[0].form], ['replaced', 'visual item']);
+  assert.deepEqual(first.pages[0].blocks[0].visuals[0].data.items[1], { label: 'Random in-line checks', detail: 'Random checks during production' });
+  assert.equal(applyReplacements(first.pages, [{ name: 'b', items }]).results[0].status, 'applied');
+  // A comparison visual's items are an object (Staylumen /san-diego/ m10, 2026-11-18): passed over, not a crash.
+  const comparison = { ...page, blocks: [{ ...page.blocks[0], visuals: [{ id: 'c', type: 'data', data: { shape: 'comparison', items: { options: ['A', 'B'], rows: [{ label: 'When', values: ['x', 'y'] }] } } }, ...page.blocks[0].visuals] }] };
+  const second = applyReplacements([comparison], [{ name: 'b', items }]);
+  assert.equal(second.results[0].status, 'replaced');
+  assert.deepEqual(second.pages[0].blocks[0].visuals[0], comparison.blocks[0].visuals[0]);
 });

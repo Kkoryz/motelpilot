@@ -227,9 +227,16 @@ export function placeCases(blocks, mapping, { source, proof = null, heading = nu
 // counterpart, its hub and its sibling products.
 export const MAX_RELATED = 12;
 export const RELATED_HEADING = 'Related products and services';
+// A block whose links are not all offers (a product, a service or their hubs) is named for what it holds: the home's
+// "Related products and services" listed Contact Us and Privacy Policy, RateHarbor's "Related services" Careers and
+// Resources (claude-seo audits 2026-11-17/18: aloha L-8, Strandmill M-13, RateHarbor L-2). The legal pages are in every
+// page's footer and are not listed here.
+export const RELATED_PAGES_HEADING = 'Related pages';
+const OFFER_TYPES = new Set(['product_manufacturer', 'product_wholesale', 'products_hub', 'solution', 'solutions_hub']);
 // The routes a page's copy links inline ([label](/route/)).
 export const linkedInCopy = (blocks) => new Set([...JSON.stringify(blocks).matchAll(/\]\((\/[^)\s"]*)\)/g)].map((match) => match[1]));
-export function placeRelated(blocks, { planned, pagesPlan, built, links = [], variant = null, heading = RELATED_HEADING }) {
+export function placeRelated(blocks, { planned, pagesPlan, built, links = [], variant = null, heading = RELATED_HEADING, pagesHeading = RELATED_PAGES_HEADING }) {
+  const typeOf = new Map(pagesPlan.pages.map((page) => [page.url, page.page_type]));
   const cta = blocks.find((block) => block.type === 'cta');
   const inCopy = linkedInCopy(blocks);
   const have = new Set([planned.url, ...(cta ? [cta.cta.href] : []), ...inCopy]);
@@ -237,7 +244,7 @@ export function placeRelated(blocks, { planned, pagesPlan, built, links = [], va
   // A link to a page not built yet stays in the data but is not shown (RelatedPagesBlock): only shown ones count.
   let shown = 0;
   const add = (label, href) => {
-    if (have.has(href) || shown >= MAX_RELATED) return false;
+    if (have.has(href) || shown >= MAX_RELATED || typeOf.get(href) === 'privacy') return false;
     have.add(href);
     list.push({ label, href });
     if (!href.startsWith('/') || built.has(href)) shown += 1;
@@ -248,7 +255,8 @@ export function placeRelated(blocks, { planned, pagesPlan, built, links = [], va
   for (const page of relatedPages(planned, pagesPlan)) if (built.has(page.url) && add(page.label, page.url)) added += 1;
   // Only pages that exist are shown: with none built yet there is no block.
   if (shown > 0) {
-    blocks.splice(indexBefore(blocks, ['faq', 'cta']), 0, { id: freeBlockId(blocks, 'related'), type: 'relatedPages', heading: heading ?? RELATED_HEADING, links: list, ...(variant ? { variant } : {}) });
+    const offers = list.filter((link) => !link.href.startsWith('/') || built.has(link.href)).every((link) => OFFER_TYPES.has(typeOf.get(link.href)));
+    blocks.splice(indexBefore(blocks, ['faq', 'cta']), 0, { id: freeBlockId(blocks, 'related'), type: 'relatedPages', heading: offers ? heading ?? RELATED_HEADING : pagesHeading ?? RELATED_PAGES_HEADING, links: list, ...(variant ? { variant } : {}) });
   }
   return { fromPage, added, inCopy: links.filter((link) => inCopy.has(link.url)).length };
 }

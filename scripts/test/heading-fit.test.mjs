@@ -159,3 +159,39 @@ test("a sans title with no measure of its own is fitted wide enough for Montserr
   // "Airbnb Booking Management" measured 15.58em in Montserrat 700: the two-line width must hold it.
   assert.ok(lineEms('Airbnb Booking Management With 24/7 Guest Messaging', HERO_FIT.desktop.lines, charEm) >= 15.58);
 });
+
+test('a title in a face the template knows wraps by its real widths, in the face the treatment sets for its page type', async () => {
+  const { heroFontFromCss, lineEms, lineWidthEms, predictLines, textEms, titleGlyphs, titleMetrics, wrapEmFor, wrapLinesEm } = await import('../lib/heading-fit.mjs');
+  const css = [
+    ':root:root { --font-body: Montserrat, Arial, sans-serif; --font-hero: Marcellus, Georgia, serif; }',
+    "main:is([data-page-type='solution'], [data-page-type='place']) .page-hero { --font-hero: Montserrat, Arial, sans-serif; --weight-heading: 700; }",
+    "main[data-page-type='home'] .page-hero { --weight-heading: 400; }",
+    "main[data-page-type='general'][data-hero-photo] .page-hero { --font-hero: var(--font-body); --weight-heading: 600; }",
+    "main[data-page-type='about'] .page-hero h1 { --font-hero: Montserrat; }",
+    "@media (max-width: 767px) { main[data-page-type='home'] .page-hero { --font-hero: Montserrat; } }",
+  ].join('\n');
+  assert.deepEqual(heroFontFromCss(css, 'place'), { family: 'Montserrat', weight: 700 });
+  assert.deepEqual(heroFontFromCss(css, 'home'), { family: 'Marcellus', weight: 400 }, 'the root token; a media query is left out');
+  assert.deepEqual(heroFontFromCss(css, 'general'), { family: 'Montserrat', weight: 600 }, 'a var() of a root token is read through');
+  assert.deepEqual(heroFontFromCss(css, 'about'), { family: 'Marcellus', weight: null }, 'a rule for a part inside the hero is not the hero');
+  // Staylumen's Nashville title (2026-11-18): four phone lines planned at the 0.6em average, five rendered in Montserrat 700.
+  const nashville = 'Airbnb Management Nashville: Full-Service Care for Your Rental';
+  const bold = titleGlyphs('"Montserrat", sans-serif', 700);
+  assert.equal(bold.weight, 700);
+  assert.equal(titleGlyphs('Montserrat', 650).weight, 600, 'the nearest weight measured (a tie goes to the lighter)');
+  assert.ok(textEms('Airbnb Management', bold) > 10.8, 'its first line runs 0.64em a letter');
+  const phone = lineWidthEms(nashville, 4, bold);
+  assert.ok(phone >= textEms('Airbnb Management', bold));
+  assert.equal(wrapLinesEm(nashville, phone, bold).length, 4);
+  assert.ok(wrapLinesEm(nashville, phone - 0.01, bold).length > 4, 'the narrowest width that keeps four lines');
+  const sizePx = 358 / lineEms(nashville, 4, bold);
+  assert.ok(sizePx < 358 / lineEms(nashville, 4, 0.6), 'smaller than the average fitted it');
+  assert.equal(predictLines(nashville, { columnPx: 358, sizePx, charEm: bold }), 4);
+  assert.ok(lineEms(nashville, 4, bold) >= textEms('Airbnb Management', bold) * 1.05 - 0.001, 'the margin over the widest line');
+  // The page types the treatment sets in a face the template does not know keep the competitor's average.
+  assert.equal(titleMetrics({ css, pageType: 'home', heroText: { family: 'Marcellus' } }), wrapEmFor({ family: 'Marcellus' }));
+  assert.equal(titleMetrics({ css: '', pageType: 'place', heroText: null }), wrapEmFor(null));
+  assert.equal(titleMetrics({ css, pageType: 'place', heroText: null }).family, 'Montserrat');
+  assert.equal(titleGlyphs('Marcellus'), null);
+  assert.ok(textEms('ABC', titleGlyphs('Montserrat', 700, { upper: true })) === textEms('abc', titleGlyphs('Montserrat', 700, { upper: true })), 'a title set in capitals is measured in capitals');
+});

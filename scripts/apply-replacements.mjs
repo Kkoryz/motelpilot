@@ -11,7 +11,8 @@ import { copyFile, mkdir, readdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { cliArgs, runMain } from './lib/cli.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
-import { applyReplacements, listItems } from './lib/replacements.mjs';
+import { SITE_FIELDS, applyReplacements, listItems } from './lib/replacements.mjs';
+import { recordPageDates } from './lib/site-pages.mjs';
 
 export const REPLACEMENTS_DIR = 'content/replacements';
 export const SKIPPED = 'skipped.json';
@@ -55,11 +56,16 @@ export async function runReplacements({ root = process.cwd() } = {}) {
     const route = `${BLOG_ROUTE}${post.slug}/`;
     if (post.slug && !pages.some((page) => page.route === route)) extras.push({ route, value: post, write: (value) => { postsOut[index] = value; } });
   });
+  // The trust bar (src/data/site-trust.json), the site-level field Site Factory names by section (lib/replacements.mjs
+  // SITE_FIELDS).
+  const trustPath = resolve(root, 'src/data/site-trust.json');
+  const trust = await readJson(trustPath, null);
+  if (trust) extras.push({ route: SITE_FIELDS.trust_bar, value: trust, write: async (value) => { await writeJson(trustPath, value); } });
   const applied = applyReplacements([...pages, ...extras.map(({ route, value }) => ({ ...value, route }))], lists);
   const extraRoutes = new Set(extras.map((extra) => extra.route));
   const next = applied.pages.slice(0, pages.length);
   const results = [...applied.results, ...Object.entries(skipped).map(([key, reason]) => { const [list, n] = key.split('#'); return { list, n: Number(n) || n, url: '', status: 'skipped', reason }; })];
-  const changed = (route) => results.some((item) => item.status === 'replaced' && item.url === route);
+  const changed = (route) => results.some((item) => item.status === 'replaced' && (item.route ?? item.url) === route);
   // Written when a page changed: an item replaced, or a card set settled (lib/replacements.mjs settleCardSets).
   if (JSON.stringify(next) !== JSON.stringify(pages)) await writeJson(pagesPath, next);
   // Each extra written back as it was kept: no route, and structured data only where it had some.
@@ -72,6 +78,9 @@ export async function runReplacements({ root = process.cwd() } = {}) {
     if (extra.route !== BLOG_ROUTE) postsChanged = true;
   }
   if (postsChanged) await writeJson(postsPath, Array.isArray(postsFile) ? postsOut : { ...postsFile, posts: postsOut });
+  // The pages' dates follow their content as replaced (the import records them before the lists are applied: aloha audit
+  // 2026-11-18 L-5, one lastmod in the sitemap of 46 pages).
+  if (pages.length) await recordPageDates({ root });
   const count = (status) => results.filter((item) => item.status === status).length;
   const report = { schemaVersion: 'seo-site-replacements-v1', lists: names, replaced: count('replaced'), applied: count('applied'), superseded: count('superseded'), skipped: count('skipped'), missing: results.filter((item) => ['missing', 'no-page'].includes(item.status)), results };
   await mkdir(resolve(root, 'docs/research'), { recursive: true });

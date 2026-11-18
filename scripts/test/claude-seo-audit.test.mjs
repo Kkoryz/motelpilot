@@ -312,6 +312,21 @@ test('three auditors at once on one set of measurements; their findings merged, 
   // audit (it goes on to ask the rules library, which here does not answer); a changed build is audited again.
   const again = await claudeSeoAudit({ root, judge: () => assert.fail('not asked'), verifyJudge, measure: measureStub(), probe, env });
   assert.equal(again.reused.dir, 'docs/research/seo-audit-4');
+  assert.equal(JSON.parse(await readFile(join(dir, 'audit-data.json'), 'utf8')).rules.retrieved, true);
+  // An audit made before its rules were seen retrieved does not stand (aloha 2026-11-18: its auditors read no rule).
+  const stale = JSON.parse(await readFile(join(dir, 'audit-data.json'), 'utf8'));
+  await writeFile(join(dir, 'audit-data.json'), JSON.stringify({ ...stale, rules: { name: stale.rules.name, snapshot: stale.rules.snapshot } }));
+  const redo = await claudeSeoAudit({ root, judge: () => assert.fail('not asked'), verifyJudge, measure: measureStub(), probe: async () => ({ ok: false, detail: 'down' }), env });
+  assert.equal(redo.failed, 'unavailable', 'audited again, so the rules library is asked');
+  await writeFile(join(dir, 'audit-data.json'), JSON.stringify(stale));
+  // The probe asks for rules, not for an answer: the MCP's error text in a result is no library.
+  const { retrievedRules } = await import('../claude-seo-audit.mjs');
+  const ragReply = (text) => JSON.stringify({ jsonrpc: '2.0', id: 1, result: { content: [{ type: 'text', text }] } });
+  assert.equal(retrievedRules(ragReply(JSON.stringify({ chunks: [{ content: 'Use rel=canonical' }] }))).ok, true);
+  assert.equal(retrievedRules(`event: message
+data: ${ragReply(JSON.stringify({ chunks: [{ content: 'x' }] }))}`).ok, true);
+  assert.equal(retrievedRules(ragReply('[Errno -2] Name or service not known')).ok, false);
+  assert.equal(retrievedRules(ragReply(JSON.stringify({ chunks: [] }))).ok, false);
   const fewer = join(root, 'auditors.json');
   await writeFile(fewer, JSON.stringify({ auditors: [{ id: 'a1', model: 'claude-opus-5-5' }] }));
   const other = await claudeSeoAudit({ root, judge: () => assert.fail('not asked'), verifyJudge, measure: measureStub(), probe: async () => ({ ok: false, detail: 'down' }), env, auditorsFile: fewer });

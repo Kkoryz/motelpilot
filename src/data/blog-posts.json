@@ -695,7 +695,7 @@
             "text": "Preserve proof of delivery and identify the recipient and permitted notice method. Check whether termination needs a second notice. For performance tests, distinguish missed manager-controlled targets from owner-delayed repairs: if the owner withholds an approved room-repair budget, identify the affected rooms and period rather than excusing all underperformance. [Fieldfisher discusses objective performance tests and cure design](https://www.fieldfisher.com/en/services/franchising/franchise-commercial-law-blog/hotel-management-agreements-10-key-points-for-hotel-owners)."
           },
           {
-            "text": "Our November 2026 full-management terms provide convenience termination on 60 calendar days' notice, a ten-calendar-day cure for reporting or remittance defaults, and no exit fee for uncured manager breach or fraud. Convenience exits before the first anniversary carry a fee capped at $4,000 plus documented unamortized setup costs; nonrenewal requires 60 days' notice, repeat defaults within 90 days receive no fresh cure, and transition support includes reservation and account transfers through cutover."
+            "text": "Our full-management proposals set out the minimum term; once it's over, you can end or pause the plan with 30 days' written notice and no exit fee. Our proposed clause adds a ten-calendar-day cure for reporting or remittance defaults; repeat defaults within 90 days receive no fresh cure, and transition support includes reservation and account transfers through cutover."
           },
           {
             "subheading": "Prove the desk can operate after cutover"
@@ -1169,7 +1169,7 @@
             "subheading": "Prove the backup can reach the motel"
           },
           {
-            "text": "Our overnight lockout drill began at 11:10 p.m.; the primary responder did not answer. The dispatcher reached the backup at 11:15 p.m., and the backup arrived at 11:32 p.m., meeting the proposed 30-minute attendance target without owner intervention."
+            "text": "A client motel's on-site team, which handles after-hours issues, ran an overnight lockout drill that began at 11:10 p.m.; the primary responder did not answer. The property's dispatcher reached the backup at 11:15 p.m., and the backup arrived at 11:32 p.m., meeting the proposed 30-minute attendance target without owner intervention."
           },
           {
             "figure": {
@@ -2824,7 +2824,7 @@
             "text": "The evening supervisor escalated cancellation clusters and failed channel updates for immediate review. These task timings describe that operating week only; they aren't the full workload or a promised schedule."
           },
           {
-            "text": "At MotelPilot, we provide revenue management remotely, monitor rates on weekends and public holidays, and arrange absence coverage by a revenue manager who knows your property. See our [Revenue Management](/revenue-management/) service."
+            "text": "At MotelPilot, we provide revenue management remotely: your dedicated revenue manager sets your rates every business day, on weekends and public holidays your rates follow the pricing rules we set with you, and we arrange absence coverage by a revenue manager who knows your property. See our [Revenue Management](/revenue-management/) service."
           },
           {
             "text": "For broader operating arrangements, see our [Motel management models: what can an independent owner choose?](/blog/motel-management-models-compared/). For management charges, see our [What Is a Reasonable Fee Structure for Third-Party Motel Management?](/blog/motel-management-fees-reasonable-structure/)."
@@ -3308,7 +3308,7 @@
     },
     "review": {
       "by": "ai-review",
-      "at": "2026-11-17T21:15:32.772Z"
+      "at": "2026-11-17T21:24:34.000Z"
     }
   }
 ]

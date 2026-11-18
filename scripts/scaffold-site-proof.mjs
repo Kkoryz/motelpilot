@@ -154,8 +154,11 @@ const ofClientCountry = (testimonials, clients) => {
 };
 // A stand-in team made before the reviewers were (four-site audit 2026-11-17, C10) takes each role's page types from
 // the made team; a person who has their own keeps them.
-const withReviews = (team, made = []) => team.map((person) => {
-  const reviews = person.reviews ?? made.find((own) => own.role === person.role)?.reviews;
+// A stand-in team (the proof's standIn) takes its roles' page types from the trade's config every run: they are the
+// template's, not the owner's (aloha 2026-11-18, L-13: the founder now reviews the service pages).
+const withReviews = (team, made = [], standIn = false) => team.map((person) => {
+  const role = made.find((own) => own.role === person.role)?.reviews;
+  const reviews = standIn && role ? role : person.reviews ?? role;
   return reviews?.length ? { ...person, reviews } : person;
 });
 const fromFacts = (item) => FOUNDED.test(item.label) || Boolean(item.factId) || Boolean(item.fromCopy);
@@ -171,7 +174,7 @@ export function withFacts(existing, made, routes = null) {
   const known = (values = {}) => Object.fromEntries(Object.entries(values).filter(([, value]) => value != null));
   return { ...existing, certifications: made.certifications, history: made.history, terms: made.terms,
     ...(ownClients ? {} : { clients: made.clients, clientsFor: made.clientsFor }),
-    ...(made.team && !(ownClients && existing.team?.length) ? { team: made.team } : existing.team?.length ? { team: withReviews(existing.team, made.team) } : {}),
+    ...(made.team && !(ownClients && existing.team?.length) ? { team: made.team } : existing.team?.length ? { team: withReviews(existing.team, made.team, existing.standIn === true) } : {}),
     // The package's privacy facts are Site Factory's on every run (a stand-in "24 months" of an earlier import gives way).
     ...(made.privacy ? { privacy: made.privacy.source === PRIVACY_FROM_PACKAGE ? made.privacy : { ...made.privacy, ...known(existing.privacy ?? {}) } } : {}),
     factory: [...stated, ...(existing.factory ?? []).filter((item) => !fromFacts(item) && !stated.some((fact) => fact.label === item.label))],

@@ -33,9 +33,18 @@ export function teamItems(team = []) {
 // lib/seo-head.mjs SERVICE_PAGE_TYPES (a test keeps them one).
 export const REVIEWED_PAGE_TYPES = Object.freeze(['product_manufacturer', 'product_wholesale', 'solution', 'service', 'place', 'location']);
 /** @param {any} page @param {{ people: any[] } | null} team sitePeople's */
+// A page whose subject is a person's job (its address names every longer word of their role: /quality-control/ and the
+// "Quality control lead", /product-development/ and the "Head of development") is theirs, whatever its page type
+// (aloha claude-seo audit 2026-11-18, L-13: one person signed all 39 product and service pages, the shipping and the
+// quality pages among them).
+const ROLE_WORD = 5;
+const roleWords = (role) => String(role ?? '').toLowerCase().split(/[^a-z]+/).filter((word) => word.length >= ROLE_WORD);
+const pageWords = (page) => new Set(String(page?.route ?? '').toLowerCase().split(/[^a-z]+/).filter(Boolean));
 export function pageReviewer(page, team) {
   if (!team || !REVIEWED_PAGE_TYPES.includes(page?.pageType) || page.status === 'placeholder') return null;
-  return team.people.find((person) => person.reviews?.includes(page.pageType)) ?? null;
+  const words = pageWords(page);
+  const ownJob = team.people.find((person) => { const role = roleWords(person.role); return role.length > 0 && role.every((word) => words.has(word)); });
+  return ownJob ?? team.people.find((person) => person.reviews?.includes(page.pageType)) ?? null;
 }
 
 // The people the built pages show: the team section of the about page (else of any page), each with the link to their

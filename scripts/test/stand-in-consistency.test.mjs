@@ -97,3 +97,17 @@ test("a stand-in names no client where the copy keeps the clients' names private
   assert.deepEqual([quiet.clients, quiet.testimonials[0].company, quiet.testimonials[0].country], [[], undefined, 'UK']);
   assert.deepEqual(proofProblems({ proof: quiet, pages }), []);
 });
+
+test('a count of addresses is not a headcount: "500 staff or store addresses" leaves the stand-in "290 staff" alone (aloha 2026-11-18)', async () => {
+  const proof = { standIn: true, factory: [{ value: '290', label: 'staff, 18 in design and patterns' }] };
+  const page = (text) => ({ route: '/shipping/', seo: {}, hero: {}, blocks: [{ type: 'intro', paragraphs: [text] }] });
+  assert.deepEqual(proofProblems({ proof, demo: await demo(), pages: [page('We send 500 shirts to 500 staff or store addresses for one business order.')] }), []);
+  assert.equal(proofProblems({ proof, demo: await demo(), pages: [page('Our 500 staff work in two shifts.')] }).length, 1);
+});
+
+test('a stand-in privacy contact gives way where the copy already says how to ask about one\'s details (aloha L-10, 2026-11-18)', () => {
+  const privacy = { retention: '24 months after our last exchange, then deleted', contact: 'privacy@tapaworks.com', standIn: true };
+  assert.equal(dataPractices({ form, privacy, copy: 'To see, correct or delete your information, email our team.' }).contact, null);
+  assert.equal(dataPractices({ form, privacy, copy: 'We answer every enquiry.' }).contact, 'privacy@tapaworks.com');
+  assert.equal(dataPractices({ form, privacy: { ...privacy, standIn: false }, copy: 'To delete your information, email our team.' }).contact, 'privacy@tapaworks.com');
+});

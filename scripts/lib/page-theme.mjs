@@ -35,18 +35,38 @@ export function pageTheme({ category, trail = [] }, briefs) {
   return { ...named[0], ...(placeWords.length ? { placeWords } : {}) };
 }
 
-// Each page's theme id by route, for the pages with one (the menu items above a page from site-nav.json).
-export function routeThemes(pages, routes, briefs, nav = null) {
+// A product family of the site that is not its line's product: the menu item product pages sit under (a page that is
+// that menu item takes it too), when it shares no word with the line (aloha 2026-11-18, claude-seo audit 3 M-17: the
+// bikini, one-piece and resort dress pages showed the line's factory photos of aloha shirts). Its pages share a factory
+// set of their own, made of the family's product, as a theme's pages do; a family of the line's product keeps the
+// line's set, and a page under no menu item is the line's.
+export const FAMILY_PREFIX = 'family-';
+const familyId = (name) => `${FAMILY_PREFIX}${String(name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+
+// Each page's theme id by route, for the pages with one (the menu items above a page from site-nav.json); line: the
+// line's product (the image plan's), for the product families that are not the line's.
+export function routeThemes(pages, routes, briefs, nav = null, line = null) {
   const themes = {};
+  const crumbs = new Map(pages.map((page) => [page.route, nav ? breadcrumbTrail({ hero: { heading: '' }, ...page }, nav).slice(1).map((crumb) => crumb.name) : []]));
+  const product = (page) => routes[page.route] && routes[page.route] !== 'general';
+  const families = new Set(pages.filter((page) => product(page) && crumbs.get(page.route).length > 1).map((page) => crumbs.get(page.route)[0]));
+  const own = words(line ?? '');
   for (const page of pages) {
-    const trail = nav ? breadcrumbTrail({ hero: { heading: '' }, ...page }, nav).slice(1, -1).map((crumb) => crumb.name) : [];
-    const theme = pageTheme({ category: routes[page.route], trail }, briefs);
-    if (theme) themes[page.route] = theme.id;
+    const path = crumbs.get(page.route);
+    const trail = path.slice(0, -1);
+    const family = line && product(page) ? [trail[0], path.at(-1)].find((name) => name && families.has(name)) : null;
+    const theme = pageTheme({ category: routes[page.route], trail }, briefs)?.id ?? (family && ![...words(family)].some((word) => own.has(word)) ? familyId(family) : null);
+    if (theme) themes[page.route] = theme;
   }
   return themes;
 }
 
-export const themeById = (id, briefs) => (id ? themeList(briefs).find((theme) => theme.id === id) ?? null : null);
+// A family's theme names its product (product: what its shared photos show in place of the line's) and no audience.
+export const themeById = (id, briefs) => {
+  if (!id) return null;
+  if (String(id).startsWith(FAMILY_PREFIX)) { const product = id.slice(FAMILY_PREFIX.length).replace(/-/g, ' '); return { id, words: [product], product }; }
+  return themeList(briefs).find((theme) => theme.id === id) ?? null;
+};
 
 // The name a theme gives a product its own name does not place ("boardshorts" for men -> "men's boardshorts").
 export const themedName = (name, theme) => (theme?.name && !matches(theme, name) ? `${theme.name} ${name}` : name);
