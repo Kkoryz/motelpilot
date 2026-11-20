@@ -55,22 +55,8 @@ export const SCOPES = Object.freeze([SITE_SCOPE, 'template', 'content']);
 // mostly text sections, as an about page is (the hotel site's seven general pages, its services overview, its two legal
 // pages and its blog had no competitor page and were never reviewed). A page type with none of these goes beside the
 // first page the competitor has.
-export const NEAREST_PAGE_TYPES = Object.freeze({
-  products_hub: ['product_manufacturer', 'product_wholesale', 'solution'],
-  solutions_hub: ['solution', 'product_manufacturer', 'product_wholesale'],
-  // A city page beside the competitor's market page, else its service page; their hub beside a market page too.
-  place: ['solution', 'about'],
-  places_hub: ['place', 'solution'],
-  general: ['about', 'solution', 'product_manufacturer', 'product_wholesale'],
-  ordering: ['contact', 'about'],
-  privacy: ['about', 'contact'],
-  blog_hub: ['about', 'solution'],
-  blog_post: ['about', 'solution'],
-});
-export function referenceType(pageType, referenceTypes) {
-  if (referenceTypes.includes(pageType)) return pageType;
-  return [...(NEAREST_PAGE_TYPES[pageType] ?? []), 'about', 'solution', 'product_manufacturer', 'home'].find((type) => referenceTypes.includes(type)) ?? referenceTypes[0] ?? null;
-}
+import { NEAREST_PAGE_TYPES, referenceType } from './lib/nearest-page-type.mjs';
+export { NEAREST_PAGE_TYPES, referenceType };
 
 // The words a page shows (its hero and its sections; lib/media-slots.mjs copyWords).
 const pageWords = (page) => copyWords({ hero: page.hero ?? null, blocks: page.blocks ?? [] });
@@ -124,11 +110,19 @@ export function standIns(page, { proofStandIn = false } = {}) {
 // near one, so small changes do not add up unseen.
 export const reviewCurrent = (page, review) => Boolean(review) && (review.shots === page.shots || (Boolean(page.near?.shots) && page.near.shots === review.shots)) && (review.rules === page.rules || !openFindings(review.findings ?? []).length);
 export const REVIEW_RULES = Object.freeze(['config/agent-steps/design-review.md', 'config/agent-steps/treatment-practice.md']);
-export async function reviewRules(root) {
+export async function reviewRules(root, paths = REVIEW_RULES) {
   const hash = createHash('sha256');
-  for (const path of REVIEW_RULES) hash.update(await readFile(resolve(root, path)).catch(() => 'missing'));
+  for (const path of paths) hash.update(await readFile(resolve(root, path)).catch(() => 'missing'));
   return hash.digest('hex').slice(0, 16);
 }
+// The buyer's review (owner 2026-11-18: "单看一站也不应该过"): each reviewed page alone, no competitor beside it, judged
+// as a buyer meets it (config/agent-steps/buyer-review.md): whether the first screen says what is offered and what to
+// do, whether the page is easy to use, whether anything in its layout looks odd. Its findings join the design review's
+// (<key>.buyer.review.json), judged by the same gate.
+export const BUYER_RULES = Object.freeze(['config/agent-steps/buyer-review.md']);
+export const buyerKey = (page) => `${reviewKey(page)}.buyer`;
+// A page's buyer review is current as its design review is, held to the buyer's instructions.
+export const buyerCurrent = (page, review) => reviewCurrent({ ...page, rules: page.buyerRules }, review);
 
 // The site's own layout rules a review and its repair keep to, as facts beside the shots: where section headings sit
 // (template-variants.json components.headingAlign; the hotel site's style-board repair centred one module's heading
@@ -138,11 +132,21 @@ export async function siteLayoutFacts(root) {
   return align === 'start' ? { sectionHeadings: 'start: every section heading starts on the content\'s left edge on every page (the site\'s rule; a module\'s heading is not centred even where the competitor\'s module centres it)' } : {};
 }
 
-// Findings that hold the run: the site's own P0/P1 without a resolution.
-export const openFindings = (findings = []) => findings.filter((finding) => BLOCKING.includes(finding.severity) && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution);
+// The sizes measured against the reference (owner 2026-11-18: Staylumen's heroes 360 to 600px against the reference's
+// 412 to 1000, its home's photo walls 1425x713 across the page, and every review passed, the screenshots never measured):
+// the layout audit's hero_height and wall_shape (lib/usability-checks.mjs referenceShapeProblems, the same width as the
+// reference's capture) are P1 findings of the gate too, measured: no waiver, no repair's note and no scope lets one go;
+// only a build that measures within the reference's sizes does.
+export const MEASURED_ISSUES = Object.freeze(['hero_height', 'wall_shape']);
+export const AUDIT_REPORT = 'docs/research/authoring-layout-audit.json';
+export function measuredFindings(audit) {
+  return (audit?.failures ?? []).filter((failure) => MEASURED_ISSUES.includes(failure.issue)).map((failure) => ({ severity: 'P1', scope: SITE_SCOPE, measured: true, review: 'measure', route: failure.route, viewport: failure.viewport, block: failure.block ?? failure.issue, issue: `${failure.issue}: ${failure.detail ?? ''}`.trim() }));
+}
+// Findings that hold the run: the site's own P0 without a resolution, and every measured finding.
+export const openFindings = (findings = []) => findings.filter((finding) => finding.measured || (BLOCKING.includes(finding.severity) && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution));
 // The findings of the site's own treatment that do not hold the gate (P1, P2): the run repairs them after it passes, and
 // what the repair cannot mend stays in the report (owner 2026-10-30: the small ones are fixed in the run too).
-export const minorFindings = (findings = []) => findings.filter((finding) => !BLOCKING.includes(finding.severity) && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution);
+export const minorFindings = (findings = []) => findings.filter((finding) => !finding.measured && !BLOCKING.includes(finding.severity) && (finding.scope ?? SITE_SCOPE) === SITE_SCOPE && !finding.resolution);
 // What the design repair said it cannot do (docs/research/analysis/notes.md, its "Asked against the site rules" and
 // "Template gaps" lists): a finding whose route and block a listed line names carries that answer and holds nothing
 // the next round (Fable's review audit: such findings came back every round and the rounds ran out).
@@ -160,7 +164,7 @@ export function listedByRepair(notes = '') {
 export function applyListed(findings, listed = []) {
   const names = (line, block) => new RegExp(`\`${block.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\`|\\bblock ${block.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(line);
   return findings.map((finding) => {
-    if (finding.resolution || !finding.route || !finding.block) return finding;
+    if (finding.measured || finding.resolution || !finding.route || !finding.block) return finding;
     const hit = listed.find(({ line }) => line.includes(finding.route) && names(line, finding.block));
     return hit ? { ...finding, resolution: `listed by the design repair under "${hit.section}" (${NOTES})` } : finding;
   });
@@ -180,16 +184,19 @@ export const WAIVERS = 'docs/research/design-waivers.json';
 export function applyWaivers(findings, waivers = []) {
   return findings.map((finding) => {
     const waiver = waivers.find((entry) => entry.block === finding.block && (!entry.review || entry.review === finding.review) && (!entry.issue || String(finding.issue ?? '').toLowerCase().includes(String(entry.issue).toLowerCase())));
-    return waiver && !finding.resolution ? { ...finding, resolution: `waived: ${waiver.why} (${waiver.by}, ${waiver.at})` } : finding;
+    return waiver && !finding.resolution && !finding.measured ? { ...finding, resolution: `waived: ${waiver.why} (${waiver.by}, ${waiver.at})` } : finding;
   });
 }
 const readWaivers = async (root) => (await readJson(resolve(root, WAIVERS), null))?.waivers ?? [];
 const readListed = async (root) => listedByRepair(await readFile(resolve(root, NOTES), 'utf8').catch(() => ''));
-export function judgeReviews(manifest, reviews, waivers = [], listed = []) {
-  const missing = manifest.pages.filter((page) => !reviews[reviewKey(page)]).map(reviewKey);
-  const stale = manifest.pages.filter((page) => reviews[reviewKey(page)] && !reviewCurrent(page, reviews[reviewKey(page)])).map(reviewKey);
-  const findings = applyWaivers(manifest.pages.flatMap((page) => (reviews[reviewKey(page)]?.findings ?? []).map((finding) => ({ pageType: page.pageType, review: reviewKey(page), route: page.route, ...finding }))), waivers);
-  const answered = applyListed(findings, listed);
+// buyer: the pages' buyer reviews are held too (the design gate; the style board has none).
+// measured: the gate's measured findings (measuredFindings), which no waiver or note answers.
+export function judgeReviews(manifest, reviews, waivers = [], listed = [], { buyer = false, measured = [] } = {}) {
+  const lenses = [{ key: reviewKey, current: reviewCurrent }, ...(buyer ? [{ key: buyerKey, current: buyerCurrent, lens: 'buyer' }] : [])];
+  const missing = lenses.flatMap(({ key }) => manifest.pages.filter((page) => !reviews[key(page)]).map(key));
+  const stale = lenses.flatMap(({ key, current }) => manifest.pages.filter((page) => reviews[key(page)] && !current(page, reviews[key(page)])).map(key));
+  const findings = applyWaivers(lenses.flatMap(({ key, lens }) => manifest.pages.flatMap((page) => (reviews[key(page)]?.findings ?? []).map((finding) => ({ pageType: page.pageType, review: key(page), route: page.route, ...(lens ? { lens } : {}), ...finding })))), waivers);
+  const answered = [...applyListed(findings, listed), ...measured.map((finding) => ({ ...finding, measured: true }))];
   const status = missing.length ? 'missing' : stale.length ? 'stale' : openFindings(answered).length ? 'open' : 'passed';
   return { status, missing, stale, findings: answered };
 }
@@ -285,22 +292,45 @@ export async function measureFacts() {
 const escapeXml = (text) => text.replace(/[<>&"]/g, (char) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' })[char]);
 
 // The competitor's page and ours side by side, cut into segments of the same height.
-async function pairSegments(sharp, reference, ours, viewport) {
-  const scale = async (input) => sharp(input).resize({ width: viewport.column }).png().toBuffer();
+export async function pairSegments(sharp, reference, ours, viewport) {
+  // One scale on both sides: a reference shot not as wide as the viewport (a capture from before the phone's own visit,
+  // capture-reference.mjs PHONE_DEVICE: Staylumen's 768px "phone" shot) is set beside ours at another scale, its sizes
+  // wrong to the eye (owner 2026-11-18): said, so the capture is taken again.
+  const { width: shot } = await sharp(reference).metadata();
+  if (shot !== viewport.width) console.warn(`design-review: the reference's ${viewport.id} shot is ${shot}px wide, not ${viewport.width}: capture it again (scripts/capture-reference-pages.mjs)`);
+  // Each shot at the one scale of a CSS pixel to the review's column (viewport.column px for viewport.width CSS px; the
+  // shots are taken one pixel a CSS pixel), not each fitted to the column: a shot wider than its viewport (a reference
+  // laid out for another width, a page running over its edge) shows wider, never smaller, beside the other.
+  const scale = async (input) => { const { width } = await sharp(input).metadata(); return sharp(input).resize({ width: Math.max(1, Math.round((width * viewport.column) / viewport.width)) }).png().toBuffer(); };
   const left = await scale(reference);
   const right = await scale(ours);
-  const heights = [(await sharp(left).metadata()).height, (await sharp(right).metadata()).height];
+  const [leftSize, rightSize] = [await sharp(left).metadata(), await sharp(right).metadata()];
+  const heights = [leftSize.height, rightSize.height];
+  const widths = [leftSize.width, rightSize.width];
   const header = 36;
   const gap = 24;
+  const at = [0, widths[0] + gap];
+  const width = widths[0] + gap + widths[1];
   const segments = [];
   for (let top = 0; top < Math.max(...heights); top += viewport.segment) {
-    const part = async (image, height) => (top < height ? sharp(image).extract({ left: 0, top, width: viewport.column, height: Math.min(viewport.segment, height - top) }).png().toBuffer() : null);
-    const pieces = [await part(left, heights[0]), await part(right, heights[1])];
+    const part = async (image, index) => (top < heights[index] ? sharp(image).extract({ left: 0, top, width: widths[index], height: Math.min(viewport.segment, heights[index] - top) }).png().toBuffer() : null);
+    const pieces = [await part(left, 0), await part(right, 1)];
     const tallest = Math.max(...(await Promise.all(pieces.filter(Boolean).map(async (piece) => (await sharp(piece).metadata()).height))));
-    const titles = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${viewport.column * 2 + gap}" height="${header}"><text x="8" y="24" font-family="sans-serif" font-size="18" font-weight="700">COMPETITOR (reference)</text><text x="${viewport.column + gap + 8}" y="24" font-family="sans-serif" font-size="18" font-weight="700">OURS</text></svg>`);
-    const layers = [{ input: titles, top: 0, left: 0 }, ...pieces.map((piece, index) => (piece ? { input: piece, top: header, left: index * (viewport.column + gap) } : null)).filter(Boolean)];
-    segments.push(await sharp({ create: { width: viewport.column * 2 + gap, height: header + tallest, channels: 3, background: '#ffffff' } }).composite(layers).png().toBuffer());
+    const titles = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${header}"><text x="8" y="24" font-family="sans-serif" font-size="18" font-weight="700">COMPETITOR (reference)${shot !== viewport.width ? ` ${shot}px wide` : ''}</text><text x="${at[1] + 8}" y="24" font-family="sans-serif" font-size="18" font-weight="700">OURS</text></svg>`);
+    const layers = [{ input: titles, top: 0, left: 0 }, ...pieces.map((piece, index) => (piece ? { input: piece, top: header, left: at[index] } : null)).filter(Boolean)];
+    segments.push(await sharp({ create: { width, height: header + tallest, channels: 3, background: '#ffffff' } }).composite(layers).png().toBuffer());
   }
+  return segments;
+}
+
+// Our page alone, cut into segments of the review's height (the buyer's review: no competitor beside it).
+async function ownSegments(sharp, ours, viewport) {
+  // At the side-by-side images' scale (pairSegments).
+  const { width: shot } = await sharp(ours).metadata();
+  const image = await sharp(ours).resize({ width: Math.max(1, Math.round((shot * viewport.column) / viewport.width)) }).png().toBuffer();
+  const { width, height } = await sharp(image).metadata();
+  const segments = [];
+  for (let top = 0; top < height; top += viewport.segment) segments.push(await sharp(image).extract({ left: 0, top, width, height: Math.min(viewport.segment, height - top) }).png().toBuffer());
   return segments;
 }
 
@@ -375,7 +405,8 @@ async function keepReviewedShots(root, entry, review) {
 // How the shots are taken: a review of shots taken another way is never kept for a near shot (Staylumen 2026-11-17: the
 // enquiry bar hidden from the shots, the home page's new shot differed by 0.12% and kept the review that found the bar
 // over its introduction). Raised whenever the shooting changes what a reviewer sees.
-export const SHOT_METHOD = 2;
+// 3: each side at one scale of a CSS pixel (pairSegments; owner 2026-11-18), not each fitted to its column.
+export const SHOT_METHOD = 3;
 
 // The review a new shot keeps (V-2): { shots, share } when it is within REVIEW_PIXEL_SHARE of the shots its review
 // judged and measures the same, else null.
@@ -407,6 +438,7 @@ export async function prepareDesignReview({ baseUrl, root = process.cwd(), shoot
   const shared = await sharedPageKey(root, { code: ['scripts/design-review.mjs'], files: [...new Set(chosen.flatMap((page) => VIEWPORTS.map((viewport) => relative(root, resolve(referenceOf(page.reference), viewport.reference)).replaceAll('\\', '/'))))] });
   const hash = createHash('sha256');
   const rules = await reviewRules(root);
+  const buyerRules = await reviewRules(root, BUYER_RULES);
   const layoutFacts = await siteLayoutFacts(root);
   const pages = [];
   let browser = null;
@@ -414,15 +446,16 @@ export async function prepareDesignReview({ baseUrl, root = process.cwd(), shoot
     for (const page of chosen) {
       const facts = { standIns: standIns(page, { proofStandIn }), ...layoutFacts };
       const source = await builtPageKey(root, page.route, shared, { pageType: page.pageType, reference: page.reference, viewports: VIEWPORTS, standIns: facts.standIns });
-      const before = previous?.pages?.find((entry) => reviewKey(entry) === page.key && entry.route === page.route && entry.images.every((path) => existsSync(resolve(root, path))));
-      // (A manifest from before pixel keys has only `shots`, the built key.)
-      if (before && (before.source ?? before.shots) === source) { const kept = { ...before, key: page.key, source, rules }; pages.push(kept); hash.update(kept.shots); continue; }
+      const before = previous?.pages?.find((entry) => reviewKey(entry) === page.key && entry.route === page.route && Boolean(entry.ownImages?.length) && [...entry.images, ...entry.ownImages].every((path) => existsSync(resolve(root, path))));
+      // (A manifest from before pixel keys has only `shots`, the built key; one from before the buyer's review has no
+      // ownImages, and its pages are shot again.)
+      if (before && (before.source ?? before.shots) === source) { const kept = { ...before, key: page.key, source, rules, buyerRules }; pages.push(kept); hash.update(kept.shots); continue; }
       const review = await readJson(resolve(dir, `${page.key}.review.json`), null);
       await keepReviewedShots(root, previous?.pages?.find((entry) => reviewKey(entry) === page.key && entry.route === page.route), review);
-      const own = new RegExp(`^${page.key.replace(/[^\w-]/g, '')}-(?:${VIEWPORTS.map((viewport) => viewport.id).join('|')})-\\d+\\.png$`);
+      const own = new RegExp(`^${page.key.replace(/[^\w-]/g, '')}-(?:own-)?(?:${VIEWPORTS.map((viewport) => viewport.id).join('|')})-\\d+\\.png$`);
       for (const name of await readdir(dir)) if (own.test(name)) await rm(resolve(dir, name));
       if (!shoot) browser ??= await chromium.launch({ headless: true });
-      const entry = { key: page.key, pageType: page.pageType, reference: page.reference, role: page.role, words: page.words, route: page.route, status: page.status, source, rules, shots: null, images: [], blocks: {}, facts };
+      const entry = { key: page.key, pageType: page.pageType, reference: page.reference, role: page.role, words: page.words, route: page.route, status: page.status, source, rules, buyerRules, shots: null, images: [], ownImages: [], blocks: {}, facts };
       const pixels = createHash('sha256');
       for (const viewport of VIEWPORTS) {
         const shot = await (shoot ?? shootPage)(browser, new URL(page.route, baseUrl).href, viewport, sharp);
@@ -434,6 +467,11 @@ export async function prepareDesignReview({ baseUrl, root = process.cwd(), shoot
           await sharp(segment).toFile(resolve(dir, name));
           entry.images.push(`${DIR}/${name}`);
           pixels.update(name).update(segment);
+        }
+        for (const [index, segment] of (await ownSegments(sharp, shot.image, viewport)).entries()) {
+          const name = `${page.key}-own-${viewport.id}-${index + 1}.png`;
+          await sharp(segment).toFile(resolve(dir, name));
+          entry.ownImages.push(`${DIR}/${name}`);
         }
       }
       // The review reads the measured blocks beside the pixels (where text sits): a page whose measures changed is
@@ -688,8 +726,10 @@ export async function styleBoardGate({ root = process.cwd() } = {}) {
 export async function readReviews(root, manifest, list = manifest.pages) {
   const reviews = {};
   for (const page of list) {
-    const review = await readJson(resolve(root, DIR, `${reviewKey(page)}.review.json`), null);
-    if (review) reviews[reviewKey(page)] = review;
+    for (const key of [reviewKey(page), buyerKey(page)]) {
+      const review = await readJson(resolve(root, DIR, `${key}.review.json`), null);
+      if (review) reviews[key] = review;
+    }
   }
   return reviews;
 }
@@ -697,7 +737,7 @@ export async function readReviews(root, manifest, list = manifest.pages) {
 export async function designReviewGate({ root = process.cwd() } = {}) {
   const manifest = await readJson(resolve(root, DIR, 'manifest.json'), null);
   if (!manifest) throw new Error(`no ${DIR}/manifest.json: run design-review prepare first`);
-  const result = judgeReviews(manifest, await readReviews(root, manifest), await readWaivers(root), await readListed(root));
+  const result = judgeReviews(manifest, await readReviews(root, manifest), await readWaivers(root), await readListed(root), { buyer: true, measured: measuredFindings(await readJson(resolve(root, AUDIT_REPORT), null)) });
   await writeJson(resolve(root, 'docs/research/design-review.json'), { schemaVersion: REVIEW_SCHEMA, shots: manifest.id, status: result.status, findings: result.findings });
   return result;
 }

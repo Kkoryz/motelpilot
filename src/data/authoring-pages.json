@@ -5,7 +5,7 @@
     "pageType": "home",
     "status": "authored",
     "seo": {
-      "title": "Motel management company: revenue, OTA & operations | MotelPilot",
+      "title": "Motel management company: revenue & OTA | MotelPilot",
       "description": "Daily operations and pricing taken off your hands: a motel management company for independent motels and hotels, working entirely remotely.",
       "canonical": "/"
     },
@@ -165,37 +165,6 @@
           }
         ],
         "mediaKind": "process"
-      },
-      {
-        "id": "owner-logos",
-        "type": "logos",
-        "heading": "Clients we work with",
-        "items": [
-          {
-            "name": "Rosewood Hospitality",
-            "note": "Minnesota, USA"
-          },
-          {
-            "name": "Redstone Hotel Group",
-            "note": "Oregon, USA"
-          },
-          {
-            "name": "Maple Crest Holdings",
-            "note": "Michigan, USA"
-          },
-          {
-            "name": "Blue Heron Properties",
-            "note": "Colorado, USA"
-          },
-          {
-            "name": "Kestrel Hotel Holdings",
-            "note": "North Carolina, USA"
-          },
-          {
-            "name": "Highfield Family Partners",
-            "note": "Wisconsin, USA"
-          }
-        ]
       },
       {
         "id": "owner-testimonials",
@@ -723,7 +692,7 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Business Development: Off-Market Deal Sourcing | MotelPilot",
+      "title": "Motel Business Development: Deal Sourcing | MotelPilot",
       "description": "Motel business development: off-market deal sourcing, underwriting, financing and fixed-fee development oversight. Free 30-minute first call.",
       "canonical": "/business-development/"
     },
@@ -1370,7 +1339,7 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Digital Marketing: Google Hotel Ads & Direct Bookings | MotelPilot",
+      "title": "Motel Digital Marketing: Google Hotel Ads | MotelPilot",
       "description": "Motel digital marketing that wins direct bookings: Google Business Profile and metasearch rate feeds, rate parity checks and conversion tracking.",
       "canonical": "/digital-marketing/"
     },
@@ -1990,7 +1959,7 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Human Resources: Recruitment, Payroll & Compliance | MotelPilot",
+      "title": "Motel Human Resources: Recruitment | MotelPilot",
       "description": "Recruitment, team building, staffing, payroll and labor law compliance for your property: motel human resources from MotelPilot, with a named HR contact.",
       "canonical": "/human-resources/"
     },
@@ -2557,7 +2526,7 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Operations Management: Remote Plans & Purchasing | MotelPilot",
+      "title": "Motel Operations Management: Purchasing | MotelPilot",
       "description": "Get remote motel operations management with group purchasing savings, staffing and payroll, plus pre-opening support for licences and insurance.",
       "canonical": "/operations-management/"
     },
@@ -3138,7 +3107,7 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Revenue Management Services with Daily Pricing | MotelPilot",
+      "title": "Motel Revenue Management: Daily Pricing | MotelPilot",
       "description": "Get outsourced motel revenue management: daily pricing, demand forecasts and budgets, OTA channel strategy and a revenue consultant for motels and hotels.",
       "canonical": "/revenue-management/"
     },
@@ -3924,88 +3893,10 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Information Technology: Remote Rollout & Support | MotelPilot",
+      "title": "Motel Information Technology: Remote Rollout | MotelPilot",
       "description": "Remote rollout, data security, privacy compliance and ongoing support: motel information technology from MotelPilot for motels and small hotels.",
       "canonical": "/information-technology/"
     },
-    "jsonLd": [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Hotel Management",
-            "item": "/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Information Technology",
-            "item": "/information-technology/"
-          }
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Motel Information Technology Services",
-        "url": "/information-technology/",
-        "description": "You'll have a dedicated IT representative who gets to know how your motel runs and helps you choose the technologies that suit it.",
-        "provider": {
-          "@type": "Organization",
-          "name": "MotelPilot",
-          "url": "/"
-        },
-        "serviceType": "Motel Information Technology Services",
-        "areaServed": "Worldwide"
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How do a one-off project and ongoing managed IT differ in later maintenance, the staff time the owner must put in and assurance that the systems stay available?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "A fixed-scope project covers design, build and testing, and after handover your team and vendors operate and maintain what we delivered. Our monthly managed IT plan includes monitoring every business day, logged configuration changes and remote fault diagnosis, and your staff report any issues to us. Managed IT suits motels with no in-house IT staff or several connected systems, while a project suits you if a capable team or vendor will take over."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "For cabling, network equipment installation or hardware replacement, which on-site people do I need to arrange, and which remote guidance and acceptance work do you handle?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "You appoint one on-site contact and a local contractor for any cabling or hardware installation, and your on-site staff or local contractor replace physical devices. We guide them through each installation step remotely by video call and webinar, and we run the acceptance tests ourselves before you sign off."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "When systems are replaced, how do you migrate and reconcile existing reservations and guest data, and how do you restore normal operations if the switchover fails?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We export future reservations, guest profiles and rate data from your old system, import them into the new one, reconcile record counts and totals, and check at least 50 reservations line by line. Your old system stays ready until the reconciliation and acceptance tests pass, and if the cutover fails, we use the tested rollback to restore your original setup within the 4-hour offline window."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can you build and maintain a custom integration when our motel systems do not have a supported connector?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, we build the links through vendor APIs or scheduled file exchanges. Under managed IT, we monitor, maintain and update those integrations when interfaces change; with a project, your handover includes documentation for your vendor."
-            }
-          }
-        ]
-      }
-    ],
     "hero": {
       "heading": "Motel Information Technology Services",
       "lead": [
@@ -4362,17 +4253,6 @@
       "package": "sf/authoring/v1",
       "project": "motel-site",
       "pageId": "c-148c6003556b:service"
-    }
-  },
-  {
-    "id": "c-879a82310e9e:service",
-    "route": "/commercial-strategy/",
-    "pageType": "solution",
-    "status": "authored",
-    "seo": {
-      "title": "Motel Commercial Strategy, Distribution and Group Sales | MotelPilot",
-      "description": "Get a motel commercial strategy built and run for you: revenue management, distribution, group sales and clear performance reporting for your property.",
-      "canonical": "/commercial-strategy/"
     },
     "jsonLd": [
       {
@@ -4394,23 +4274,23 @@
           {
             "@type": "ListItem",
             "position": 3,
-            "name": "Commercial Strategy",
-            "item": "/commercial-strategy/"
+            "name": "Information Technology",
+            "item": "/information-technology/"
           }
         ]
       },
       {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Motel Commercial Strategy Built and Run for Your Property",
-        "url": "/commercial-strategy/",
-        "description": "Each of your properties gets its own motel commercial strategy and marketing plan.",
+        "name": "Motel Information Technology Services",
+        "url": "/information-technology/",
+        "description": "You'll have a dedicated IT representative who gets to know how your motel runs and helps you choose the technologies that suit it.",
         "provider": {
           "@type": "Organization",
           "name": "MotelPilot",
           "url": "/"
         },
-        "serviceType": "Motel Commercial Strategy Built and Run for Your Property",
+        "serviceType": "Motel Information Technology Services",
         "areaServed": "Worldwide"
       },
       {
@@ -4419,39 +4299,50 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Can I buy the commercial strategy on its own, or only together with your management or revenue management service?",
+            "name": "How do a one-off project and ongoing managed IT differ in later maintenance, the staff time the owner must put in and assurance that the systems stay available?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, a fixed-scope strategy is available on its own with no management agreement or revenue management plan, and you can add either one later. Execution such as website development, ongoing SEO, paid search campaigns or OTA listing optimisation is commissioned separately, with its own fee for each service."
+              "text": "A fixed-scope project covers design, build and testing, and after handover your team and vendors operate and maintain what we delivered. Our monthly managed IT plan includes monitoring every business day, logged configuration changes and remote fault diagnosis, and your staff report any issues to us. Managed IT suits motels with no in-house IT staff or several connected systems, while a project suits you if a capable team or vendor will take over."
             }
           },
           {
             "@type": "Question",
-            "name": "If I take the plan only versus plan plus execution, what do I get in each case and what is left for my team to do?",
+            "name": "For cabling, network equipment installation or hardware replacement, which on-site people do I need to arrange, and which remote guidance and acceptance work do you handle?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Plan only fits if you have an experienced commercial lead: your team acts on the written roadmap and makes the daily pricing, sales and marketing decisions, and check-ins, with plan revisions every six to eight weeks, are optional and cost extra. With plan plus execution, we handle your restrictions and distribution, adjust pricing each business day, run your campaigns each month, review results on a monthly strategy call and revise the full plan once a year alongside your budget."
+              "text": "You appoint one on-site contact and a local contractor for any cabling or hardware installation, and your on-site staff or local contractor replace physical devices. We guide them through each installation step remotely by video call and webinar, and we run the acceptance tests ourselves before you sign off."
             }
           },
           {
             "@type": "Question",
-            "name": "How long does it take from our first meeting to a finished, agreed commercial plan?",
+            "name": "When systems are replaced, how do you migrate and reconcile existing reservations and guest data, and how do you restore normal operations if the switchover fails?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "It takes four to eight weeks, and the last step is a working session where we sign the plan off together. From you, we need your brand materials, one leadership contact and your approval of the plan and of any major rate and budget changes."
+              "text": "We export future reservations, guest profiles and rate data from your old system, import them into the new one, reconcile record counts and totals, and check at least 50 reservations line by line. Your old system stays ready until the reconciliation and acceptance tests pass, and if the cutover fails, we use the tested rollback to restore your original setup within the 4-hour offline window."
             }
           },
           {
             "@type": "Question",
-            "name": "What makes the commercial strategy fee go up or down: which services I include, how much ad budget you manage, how much creative work, how many properties?",
+            "name": "Can you build and maintain a custom integration when our motel systems do not have a supported connector?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Your fee is fixed before you sign and depends on which revenue, sales, marketing and creative pillars are included, how much advertising budget we manage, the creative workload, and the channels and properties covered. Hotels with more than 200 rooms, luxury and full-service properties, and multi-property groups get an individual quote."
+              "text": "Yes, we build the links through vendor APIs or scheduled file exchanges. Under managed IT, we monitor, maintain and update those integrations when interfaces change; with a project, your handover includes documentation for your vendor."
             }
           }
         ]
       }
-    ],
+    ]
+  },
+  {
+    "id": "c-879a82310e9e:service",
+    "route": "/commercial-strategy/",
+    "pageType": "solution",
+    "status": "authored",
+    "seo": {
+      "title": "Motel Commercial Strategy: Group Sales | MotelPilot",
+      "description": "Get a motel commercial strategy built and run for you: revenue management, distribution, group sales and clear performance reporting for your property.",
+      "canonical": "/commercial-strategy/"
+    },
     "hero": {
       "heading": "Motel Commercial Strategy Built and Run for Your Property",
       "lead": [
@@ -4938,7 +4829,85 @@
       "package": "sf/authoring/v1",
       "project": "motel-site",
       "pageId": "c-879a82310e9e:service"
-    }
+    },
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Hotel Management",
+            "item": "/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "/services/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Commercial Strategy",
+            "item": "/commercial-strategy/"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Motel Commercial Strategy Built and Run for Your Property",
+        "url": "/commercial-strategy/",
+        "description": "Each of your properties gets its own motel commercial strategy and marketing plan.",
+        "provider": {
+          "@type": "Organization",
+          "name": "MotelPilot",
+          "url": "/"
+        },
+        "serviceType": "Motel Commercial Strategy Built and Run for Your Property",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can I buy the commercial strategy on its own, or only together with your management or revenue management service?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, a fixed-scope strategy is available on its own with no management agreement or revenue management plan, and you can add either one later. Execution such as website development, ongoing SEO, paid search campaigns or OTA listing optimisation is commissioned separately, with its own fee for each service."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "If I take the plan only versus plan plus execution, what do I get in each case and what is left for my team to do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Plan only fits if you have an experienced commercial lead: your team acts on the written roadmap and makes the daily pricing, sales and marketing decisions, and check-ins, with plan revisions every six to eight weeks, are optional and cost extra. With plan plus execution, we handle your restrictions and distribution, adjust pricing each business day, run your campaigns each month, review results on a monthly strategy call and revise the full plan once a year alongside your budget."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take from our first meeting to a finished, agreed commercial plan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It takes four to eight weeks, and the last step is a working session where we sign the plan off together. From you, we need your brand materials, one leadership contact and your approval of the plan and of any major rate and budget changes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What makes the commercial strategy fee go up or down: which services I include, how much ad budget you manage, how much creative work, how many properties?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your fee is fixed before you sign and depends on which revenue, sales, marketing and creative pillars are included, how much advertising budget we manage, the creative workload, and the channels and properties covered. Hotels with more than 200 rooms, luxury and full-service properties, and multi-property groups get an individual quote."
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "c-45ff5d4e8e75:service",
@@ -4946,7 +4915,7 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Project Management, Renovations & FF&E Procurement | MotelPilot",
+      "title": "Motel Project Management: Renovations | MotelPilot",
       "description": "Motel project management that keeps budget, schedule and brand standards on track, with FF&E procurement and renovations at operating motels and hotels.",
       "canonical": "/project-management/"
     },
@@ -5482,88 +5451,10 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Development: Remote Team From Site to Opening | MotelPilot",
+      "title": "Motel Development From Site to Opening | MotelPilot",
       "description": "Motel development support from MotelPilot: a remote team from site to opening, brand submittals, FF&E quote comparison and flexible fee routes.",
       "canonical": "/development/"
     },
-    "jsonLd": [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Hotel Management",
-            "item": "/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Development",
-            "item": "/development/"
-          }
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Motel Development Managed From Site to Opening",
-        "url": "/development/",
-        "description": "You deal with your motel brand through a single point of coordination: we handle brand submittals and approvals remotely and coordinate the design and construction your architect and contractor carry out.",
-        "provider": {
-          "@type": "Organization",
-          "name": "MotelPilot",
-          "url": "/"
-        },
-        "serviceType": "Motel Development Managed From Site to Opening",
-        "areaServed": "Worldwide"
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Can you coordinate with my chosen brand's development and technical services teams and work within its required submission systems?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. We handle every brand submittal and approval remotely through your brand's portal, using the access you give us, and we build each package to the current requirements of the brand you've selected. Through our change-control process, you see the costs and compliant alternatives before committing any additional funds."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can you work with the architect, contractor and suppliers I already have, or must I use your partners and buying group?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, we work with them. Your architect keeps their contract with you and stays responsible for site inspections and signing off completed work, and we source all of your FF&E, or only the packages you choose, through your suppliers or brand-approved vendors. Contracts are made directly between suppliers and your ownership entity, at the suppliers' own prices."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What do I need to supply and approve during the project, and how much of my own time does it take?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Expect about 2 to 4 hours a week, including a 30-minute weekly video update and the sign-offs we need. You name one contact, set a purchase approval limit and approve brand submittals, budget changes and any order above that limit, while we handle the correspondence and supplier follow-up. For opening, you provide the completed building works, the opening-budget funding and an on-site team or general manager you appoint."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Which development choices change your fee: coordination versus purchasing scope, project stage at appointment, procurement volume, brand revision rounds or accelerated purchasing?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Your fee depends on the scope, the project stage when you appoint us, how many months the work runs and the number of purchase packages, not on the size of your FF&E budget. More than 2 brand revision rounds on a submittal, or accelerated purchasing, is quoted as an addition before work starts."
-            }
-          }
-        ]
-      }
-    ],
     "hero": {
       "heading": "Motel Development Managed From Site to Opening",
       "lead": [
@@ -6105,7 +5996,85 @@
       "package": "sf/authoring/v1",
       "project": "motel-site",
       "pageId": "c-05134426bcd1:service"
-    }
+    },
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Hotel Management",
+            "item": "/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "/services/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Development",
+            "item": "/development/"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Motel Development Managed From Site to Opening",
+        "url": "/development/",
+        "description": "You deal with your motel brand through a single point of coordination: we handle brand submittals and approvals remotely and coordinate the design and construction your architect and contractor carry out.",
+        "provider": {
+          "@type": "Organization",
+          "name": "MotelPilot",
+          "url": "/"
+        },
+        "serviceType": "Motel Development Managed From Site to Opening",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can you coordinate with my chosen brand's development and technical services teams and work within its required submission systems?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We handle every brand submittal and approval remotely through your brand's portal, using the access you give us, and we build each package to the current requirements of the brand you've selected. Through our change-control process, you see the costs and compliant alternatives before committing any additional funds."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you work with the architect, contractor and suppliers I already have, or must I use your partners and buying group?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we work with them. Your architect keeps their contract with you and stays responsible for site inspections and signing off completed work, and we source all of your FF&E, or only the packages you choose, through your suppliers or brand-approved vendors. Contracts are made directly between suppliers and your ownership entity, at the suppliers' own prices."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What do I need to supply and approve during the project, and how much of my own time does it take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Expect about 2 to 4 hours a week, including a 30-minute weekly video update and the sign-offs we need. You name one contact, set a purchase approval limit and approve brand submittals, budget changes and any order above that limit, while we handle the correspondence and supplier follow-up. For opening, you provide the completed building works, the opening-budget funding and an on-site team or general manager you appoint."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which development choices change your fee: coordination versus purchasing scope, project stage at appointment, procurement volume, brand revision rounds or accelerated purchasing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your fee depends on the scope, the project stage when you appoint us, how many months the work runs and the number of purchase packages, not on the size of your FF&E budget. More than 2 brand revision rounds on a submittal, or accelerated purchasing, is quoted as an addition before work starts."
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "c-ed8aaa726e8f:service",
@@ -6113,7 +6082,7 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Asset Management & Owner Performance Reviews | MotelPilot",
+      "title": "Motel Asset Management: Performance Reviews | MotelPilot",
       "description": "Protect owner value with motel asset management: an initial performance review, hands-on revenue and capex control, and distressed work-out support.",
       "canonical": "/asset-management/"
     },
@@ -6759,7 +6728,7 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel Accounting Services with USALI Owner Reporting | MotelPilot",
+      "title": "Motel Accounting: USALI Owner Reporting | MotelPilot",
       "description": "From daily income audits to USALI reporting with variance analysis, our motel accounting handles tax, payroll and banking for your motel or hotel.",
       "canonical": "/accounting/"
     },
@@ -7329,96 +7298,10 @@
     "pageType": "solution",
     "status": "authored",
     "seo": {
-      "title": "Motel OTA Optimization, Listing Rebuilds & Daily Rank Checks | MotelPilot",
+      "title": "Motel OTA Optimization: Daily Rank Checks | MotelPilot",
       "description": "Motel OTA optimization from MotelPilot: listing rebuilds on Booking.com, Expedia, Agoda and Trip.com, daily rank monitoring and parity fixes.",
       "canonical": "/ota-optimization/"
     },
-    "jsonLd": [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Hotel Management",
-            "item": "/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "/services/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "OTA Optimization",
-            "item": "/ota-optimization/"
-          }
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Motel OTA Optimization for Every Channel You Sell On",
-        "url": "/ota-optimization/",
-        "description": "We aim to bring your Booking.com content score to 100% and leave your existing reviews untouched.",
-        "provider": {
-          "@type": "Organization",
-          "name": "MotelPilot",
-          "url": "/"
-        },
-        "serviceType": "Motel OTA Optimization for Every Channel You Sell On",
-        "areaServed": "Worldwide"
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "My motel isn't on Expedia or Agoda yet; do you create the listing from scratch and handle the registration?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, we write your property and room descriptions and configure your amenities, policies, room types and rates, and we set up a new Expedia listing within 10 business days; if Expedia's checks hold it up, we follow up and tell you. You complete the partner sign-up, verification and payout details under your ownership entity, so the partner account and contract stay in your name."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "I don't use a channel manager; can you still run my OTA listings, and which channel managers do you support?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Without a channel manager, we update your rates, availability and restrictions by hand every business day on up to 3 OTA channels; beyond 3 channels, we recommend one that suits your property, then set it up and map it for you. We guide you through connecting the channel in Cloudbeds, RateGain, D-EDGE or most other channel managers."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "If you rebuild my Expedia or Agoda listing, do I lose my reviews, ranking history or existing reservations?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. We rewrite your titles, descriptions, photos, amenities and policies inside your current property account instead of opening a replacement, so your reviews, review score, listing history, room mappings and existing reservations all stay in place."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can you manage listing content and visibility while our revenue manager retains control of rates and promotions?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Your revenue manager keeps every pricing decision and control of your promotions and market strategy, while we look after listing content, photos, rank tracking and channel visibility. Any rate or promotion change we propose goes to them as a written recommendation, and we don't make it ourselves."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What results should I expect in bookings or rank, and do you guarantee any of it?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Optimised listings usually climb in Booking.com search results within 2 to 4 weeks, as 8 of the 12 we optimised in 2025 did, by average position on a fixed set of searches, recorded weekly. We don't guarantee rankings, bookings or revenue, because demand, competitors and OTA algorithms are outside our control. What we commit to is completing the agreed fixes during setup, reviewing your agreed targets at 30 days and adjusting any channel that misses them."
-            }
-          }
-        ]
-      }
-    ],
     "hero": {
       "heading": "Motel OTA Optimization for Every Channel You Sell On",
       "lead": [
@@ -8322,7 +8205,93 @@
       "package": "sf/authoring/v1",
       "project": "motel-site",
       "pageId": "c-acaa8626f051:service"
-    }
+    },
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Hotel Management",
+            "item": "/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "/services/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "OTA Optimization",
+            "item": "/ota-optimization/"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Motel OTA Optimization for Every Channel You Sell On",
+        "url": "/ota-optimization/",
+        "description": "We aim to bring your Booking.com content score to 100% and leave your existing reviews untouched.",
+        "provider": {
+          "@type": "Organization",
+          "name": "MotelPilot",
+          "url": "/"
+        },
+        "serviceType": "Motel OTA Optimization for Every Channel You Sell On",
+        "areaServed": "Worldwide"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "My motel isn't on Expedia or Agoda yet; do you create the listing from scratch and handle the registration?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we write your property and room descriptions and configure your amenities, policies, room types and rates, and we set up a new Expedia listing within 10 business days; if Expedia's checks hold it up, we follow up and tell you. You complete the partner sign-up, verification and payout details under your ownership entity, so the partner account and contract stay in your name."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "I don't use a channel manager; can you still run my OTA listings, and which channel managers do you support?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Without a channel manager, we update your rates, availability and restrictions by hand every business day on up to 3 OTA channels; beyond 3 channels, we recommend one that suits your property, then set it up and map it for you. We guide you through connecting the channel in Cloudbeds, RateGain, D-EDGE or most other channel managers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "If you rebuild my Expedia or Agoda listing, do I lose my reviews, ranking history or existing reservations?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. We rewrite your titles, descriptions, photos, amenities and policies inside your current property account instead of opening a replacement, so your reviews, review score, listing history, room mappings and existing reservations all stay in place."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you manage listing content and visibility while our revenue manager retains control of rates and promotions?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Your revenue manager keeps every pricing decision and control of your promotions and market strategy, while we look after listing content, photos, rank tracking and channel visibility. Any rate or promotion change we propose goes to them as a written recommendation, and we don't make it ourselves."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What results should I expect in bookings or rank, and do you guarantee any of it?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Optimised listings usually climb in Booking.com search results within 2 to 4 weeks, as 8 of the 12 we optimised in 2025 did, by average position on a fixed set of searches, recorded weekly. We don't guarantee rankings, bookings or revenue, because demand, competitors and OTA algorithms are outside our control. What we commit to is completing the agreed fixes during setup, reviewing your agreed targets at 30 days and adjusting any channel that misses them."
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "site:about",
@@ -8473,37 +8442,6 @@
           }
         ],
         "mediaKind": "process"
-      },
-      {
-        "id": "owner-logos",
-        "type": "logos",
-        "heading": "Clients we work with",
-        "items": [
-          {
-            "name": "Rosewood Hospitality",
-            "note": "Minnesota, USA"
-          },
-          {
-            "name": "Redstone Hotel Group",
-            "note": "Oregon, USA"
-          },
-          {
-            "name": "Maple Crest Holdings",
-            "note": "Michigan, USA"
-          },
-          {
-            "name": "Blue Heron Properties",
-            "note": "Colorado, USA"
-          },
-          {
-            "name": "Kestrel Hotel Holdings",
-            "note": "North Carolina, USA"
-          },
-          {
-            "name": "Highfield Family Partners",
-            "note": "Wisconsin, USA"
-          }
-        ]
       },
       {
         "id": "owner-testimonials",
@@ -8860,68 +8798,10 @@
     "pageType": "general",
     "status": "authored",
     "seo": {
-      "title": "Case Studies: Motel and Hotel Before-and-After Results | MotelPilot",
+      "title": "Case Studies: Motel Before-and-After Results | MotelPilot",
       "description": "From an Oregon motel to an Ontario hotel and a Queensland motel, each anonymised case shows the challenge, what we changed and the period compared.",
       "canonical": "/case-studies/"
     },
-    "jsonLd": [
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Hotel Management",
-            "item": "/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Case Studies",
-            "item": "/case-studies/"
-          }
-        ]
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What periods are the before-and-after figures in these cases compared over?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Every result compares April–September 2025 with the same months of 2024, so seasonal demand is alike in both periods, and each covers that one property alone. Figures for owner workload compare weekly averages."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I see results or speak with current owners before I sign?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Before you sign, we share anonymised RevPAR, occupancy and NOI figures comparing the 12 months before we took over with the 12 months after. We can also arrange calls with up to three current owner clients who have agreed to act as references."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Which kinds of properties and services do these cases cover?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "They cover a 32-room motel in Oregon on revenue management, a 46-room hotel in Ontario on OTA management, and a 28-room motel in Queensland on full remote management. Each case sets out the challenge, what we changed and how the results compared."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How did full remote management work for a motel with none of your staff on site?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "For the Queensland motel, we took over reservations, guest messaging and arrival instructions remotely and coordinated cleaning and maintenance with local contractors, who carried out all on-site work. In April–September 2025 against the same months of 2024, the median first reply to guest messages received in our business hours, Monday to Friday on Eastern Time, fell from three hours to 24 minutes, and the owner's routine operational workload fell from 26 to six hours per week."
-            }
-          }
-        ]
-      }
-    ],
     "hero": {
       "heading": "MotelPilot Case Studies",
       "lead": [
@@ -9076,7 +8956,65 @@
       "package": "sf/authoring/v1",
       "project": "motel-site",
       "pageId": "site:case_studies_portfolio"
-    }
+    },
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Hotel Management",
+            "item": "/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Case Studies",
+            "item": "/case-studies/"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What periods are the before-and-after figures in these cases compared over?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every result compares April–September 2025 with the same months of 2024, so seasonal demand is alike in both periods, and each covers that one property alone. Figures for owner workload compare weekly averages."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I see results or speak with current owners before I sign?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Before you sign, we share anonymised RevPAR, occupancy and NOI figures comparing the 12 months before we took over with the 12 months after. We can also arrange calls with up to three current owner clients who have agreed to act as references."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which kinds of properties and services do these cases cover?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They cover a 32-room motel in Oregon on revenue management, a 46-room hotel in Ontario on OTA management, and a 28-room motel in Queensland on full remote management. Each case sets out the challenge, what we changed and how the results compared."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How did full remote management work for a motel with none of your staff on site?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For the Queensland motel, we took over reservations, guest messaging and arrival instructions remotely and coordinated cleaning and maintenance with local contractors, who carried out all on-site work. In April–September 2025 against the same months of 2024, the median first reply to guest messages received in our business hours, Monday to Friday on Eastern Time, fell from three hours to 24 minutes, and the owner's routine operational workload fell from 26 to six hours per week."
+            }
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "site:capabilities",

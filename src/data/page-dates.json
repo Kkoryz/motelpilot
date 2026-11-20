@@ -1,71 +1,71 @@
 {
   "/": {
-    "hash": "cf44b090f8510ea8",
-    "modified": "2026-11-17"
+    "hash": "b79910c5e3e1e458",
+    "modified": "2026-11-20"
   },
   "/services/": {
     "hash": "4877722b8ab0ef51",
     "modified": "2026-11-17"
   },
   "/business-development/": {
-    "hash": "61b4dc974c14dc55",
-    "modified": "2026-11-17"
+    "hash": "f6142bf2199b8966",
+    "modified": "2026-11-19"
   },
   "/digital-marketing/": {
-    "hash": "60457c562c5bd087",
-    "modified": "2026-11-17"
+    "hash": "3d957e66d82c3a1c",
+    "modified": "2026-11-19"
   },
   "/human-resources/": {
-    "hash": "b25791cfaef00c2e",
-    "modified": "2026-11-17"
+    "hash": "64af88f0f0778dd6",
+    "modified": "2026-11-19"
   },
   "/operations-management/": {
-    "hash": "2780d8918301cbd2",
-    "modified": "2026-11-17"
+    "hash": "eff3c05392cf76fe",
+    "modified": "2026-11-19"
   },
   "/revenue-management/": {
-    "hash": "188cef03ba446d66",
-    "modified": "2026-11-17"
+    "hash": "0ad2974776244b14",
+    "modified": "2026-11-19"
   },
   "/information-technology/": {
-    "hash": "bfed4036e0072995",
-    "modified": "2026-11-17"
+    "hash": "5ed2ff717e7d1821",
+    "modified": "2026-11-19"
   },
   "/commercial-strategy/": {
-    "hash": "25fcd096fe7467f1",
-    "modified": "2026-11-17"
+    "hash": "b226b1be23ff3301",
+    "modified": "2026-11-19"
   },
   "/project-management/": {
-    "hash": "063cc2b5b65f5be0",
-    "modified": "2026-11-17"
+    "hash": "db7ef1cfe8f8825b",
+    "modified": "2026-11-19"
   },
   "/development/": {
-    "hash": "697c5c0c538f51a7",
-    "modified": "2026-11-17"
+    "hash": "cdef79438f7afb55",
+    "modified": "2026-11-19"
   },
   "/asset-management/": {
-    "hash": "c68e2a2c2132f8b5",
-    "modified": "2026-11-17"
+    "hash": "d9ad4f0b1da9a1cc",
+    "modified": "2026-11-19"
   },
   "/accounting/": {
-    "hash": "9041cd05ca06c132",
-    "modified": "2026-11-17"
+    "hash": "415b3eefdb675af9",
+    "modified": "2026-11-19"
   },
   "/ota-optimization/": {
-    "hash": "82e94f955000de4b",
-    "modified": "2026-11-17"
+    "hash": "3b1a75bf9d04b3bc",
+    "modified": "2026-11-19"
   },
   "/about-us/": {
-    "hash": "c408e0b530b719a3",
-    "modified": "2026-11-17"
+    "hash": "606ab99233b470d7",
+    "modified": "2026-11-20"
   },
   "/contact-us/": {
     "hash": "fff9032e2e191b8f",
     "modified": "2026-11-17"
   },
   "/case-studies/": {
-    "hash": "bba1a34e1ced8048",
-    "modified": "2026-11-17"
+    "hash": "d8410fb72d974859",
+    "modified": "2026-11-19"
   },
   "/capabilities/": {
     "hash": "dce20c7b62d54c9b",
@@ -96,23 +96,23 @@
     "modified": "2026-11-17"
   },
   "/blog/": {
-    "hash": "cf243055a17b59cf",
+    "hash": "c274e1d868b6b73e",
     "modified": "2026-11-17"
   },
   "/blog/motel-management-fees-reasonable-structure/": {
-    "hash": "db227b2078354ffd",
+    "hash": "3869bc2f304ebc45",
     "modified": "2026-11-17"
   },
   "/blog/motel-management-models-compared/": {
-    "hash": "11b1abac624e27bd",
+    "hash": "67fffe7209956c31",
     "modified": "2026-11-17"
   },
   "/blog/motel-manager-performance-metrics/": {
-    "hash": "6a844014630b2c38",
+    "hash": "01b0a961ebeab40a",
     "modified": "2026-11-17"
   },
   "/blog/what-is-hotel-revenue-management/": {
-    "hash": "26992d45e442e621",
+    "hash": "c9ea4439a5261772",
     "modified": "2026-11-17"
   }
 }

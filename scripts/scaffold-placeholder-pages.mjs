@@ -10,7 +10,7 @@
 // Usage: node scripts/scaffold-placeholder-pages.mjs --pages-plan <pages.json> [--blueprints <slot-manifest.json>]
 //        home=<url> about=<url> contact=<url> [product_manufacturer=<url> product_wholesale=<url> solution=<url>]
 
-import { mkdir, rm } from 'node:fs/promises';
+import { mkdir, readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { assertAuthoringPages } from './lib/authoring-contract.mjs';
@@ -19,9 +19,12 @@ import { blueprintChoices, blueprintPage, blueprintsFrom, competitorBlueprints, 
 import { DEFAULT_TRADE, imageBriefs, siteTrade, tradeConfigPath } from './lib/trade.mjs';
 import { tradePhotos } from './lib/slot-visuals.mjs';
 import { siteNavFromPlan } from './lib/site-plan.mjs';
+import { withClientWall } from './lib/site-proof.mjs';
 import { extractSectionShapes, measurePhoneSections } from './lib/reference-anatomy.mjs';
 import { PAGE_SHELL } from './lib/page-shell.mjs';
 import { captureFolder } from './lib/rules.mjs';
+import { capturedHeroHeights } from './lib/capture-hero.mjs';
+import { captureTree } from './lib/capture-dom.mjs';
 import { revealDeferredContent, scrollThroughPage } from './lib/reveal.mjs';
 import { readJson, writeJson } from './lib/json-io.mjs';
 
@@ -29,10 +32,13 @@ import { readJson, writeJson } from './lib/json-io.mjs';
 // (each shape's `phone`: height, words, main photo and its ratio), on one page load.
 export const DESKTOP = Object.freeze({ width: 1440, height: 1000 });
 export const PHONE = Object.freeze({ width: 390, height: 844 });
+export const TABLET = Object.freeze({ width: 768, height: 1024 });
 
 // A reference that refuses this machine keeps its earlier measure (lib/reference-access.mjs).
 export { BLOCKED_STATUSES } from './lib/reference-access.mjs';
-import { BLOCKED_STATUSES } from './lib/reference-access.mjs';
+import { BLOCKED_STATUSES, captureStamp, measuredBeside } from './lib/reference-access.mjs';
+import { contextFor } from './capture-reference.mjs';
+import { HERO_FORM_FIELDS } from './lib/usability-checks.mjs';
 
 // The reference page's sections, measured at desktop and at phone width; the page is left at desktop width, scrolled
 // to the top, for the section crops. desktopOnly: a hero sample's sections at desktop width only (its hero's pattern
@@ -66,7 +72,22 @@ export async function measureReference(browser, url, { desktopOnly = false } = {
     }
     return null;
   };
-  const phones = await atWidth(PHONE, () => page.evaluate(measurePhoneSections, shapes.map((shape) => shape.anchor)));
+  const anchors = shapes.map((shape) => shape.anchor);
+  const tablets = await atWidth(TABLET, () => page.evaluate(measurePhoneSections, anchors));
+  shapes.forEach((shape, index) => { shape.tablet = tablets?.[index] ?? null; });
+  // The phone's measure is a phone's visit (capture-reference.mjs PHONE_DEVICE): a page that serves its phone layout
+  // by the browser it sees is measured in that layout, its sections found by their paths.
+  const phonePage = await browser.newPage(contextFor({ ...PHONE, phone: true }));
+  let phones = [];
+  try {
+    await phonePage.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
+    await phonePage.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+    await revealDeferredContent(phonePage);
+    await scrollThroughPage(phonePage);
+    phones = await phonePage.evaluate(measurePhoneSections, anchors);
+  } finally {
+    await phonePage.close();
+  }
   shapes.forEach((shape, index) => { shape.phone = phones[index]; });
   await atWidth(DESKTOP, async () => {});
   return { page, shapes, headings, heroText, siblings };
@@ -92,7 +113,79 @@ export function navSiblings(url) {
 // while three of the four pages beside it in its menu put the title over the photo). A tie, or no sample, keeps the
 // reference page's.
 export const HERO_SAMPLES = 4;
+// The other competitors' pages of a page type (site.json designPeers { <page type>: [url, ...] }; owner 2026-11-18:
+// design follows the majority of several competitors' pages of that kind, the reference deciding a tie or no sample):
+// they vote beside the reference's own pages, at most PEER_SAMPLES a page type.
+export const PEER_SAMPLES = 6;
 export const SINGLE_PAGE_TYPES = Object.freeze(['home', 'about', 'contact', 'privacy', 'terms', 'blog_hub', 'blog_post']);
+// The page-type variants a sample votes on beside its hero: the card, process and gallery variants (one value each). The
+// split sequence and the photo walls are the reference page's: a sequence is no vote.
+export const VOTED_MODULE_KEYS = Object.freeze(['featureGrid', 'process', 'gallery']);
+// A page type's modules by the majority of the reference page and the other competitors' pages of its type (designPeers,
+// not the reference's own menu siblings: a size guide beside a product page is no page of its kind), key by key, only
+// the modules the reference page has; a sample without the module casts no vote on it, and a tie keeps the reference's.
+export function modulesByMajority(reference = {}, samples = []) {
+  const voted = { ...reference };
+  for (const key of VOTED_MODULE_KEYS.filter((name) => reference[name])) voted[key] = heroByMajority(reference[key], samples.map((sample) => sample?.[key]).filter(Boolean));
+  return voted;
+}
+// A page's hero as a sample votes it: the enquiry form in its first section (HERO_FORM_FIELDS fields or more, or an
+// embedded form whose fields are out of reach) is a form hero, whatever photo it sits by (the reference's /management
+// and its state pages; Vacasa's city pages; Vacasa's one-field estimate box is none).
+export function sampleHero(sections, heroOf) {
+  const top = sections[0]?.shape;
+  if (top?.hasForm && ((top.formFields ?? 0) >= HERO_FORM_FIELDS || top.formEmbed)) return 'media-form';
+  return heroOf(sections);
+}
+// A reference page type's first screen: the capture's, wherever the page type has a capture (lib/capture-hero.mjs
+// capturedHeroHeights: its bands, or { band: false } where it opens on none); the live measure's opening section
+// (heroHeightsOf) only without any capture. A section is cut at the headings, not at a band: where the capture found
+// no band, the live measure's first section is the page's copy down to its next heading (2026-11-20, Tapa Works'
+// reference about page: 1715px of copy, photo and figures taken for a first screen), never a height to keep.
+export function heroHeightsFrom(captured, sections) {
+  return captured ?? heroHeightsOf(sections);
+}
+// A reference page's first screen: the height of its opening section (its hero, else its first section with content:
+// the contact page's photo after a spacer) at a desktop (1440x1000), a tablet (768x1024) and a phone (390x844), each
+// with its share of that screen's height. Each page type's hero takes them (components.heroHeights, PageHero.astro):
+// owner 2026-11-18, Staylumen's heroes were the template's default 360 to 560px where the reference's are 1000 (home),
+// 572 (about), 412 (contact) and 837 (solution, place); nothing carried the measure into the pages.
+export function heroHeightsOf(sections) {
+  const hero = sections.find((section) => String(section.decision).startsWith('hero:')) ?? sections.find((section) => !String(section.decision).startsWith('skip'));
+  if (!hero?.height) return null;
+  const at = (height, screen) => (height > 0 ? { height: Math.round(height), share: Math.round((1000 * height) / screen) / 1000 } : null);
+  const heights = { desktop: at(hero.height, DESKTOP.height), tablet: at(hero.tablet?.height ?? 0, TABLET.height), phone: at(hero.phone?.height ?? 0, PHONE.height) };
+  return Object.fromEntries(Object.entries(heights).filter(([, value]) => value));
+}
+// The photo walls' shape from the reference's own photos under its first screens (raw desktop-1440.json of each
+// captured page: images and photo backgrounds from 35% of the width): one across the page (90% or more) keeps the
+// walls across it ({ fit: 'full' }); else the walls sit in the content's width, as the reference's photos do, as tall
+// as its photos' median height in a WALL_CONTAINER-wide column, between 2:1 and 3:1 (3:1 shows a 3:2 photo's middle
+// half, the most the layout audit's heavy_crop lets go). Owner 2026-11-18: Staylumen's home walls were 1425x713 photos
+// across the page where the reference shows split rows and panels of about 590px.
+// Only photos a visitor sees in the page's body: not in its header or footer (nor below the footer's top: a builder's
+// footer photo whose parent the capture cannot place), not hidden (display none, visibility hidden, no opacity, no size),
+// not fixed to the screen (a pop-up) - a footer's photo across the page set every wall across it.
+// htmls: each capture's rendered.html, by index (lib/capture-dom.mjs takes the parents of id-anchored elements from it).
+export const WALL_CONTAINER = 1200;
+export function photoWallOf(raws = [], htmls = []) {
+  const fixed = (node) => { for (let at = node; at; at = at.parent) if (at.styles?.position === 'fixed') return true; return false; };
+  const photos = raws.flatMap((raw, index) => {
+    if (!raw?.elements) return [];
+    const tree = captureTree(raw, { html: htmls[index] ?? null });
+    const footer = tree.footer && tree.footer.rect.height > 0 ? tree.footer.rect.y : Infinity;
+    return tree.nodes.filter((node) => node.rect && node.displayed && node.styles?.visibility !== 'hidden' && node.opacity > 0 && !node.inShell && !fixed(node)
+      && node.rect.y >= tree.viewport.height && node.rect.y < footer && node.rect.width >= tree.viewport.width * 0.35 && node.rect.height >= 200
+      && (node.tag === 'img' || /url\(/.test(node.styles?.['background-image'] ?? '')))
+      .map((node) => ({ wide: node.rect.width >= tree.viewport.width * 0.9, height: node.rect.height }));
+  });
+  if (!photos.length) return null;
+  if (photos.some((photo) => photo.wide)) return { fit: 'full' };
+  const heights = photos.map((photo) => photo.height).sort((a, b) => a - b);
+  const median = heights[Math.floor(heights.length / 2)];
+  const ratio = Math.round(100 * Math.min(3, Math.max(2, WALL_CONTAINER / median))) / 100;
+  return { fit: 'container', ratio: `${ratio} / 1`, height: Math.round(median) };
+}
 export function heroByMajority(reference, samples = []) {
   const counts = new Map();
   for (const variant of [reference, ...samples].filter(Boolean)) counts.set(variant, (counts.get(variant) ?? 0) + 1);
@@ -220,6 +313,13 @@ const followsEvidence = (current, guess) => current === undefined || current ===
 // /swimwear-manufacturer/ undid the product pages' media-overlay, 3 of 5 pages, and the accessories page's button fell
 // under the first screen).
 const majorityDecided = (inventory, pageType) => Boolean(inventory?.pages?.find((page) => page.pageType === pageType)?.heroSamples?.length);
+// The enquiry form beside a hero (media-form) is one landing page's: named from the reference's page, a page type takes the
+// same photo hero without the form (media-overlay, as PageHero.astro draws media-form, so the phone frames hold) and its
+// pages lead to the form from their button and closing call, the contact and quote pages carrying it in full (owner
+// 2026-11-18: "每个 service 带这么大表单"; Staylumen took the reference's /management form for nine service pages, where
+// Awning, Evolve and Vacasa open their service pages on a button, 10 of 10). A site that keeps the form hero for a page
+// type sets it in template-variants.json, which stays.
+const typeHero = (variant) => (variant === 'media-form' ? 'media-overlay' : variant);
 
 // The site's pages Site Factory has not authored, built from the blueprints (marked placeholders), the site's menus,
 // and the slot manifest that goes to Site Factory 06 (docs/research/slot-manifest.json). Without Site Factory's
@@ -237,8 +337,9 @@ export async function writeBlueprintPages({ root = process.cwd(), pagesPlan, blu
     await writeJson(choicesPath, choices);
   }
   const sections = await readJson(resolve(root, 'docs/research/analysis/section-modules.json'), []);
-  // The owner's proof fills the owner slots (scripts/lib/site-proof.mjs); none while the site has no proof file.
-  const proof = await readJson(resolve(root, 'src/data/site-proof.json'), null);
+  // The owner's proof fills the owner slots (scripts/lib/site-proof.mjs); none while the site has no proof file; its
+  // client wall only where site.json switches it on (clientWallOn).
+  const proof = withClientWall(await readJson(resolve(root, 'src/data/site-proof.json'), null), await readJson(resolve(root, 'site.json'), null));
   const trust = await readJson(resolve(root, 'src/data/site-trust.json'), null);
   // A trade other than the default words the competitor-derived blueprint's purposes its own way
   // (config/blueprint-wording.<trade>.json); Site Factory's own manifest keeps its words.
@@ -273,7 +374,7 @@ export async function writeBlueprintPages({ root = process.cwd(), pagesPlan, blu
   }
   // A hero the analysis named for a page type (section-modules "hero:<variant>") replaces the capture's guess.
   const heroes = sections.filter((item) => item.module?.startsWith('hero:') && !majorityDecided(inventory, item.pageType) && followsEvidence(variants.components.heroByPageType?.[item.pageType], heroGuess(inventory, item.pageType)));
-  if (heroes.length) variants.components.heroByPageType = { ...(variants.components.heroByPageType || {}), ...Object.fromEntries(heroes.map((item) => [item.pageType, item.module.slice(5)])) };
+  if (heroes.length) variants.components.heroByPageType = { ...(variants.components.heroByPageType || {}), ...Object.fromEntries(heroes.map((item) => [item.pageType, typeHero(item.module.slice(5))])) };
   if (heroes.length || tradeChanged) await writeJson(variantsPath, variants);
   await writeJson(resolve(root, 'docs/research/slot-manifest.json'), slotManifest({ components: variants.components, source: variants.sourceUrl ?? null, blueprints: used }));
   await recordRoutes(root, [...authored, ...pages]);
@@ -286,6 +387,9 @@ export async function writeBlueprintPages({ root = process.cwd(), pagesPlan, blu
 export function withCapture(components, report, previous) {
   const heroByPageType = { ...components.heroByPageType };
   const pageTypes = { ...components.pageTypes };
+  // The first screen's heights are the capture's own measure: each capture replaces them.
+  const heroHeights = Object.fromEntries(report.pages.filter((page) => page.heroHeights).map((page) => [page.pageType, page.heroHeights]));
+  const photoWall = report.photoWall ?? components.photoWall;
   for (const page of report.pages) {
     if (page.heroVariant && followsEvidence(heroByPageType[page.pageType], heroGuess(previous, page.pageType))) heroByPageType[page.pageType] = page.heroVariant;
     pageTypes[page.pageType] = { ...Object.fromEntries(Object.entries(pageTypes[page.pageType] ?? {}).filter(([key]) => !AUTHORED_PATTERN_KEYS.includes(key))), ...page.modules };
@@ -295,38 +399,55 @@ export function withCapture(components, report, previous) {
   const headingAlign = headings && headings.start + headings.center ? (headings.start >= headings.center ? 'start' : 'center') : components.headingAlign;
   // The competitor's titles as measured (lib/heading-fit.mjs); a capture that found none keeps the earlier measure.
   const heroText = report.heroText ?? components.heroText;
-  return { ...components, heroByPageType, pageTypes, ...(headingAlign ? { headingAlign } : {}), ...(heroText ? { heroText } : {}) };
+  return { ...components, heroByPageType, pageTypes, ...(Object.keys(heroHeights).length ? { heroHeights } : {}), ...(photoWall ? { photoWall } : {}), ...(headingAlign ? { headingAlign } : {}), ...(heroText ? { heroText } : {}) };
 }
 
 // blueprints: Site Factory 06's slot manifest when given; else each page type follows the competitor's page.
 export async function scaffoldReferencePatterns({ pagesPlan, references, blueprints = null, root = process.cwd() }) {
   const contact = pagesPlan.pages.find((page) => page.page_type === 'contact');
   if (!contact) throw new Error('the site plan has no contact page');
-  const { chromium } = await import('playwright');
-  const browser = await chromium.launch({ headless: true });
+  // The browser opens for the first page measured live: a run that keeps every measure visits nothing.
+  let opened = null;
+  const browser = { newPage: async (options) => (await (opened ??= import('playwright').then(({ chromium }) => chromium.launch({ headless: true })))).newPage(options) };
   const pages = [];
-  const report = { schemaVersion: 'seo-site-pattern-inventory-v1', viewport: DESKTOP.width, phoneViewport: PHONE.width, pages: [], headings: { start: 0, center: 0 } };
+  // The capture these measures stand beside (lib/reference-access.mjs: the live pages are measured once a capture).
+  const stamp = await captureStamp(root);
+  const report = { schemaVersion: 'seo-site-pattern-inventory-v1', ...(stamp ? { capture: stamp } : {}), viewport: DESKTOP.width, phoneViewport: PHONE.width, pages: [], headings: { start: 0, center: 0 } };
   const pageTypes = {};
   const heroTexts = [];
   const inventoryPath = resolve(root, 'docs/research/pattern-inventory.json');
   const previous = await readJson(inventoryPath, null);
+  const peers = (await readJson(resolve(root, 'site.json'), null))?.designPeers ?? {};
+  const beside = measuredBeside(previous, stamp);
   // A page kept from an earlier measure without its own heading and hero counts (an inventory written before they were
   // kept per page): the site's counts stay the earlier ones.
   let keptWithoutCounts = false;
   try {
     for (const [pageType, url] of Object.entries(references)) {
+      const peerUrls = (peers[pageType] ?? []).slice(0, PEER_SAMPLES);
+      const kept = previous?.pages?.find((entry) => entry.pageType === pageType && entry.reference === url);
+      // An earlier measure kept as this run's (its crops stay): its page, its counts and whatever this run says of it.
+      const keep = (more) => {
+        pageTypes[pageType] = kept.modules;
+        report.pages.push({ ...kept, ...more });
+        if (kept.headings) for (const [align, count] of Object.entries(kept.headings)) report.headings[align] += count;
+        heroTexts.push(kept.heroText ? { ...kept.heroText, pageType } : null);
+        if (!kept.headings || !('heroText' in kept)) keptWithoutCounts = true;
+      };
+      // Measured beside this capture already, with these peers (a measure from before the capture was recorded names
+      // no peers and is taken as theirs): kept, the page not visited. Its first screen is the capture's own, read again.
+      if (beside && kept && (previous.capture == null || JSON.stringify(kept.peers ?? []) === JSON.stringify(peerUrls))) {
+        const heroHeights = (await capturedHeroHeights(root, pageType)) ?? kept.heroHeights;
+        keep({ ...(heroHeights ? { heroHeights } : {}), peers: peerUrls });
+        continue;
+      }
       let measured;
       try {
         measured = await measureReference(browser, url);
       } catch (error) {
-        const kept = previous?.pages?.find((entry) => entry.pageType === pageType && entry.reference === url);
         if (!BLOCKED_STATUSES.includes(error.status) || !kept) throw error;
         console.warn(`patterns: ${url} answered ${error.status}; the ${pageType} page keeps the measure an earlier run took (stale in docs/research/pattern-inventory.json, crops kept)`);
-        pageTypes[pageType] = kept.modules;
-        report.pages.push({ ...kept, stale: { status: error.status } });
-        if (kept.headings) for (const [align, count] of Object.entries(kept.headings)) report.headings[align] += count;
-        heroTexts.push(kept.heroText ? { ...kept.heroText, pageType } : null);
-        if (!kept.headings || !('heroText' in kept)) keptWithoutCounts = true;
+        keep({ stale: { status: error.status } });
         continue;
       }
       const { page, shapes, headings, heroText } = measured;
@@ -348,28 +469,47 @@ export async function scaffoldReferencePatterns({ pagesPlan, references, bluepri
       await page.close();
       pageTypes[pageType] = authoredPatterns(sections);
       const heroOf = (list) => { const hero = list.find((section) => section.pattern.startsWith('hero-')); return hero ? PATTERN_DECISIONS[hero.pattern].slice('hero:'.length) : undefined; };
-      const ownHero = heroOf(sections);
+      const ownHero = sampleHero(sections, heroOf);
       // The hero by the majority of this page and the competitor's pages beside it in its menu (heroByMajority): only
       // their heroes are measured; one that cannot be read is left out.
+      // Its samples: the reference's pages beside it in its menu, then the other competitors' pages of its type
+      // (designPeers), each measured at desktop width; one that cannot be read is left out.
       const heroSamples = [];
+      const sampleModules = [];
       const others = new Set(Object.values(references).map((ref) => String(ref).replace(/\/?$/, '/')));
-      for (const sampleUrl of SINGLE_PAGE_TYPES.includes(pageType) ? [] : (measured.siblings ?? []).filter((href) => !others.has(href)).slice(0, HERO_SAMPLES)) {
+      const siblingUrls = SINGLE_PAGE_TYPES.includes(pageType) ? [] : (measured.siblings ?? []).filter((href) => !others.has(href)).slice(0, HERO_SAMPLES);
+      for (const [sampleUrl, peer] of [...siblingUrls.map((href) => [href, false]), ...peerUrls.map((href) => [href, true])]) {
         try {
           const sample = await measureReference(browser, sampleUrl, { desktopOnly: true });
           await sample.page.close();
-          const variant = heroOf(inventory(sample.shapes, { pageType }));
-          if (variant) heroSamples.push({ url: sampleUrl, heroVariant: variant });
+          const sampleSections = inventory(sample.shapes, { pageType });
+          const variant = sampleHero(sampleSections, heroOf);
+          if (variant) heroSamples.push({ url: sampleUrl, heroVariant: variant, ...(peer ? { peer: true } : {}) });
+          if (peer) sampleModules.push(authoredPatterns(sampleSections));
         } catch (error) {
-          console.warn(`patterns: hero sample ${sampleUrl} not measured (${error.message.slice(0, 120)})`);
+          console.warn(`patterns: ${peer ? 'peer' : 'hero'} sample ${sampleUrl} not measured (${error.message.slice(0, 120)})`);
         }
       }
-      const heroVariant = heroByMajority(ownHero, heroSamples.map((sample) => sample.heroVariant));
-      report.pages.push({ pageType, reference: url, modules: pageTypes[pageType], heroVariant, ...(heroSamples.length ? { heroOwn: ownHero, heroSamples } : {}), coverage: coverage(sections), headings, heroText: heroText ?? null, sections: sections.map(({ shape, ...rest }) => rest) });
+      pageTypes[pageType] = modulesByMajority(pageTypes[pageType], sampleModules);
+      // A form hero stands only on more pages than the reference's own (one landing page's form is not every page's of
+      // the type): without them the type takes the page's own photo hero (else the photo behind the copy, typeHero).
+      const voted = heroByMajority(ownHero, heroSamples.map((sample) => sample.heroVariant));
+      const heroVariant = voted === 'media-form' && !heroSamples.some((sample) => sample.heroVariant === 'media-form') ? (heroOf(sections) ?? typeHero(voted)) : voted;
+      // The capture's own rects (lib/capture-hero.mjs: the phone's visit has its own DOM, which the live measure's
+      // desktop paths do not find); the live measure only where the page type has no capture (heroHeightsFrom).
+      const heroHeights = heroHeightsFrom(await capturedHeroHeights(root, pageType), sections);
+      report.pages.push({ pageType, reference: url, modules: pageTypes[pageType], heroVariant, ...(heroHeights ? { heroHeights } : {}), ...(heroSamples.length ? { heroOwn: ownHero, heroSamples } : {}), coverage: coverage(sections), headings, heroText: heroText ?? null, sections: sections.map(({ shape, ...rest }) => rest), peers: peerUrls });
     }
   } finally {
-    await browser.close();
+    await (await opened)?.close();
   }
   report.heroText = keptWithoutCounts && previous?.heroText ? previous.heroText : heroTextAverage(heroTexts);
+  // The photo walls' shape from the captured pages' raw measure (capture-reference-pages.mjs).
+  const rawDirs = Object.keys(references).map((pageType) => resolve(root, 'docs/research/reference-pages', captureFolder(pageType), 'raw'));
+  const raws = await Promise.all(rawDirs.map((dir) => readJson(resolve(dir, 'desktop-1440.json'), null)));
+  const htmls = await Promise.all(rawDirs.map((dir) => readFile(resolve(dir, 'rendered.html'), 'utf8').catch(() => null)));
+  const photoWall = photoWallOf(raws, htmls);
+  if (photoWall) report.photoWall = photoWall;
   if (keptWithoutCounts && previous?.headings) report.headings = previous.headings;
   await writeJson(inventoryPath, report);
   const variantsPath = resolve(root, 'src/data/template-variants.json');

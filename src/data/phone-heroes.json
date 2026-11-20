@@ -15,16 +15,16 @@
     }
   },
   "crops": {
-    "/media/photos/home-brief-cta-1-960.webp": {
+    "/media/photos/motel-owner-talks-phone-front-desk-coffee-mug-960.webp": {
       "0.51": {
-        "src": "/media/photos/home-brief-cta-1-960-phone-51.webp",
+        "src": "/media/photos/motel-owner-talks-phone-front-desk-coffee-mug-960-phone-51.webp",
         "width": 522,
         "height": 1024
       }
     }
   },
   "soft": [
-    "/media/photos/home-brief-cta-1-960-phone-51.webp (522px wide, from 1536x1024)"
+    "/media/photos/motel-owner-talks-phone-front-desk-coffee-mug-960-phone-51.webp (522px wide, from 1536x1024)"
   ],
   "unfocused": [],
   "overBudget": []

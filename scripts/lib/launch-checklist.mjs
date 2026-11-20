@@ -27,6 +27,8 @@ export const HOLDS = {
   design_review_not_current: ['template', '整页评审没通过，或评审的是旧截图'],
   handoff_missing: ['template', '上线前出交接单（pnpm handoff），列出业主要提供的内容和要换实拍的图'],
   image_not_approved: ['owner', '审批生成的图片（pnpm approve:images）'],
+  image_seo_off: ['template', '图片 SEO 没开（site.json 没有 imageSeo: true）：新站在 site.json 写上；已建好的旧站跑 scripts/handfix-image-seo.mjs'],
+  image_alt_product: ['template', '内容图 alt 里点出页面产品词的比例（只报告）：由产出或选定图片的一方改写 alt，产品词最多一次'],
   image_alt_rules: ['template', '图片 alt 不合规（长度、image of、公司声明、同页重复、主词重复）：由产出或选定图片的一方改写 alt'],
   form_delivery_unconfigured: ['owner', '提供询盘表单的接收地址'],
   chat_undecided: ['owner', '决定是否开启在线客服'],
@@ -89,6 +91,7 @@ const byCode = (entries) => [...entries.reduce((codes, entry) => codes.set(entry
 
 // Notices: the owner's to read, never a hold. Each code's line; a code not listed shows its code.
 export const NOTICES = {
+  claude_seo_audit_not_current: 'claude-seo 审计不是这一版发布构建的，也没有这一版的逐条复查；site.json 的 launchFlow 关掉了审计或把复查设成只报告，所以只提示',
   claude_seo_audit_open: 'claude-seo 审计里不拦截上线的问题（Medium、Low，以及核对未成立的 Critical / High）：按行动计划处理',
   entity_profiles_missing: '实体建设：上线后建 LinkedIn 公司页、Bing Places 等档案（清单见交接单的“实体建设”组），建好后把网址补进 sameAs（pnpm handoff -- --same-as <网址>）',
   people_missing: '网站上没有具名人员（关于页的团队、博文作者）：可以不公开，但会拉低 E-E-A-T 和 GEO（看不出谁在做、谁写的）。愿意公开时，把姓名、职位、从业年限和一句简介写进 src/data/site-proof.json 的 team',
